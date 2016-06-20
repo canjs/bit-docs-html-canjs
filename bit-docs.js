@@ -1,3 +1,5 @@
+var path = require("path");
+
 module.exports = function(bitDocs){
     var pkg = require("./package.json");
     var dependencies = {};
