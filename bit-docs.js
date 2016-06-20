@@ -4,6 +4,7 @@ module.exports = function(bitDocs){
     dependencies[pkg.name] = pkg.version;
 
     bitDocs.register("html", {
-        templates: path.join(__dirname, "templates")
+        templates: path.join(__dirname, "templates"),
+        dependencies: dependencies
     });
 }
