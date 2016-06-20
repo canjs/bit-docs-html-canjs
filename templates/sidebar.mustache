@@ -1,0 +1,18 @@
+<nav class="sidebar">
+    <ul>
+    {{#each (sidebarLevels)}}
+        <li class='sidebar-level'>
+            {{#if title}}<span>{{title}}:</span>{{/if}}
+            <ul class='sidebar-items'>
+            {{#each items}}
+                <li class="{{type}} {{#isActive}}active{{/isActive}}">
+                    <a href="{{urlTo name}}">
+                        {{makeTitle}}
+                    </a>
+                </li>
+            {{/each}}
+            </ul>
+        </li>
+    {{/each}}
+    </ul>
+</nav>

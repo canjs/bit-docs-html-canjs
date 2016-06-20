@@ -1,0 +1,1572 @@
+{
+  "canjs": {
+    "name": "canjs",
+    "type": "page",
+    "description": "the CanJS framework"
+  },
+  "canjs-core": {
+    "name": "canjs-core",
+    "parent": "canjs",
+    "type": "page",
+    "description": "Core modules in CanJS"
+  },
+  "canjs-ecosystem": {
+    "name": "canjs-ecosystem",
+    "parent": "canjs",
+    "type": "page",
+    "description": "Useful extensions"
+  },
+  "canjs-infrastructure": {
+    "name": "canjs-infrastructure",
+    "parent": "canjs",
+    "type": "page",
+    "description": "Utilities that power the rest of CanJS"
+  },
+  "can-component": {
+    "body": "can-component body",
+    "parent": "canjs-core",
+    "description": "can-component description",
+    "name": "can-component",
+    "type": "module"
+  },
+  "can-define": {
+    "parent": "canjs-core",
+    "src": {
+      "path": "node_modules/can-define/docs/define.md"
+    },
+    "body": "",
+    "description": "Exports the `can.define` method that defines observable properties and their behavior.\n\n",
+    "type": "module",
+    "title": "",
+    "types": [
+      {
+        "type": "function",
+        "returns": {
+          "types": [
+            {
+              "type": "undefined"
+            }
+          ]
+        },
+        "params": []
+      }
+    ],
+    "name": "can-define",
+    "signatures": [
+      {
+        "code": "can.define(prototype, propDefinitions)",
+        "description": "\n\nDefine observable properties, type conversion, and getter/setter logic to your constructor prototypes.\n\n```js\nvar Person = function(first, last){\n  this.first = first;\n  this.last = last;\n};\ncan.define(Person.prototype,{\n  first: {\n    type: \"string\"\n  },\n  last: {\n    type: \"string\"\n  },\n  fullName: {\n    get: function(){\n      return this.first+\" \"+this.last;\n    }\n  }\n});\n```\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "Object",
+                "options": []
+              }
+            ],
+            "name": "prototype",
+            "description": "The prototype object of a constructor function.\n"
+          },
+          {
+            "types": [
+              {
+                "type": "Object",
+                "template": [
+                  {
+                    "types": [
+                      {
+                        "type": "String"
+                      }
+                    ]
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "can-define.types.propDefinition"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "propDefinitions",
+            "description": "An object of\nproperties and their definitions.\n"
+          }
+        ]
+      }
+    ]
+  },
+  "can-define.types": {
+    "parent": "can-define",
+    "src": {
+      "path": "node_modules/can-define/docs/define.types.md"
+    },
+    "body": "\n",
+    "description": "\nDefines the type, initial value, and get, set, and serialize behavior for an\nobservable property. All type converters leave `null` and `undefined` as is except for\nthe `\"boolean\"` type converter.\n",
+    "types": [
+      {
+        "type": "Object",
+        "options": [
+          {
+            "name": "observable",
+            "description": "The default type behavior. It converts plain Objects to\n[can-define/map/map DefineMaps] and plain Arrays to [can-define/list/list DefineLists]. Everything else is left as is.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "any",
+            "description": "Leaves the set value as is, performs no type conversion. Aliased as `*`.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "string",
+            "description": "Converts to a string with `\"\"+val`.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "date",
+            "description": "Converts to a JavaScript date using `Date.parse(val)` if a string is given or `new Date(val)` if a number is passed.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "number",
+            "description": "Converts to a number with `+(val)`.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "boolean",
+            "description": "Converts to `false` if `val` is falsey, `\"0\"`, or `\"false\"`; otherwise, converts to `true`.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "htmlbool",
+            "description": "Like `boolean`, but converts to `true` if empty string (`\"\"`) is passed.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "compute",
+            "description": "Allows computes to be passed and the property take on the value of the compute.",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "stringOrObservable",
+            "description": "Converts plain Objects to [can-define/map/map DefineMaps], plain Arrays to [can-define/list/list DefineLists] and everything else to strings.  This is useful for routing.\n",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "title": "types",
+    "name": "can-define.types",
+    "type": "property"
+  },
+  "can-define.types.propDefinition": {
+    "parent": "can-define",
+    "body": "\n",
+    "description": "\nDefines the type, initial value, and get, set, and serialize behavior for an\nobservable property.\n",
+    "type": "typedef",
+    "title": "propDefinition",
+    "types": [
+      {
+        "type": "Object",
+        "options": [
+          {
+            "name": "value",
+            "description": "Specifies the initial value of the property or\na function that returns the initial value.\n\n```js\n// A default age of `0`:\nvar Person = DefineMap.extend({\n  age: {value: 0}    \n});\n\nnew Person().age //-> 0\n```\n\n`Object` types should not be specified directly on `value` because that same object will\nbe shared on every instance of the Map.  Instead, a function that returns a fresh copy should be provided:\n\n```js\n// A default address object:\nvar Person = DefineMap.extend({\n  address: {\n    value: function(){\n      return {city: \"Chicago\", state: \"IL\"};\n    };\n  }    \n});\n\nnew Person().address //-> {city: \"Chicago\", state: \"IL\"};\n```\n",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              },
+              {
+                "type": "*"
+              }
+            ]
+          },
+          {
+            "name": "Value",
+            "description": "Specifies a function that will be called with `new` whose result is\nset as the initial value of the attribute.\n\n```js\n// A default empty DefineList of hobbies:\nvar Person = DefineMap.extend({\n  hobbies: {Value: DefineList}\n});\n\nnew Person().hobbies //-> []\n```\n",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "type",
+            "description": "Specifies the type of the\nproperty.  The type can be specified as either a function\nthat returns the type coerced value or one of the [can-define.types] names.\n\n```js\nvar Person = DefineMap.extend({\n  age: {type: \"number\"},\n  hobbies: {\n    type: function(newValue){\n      if(typeof newValue === \"string\") {\n        return newValue.split(\",\")\n      } else if( Array.isArray(newValue) ) {\n        return newValue;\n      }\n    }\n  }\n});\n\nvar me = new Person({age: \"33\", hobbies: \"bball,js\"})\nme.age //-> 33\nme.hobbies //-> [\"bball\",\"js\"]\n```\n",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              },
+              {
+                "type": "String"
+              }
+            ]
+          },
+          {
+            "name": "Type",
+            "description": "A constructor function that takes\nthe value passed to [can.Map::attr attr] as the first argument and called with\nnew. For example, if you want whatever\ngets passed to go through `new Array(newValue)` you can do that like:\n\n```js\ndefine: {\n  items: {\n    Type: Array\n  }\n}\n```\n\nIf the value passed to [can.Map::attr attr] is already an Array, it will be left as is.\n",
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": []
+              }
+            ]
+          },
+          {
+            "name": "set",
+            "description": "A set function that specifies what should happen when an attribute\nis set on a [can.Map]. `set` is called with the result of `type` or `Type`. The following\ndefines a `page` setter that updates the map's offset:\n\n```js\ndefine: {\n  page: {\n    set: function(newVal){\n      this.attr('offset', (parseInt(newVal) - 1) *\n                           this.attr('limit'));\n    }\n  }\n}\n```\n",
+            "types": [
+              {
+                "type": "can.Map.prototype.define.set"
+              }
+            ]
+          },
+          {
+            "name": "get",
+            "description": "A function that specifies how the value is retrieved.  The get function is\nconverted to an [can.compute.async async compute].  It should derive its value from other values\non the map. The following\ndefines a `page` getter that reads from a map's offset and limit:\n\n```js\ndefine: {\n  page: {\n    get: function (newVal) {\n\t  return Math.floor(this.attr('offset') /\n\t                    this.attr('limit')) + 1;\n\t}\n  }\n}\n```\n\nA `get` definition makes the property __computed__ which means it will not be serialized by default.\n",
+            "types": [
+              {
+                "type": "can-define.types.get"
+              }
+            ]
+          },
+          {
+            "name": "serialize",
+            "description": "Specifies the behavior of the\nproperty when [can.Map::serialize serialize] is called.\n\nBy default, serialize does not include computed values. Properties with a `get` definition\nare computed and therefore are not added to the result.  Non-computed properties values are\nserialized if possible and added to the result.\n\n```js\nPaginate = can.Map.extend({\n  define: {\n    pageNum: {\n      get: function(){ return this.offset() / 20 }\n    }\n  }\n});\n\np = new Paginate({offset: 40});\np.serialize() //-> {offset: 40}\n```\n\nIf `true` is specified, computed properties will be serialized and added to the result.\n\n```js\nPaginate = can.Map.extend({\n  define: {\n    pageNum: {\n      get: function(){ return this.offset() / 20 },\n      serialize: true\n    }\n  }\n});\n\np = new Paginate({offset: 40});\np.serialize() //-> {offset: 40, pageNum: 2}\n```\n\nIf `false` is specified, non-computed properties will not be added to the result.\n\n```js\nPaginate = can.Map.extend({\n  define: {\n    offset: {\n      serialize: false\n    }\n  }\n});\n\np = new Paginate({offset: 40});\np.serialize() //-> {}\n```\n\nIf a [can.Map.prototype.define.serialize serialize function] is specified, the result\nof the function is added to the result.\n\n```js\nPaginate = can.Map.extend({\n  define: {\n    offset: {\n      serialize: function(offset){\n        return (offset / 20)+1\n      }\n    }\n  }\n});\n\np = new Paginate({offset: 40});\np.serialize() //-> {offset: 3}\n```\n",
+            "types": [
+              {
+                "type": "can.Map.prototype.define.serialize"
+              },
+              {
+                "type": "Boolean"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "name": "can-define.types.propDefinition",
+    "parent": "can-define.types"
+  },
+
+  "can-define/map/map": {
+    "parent": "canjs-core",
+    "src": {
+      "path": "node_modules/can-define/map/docs/define-map.md"
+    },
+    "body": "",
+    "description": "Create observable objects. \n",
+    "type": "module",
+    "title": "",
+    "types": [
+      {
+        "type": "function",
+        "returns": {
+          "types": [
+            {
+              "type": "undefined"
+            }
+          ]
+        },
+        "params": []
+      }
+    ],
+    "name": "can-define/map/map",
+    "alias": "can.DefineMap",
+    "inherits": "can.Construct",
+    "signatures": [
+      {
+        "code": "new can.DefineMap([props])",
+        "description": "\n\nCreates a new instance of DefineMap or an extended DefineMap.\n\n```js\nvar person = new can.DefineMap({\n  first: \"Justin\",\n  last: \"Meyer\"\n})\n```\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "Object",
+                "options": []
+              }
+            ],
+            "optional": true,
+            "name": "props",
+            "description": "Properties and values to seed the map with."
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "can-define/map/map"
+            }
+          ],
+          "description": "An instance of `can.DefineMap` with the properties from _props_.\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "Object",
+          "options": []
+        }
+      ],
+      "optional": true,
+      "name": "props",
+      "description": "Properties and values to seed the map with."
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "can-define/map/map"
+        }
+      ],
+      "description": "An instance of `can.DefineMap` with the properties from _props_.\n"
+    }
+  },
+  "can-define/map/map.static": {
+    "type": "group",
+    "name": "can-define/map/map.static",
+    "title": "static",
+    "parent": "can-define/map/map"
+  },
+  "can-define/map/map.prototype": {
+    "type": "group",
+    "name": "can-define/map/map.prototype",
+    "title": "prototype",
+    "parent": "can-define/map/map"
+  },
+  "can-define/map/map.extend": {
+    "parent": "can-define/map/map.static",
+    "src": {
+      "path": "node_modules/can-define/map/docs/static.extend.md"
+    },
+    "body": "",
+    "description": "Create a custom map type \n",
+    "title": "extend",
+    "name": "can-define/map/map.extend",
+    "type": "function",
+    "parent": "can-define/map/map.static",
+    "signatures": [
+      {
+        "code": "can.DefineMap.extend([name,] [static,] prototype)",
+        "description": "\n\nExtends can.DefineMap, or constructor functions derived from can.DefineMap,\nto create a new constructor function.\n\n```js\nvar Person = can.DefineMap.extend(\n  \"Person\",\n  {seal: true},\n  {\n    first: \"string\",\n    last: {type: \"string\"},\n    fullName: {\n      get: function(){\n        return this.first+\" \"+this.last;\n      }\n    },\n    age: {value: 0},\n  });\n\nvar me = new Person({first: \"Justin\", last: \"Meyer\"})\nme.fullName //-> \"Justin Meyer\"\nme.age      //-> 0\n```\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "String"
+              }
+            ],
+            "optional": true,
+            "name": "name",
+            "description": "Provides an optional name for this type that will\nshow up nicely in debuggers.\n"
+          },
+          {
+            "types": [
+              {
+                "type": "Object",
+                "options": []
+              }
+            ],
+            "optional": true,
+            "name": "static",
+            "description": "Static properties that are set directly on the\nconstructor function.\n"
+          },
+          {
+            "types": [
+              {
+                "type": "Object",
+                "template": [
+                  {
+                    "types": [
+                      {
+                        "type": "String"
+                      }
+                    ]
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "function",
+                        "returns": {
+                          "types": [
+                            {
+                              "type": "undefined"
+                            }
+                          ]
+                        },
+                        "params": []
+                      },
+                      {
+                        "type": "String"
+                      },
+                      {
+                        "type": "can-define.types"
+                      },
+                      {
+                        "type": "can-define.types.propDefinition"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "prototype",
+            "description": "A definition of the properties or methods on this type.\n\nIf the property definition is a __plain function__, it's considered a method.\n\n```js\nvar Person = DefineMap.extend({\n  sayHi: function(){ console.log(\"hi\"); }\n});\n\nvar me = new Person();\nme.sayHi();\n```\n\nIf the property definition is a __string__, it's considered a `type` setting to be looked up in [can-define.types can.define.types].\n\n```js\nvar Person = DefineMap.extend({\n  age: 'number',\n  isCool: 'boolean',\n  hobbies: 'observable'\n});\n\nvar me = new Person({age: '33', isCool: 'false', hobbies: ['js','bball']});\nme.age    //-> 33\nme.isCool //-> false\nme.hobbies instanceof DefineList //-> true\n```\n\n\nIf the property definition is a Constructor function, it's considered a `Type` setting.\n\n```js\nvar Address = DefineMap.extend({\n  zip: 'number'\n});\nvar Person = DefineMap.extend({\n  address: Address\n});\n\nvar me = new Person({address: {zip: '60048'}});\nme.address.zip //-> 60048\n```\n\nIf the property is an __object__, it's considered to be a [can-define.types.propDefinition].\n\n```js\nvar Person = DefineMap.extend({\n  fullName: {\n    get: function() {\n      return this.first+\" \"+this.last;\n    },\n    set: function(newVal) {\n      var parts = newVal.split(\" \");\n      this.first = parts[0];\n      this.last = parts[1];\n    }\n  },\n  // slick way of creating an 'inline' type.\n  address: {\n    Type: {\n      zip: \"number\"\n    }\n  }\n});\n\nvar me = new Person({fullName: \"Rami Myer\", address: {zip: '60048'}});\nme.first       //-> \"Rami\"\nme.address.zip //-> 60048\n```\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "can-define/map/map"
+            }
+          ],
+          "description": "A DefineMap constructor function.\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "Object",
+          "template": [
+            {
+              "types": [
+                {
+                  "type": "String"
+                }
+              ]
+            },
+            {
+              "types": [
+                {
+                  "type": "function",
+                  "returns": {
+                    "types": [
+                      {
+                        "type": "undefined"
+                      }
+                    ]
+                  },
+                  "params": []
+                },
+                {
+                  "type": "String"
+                },
+                {
+                  "type": "can-define.types"
+                },
+                {
+                  "type": "can-define.types.propDefinition"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "name": "prototype",
+      "description": "A definition of the properties or methods on this type.\n\nIf the property definition is a __plain function__, it's considered a method.\n\n```js\nvar Person = DefineMap.extend({\n  sayHi: function(){ console.log(\"hi\"); }\n});\n\nvar me = new Person();\nme.sayHi();\n```\n\nIf the property definition is a __string__, it's considered a `type` setting to be looked up in [can-define.types can.define.types].\n\n```js\nvar Person = DefineMap.extend({\n  age: 'number',\n  isCool: 'boolean',\n  hobbies: 'observable'\n});\n\nvar me = new Person({age: '33', isCool: 'false', hobbies: ['js','bball']});\nme.age    //-> 33\nme.isCool //-> false\nme.hobbies instanceof DefineList //-> true\n```\n\n\nIf the property definition is a Constructor function, it's considered a `Type` setting.\n\n```js\nvar Address = DefineMap.extend({\n  zip: 'number'\n});\nvar Person = DefineMap.extend({\n  address: Address\n});\n\nvar me = new Person({address: {zip: '60048'}});\nme.address.zip //-> 60048\n```\n\nIf the property is an __object__, it's considered to be a [can-define.types.propDefinition].\n\n```js\nvar Person = DefineMap.extend({\n  fullName: {\n    get: function() {\n      return this.first+\" \"+this.last;\n    },\n    set: function(newVal) {\n      var parts = newVal.split(\" \");\n      this.first = parts[0];\n      this.last = parts[1];\n    }\n  },\n  // slick way of creating an 'inline' type.\n  address: {\n    Type: {\n      zip: \"number\"\n    }\n  }\n});\n\nvar me = new Person({fullName: \"Rami Myer\", address: {zip: '60048'}});\nme.first       //-> \"Rami\"\nme.address.zip //-> 60048\n```\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "can-define/map/map"
+        }
+      ],
+      "description": "A DefineMap constructor function.\n"
+    }
+  },
+  "can-define/map/map.seal": {
+    "parent": "can-define/map/map.static",
+    "src": {
+      "path": "node_modules/can-define/map/docs/static.seal.md"
+    },
+    "body": "\n",
+    "description": "Defines if instances of the map should be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) in development. \n",
+    "types": [
+      {
+        "type": "Boolean",
+        "description": "If `true`, in development, instances of this object will be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal).  In  [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) errors will be thrown when undefined properties are set.  This is the default\nbehavior of [can-define/map/map.extend extended DefineMaps]:\n\n```js\n\"use strict\";\nvar Person = can.DefineMap.extend({});\nvar me = new Person();\nme.age = 33 //-> throws \"TypeError: Can't add property age, object is not extensible\"\n```\n\nIf `false`, the object will not be sealed.  This is the default behavior of\nunextended [can-define/map/map DefineMaps].  Use [can-define/map/map.prototype.get] and [can-define/map/map.prototype.set] to get and set values:\n\n```js\nvar person = new can.DefineMap();\nperson.set(\"first\",\"Justin\");\nperson.set(\"last\",\"Meyer\");\n\nperson.get(\"first\") //-> \"Justin\"\nperson.get(\"last\") //-> \"Meyer\"\n```\n\nSet `seal` to `false` on objects that have an indeterminate number of properties:\n\n```js\nvar Style = can.DefineMap.extend({\n  seal: false\n},{\n  cssText: {\n    get: function(){\n      return _.map(this.get(), function(val, prop){\n        return prop+\": \"+val;\n      }).join(\";\")\n    }\n  }\n});\nvar style = new Style();\nstyle.set(\"color\",\"green\");\nstyle.set(\"font\",\"awesome\");\nstyle.cssText //-> \"color:green; font: awesome;\"\n```\n"
+      }
+    ],
+    "title": "seal",
+    "name": "can-define/map/map.seal",
+    "type": "property",
+    "parent": "can-define/map/map.static"
+  },
+  "can-define/map/map.prototype.get": {
+    "type": "function",
+    "name": "can-define/map/map.prototype.get",
+    "parent": "can-define/map/map.prototype",
+    "src": {
+      "line": 161,
+      "codeLine": 169,
+      "path": "node_modules/can-define/map/map.js"
+    },
+    "body": "",
+    "description": "Get a value that was not predefined. \n",
+    "title": "get",
+    "signatures": [
+      {
+        "code": "map.get(propName)",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/map/map.prototype.set": {
+    "type": "function",
+    "name": "can-define/map/map.prototype.set",
+    "parent": "can-define/map/map.prototype",
+    "src": {
+      "line": 173,
+      "codeLine": 181,
+      "path": "node_modules/can-define/map/map.js"
+    },
+    "body": "",
+    "description": "Set a value that was not predefined. \n",
+    "title": "set",
+    "signatures": [
+      {
+        "code": "map.set(propName, value)",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/map/map.prototype.serialize": {
+    "type": "function",
+    "name": "can-define/map/map.prototype.serialize",
+    "parent": "can-define/map/map.prototype",
+    "src": {
+      "line": 191,
+      "codeLine": 199,
+      "path": "node_modules/can-define/map/map.js"
+    },
+    "body": "",
+    "description": "Get a value that was not predefined. \n",
+    "title": "serialize",
+    "signatures": [
+      {
+        "code": "map.serialize()",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/map/map.prototype.toObject": {
+    "type": "function",
+    "name": "can-define/map/map.prototype.toObject",
+    "parent": "can-define/map/map.prototype",
+    "src": {
+      "line": 202,
+      "codeLine": 210,
+      "path": "node_modules/can-define/map/map.js"
+    },
+    "body": "",
+    "description": "Get a value that was not predefined. \n",
+    "title": "toObject",
+    "signatures": [
+      {
+        "code": "map.toObject()",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/map/map.prototype.each": {
+    "type": "function",
+    "name": "can-define/map/map.prototype.each",
+    "parent": "can-define/map/map.prototype",
+    "src": {
+      "path": "node_modules/can-define/map/docs/prototype.each.md"
+    },
+    "body": "\n```\nvar names = [];\nnew can.Map({a: 'Alice', b: 'Bob', e: 'Eve'}).each(function(value, key) {\n    names.push(value);\n});\n\nnames; // ['Alice', 'Bob', 'Eve']\n\nnames = [];\nnew can.Map({a: 'Alice', b: 'Bob', e: 'Eve'}).each(function(value, key) {\n    names.push(value);\n    if(key === 'b') {\n        return false;\n    }\n});\n\nnames; // ['Alice', 'Bob']\n```\n\n",
+    "description": "Call a function on each property of a Map. \n",
+    "title": "each",
+    "signatures": [
+      {
+        "code": "map.each( callback(item, propName ) )",
+        "description": "\n\n`each` iterates through the Map, calling a function\nfor each property value and key.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": [
+                  {
+                    "types": [
+                      {
+                        "type": "*"
+                      }
+                    ],
+                    "name": "item"
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "String"
+                      }
+                    ],
+                    "name": "propName"
+                  }
+                ]
+              }
+            ],
+            "name": "callback",
+            "description": "the function to call for each property\nThe value and key of each property will be passed as the first and second\narguments, respectively, to the callback. If the callback returns false,\nthe loop will stop.\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "can.Map"
+            }
+          ],
+          "description": "this Map, for chaining\n"
+        }
+      }
+    ],
+    "comment": " "
+  },
+  "can-define/list/list": {
+    "parent": "canjs-core",
+    "src": {
+      "path": "node_modules/can-define/list/docs/define-list.md"
+    },
+    "body": "",
+    "description": "Create observable list. \n",
+    "type": "module",
+    "title": "",
+    "types": [
+      {
+        "type": "function",
+        "returns": {
+          "types": [
+            {
+              "type": "undefined"
+            }
+          ]
+        },
+        "params": []
+      }
+    ],
+    "name": "can-define/list/list",
+    "alias": "can.DefineMap",
+    "inherits": "can.Construct",
+    "signatures": [
+      {
+        "code": "new can.DefineList([items])",
+        "description": "\n",
+        "params": []
+      }
+    ]
+  },
+  "can-define/list/list.prototype": {
+    "type": "group",
+    "name": "can-define/list/list.prototype",
+    "title": "prototype",
+    "parent": "can-define/list/list"
+  },
+  "can-define/list/list.prototype.item": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.item",
+    "parent": "can-define/list/list.prototype",
+    "src": {
+      "line": 89,
+      "codeLine": 97,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "",
+    "description": "Get a value that was not predefined. \n",
+    "title": "item",
+    "signatures": [
+      {
+        "code": "map.item(index, [newVal])",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/list/list.prototype.items": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.items",
+    "parent": "can-define/list/list.prototype",
+    "src": {
+      "line": 105,
+      "codeLine": 113,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "",
+    "description": "Get a value that was not predefined. \n",
+    "title": "items",
+    "signatures": [
+      {
+        "code": "map.items()",
+        "description": "\n    ",
+        "params": []
+      }
+    ]
+  },
+  "can-define/list/list.prototype.each": {
+    "src": {
+      "line": 156,
+      "codeLine": 193,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "type": "function",
+    "body": "```\nvar i = 0;\nnew can.Map([1, 10, 100]).each(function(element, index) {\n    i += element;\n});\n\ni; // 111\n\ni = 0;\nnew can.Map([1, 10, 100]).each(function(element, index) {\n    i += element;\n    if(index >= 1) {\n        return false;\n    }\n});\n\ni; // 11\n```\n    \n",
+    "description": "Call a function on each element of a DefineList. ",
+    "title": "each",
+    "name": "can-define/list/list.prototype.each",
+    "signatures": [
+      {
+        "code": "list.each( callback(item, index) )",
+        "description": "\n\n`each` iterates through the Map, calling a function\nfor each element.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": [
+                  {
+                    "types": [
+                      {
+                        "type": "*"
+                      }
+                    ]
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "Number"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "callback",
+            "description": "the function to call for each element\nThe value and index of each element will be passed as the first and second\narguments, respectively, to the callback. If the callback returns false,\nthe loop will stop.\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "can.DefineList"
+            }
+          ],
+          "description": "this DefineList, for chaining\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "function",
+          "returns": {
+            "types": [
+              {
+                "type": "undefined"
+              }
+            ]
+          },
+          "params": [
+            {
+              "types": [
+                {
+                  "type": "*"
+                }
+              ]
+            },
+            {
+              "types": [
+                {
+                  "type": "Number"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "name": "callback",
+      "description": "the function to call for each element\nThe value and index of each element will be passed as the first and second\narguments, respectively, to the callback. If the callback returns false,\nthe loop will stop.\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "can.DefineList"
+        }
+      ],
+      "description": "this DefineList, for chaining\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.splice": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.splice",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 193,
+      "codeLine": 256,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`splice` lets you remove elements from and insert elements into a DefineList.\n\nThis example demonstrates how to do surgery on a list of numbers:\n\n```\nvar list = new can.DefineList([0, 1, 2, 3]);\n\n// starting at index 2, remove one element and insert 'Alice' and 'Bob':\nlist.splice(2, 1, 'Alice', 'Bob');\nlist.attr(); // [0, 1, 'Alice', 'Bob', 3]\n```\n\n## Events\n\n`splice` causes the DefineList it's called on to emit _change_ events,\n_add_ events, _remove_ events, and _length_ events. If there are\nany elements to remove, a _change_ event, a _remove_ event, and a\n_length_ event will be fired. If there are any elements to insert, a\nseparate _change_ event, an _add_ event, and a separate _length_ event\nwill be fired.\n\nThis slightly-modified version of the above example should help\nmake it clear how `splice` causes events to be emitted:\n\n```\nvar list = new can.DefineList(['a', 'b', 'c', 'd']);\nlist.bind('change', function(ev, attr, how, newVals, oldVals) {\n    console.log('change: ' + attr + ', ' + how + ', ' + newVals + ', ' + oldVals);\n});\nlist.bind('add', function(ev, newVals, where) {\n    console.log('add: ' + newVals + ', ' + where);\n});\nlist.bind('remove', function(ev, oldVals, where) {\n    console.log('remove: ' + oldVals + ', ' + where);\n});\nlist.bind('length', function(ev, length) {\n    console.log('length: ' + length + ', ' + this.attr());\n});\n\n// starting at index 2, remove one element and insert 'Alice' and 'Bob':\nlist.splice(2, 1, 'Alice', 'Bob'); // change: 2, 'remove', undefined, ['c']\n                                   // remove: ['c'], 2\n                                   // length: 5, ['a', 'b', 'Alice', 'Bob', 'd']\n                                   // change: 2, 'add', ['Alice', 'Bob'], ['c']\n                                   // add: ['Alice', 'Bob'], 2\n                                   // length: 5, ['a', 'b', 'Alice', 'Bob', 'd']\n```\n\nMore information about binding to these events can be found under [can.DefineList.attr attr].\n    \n",
+    "description": "Insert and remove elements from a DefineList. ",
+    "title": "splice",
+    "signatures": [
+      {
+        "code": "list.splice(index[, howMany[, ...newElements]])",
+        "description": "",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "Number"
+              }
+            ],
+            "name": "index",
+            "description": "where to start removing or inserting elements\n"
+          },
+          {
+            "types": [
+              {
+                "type": "Number"
+              }
+            ],
+            "optional": true,
+            "name": "howMany",
+            "description": "the number of elements to remove\nIf _howMany_ is not provided, `splice` will remove all elements from `index` to the end of the DefineList.\n"
+          },
+          {
+            "types": [
+              {
+                "type": "*"
+              }
+            ],
+            "name": "newElements",
+            "description": "elements to insert into the DefineList\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "Array",
+              "options": []
+            }
+          ],
+          "description": "the elements removed by `splice`\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "name": "newElements",
+      "description": "elements to insert into the DefineList\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "Array",
+          "options": []
+        }
+      ],
+      "description": "the elements removed by `splice`\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.push": {
+    "name": "can-define/list/list.prototype.push",
+    "type": "function",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 350,
+      "codeLine": 391,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`push` adds elements onto the end of a DefineList here is an example:\n\n```\nvar list = new can.DefineList(['Alice']);\n\nlist.push('Bob', 'Eve');\nlist.attr(); // ['Alice', 'Bob', 'Eve']\n```\n\nIf you have an array you want to concatenate to the end\nof the DefineList, you can use `apply`:\n\n```\nvar names = ['Bob', 'Eve'],\n    list = new can.DefineList(['Alice']);\n\nlist.push.apply(list, names);\nlist.attr(); // ['Alice', 'Bob', 'Eve']\n```\n\n## Events\n\n`push` causes _change_, _add_, and _length_ events to be fired.\n\n## See also\n\n`push` has a counterpart in [can.DefineList::pop pop], or you may be\nlooking for [can.DefineList::unshift unshift] and its counterpart [can.DefineList::shift shift].\n    \n",
+    "description": "Add elements to the end of a list. ",
+    "title": "push",
+    "signatures": [
+      {
+        "code": "list.push(...elements)",
+        "description": "\n\n`push` adds elements onto the end of a DefineList.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "*"
+              }
+            ],
+            "name": "elements",
+            "description": "the elements to add to the DefineList\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "Number"
+            }
+          ],
+          "description": "the new length of the DefineList\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "name": "elements",
+      "description": "the elements to add to the DefineList\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "Number"
+        }
+      ],
+      "description": "the new length of the DefineList\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.unshift": {
+    "name": "can-define/list/list.prototype.unshift",
+    "type": "function",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 392,
+      "codeLine": 433,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`unshift` adds elements to the front of the list in bulk in the order specified:\n\n```\nvar list = new can.DefineList(['Alice']);\n\nlist.unshift('Bob', 'Eve');\nlist.attr(); // ['Bob', 'Eve', 'Alice']\n```\n\nIf you have an array you want to concatenate to the beginning\nof the DefineList, you can use `apply`:\n\n```\nvar names = ['Bob', 'Eve'],\n    list = new can.DefineList(['Alice']);\n\nlist.unshift.apply(list, names);\nlist.attr(); // ['Bob', 'Eve', 'Alice']\n```\n\n## Events\n\n`unshift` causes _change_, _add_, and _length_ events to be fired.\n\n## See also\n\n`unshift` has a counterpart in [can.DefineList::shift shift], or you may be\nlooking for [can.DefineList::push push] and its counterpart [can.DefineList::pop pop].\n    \n",
+    "description": "Add elements to the beginning of a DefineList. ",
+    "title": "unshift",
+    "signatures": [
+      {
+        "code": "list.unshift(...elements)",
+        "description": "\n\n`unshift` adds elements onto the beginning of a DefineList.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "*"
+              }
+            ],
+            "name": "elements",
+            "description": "the elements to add to the DefineList\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "Number"
+            }
+          ],
+          "description": "the new length of the DefineList\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "name": "elements",
+      "description": "the elements to add to the DefineList\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "Number"
+        }
+      ],
+      "description": "the new length of the DefineList\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.pop": {
+    "name": "can-define/list/list.prototype.pop",
+    "type": "function",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 467,
+      "codeLine": 499,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`pop` is the opposite action from `[can.DefineList.push push]`:\n\n```\nvar list = new can.DefineList(['Alice', 'Bob', 'Eve']);\nlist.attr(); // ['Alice', 'Bob', 'Eve']\n\nlist.pop(); // 'Eve'\nlist.pop(); // 'Bob'\nlist.pop(); // 'Alice'\nlist.pop(); // undefined\n```\n\n## Events\n\n`pop` causes _change_, _remove_, and _length_ events to be fired if the DefineList is not empty\nwhen it is called.\n\n## See also\n\n`pop` has its counterpart in [can.DefineList::push push], or you may be\nlooking for [can.DefineList::unshift unshift] and its counterpart [can.DefineList::shift shift].\n    \n",
+    "description": "Remove an element from the end of a DefineList. ",
+    "title": "pop",
+    "signatures": [
+      {
+        "code": "list.pop()",
+        "description": "\n\n`pop` removes an element from the end of a DefineList.\n",
+        "params": [],
+        "returns": {
+          "types": [
+            {
+              "type": "*"
+            }
+          ],
+          "description": "the element just popped off the DefineList, or `undefined` if the DefineList was empty\n"
+        }
+      }
+    ],
+    "_curReturn": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "description": "the element just popped off the DefineList, or `undefined` if the DefineList was empty\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.shift": {
+    "name": "can-define/list/list.prototype.shift",
+    "type": "function",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 500,
+      "codeLine": 534,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`shift` is the opposite action from `[can.DefineList::unshift unshift]`:\n\n```\nvar list = new can.DefineList(['Alice']);\n\nlist.unshift('Bob', 'Eve');\nlist.attr(); // ['Bob', 'Eve', 'Alice']\n\nlist.shift(); // 'Bob'\nlist.shift(); // 'Eve'\nlist.shift(); // 'Alice'\nlist.shift(); // undefined\n```\n\n## Events\n\n`pop` causes _change_, _remove_, and _length_ events to be fired if the DefineList is not empty\nwhen it is called.\n\n## See also\n\n`shift` has a counterpart in [can.DefineList::unshift unshift], or you may be\nlooking for [can.DefineList::push push] and its counterpart [can.DefineList::pop pop].\n    \n",
+    "description": "Remove en element from the front of a list. ",
+    "title": "shift",
+    "signatures": [
+      {
+        "code": "list.shift()",
+        "description": "\n\n`shift` removes an element from the beginning of a DefineList.\n",
+        "params": [],
+        "returns": {
+          "types": [
+            {
+              "type": "*"
+            }
+          ],
+          "description": "the element just shifted off the DefineList, or `undefined` if the DefineList is empty\n"
+        }
+      }
+    ],
+    "_curReturn": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "description": "the element just shifted off the DefineList, or `undefined` if the DefineList is empty\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.indexOf": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.indexOf",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 562,
+      "codeLine": 588,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "```\nvar list = new can.DefineList(['Alice', 'Bob', 'Eve']);\nlist.indexOf('Alice');   // 0\nlist.indexOf('Charlie'); // -1\n```\n\nIt is trivial to make a `contains`-type function using `indexOf`:\n\n```\nfunction(list, item) {\n    return list.indexOf(item) >= 0;\n}\n```\n    \n",
+    "description": "Look for an item in a DefineList. ",
+    "title": "indexOf",
+    "signatures": [
+      {
+        "code": "list.indexOf(item)",
+        "description": "\n\n`indexOf` finds the position of a given item in the DefineList.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "*"
+              }
+            ],
+            "name": "item",
+            "description": "the item to find\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "Number"
+            }
+          ],
+          "description": "the position of the item in the DefineList, or -1 if the item is not found.\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "*"
+        }
+      ],
+      "name": "item",
+      "description": "the item to find\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "Number"
+        }
+      ],
+      "description": "the position of the item in the DefineList, or -1 if the item is not found.\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.join": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.join",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 597,
+      "codeLine": 618,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "```\nvar list = new can.DefineList(['Alice', 'Bob', 'Eve']);\nlist.join(', '); // 'Alice, Bob, Eve'\n\nvar beatles = new can.DefineList(['John', 'Paul', 'Ringo', 'George']);\nbeatles.join('&'); // 'John&Paul&Ringo&George'\n```\n    \n",
+    "description": "Join a DefineList's elements into a string. ",
+    "title": "join",
+    "signatures": [
+      {
+        "code": "list.join(separator)",
+        "description": "\n\n`join` turns a DefineList into a string by inserting _separator_ between the string representations\nof all the elements of the DefineList.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "String"
+              }
+            ],
+            "name": "separator",
+            "description": "the string to seperate elements with\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "String"
+            }
+          ],
+          "description": "the joined string\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "String"
+        }
+      ],
+      "name": "separator",
+      "description": "the string to seperate elements with\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "String"
+        }
+      ],
+      "description": "the joined string\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.reverse": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.reverse",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 623,
+      "codeLine": 641,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "```\nvar list = new can.DefineList(['Alice', 'Bob', 'Eve']);\nvar reversedList = list.reverse();\n\nreversedList.attr(); // ['Eve', 'Bob', 'Alice'];\nlist === reversedList; // true\n```\n    \n",
+    "description": "Reverse the order of a DefineList. ",
+    "title": "reverse",
+    "signatures": [
+      {
+        "code": "list.reverse()",
+        "description": "\n\n`reverse` reverses the elements of the DefineList in place.\n",
+        "params": [],
+        "returns": {
+          "types": [
+            {
+              "type": "can.DefineList"
+            }
+          ],
+          "description": "the DefineList, for chaining\n"
+        }
+      }
+    ],
+    "_curReturn": {
+      "types": [
+        {
+          "type": "can.DefineList"
+        }
+      ],
+      "description": "the DefineList, for chaining\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.slice": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.slice",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 647,
+      "codeLine": 678,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "```\nvar list = new can.DefineList(['Alice', 'Bob', 'Charlie', 'Daniel', 'Eve']);\nvar newList = list.slice(1, 4);\nnewList.attr(); // ['Bob', 'Charlie', 'Daniel']\n```\n\n`slice` is the simplest way to copy a DefineList:\n\n```\nvar list = new can.DefineList(['Alice', 'Bob', 'Eve']);\nvar copy = list.slice();\n\ncopy.attr();   // ['Alice', 'Bob', 'Eve']\nlist === copy; // false\n```\n    \n",
+    "description": "Make a copy of a part of a DefineList. ",
+    "title": "slice",
+    "signatures": [
+      {
+        "code": "list.slice([start[, end]])",
+        "description": "\n\n`slice` creates a copy of a portion of the DefineList.\n",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "Number"
+              }
+            ],
+            "optional": true,
+            "name": "start",
+            "defaultValue": "0",
+            "description": "the index to start copying from\n"
+          },
+          {
+            "types": [
+              {
+                "type": "Number"
+              }
+            ],
+            "optional": true,
+            "name": "end",
+            "description": "the first index not to include in the copy\nIf _end_ is not supplied, `slice` will copy until the end of the list.\n"
+          }
+        ],
+        "returns": {
+          "types": [
+            {
+              "type": "can.DefineList"
+            }
+          ],
+          "description": "a new `can.DefineList` with the extracted elements\n"
+        }
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "Number"
+        }
+      ],
+      "optional": true,
+      "name": "end",
+      "description": "the first index not to include in the copy\nIf _end_ is not supplied, `slice` will copy until the end of the list.\n"
+    },
+    "_curReturn": {
+      "types": [
+        {
+          "type": "can.DefineList"
+        }
+      ],
+      "description": "a new `can.DefineList` with the extracted elements\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.concat": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.concat",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 685,
+      "codeLine": 707,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`concat` makes a new DefineList with the elements of the DefineList followed by the elements of the parameters.\n\n```\nvar list = new can.DefineList();\nvar newList = list.concat(\n    'Alice',\n    ['Bob', 'Charlie']),\n    new can.DefineList(['Daniel', 'Eve']),\n    {f: 'Francis'}\n);\nnewList.attr(); // ['Alice', 'Bob', 'Charlie', 'Daniel', 'Eve', {f: 'Francis'}]\n```\n    \n",
+    "description": "Merge many collections together into a DefineList. ",
+    "title": "concat",
+    "signatures": [
+      {
+        "code": "list.concat(...args)",
+        "description": "",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "Array"
+              },
+              {
+                "type": "can.DefineList"
+              },
+              {
+                "type": "*"
+              }
+            ],
+            "name": "args",
+            "description": "Any number of arrays, Lists, or values to add in\nFor each parameter given, if it is an Array or a DefineList, each of its elements will be added to\nthe end of the concatenated DefineList. Otherwise, the parameter itself will be added.\n"
+          }
+        ]
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "Array"
+        },
+        {
+          "type": "can.DefineList"
+        },
+        {
+          "type": "*"
+        }
+      ],
+      "name": "args",
+      "description": "Any number of arrays, Lists, or values to add in\nFor each parameter given, if it is an Array or a DefineList, each of its elements will be added to\nthe end of the concatenated DefineList. Otherwise, the parameter itself will be added.\n"
+    },
+    "comment": " "
+  },
+  "can-define/list/list.prototype.forEach": {
+    "type": "function",
+    "name": "can-define/list/list.prototype.forEach",
+    "parent": "node_modules/can-define/list/list.js",
+    "src": {
+      "line": 715,
+      "codeLine": 735,
+      "path": "node_modules/can-define/list/list.js"
+    },
+    "body": "`forEach` calls a callback for each element in the DefineList.\n\n```\nvar list = new can.DefineList([1, 2, 3]);\nlist.forEach(function(element, index, list) {\n    list.attr(index, element * element);\n});\nlist.attr(); // [1, 4, 9]\n```\n    \n",
+    "description": "Call a function for each element of a DefineList. ",
+    "title": "forEach",
+    "signatures": [
+      {
+        "code": "list.forEach(callback[, thisArg])",
+        "description": "",
+        "params": [
+          {
+            "types": [
+              {
+                "type": "function",
+                "returns": {
+                  "types": [
+                    {
+                      "type": "undefined"
+                    }
+                  ]
+                },
+                "params": [
+                  {
+                    "types": [
+                      {
+                        "type": "element"
+                      }
+                    ]
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "index"
+                      }
+                    ]
+                  },
+                  {
+                    "types": [
+                      {
+                        "type": "list"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "callback",
+            "description": "a function to call with each element of the DefineList\nThe three parameters that _callback_ gets passed are _element_, the element at _index_, _index_ the\ncurrent element of the list, and _list_ the DefineList the elements are coming from."
+          },
+          {
+            "types": [
+              {
+                "type": "Object",
+                "options": []
+              }
+            ],
+            "optional": true,
+            "name": "thisArg",
+            "description": "the object to use as `this` inside the callback\n"
+          }
+        ]
+      }
+    ],
+    "_curParam": {
+      "types": [
+        {
+          "type": "Object",
+          "options": []
+        }
+      ],
+      "optional": true,
+      "name": "thisArg",
+      "description": "the object to use as `this` inside the callback\n"
+    },
+    "comment": " "
+  }
+}
