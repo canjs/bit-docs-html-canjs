@@ -15,10 +15,15 @@
 {{#unless hideBody}}
 {{#if signatures}}
 {{#each signatures}}
-{{{makeSignatureInsert .}}}
+{{> signature.mustache}}
 {{/each}}
+{{else}}
+{{#types}}
+{{> signature.mustache}}
+{{/types}}
 {{/if}}
 {{/unless}}
+
 
 	{{#unless hideBody}}
 		{{#if body}}

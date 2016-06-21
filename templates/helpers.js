@@ -6,16 +6,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
     console.log("making helpers");
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
-    var signatureTemplate = OtherHandlebars.compile(""+fs.readFileSync(path.join(__dirname,"signature.mustache")))
     return {
-        makeSignatureInsert: function(signature){
-            if(signature) {
-                var res = signatureTemplate(signature);
-                return res;
-            } else {
-                return "";
-            }
-        },
         "makeSignature": function(code){
 
             if(code){
@@ -241,7 +232,7 @@ function getLevels(docObject, childrenMap, index) {
     if( children && children.every(isGroup) ) {
         return children.map(function(docObject){
             return {
-                title: levelMap[index] || getTitle(docObject),
+                title: getTitle(docObject).replace(docObject.title,""),
                 items: childrenMap[docObject.name]
             }
         });
