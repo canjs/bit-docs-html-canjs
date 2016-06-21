@@ -1,0 +1,23 @@
+<h2><code>{{{makeSignature code}}}</code></h2>
+{{{makeHtml (makeLinks description)}}}
+
+{{#if params}}
+<ol>
+{{#params}}
+<li> {{{makeParams}}}: {{{makeHtml (makeLinks description)}}} </li>
+{{/params}}
+</ol>
+{{/if}}
+{{#returns}}
+<ul>
+    <li><b>returns</b> {{{makeReturn}}}: {{{makeHtml (makeLinks description)}}} </li>
+</ul>
+{{/returns}}
+{{#if options.length}}
+<ul>
+{{#options}}
+  <li><b>{{name}}</b> {{#if types}}<code>{{{makeTypesString types}}}</code>{{/if}}:
+  {{{makeHtml (makeLinks description)}}}</li>
+{{/options}}
+</ul>
+{{/if}}

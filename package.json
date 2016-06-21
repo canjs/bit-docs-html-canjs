@@ -25,9 +25,7 @@
     "url": "https://github.com/bit-docs/bit-docs-prettify/issues"
   },
   "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
-  "system": {
-
-  },
+  "system": {},
   "devDependencies": {
     "bit-docs-generate-html": "^0.0.5",
     "q": "^1.4.1",

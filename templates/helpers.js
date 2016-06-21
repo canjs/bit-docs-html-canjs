@@ -1,11 +1,143 @@
-
-
+var fs = require("fs");
+var path = require("path");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
+
     console.log("making helpers");
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
+    var signatureTemplate = OtherHandlebars.compile(""+fs.readFileSync(path.join(__dirname,"signature.mustache")))
     return {
+        makeSignatureInsert: function(signature){
+            if(signature) {
+                var res = signatureTemplate(signature);
+                return res;
+            } else {
+                return "";
+            }
+        },
+        "makeSignature": function(code){
+
+            if(code){
+				return code;
+			}
+
+			var sig = "";
+            if(this.type === "module") {
+                sig = "__"+this.name+"__ ";
+            }
+            if(this.types) {
+                return sig + helpers.makeTypes(this.types);
+            }
+
+            if(! /function|constructor/i.test(this.type) && !this.params && !this.returns){
+				return sig + helpers.makeType(this);
+			}
+
+            // if it's a constructor add new
+			if(this.type === "constructor"){
+				sig += "new "
+			}
+
+			// get the name part right
+			var parent = docMap[this.parent];
+			if(parent){
+				if(parent.type == "prototype"){
+					var parentParent = docMap[parent.parent];
+					sig += (parentParent.alias || (lastPartOfName( parentParent.name) +".")  ).toLowerCase();
+
+				} else {
+					sig += (parent.alias || lastPartOfName( parent.name)+"." );
+				}
+
+				sig += ( lastPartOfName(this.name) || "function" );
+			} else {
+				sig += "function";
+			}
+
+
+			sig+="("+helpers.makeParamsString(this.params)+")";
+
+			// now get the params
+
+
+
+			return sig;
+        },
+        "makeParams": function(){
+            var result = "<b>"+this.name+"</b>";
+            if(this.types) {
+                result += " <code>"+helpers.makeTypesString(this.types)+"</code>"
+            }
+            return result;
+        },
+        makeTypesString: function (types) {
+			if (types && types.length) {
+				// turns [{type: 'Object'}, {type: 'String'}] into '{Object | String}'
+				var txt = "{"+helpers.makeTypes(types);
+				//if(this.defaultValue){
+				//	txt+="="+this.defaultValue
+				//}
+				return txt+"}";
+			} else {
+				return '';
+			}
+		},
+        makeTypes: function(types){
+			if (types.length) {
+				// turns [{type: 'Object'}, {type: 'String'}] into '{Object | String}'
+				return types.map(helpers.makeType).join('|');
+			} else {
+				return '';
+			}
+		},
+        makeType: function (t) {
+			if(t.type === "function"){
+				var fn = t.params && t.params.length ?
+                    "("+helpers.makeParamsString(t.params)+")" : "";
+
+				if(t.constructs && t.constructs.types){
+					fn = "constructor"+fn;
+					fn += " => "+helpers.makeTypes(t.constructs.types)
+				} else {
+					fn = "function"+fn;
+				}
+
+				return fn;
+			}
+			var type = docMap[t.type];
+			var title = type && type.title || undefined;
+			var txt = helpers.linkTo(t.type, title);
+
+			if(t.template && t.template.length){
+				txt += "\\<"+t.template.map(function(templateItem){
+					return helpers.makeTypes(templateItem.types)
+				}).join(",")+"\\>";
+			}
+			if(type){
+				if(type.type === "function" && (type.params || type.signatures)){
+					var params = type.params || (type.signatures[0] && type.signatures[0].params ) || []
+				} else if(type.type === "typedef" && type.types[0] && type.types[0].type == "function"){
+					var params = type.types[0].params;
+				}
+				if(params){
+					txt += "("+helpers.makeParamsString(params)+")";
+				}
+			}
+
+			return txt;
+		},
+        makeParamsString: function(params){
+            if(!params || !params.length){
+                return "";
+            }
+            return params.map(function(param){
+                // try to look up the title
+                var type = param.types && param.types[0] && param.types[0].type
+                return helpers.linkTo(type, param.name) +
+                    ( param.variable ? "..." : "" );
+            }).join(", ");
+        },
         sidebarLevels: function(){
             // we need to walk up until the highest parent
             // and then get all children on the way down
@@ -43,6 +175,18 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             } else {
                 return options.inverse();
             }
+        },
+        indent: function(content, spaces){
+            if(typeof content === "string") {
+                var padding = new Array(spaces+1).join(" ");
+
+                return padding + content.replace(/\n\r?/g,"\n"+padding);
+            } else {
+                var depth = this.depth || (this.docObject && this.docObject.depth) || 0;
+
+                return new Array(depth+1).join("  ");
+            }
+
         }
     };
 };

@@ -1,0 +1,28 @@
+{{#unless hideSidebar}}
+	{{> sidebar.mustache}}
+{{/unless}}
+<article>
+	{{#unless hideTitle}}
+		{{> title.mustache}}
+	{{/unless}}
+
+	{{#unless hideDescription}}
+		{{#if description}}
+			{{> description.mustache}}
+		{{/if}}
+	{{/unless}}
+
+{{#unless hideBody}}
+{{#if signatures}}
+{{#each signatures}}
+{{{makeSignatureInsert .}}}
+{{/each}}
+{{/if}}
+{{/unless}}
+
+	{{#unless hideBody}}
+		{{#if body}}
+			{{> body.mustache}}
+		{{/if}}
+	{{/unless}}
+</article>
