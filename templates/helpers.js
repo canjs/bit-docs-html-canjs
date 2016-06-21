@@ -232,7 +232,7 @@ function getLevels(docObject, childrenMap, index) {
     if( children && children.every(isGroup) ) {
         return children.map(function(docObject){
             return {
-                title: getTitle(docObject).replace(docObject.title,""),
+                title: getTitle(docObject),
                 items: childrenMap[docObject.name]
             }
         });
