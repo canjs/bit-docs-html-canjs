@@ -237,7 +237,6 @@ function getLevels(docObject, childrenMap, index) {
             }
         });
     } else {
-        var children = childrenMap[docObject.name];
         if(children && children.length) {
             return [{
                 items: (children || []).sort(compareDocObjects)

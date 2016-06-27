@@ -19,7 +19,9 @@
 {{/each}}
 {{else}}
 {{#types}}
+{{#if description}}
 {{> signature.mustache}}
+{{/if}}
 {{/types}}
 {{/if}}
 {{/unless}}
