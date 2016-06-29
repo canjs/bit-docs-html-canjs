@@ -28,8 +28,9 @@
   "system": {},
   "devDependencies": {
     "bit-docs-generate-html": "^0.0.5",
-    "q": "^1.4.1",
     "connect": "^2.14.4",
+    "normalize.css": "^4.1.1",
+    "q": "^1.4.1",
     "zombie": "^4.2.1"
   }
 }

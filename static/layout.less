@@ -1,0 +1,28 @@
+.main-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+
+nav.sidebar {
+    flex-shrink: 0;
+    padding: 0px;
+    margin-right: 40px;
+    
+    a {
+      text-decoration: none;
+    }
+    
+    .expanded > a {
+      text-decoration: underline;
+    }
+}
+article {
+
+}
