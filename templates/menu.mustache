@@ -1,0 +1,28 @@
+{{#if children.length}}
+	<ul>
+		{{#each children}}
+			{{^if docObject.hide}}
+				{{#if (isGroup docObject)}}
+					<li>
+						<span>{{getTitle docObject}}</span>
+
+						{{> menu.mustache}}
+					</li>
+				{{else}}
+					<li class="{{#if (isCurrent docObject)}}current{{/if}}
+                               {{#children.length}}parent{{/children.length}}
+                               {{#if (hasCurrent docObject)}}expanded{{/if}}">
+						<a class="{{docObject.type}}"
+							href="{{urlTo docObject.name}}">
+							{{getTitle docObject}}
+						</a>
+						{{#if (hasOrIsCurrent docObject)}}
+							{{> menu.mustache}}
+						{{/if}}
+					</li>
+				{{/if}}
+
+			{{/if}}
+		{{/each}}
+	</ul>
+{{/if}}

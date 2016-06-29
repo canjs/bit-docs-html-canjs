@@ -6,6 +6,8 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
     console.log("making helpers");
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
+    var docMapInfo = new DocMapInfo(docMap, getCurrent);
+
     return {
         "makeSignature": function(code){
 
@@ -129,43 +131,23 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
                     ( param.variable ? "..." : "" );
             }).join(", ");
         },
-        sidebarLevels: function(){
-            // we need to walk up until the highest parent
-            // and then get all children on the way down
-
-            var parents = getParents(getCurrent(), docMap);
-
-            // [{title: "collection", items: []},{title: ""}]
-            //var current = parents.shift(); // remove the canjs one
-            parents.pop();
-            var parentLevels = [];
-            parents.forEach(function(docObject, index){
-                // dont get groups because they will be retrieved already
-                if(!isGroup(docObject)) {
-                    var levels = getLevels(docObject, childrenMap, index);
-                    parentLevels.push.apply(parentLevels,levels);
-                }
-
-            });
-
-            return parentLevels;
+        isCurrent: function(docObject, options){
+            return docMapInfo.isCurrent(docObject);
         },
-        subSidebarLevels: function(){
-            return getLevels(getCurrent(), childrenMap, Infinity);
+        hasCurrent: function(docObject) {
+            return docMapInfo.hasCurrent(docObject);
         },
-        isActive: function(options){
-            var parents = getParents(getCurrent(), docMap);
-            parents.push(getCurrent());
-            var itemMap = {};
-            parents.forEach(function(docObject){
-                itemMap[docObject.name] = true;
-            });
-
-            if(itemMap[this.name]) {
-                return options.fn();
-            } else {
-                return options.inverse();
-            }
+        hasOrIsCurrent: function(docObject){
+            return docMapInfo.hasOrIsCurrent(docObject);
+        },
+        getTitle: function(docObject){
+            return docMapInfo.getTitle(docObject);
+        },
+        isGroup: function(docObject){
+            return docMapInfo.isGroup(docObject);
+        },
+        getCurrentTree: function(){
+            return docMapInfo.getCurrentTree();
         },
         indent: function(content, spaces){
             if(typeof content === "string") {
@@ -181,6 +163,103 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         }
     };
 };
+
+var DocMapInfo = function(docMap, getCurrent) {
+    this.docMap = docMap;
+    this.childrenMap = makeChildrenMap(docMap);
+    this.getCurrent = getCurrent;
+};
+DocMapInfo.prototype.isCurrent = function(docObject){
+    return docObject.name === this.getCurrent().name;
+};
+DocMapInfo.prototype.hasCurrent = function(docObject){
+    var parents = this.getParents(this.getCurrent());
+    parents.push(this.getCurrent());
+    var itemMap = {};
+    parents.forEach(function(docObject){
+        itemMap[docObject.name] = true;
+    });
+
+    return itemMap[docObject.name];
+};
+DocMapInfo.prototype.hasOrIsCurrent = function(docObject){
+    return this.isCurrent(docObject) || this.hasCurrent(docObject);
+};
+DocMapInfo.prototype.getParents = function(docObject, cb){
+    var names = {};
+
+	// walk up parents until you don't have a parent
+	var parent = this.docMap[docObject.parent],
+		parents = [];
+    if(!parent) {
+        return [];
+    }
+	// don't allow things that are their own parent
+	if(parent.parent === docObject.name){
+		return parents;
+	}
+
+	while(parent){
+        cb && cb(parent);
+		parents.unshift(parent);
+		if(names[parent.name]){
+			return parents;
+		}
+		names[parent.name] = true;
+		parent = this.docMap[parent.parent];
+	}
+	return parents;
+};
+DocMapInfo.prototype.getTitle = function(docObject) {
+    return docObject.title || docObject.name
+};
+DocMapInfo.prototype.isGroup = function(docObject) {
+    return ["group","static","prototype"].indexOf(docObject.type) !== -1
+};
+DocMapInfo.prototype.getCurrentTree = function(){
+    // [{docObject, children<>},{docObject}]
+    //
+    var getChildren = this.getChildren.bind(this),
+        getNestedDocObject = this.getNestedDocObject.bind(this);
+
+    var cur = this.getCurrent();
+
+    var curChildren = this.getNestedChildren(cur);
+
+    this.getParents(cur, function(docObject){
+        curChildren = getChildren(docObject).map(function(docObject){
+            if(docObject.name === cur.name) {
+                return {docObject: docObject, children: curChildren};
+            } else {
+                return getNestedDocObject(docObject);
+            }
+        });
+        cur = docObject;
+    });
+
+    if(!curChildren) {
+        return {children: []}
+    } else {
+        return {children: curChildren};
+    }
+};
+DocMapInfo.prototype.getChildren = function(docObject){
+    var children = this.childrenMap[docObject.name];
+    return (children || []).sort(compareDocObjects);
+};
+DocMapInfo.prototype.getNestedDocObject = function(docObject){
+    if(this.isGroup(docObject)) {
+        return {
+            docObject: docObject,
+            children: this.getNestedChildren(docObject)
+        }
+    } else {
+        return {docObject: docObject};
+    }
+};
+DocMapInfo.prototype.getNestedChildren = function(docObject){
+    return this.getChildren(docObject).map(this.getNestedDocObject.bind(this));
+}
 
 var levelMap = ["collection","modules"];
 
@@ -199,52 +278,7 @@ function makeChildrenMap(docMap){
     return childrenMap;
 };
 
-function getParents(docObject, docMap) {
-    var names = {};
 
-	// walk up parents until you don't have a parent
-	var parent = docMap[docObject.name],
-		parents = [];
-
-	// don't allow things that are their own parent
-	if(parent.parent === docObject.name){
-		return parents;
-	}
-
-	while(parent){
-		parents.unshift(parent);
-		if(names[parent.name]){
-			return parents;
-		}
-		names[parent.name] = true;
-		parent = docMap[parent.parent];
-	}
-	return parents;
-};
-function getTitle(docObject, docMap) {
-    return docObject.title || docObject.name
-}
-function isGroup(docObject) {
-    return ["group","static","prototype"].indexOf(docObject.type) !== -1
-}
-function getLevels(docObject, childrenMap, index) {
-    var children = childrenMap[docObject.name];
-    if( children && children.every(isGroup) ) {
-        return children.map(function(docObject){
-            return {
-                title: getTitle(docObject),
-                items: (childrenMap[docObject.name] || []).sort(compareDocObjects)
-            }
-        });
-    } else {
-        if(children && children.length) {
-            return [{
-                items: (children || []).sort(compareDocObjects)
-            }]
-        }
-
-    }
-}
 var compareDocObjects = function(child1, child2){
 
 	// put groups at the end

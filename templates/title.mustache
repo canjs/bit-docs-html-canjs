@@ -1,21 +1,3 @@
 <section class="title">
-	<h1>{{makeTitle}}</h1>
-    <nav class="sub-sidebar">
-        <ul>
-        {{#each (subSidebarLevels)}}
-            <li class='sidebar-level'>
-                {{#if title}}<span>{{title}}:</span>{{/if}}
-                <ul class='sidebar-items'>
-                {{#each items}}
-                    <li class="{{type}} {{#isActive}}active{{/isActive}}">
-                        <a href="{{urlTo name}}">
-                            {{makeTitle}}
-                        </a>
-                    </li>
-                {{/each}}
-                </ul>
-            </li>
-        {{/each}}
-        </ul>
-    </nav>
+	<h1>{{getTitle .}}</h1>
 </section>
