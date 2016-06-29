@@ -1,28 +1,20 @@
 .main-container {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    justify-content: flex-start;
-    align-items: stretch;
+  padding: @gutter*2;
+  .flex;
+  flex-direction: column;
+}
+.sidebar {
+  margin-right: @gutter*2;
+}
+
+@media screen and (min-width: @breakpoint) {
+  
+  .main-container {
+    flex-direction: row;
     flex-wrap: nowrap;
-}
-
-nav.sidebar {
-    flex-shrink: 0;
-    padding: 0px;
-    margin-right: 40px;
     
-    a {
-      text-decoration: none;
+    article {
+      flex: 1;
     }
-    
-    .expanded > a {
-      text-decoration: underline;
-    }
-}
-article {
-
+  }
 }
