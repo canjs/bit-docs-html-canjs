@@ -1,0 +1,37 @@
+header {
+  .navbar {
+    .flex;
+    align-items: center;
+    width: 100%;
+    .border-bottom;
+    padding: @gutter @gutter*2;
+    
+    .navbar-items {
+      .flex;
+      align-items: center;
+      list-style: none;
+      
+      li {
+        margin-right: @gutter;
+      }
+    }
+  }
+  .dropdown {
+    position: relative;
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #fff;
+      border: 1px solid @border-color;
+    }
+    &:hover {
+      .dropdown-menu {
+        display: block;
+      }
+    }
+  }
+  .bitovi-menu {
+    margin-left: auto;
+  }
+}

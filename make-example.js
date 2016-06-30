@@ -14,7 +14,8 @@ generate(docMap,{
     html: {
         templates: path.join(__dirname, "templates"),
         dependencies: {
-            "bit-docs-html-canjs": __dirname
+            "bit-docs-html-canjs": __dirname,
+            "bit-docs-prettify": "^0.0.3"
         }
     },
     dest: path.join(__dirname, "temp"),
