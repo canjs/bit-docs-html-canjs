@@ -27,7 +27,7 @@
   "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
   "system": {},
   "devDependencies": {
-    "bit-docs-generate-html": "^0.0.7",
+    "bit-docs-generate-html": "^0.0.9",
     "q": "^1.4.1",
     "connect": "^2.14.4",
     "normalize.css": "^4.1.1",
