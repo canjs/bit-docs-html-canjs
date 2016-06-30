@@ -8,3 +8,13 @@
   display: -webkit-flex;
   display: flex;
 }
+.border-radius {
+  border-radius: 2px;
+}
+.font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.box-shadow (@horizontal: 3px, @vertical: 3px, @blur: 10px, @color: rgba(0,0,0,.05)) {
+  box-shadow: @horizontal @vertical @blur @color;
+}
