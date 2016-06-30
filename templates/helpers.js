@@ -3,7 +3,6 @@ var path = require("path");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
 
-    console.log("making helpers");
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
     var docMapInfo = new DocMapInfo(docMap, getCurrent);

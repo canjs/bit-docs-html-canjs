@@ -8,6 +8,8 @@ var docMap = readFile(__dirname+"/docMap.json").then(function(source){
     return JSON.parse(""+source);
 });
 
+var forceBuild = process.argv.indexOf("-f") !== -1;
+
 generate(docMap,{
     html: {
         templates: path.join(__dirname, "templates"),
@@ -17,6 +19,6 @@ generate(docMap,{
     },
     dest: path.join(__dirname, "temp"),
     parent: "canjs",
-    forceBuild: true,
+    forceBuild: forceBuild,
     debug: true
 }).done();

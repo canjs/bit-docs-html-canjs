@@ -1,8 +1,7 @@
 Generate example site:
 
-
 ```
-node make-example.js
+node make-example.js -f
 ```
 
 ## Change Styles
@@ -11,7 +10,7 @@ Edit styles in _static/canjs.less_.
 Delete _node_modules/bit-docs-generate-html/site/static_. Re-run:
 
 ```
-node make-example.js
+node make-example.js -f
 ```
 
 
