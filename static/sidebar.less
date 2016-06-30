@@ -2,7 +2,7 @@
   min-width: 200px; 
   
   ul {
-    padding-left: @gutter/2;
+    padding-left: @gutter/1.5;
     margin: 0;
     margin-bottom: @gutter;
     list-style: none;
@@ -16,17 +16,8 @@
         padding-bottom: 3px;
       }
       span {
-        font-size: 90%;
         color: #555;
-        //margin-left: 3px;
-      }
-      .current:before {
-        position: absolute;
-        //content: '\25B6';
-        left: -10px;
-        top: 8px;
-        font-size: 10px;
-        color: darken(@border-color, 10%);
+        font-size: 90%;
       }
     }
   }
@@ -36,7 +27,7 @@
   }
   .current > a {
     text-decoration: underline;
-    color: #444;
+    color: darken(@link-color,10%);
   }
 
   // Highest parent level
@@ -74,9 +65,9 @@
               }
             }
              //Third level
-             > ul {
-               > li {
-                 > ul {
+            > ul {
+                li {
+                  ul {
                    margin-top: @gutter/3;
                  }
                }
