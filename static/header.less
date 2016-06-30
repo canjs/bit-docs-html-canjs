@@ -1,19 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
 header {
+  font-family: 'Lato', sans-serif;
+  
   .navbar {
     .flex;
     align-items: center;
     width: 100%;
     .border-bottom;
-    padding: @gutter @gutter*2;
+    padding: 0 @gutter;
+    margin-bottom: @gutter;
     
     .navbar-items {
       .flex;
       align-items: center;
       list-style: none;
+      margin: 0;
       
-      li {
-        margin-right: @gutter;
+      > li {
+        font-size: 14px;
+        padding: @gutter 0;
+        
+          > a {
+          margin-right: @gutter/2;
+          font-weight: 700;
+          font-size: 12px;
+          padding: 5px 10px;
+          text-transform: uppercase;
+          line-height: 20px;
+          .border-radius;
+          border: 1px solid transparent;
+          
+          &:hover {
+            border: 1px solid lighten(@link-color, 40%);
+            text-decoration: none;
+            background: @border-color;
+          }
+        }
       }
+      .active a, .active a:hover {
+        background: @link-color;
+        color: #fff;
+        border: 1px solid darken(@link-color, 20%);
+        .font-smoothing;
+        
+        &:hover {
+          border: 1px solid darken(@link-color, 40%);
+        }
+      }
+    }
+    .brand {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100px;
+      height: 39px;
+      background-image: url(img/canjs_logo.svg);
+      background-size: cover;
     }
   }
   .dropdown {
@@ -24,6 +67,36 @@ header {
       position: absolute;
       background: #fff;
       border: 1px solid @border-color;
+      border-top: none;
+      left: 0;
+      z-index: 10;
+      top: 50px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      list-style-type: none;
+      width: 240px;
+      .box-shadow;
+      
+      > li {
+        font-weight: 400;
+        
+         > a {
+          display: block;
+          padding: @gutter/3 @gutter;
+          border-top: 1px solid @border-color;
+          white-space: nowrap;
+          font-size: 14px;
+          line-height: 32px;
+          color: #706f70;
+          
+          &:hover {
+            background-color: @border-color;
+            text-decoration: none;
+          }
+        }
+      }
     }
     &:hover {
       .dropdown-menu {
@@ -31,7 +104,40 @@ header {
       }
     }
   }
+  
   .bitovi-menu {
-    margin-left: auto;
-  }
+      margin: 0;
+      margin-left: auto;
+      .flex;
+      align-items: center;
+      list-style: none;
+      
+      .bitovi.icon-bits {
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: @gutter @gutter*2;
+        width: 50px;
+        display: block;
+        background: url(img/bitovi_bits.svg) no-repeat;
+        background-size: 30px auto;
+        background-position: center;
+        border: 1px solid transparent;
+        border-top: none;
+        border-bottom: none;
+        
+        &:hover {
+          border: 1px solid @border-color;
+          border-top: none;
+          border-bottom: none;
+        }
+      }
+      .dropdown {
+        .dropdown-menu {
+          right: 0;
+          left: auto;
+          top: 49px;
+        }
+      }
+    }
 }
