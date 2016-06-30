@@ -1,8 +1,88 @@
 .sidebar {
+  min-width: 200px; 
+  
   ul {
-    padding-left: @gutter;
+    padding-left: @gutter/2;
+    margin: 0;
+    margin-bottom: @gutter;
+    list-style: none;
+    
+    li {
+      position: relative;
+      
+      a {
+        display: block;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      span {
+        font-size: 90%;
+        color: #555;
+        //margin-left: 3px;
+      }
+      .current:before {
+        position: absolute;
+        //content: '\25B6';
+        left: -10px;
+        top: 8px;
+        font-size: 10px;
+        color: darken(@border-color, 10%);
+      }
+    }
   }
-  .current>a, .expanded>a {
+  .current > a, .expanded > a {
     font-weight: bold;
+    color: darken(@link-color,5%);
+  }
+  .current > a {
+    text-decoration: underline;
+    color: #444;
+  }
+
+  // Highest parent level
+  > ul {
+    padding-left: 0;
+    
+    > li {
+      list-style: none;
+      list-style-type: none;
+      padding: 0;
+      .border-bottom;
+      
+      > a {
+        font-size: 110%;
+        padding-bottom: @gutter;
+        padding-top: @gutter;
+      }
+      &.expanded > a {
+        padding-bottom: @gutter/3;
+      }
+      // Second level
+        > ul {
+          > li {
+            > a {
+              padding-bottom: @gutter/3;
+              padding-top: @gutter/3;
+            }
+            &.expanded {
+              border-left: 1px solid @border-color;
+              
+              > a {
+                padding-bottom: @gutter/2;
+                margin-left: -1px;
+                background: #fff;
+              }
+            }
+             //Third level
+             > ul {
+               > li {
+                 > ul {
+                   margin-top: @gutter/3;
+                 }
+               }
+             }
+          }
+        }
+    }
   }
 }
