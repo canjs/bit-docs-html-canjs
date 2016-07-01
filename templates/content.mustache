@@ -2,7 +2,9 @@
 {{#unless hideSidebar}}
 	{{> sidebar.mustache}}
 {{/unless}}
-<article>
+<article class="site-wrap">
+<header>{{> header.mustache}}</header>
+
 	{{#unless hideTitle}}
 		{{> title.mustache}}
 	{{/unless}}
@@ -31,5 +33,8 @@
 			{{> body.mustache}}
 		{{/if}}
 	{{/unless}}
+	
+	<footer>{{> footer.mustache}}</footer>
 </article>
 </div>
+
