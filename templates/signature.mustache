@@ -1,14 +1,16 @@
 <div class="signature">
-  <h2><code>{{{makeSignature code}}}</code></h2>
+  <h2 class="signature-title"><code>{{{makeSignature code}}}</code></h2>
   {{{makeHtml (makeLinks description)}}}
   
   {{#if params}}
-    <h3>Parameters</h3>
-      <ol class="parameters">
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
         {{#params}}
           <li>{{{makeParams}}}: {{{makeHtml (makeLinks description)}}}</li>
         {{/params}}
       </ol>
+  </div>
   {{/if}}
   
   {{#returns}}
@@ -18,6 +20,7 @@
   {{/returns}}
   
   {{#if options.length}}
+  <div class="options">
   <h3>Options</h3>
     <ul>
     {{#options}}
@@ -27,5 +30,6 @@
       </li>
     {{/options}}
     </ul>
+  </div>
   {{/if}}
 </div>
