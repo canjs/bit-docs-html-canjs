@@ -33,7 +33,7 @@
       border: 1px solid @border-color;
       
       .signature-title {
-        background: #eee;
+        background: lighten(@border-color, 5%);
         margin-top: 0;
         margin-left: -@gutter;
         margin-right: -@gutter;
@@ -43,6 +43,8 @@
           font-weight: bold;
           .font-smoothing;
           color: darken(@code-color,10%);
+          padding: 0;
+          background: none;
         }
       }
     }
