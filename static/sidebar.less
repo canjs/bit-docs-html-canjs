@@ -1,5 +1,5 @@
 .sidebar {
-  width: 200px; 
+  width: @sidebar-width; 
   padding-left: @gutter;
   height: 100%;
   position: fixed;
@@ -11,7 +11,6 @@
   overflow-x: hidden;
   overflow-y:scroll;
   background: #fff;
-
   
   ul {
     padding-left: @gutter/1.5;
@@ -92,7 +91,7 @@
 
 // -- Mobile Menu Menu
 .nav-trigger {
-  position: absolute;
+  position: fixed;
   clip: rect(0, 0, 0, 0);
 }
 label[for="nav-trigger"] {
@@ -114,9 +113,28 @@ label[for="nav-trigger"] {
     left: 215px;
 }
 .nav-trigger:checked ~ .site-wrap {
-    left: 200px;
+    left: @sidebar-width;
     .box-shadow (0, 0, 10px);
 }
 .nav-trigger + label, .site-wrap {
     transition: left 0.2s;
+}
+
+@media screen and (min-width: @breakpoint) {
+    .sidebar {
+      margin-right: @gutter*2;
+      position: relative;
+      overflow: visible;
+      width: auto;
+      min-width: @sidebar-width;
+      height: auto;
+      position: absolute;
+      top: 100px;
+      left: 0;
+      z-index: 3;
+      width: @sidebar-width;
+    }
+  .nav-trigger, label[for="nav-trigger"] {
+    display: none;
+  } 
 }
