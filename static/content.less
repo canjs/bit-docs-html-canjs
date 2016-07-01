@@ -11,6 +11,10 @@
       
       li {
         line-height: 1.6;
+        
+        > p:first-of-type {
+          display: inline;
+        }
       }
     }
     small {
@@ -50,8 +54,6 @@
     }
     .parameters {
       padding: 0 @gutter;
-      border-left: 4px solid @border-color;
-      margin-left: @gutter;
       
       .parameters-title {
         border: none;
@@ -67,6 +69,7 @@
           list-style-type: none;
           counter-increment: item;
           margin-left: -@gutter*2;
+          margin-bottom: @gutter;
           
           &:before {
             display: inline-block;
@@ -76,11 +79,8 @@
             text-align: right;
             content: counter(item) ".";
           }
-          
-          > p:first-of-type {
-            border-top: 1px solid @border-color;
-            margin-top: 4px;
-            padding-top: 4px;
+          &:last-child {
+            margin-bottom: 0;
           }
         }
       }
