@@ -1,7 +1,10 @@
-<div class='main-container'>
+<div class="main-container">
 {{#unless hideSidebar}}
 	{{> sidebar.mustache}}
 {{/unless}}
+<div class="site-wrap">
+<header>{{> header.mustache}}</header>
+
 <article>
 	{{#unless hideTitle}}
 		{{> title.mustache}}
@@ -31,5 +34,12 @@
 			{{> body.mustache}}
 		{{/if}}
 	{{/unless}}
+	
+	<footer>{{> footer.mustache}}</footer>
+	
 </article>
+
+	
 </div>
+</div>
+

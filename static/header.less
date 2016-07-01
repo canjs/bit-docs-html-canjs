@@ -2,6 +2,8 @@
 
 header {
   font-family: 'Lato', sans-serif;
+  margin-left: -@gutter;
+  margin-right: -@gutter;
   
   .navbar {
     .flex;
@@ -66,6 +68,7 @@ header {
       background-image: url(img/canjs_logo.svg);
       background-size: cover;
       margin-right: @gutter*2;
+      margin-left: 65px;
     }
   }
   .dropdown {
@@ -116,6 +119,7 @@ header {
   
   .bitovi-menu {
       .flex;
+      padding: 0;
       margin: 0;
       margin-left: auto;
       align-items: center;
@@ -164,3 +168,12 @@ header {
   }
 }
 
+@media screen and (min-width: @breakpoint) {
+  header {
+    .navbar {
+      .brand {
+        margin-left: 0;
+      }
+    }
+  } 
+}
