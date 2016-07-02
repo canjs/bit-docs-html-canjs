@@ -102,9 +102,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 			var txt = helpers.linkTo(t.type, title);
 
 			if(t.template && t.template.length){
-				txt += "\\<"+t.template.map(function(templateItem){
+				txt += "&lt;"+t.template.map(function(templateItem){
 					return helpers.makeTypes(templateItem.types)
-				}).join(",")+"\\>";
+				}).join(",")+"&gt;";
 			}
 			if(type){
 				if(type.type === "function" && (type.params || type.signatures)){
