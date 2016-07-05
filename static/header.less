@@ -4,6 +4,10 @@ header {
   font-family: 'Lato', sans-serif;
   margin-left: -@gutter;
   margin-right: -@gutter;
+  z-index: 10;
+  position: relative;
+  background: #fff;
+  left: 0;
   
   .navbar {
     .flex;
@@ -68,7 +72,7 @@ header {
       background-image: url(img/canjs_logo.svg);
       background-size: cover;
       margin-right: @gutter*2;
-      margin-left: 65px;
+      margin-left: 80px;
     }
   }
   .dropdown {
@@ -168,12 +172,50 @@ header {
   }
 }
 
+// -- Mobile Menu Menu
+.nav-trigger {
+  position: fixed;
+  clip: rect(0, 0, 0, 0);
+}
+label[for="nav-trigger"] {
+  position: fixed;
+  top: 7px;
+  left: 10px;
+  z-index: 12;
+  font-family: Lato, sans-serif;
+  border: 1px solid @border-color;
+  padding: 10px;
+  background: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  .border-radius;
+}
+.nav-trigger:checked + label,
+.nav-trigger:checked ~ header {
+    left: @sidebar-width+15;
+}
+.nav-trigger:checked ~ .main-container .content-container,
+.nav-trigger:checked ~ footer {
+    left: @sidebar-width;
+    .box-shadow (0, 0, 10px);
+}
+.nav-trigger + label, .content-container, header, footer {
+    transition: left 0.2s;
+}
+    
 @media screen and (min-width: @breakpoint) {
   header {
-    .navbar {
+    margin: 0;
+    
+    .navbar {  
       .brand {
         margin-left: 0;
       }
     }
+  } 
+  .nav-trigger, label[for="nav-trigger"] {
+    display: none;
   } 
 }
