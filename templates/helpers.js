@@ -109,7 +109,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 			if(type){
 				if(type.type === "function" && (type.params || type.signatures)){
 					var params = type.params || (type.signatures[0] && type.signatures[0].params ) || []
-				} else if(type.type === "typedef" && type.types[0] && type.types[0].type == "function"){
+				} else if(type.type === "typedef" && type.types && type.types[0] && type.types[0].type == "function"){
 					var params = type.types[0].params;
 				}
 				if(params){
@@ -141,6 +141,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         },
         getTitle: function(docObject){
             return docMapInfo.getTitle(docObject);
+        },
+        getShortTitle: function(docObject){
+            return docMapInfo.getShortTitle(docObject);
         },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
@@ -211,6 +214,28 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 };
 DocMapInfo.prototype.getTitle = function(docObject) {
     return docObject.title || docObject.name
+};
+DocMapInfo.prototype.getShortTitle = function(docObject) {
+    if(docObject.title) {
+        return docObject.title;
+    }
+    if(docObject.type === "module") {
+        var parents = this.getParents(docObject);
+        var parentModule = parents.find(function(docObject){
+            return docObject.type === "module";
+        });
+        if(parentModule) {
+            var name = docObject.name;
+            if(docObject.name.indexOf( parentModule.name+"/" ) === 0 ) {
+                name = docObject.name.replace(parentModule.name+"/", "./")
+            }
+            var basename = path.basename(name);
+            if(name.endsWith("/"+basename+"/"+basename)) {
+                return path.dirname(name)+"/";
+            }
+        }
+    }
+    return docObject.name;
 };
 DocMapInfo.prototype.isGroup = function(docObject) {
     return ["group","static","prototype"].indexOf(docObject.type) !== -1

@@ -4,7 +4,7 @@
 			{{^if docObject.hide}}
 				{{#if (isGroup docObject)}}
 					<li>
-						<span>{{getTitle docObject}}</span>
+						<span>{{getShortTitle docObject}}</span>
 
 						{{> menu.mustache}}
 					</li>
@@ -14,7 +14,7 @@
                                {{#if (hasCurrent docObject)}}expanded{{/if}}">
 						<a class="{{docObject.type}}"
 							href="{{urlTo docObject.name}}">
-							{{getTitle docObject}}
+							{{getShortTitle docObject}}
 						</a>
 						{{#if (hasOrIsCurrent docObject)}}
 							{{> menu.mustache}}
