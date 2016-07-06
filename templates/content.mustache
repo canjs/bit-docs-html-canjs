@@ -1,35 +1,39 @@
-<div class='main-container'>
-{{#unless hideSidebar}}
-	{{> sidebar.mustache}}
-{{/unless}}
-<article>
-	{{#unless hideTitle}}
-		{{> title.mustache}}
-	{{/unless}}
+<div class="main-container">
+  {{#unless hideSidebar}}
+  	{{> sidebar.mustache}}
+  {{/unless}}
 
-	{{#unless hideDescription}}
-		{{#if description}}
-			{{> description.mustache}}
-		{{/if}}
-	{{/unless}}
-
-{{#unless hideBody}}
-{{#if signatures}}
-{{#each signatures}}
-{{> signature.mustache}}
-{{/each}}
-{{else}}
-{{#types}}
-{{> signature.mustache}}
-{{/types}}
-{{/if}}
-{{/unless}}
-
-
-	{{#unless hideBody}}
-		{{#if body}}
-			{{> body.mustache}}
-		{{/if}}
-	{{/unless}}
-</article>
+  <div class="content-container">
+    <article>
+    	{{#unless hideTitle}}
+    		{{> title.mustache}}
+    	{{/unless}}
+    
+    	{{#unless hideDescription}}
+    		{{#if description}}
+    			{{> description.mustache}}
+    		{{/if}}
+    	{{/unless}}
+    
+    {{#unless hideBody}}
+    {{#if signatures}}
+    {{#each signatures}}
+    {{> signature.mustache}}
+    {{/each}}
+    {{else}}
+    {{#types}}
+    {{> signature.mustache}}
+    {{/types}}
+    {{/if}}
+    {{/unless}}
+    
+    
+    	{{#unless hideBody}}
+    		{{#if body}}
+    			{{> body.mustache}}
+    		{{/if}}
+    	{{/unless}}
+    	
+    </article>
+  </div>
 </div>
