@@ -63,6 +63,11 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             }
             return result;
         },
+        makeReturn: function(){
+            if(this.types) {
+                return " <code>"+helpers.makeTypesString(this.types)+"</code>"
+            }
+        },
         makeTypesString: function (types) {
 			if (types && types.length) {
 				// turns [{type: 'Object'}, {type: 'String'}] into '{Object | String}'
