@@ -221,9 +221,7 @@ DocMapInfo.prototype.getTitle = function(docObject) {
     return docObject.title || docObject.name
 };
 DocMapInfo.prototype.getShortTitle = function(docObject) {
-    if(docObject.title) {
-        return docObject.title;
-    }
+
     if(docObject.type === "module") {
         var parents = this.getParents(docObject);
         var parentModule = parents.find(function(docObject){
@@ -240,8 +238,11 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
                 return path.dirname(name)+"/";
             }
         }
+        return name;
+    } else {
+        return this.getTitle(docObject);
     }
-    return name;
+
 };
 DocMapInfo.prototype.isGroup = function(docObject) {
     return ["group","static","prototype"].indexOf(docObject.type) !== -1
