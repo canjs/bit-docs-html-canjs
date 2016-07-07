@@ -229,8 +229,9 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
         var parentModule = parents.find(function(docObject){
             return docObject.type === "module";
         });
+        var name = docObject.name;
         if(parentModule) {
-            var name = docObject.name;
+
             if(docObject.name.indexOf( parentModule.name+"/" ) === 0 ) {
                 name = docObject.name.replace(parentModule.name+"/", "./")
             }
@@ -240,7 +241,7 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
             }
         }
     }
-    return docObject.name;
+    return name;
 };
 DocMapInfo.prototype.isGroup = function(docObject) {
     return ["group","static","prototype"].indexOf(docObject.type) !== -1
