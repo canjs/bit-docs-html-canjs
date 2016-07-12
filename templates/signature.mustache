@@ -14,14 +14,15 @@
   {{/if}}
   
   {{#returns}}
-  <ul>
-      <li><b>returns</b> {{{makeReturn}}}: {{{makeHtml (makeLinks description)}}} </li>
-  </ul>
+  <div class="returns">
+    <h3 class="returns-title">Returns</h3>
+     <p>{{{makeReturn}}}: {{{makeHtml (makeLinks description)}}}</p>
+  </div>
   {{/returns}}
   
   {{#if options.length}}
   <div class="options">
-  <h3>Options</h3>
+  <h3 class="options-title">Options</h3>
     <ul>
     {{#options}}
       <li>

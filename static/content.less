@@ -29,7 +29,13 @@
     pre code {
       background: none;
     }
-    
+    .title {
+      .type {
+        font-weight: normal;
+        color: #666;
+        font-size: 50%;
+      }
+    }
     .signature {
       padding-left: @gutter;
       padding-right: @gutter;
@@ -52,12 +58,10 @@
         }
       }
     }
-    .parameters {
+    .parameters, .options, .returns {
       padding: 0 @gutter;
-      
-      .parameters-title {
-        border: none;
-      }
+    }
+    .parameters {
       > ol {
         margin: 0 0 1.5em;
         padding: 0;
