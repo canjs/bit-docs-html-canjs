@@ -21,5 +21,6 @@ generate(docMap,{
     dest: path.join(__dirname, "temp"),
     parent: "canjs",
     forceBuild: forceBuild,
+		minifyBuild: false,
     debug: true
 }).done();
