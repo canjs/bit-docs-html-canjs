@@ -17070,7 +17070,7 @@
     "signatures": [
       {
         "code": "connection.get(set)",
-        "description": "\n\n  Gets an instance from [can-connect/connection.getData] and runs the resulting data\n  through [can-connect/constructor.hydrateInstance].\n",
+        "description": "\n\n  Gets an instance from [can-connect/connection.getData] and runs the resulting data\n  through [can-connect/constructor/constructor.hydrateInstance].\n",
         "params": [
           {
             "types": [
@@ -17238,7 +17238,7 @@
     "signatures": [
       {
         "code": "connection.hydrateList(listData, set)",
-        "description": "\n\n  Calls [can-connect/constructor.hydrateInstance] with each raw instance data item and then\n  calls [can-connect/constructor.list] with an array of the instances.  If [can-connect/constructor.list]\n  is not provided, a normal array is used.\n",
+        "description": "\n\n  Calls [can-connect/constructor/constructor.hydrateInstance] with each raw instance data item and then\n  calls [can-connect/constructor.list] with an array of the instances.  If [can-connect/constructor.list]\n  is not provided, a normal array is used.\n",
         "params": [
           {
             "types": [
@@ -17289,9 +17289,9 @@
       "description": "The data type used to represent the list.\n\t "
     }
   },
-  "can-connect/constructor.hydrateInstance": {
+  "can-connect/constructor/constructor.hydrateInstance": {
     "type": "function",
-    "name": "can-connect/constructor.hydrateInstance",
+    "name": "can-connect/constructor/constructor.hydrateInstance",
     "parent": "can-connect/constructor/constructor.hydrators",
     "src": {
       "line": 215,
@@ -17573,7 +17573,7 @@
     "signatures": [
       {
         "code": "connection.updatedInstance( instance, props )",
-        "description": "\n\n  [can-connect/constructor.hydrateInstance Hydrates] instances with `listData`'s data\n  and attempts to merge them into `list`.  The merge is able to identify simple insertions\n  and removals of elements instead of replacing the entire list.\n",
+        "description": "\n\n  [can-connect/constructor/constructor.hydrateInstance Hydrates] instances with `listData`'s data\n  and attempts to merge them into `list`.  The merge is able to identify simple insertions\n  and removals of elements instead of replacing the entire list.\n",
         "params": [
           {
             "types": [
@@ -17846,7 +17846,7 @@
     "signatures": [
       {
         "code": "connection.list( listInstanceData, set )",
-        "description": "\n\n  Takes an object with a data property that is an array of instances returned by\n  [can-connect/constructor.hydrateInstance] and should return the right type of list.\n",
+        "description": "\n\n  Takes an object with a data property that is an array of instances returned by\n  [can-connect/constructor/constructor.hydrateInstance] and should return the right type of list.\n",
         "params": [
           {
             "types": [
@@ -17933,7 +17933,7 @@
     "signatures": [
       {
         "code": "connection.instance( props )",
-        "description": "\n\n  Takes an object with a data property that is an array of instances returned by\n  [can-connect/constructor.hydrateInstance] and should return the right type of list.\n",
+        "description": "\n\n  Takes an object with a data property that is an array of instances returned by\n  [can-connect/constructor/constructor.hydrateInstance] and should return the right type of list.\n",
         "params": [
           {
             "types": [
@@ -18222,7 +18222,7 @@
     "signatures": [
       {
         "code": "connection.getData(params)",
-        "description": "\n\n  Checks the [can-connect/base/base.cacheConnection] for `params`'s data.\n\n  If the cache connection has data, the cached data is returned. Prior to\n  returning the data, the [can-connect/constructor.hydrateInstance] method\n  is intercepted so we can get a handle on the instance that's being created\n  for the returned data. Once the intercepted instance is retrieved,\n  we use the base connection to get data and update the intercepted instance and\n  the cacheConnection.\n\n  If the cache connection does not have data, the base connection\n  is used to load the data and the cached connection is updated with that\n  data.\n",
+        "description": "\n\n  Checks the [can-connect/base/base.cacheConnection] for `params`'s data.\n\n  If the cache connection has data, the cached data is returned. Prior to\n  returning the data, the [can-connect/constructor/constructor.hydrateInstance] method\n  is intercepted so we can get a handle on the instance that's being created\n  for the returned data. Once the intercepted instance is retrieved,\n  we use the base connection to get data and update the intercepted instance and\n  the cacheConnection.\n\n  If the cache connection does not have data, the base connection\n  is used to load the data and the cached connection is updated with that\n  data.\n",
         "params": [
           {
             "types": [
@@ -18309,7 +18309,7 @@
       "codeLine": 131,
       "path": "node_modules/can-connect/src/real-time/real-time.js"
     },
-    "body": "\n\n## Use\n\nTo use `real-time`, create a connection with its dependent\nbehaviors like:\n\n```\nvar todoConnection = connect(\n   [\"real-time\",\n    \"constructor\",\n    \"constructor-store\",\n    \"constructor-callbacks-once\",\n    \"data-url\"],{\n  url: \"/todos\"\n});\n```\n\nNext, use the connection to load lists and save those lists in the\nstore:\n\n```\ntodoConnection.getList({complete: false}).then(function(todos){\n  todoConnection.addListReference(todos);\n})\n```\n\nFinally, use one of the  [can-connect/real-time/real-time.createInstance],\n[can-connect/real-time/real-time.updateInstance], and\n[can-connect/real-time/real-time.destroyInstance] methods to tell the connection\nthat data has changed.  The connection will update (by calling splice)\neach list accordingly.\n\n\n## Example\n\nThe following demo shows two lists that use this connection.  The\n\"Run Code\" button sends the connection data changes which the\nconnection will then update lists accordingly:\n\n\n<div class='demo_wrapper' data-demo-src='can-connect/src/real-time/real-time.html'></div>\n\nThis example creates a `todoList` function and `todoItem` function\nthat manage the behavior of a list of todos and a single todo respectfully.\nIt uses [Object.observe](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe)\nto observe changes in the todo list and individual todo data. Other\nframeworks will typically provide their own observable system.\n\n### todoList\n\nWhen `todoList` is created, it is passed the `set` of data to load.  It uses\nthis to get todos from the `todoConnection` like:\n\n\n```\ntodosConnection.getList(set).then(function(retrievedTodos){\n```\n\nIt then adds those `todos` to the [can.connect/constructor-store.listStore] so\nthey can be updated automatically.  And, it listens to changes in `todos` and calls an `update` function:\n\n```\ntodosConnection.addListReference(todos);\nObject.observe(todos, update, [\"add\", \"update\", \"delete\"] );\n```\n\nThe update function is able to inserted new `todoItem`s in the page when items are added\nto or removed from `todos`.  We exploit that by calling `update` as if it just added\neach todo in the list:\n\n```\nupdate(todos.map(function(todo, i){\n  return {\n    type: \"add\",\n    name: \"\"+i\n  };\n}));\n```\n\n### todoItem\n\nThe `todoItem` creates an element that updates with changes\nin its `todo`.  It listens to changes in the `todo` and saves\nthe todo in the [can.connect/constructor-store.instanceStore] with the\nfollowing:\n\n```\nObject.observe(todo, update, [\"add\", \"update\", \"delete\"] );\ntodosConnection.addInstanceReference(todo);\n```\n\nA `todoItem` needs to be able to stop listening on the `todo` and remove itself from the\n`instanceStore` if the `todo` is removed from the page.  To provide this teardown\nfunctionality, `todoItem` listens to a `\"removed\"` event on its element and\n`unobserves` the todo and removes it from the `instanceStore`:\n\n```\n$(li).bind(\"removed\", function(){\n  Object.unobserve(todo, update, [\"add\", \"update\", \"delete\"] );\n  todosConnection.deleteInstanceReference(todo);\n});\n```\n\n",
+    "body": "\n\n## Use\n\nTo use `real-time`, create a connection with its dependent\nbehaviors like:\n\n```\nvar todoConnection = connect(\n   [\"real-time\",\n    \"constructor\",\n    \"constructor-store\",\n    \"constructor-callbacks-once\",\n    \"data-url\"],{\n  url: \"/todos\"\n});\n```\n\nNext, use the connection to load lists and save those lists in the\nstore:\n\n```\ntodoConnection.getList({complete: false}).then(function(todos){\n  todoConnection.addListReference(todos);\n})\n```\n\nFinally, use one of the  [can-connect/real-time/real-time.createInstance],\n[can-connect/real-time/real-time.updateInstance], and\n[can-connect/real-time/real-time.destroyInstance] methods to tell the connection\nthat data has changed.  The connection will update (by calling splice)\neach list accordingly.\n\n\n## Example\n\nThe following demo shows two lists that use this connection.  The\n\"Run Code\" button sends the connection data changes which the\nconnection will then update lists accordingly:\n\n\n<div class='demo_wrapper' data-demo-src='can-connect/src/real-time/real-time.html'></div>\n\nThis example creates a `todoList` function and `todoItem` function\nthat manage the behavior of a list of todos and a single todo respectfully.\nIt uses [Object.observe](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe)\nto observe changes in the todo list and individual todo data. Other\nframeworks will typically provide their own observable system.\n\n### todoList\n\nWhen `todoList` is created, it is passed the `set` of data to load.  It uses\nthis to get todos from the `todoConnection` like:\n\n\n```\ntodosConnection.getList(set).then(function(retrievedTodos){\n```\n\nIt then adds those `todos` to the [can-connect/constructor/store/store.listStore] so\nthey can be updated automatically.  And, it listens to changes in `todos` and calls an `update` function:\n\n```\ntodosConnection.addListReference(todos);\nObject.observe(todos, update, [\"add\", \"update\", \"delete\"] );\n```\n\nThe update function is able to inserted new `todoItem`s in the page when items are added\nto or removed from `todos`.  We exploit that by calling `update` as if it just added\neach todo in the list:\n\n```\nupdate(todos.map(function(todo, i){\n  return {\n    type: \"add\",\n    name: \"\"+i\n  };\n}));\n```\n\n### todoItem\n\nThe `todoItem` creates an element that updates with changes\nin its `todo`.  It listens to changes in the `todo` and saves\nthe todo in the [can-connect/constructor/store/store.instanceStore] with the\nfollowing:\n\n```\nObject.observe(todo, update, [\"add\", \"update\", \"delete\"] );\ntodosConnection.addInstanceReference(todo);\n```\n\nA `todoItem` needs to be able to stop listening on the `todo` and remove itself from the\n`instanceStore` if the `todo` is removed from the page.  To provide this teardown\nfunctionality, `todoItem` listens to a `\"removed\"` event on its element and\n`unobserves` the todo and removes it from the `instanceStore`:\n\n```\n$(li).bind(\"removed\", function(){\n  Object.unobserve(todo, update, [\"add\", \"update\", \"delete\"] );\n  todosConnection.deleteInstanceReference(todo);\n});\n```\n\n",
     "description": "\nUpdate lists to include or exclude instances based\non set logic.\n",
     "title": "",
     "signatures": [
@@ -18336,7 +18336,7 @@
     "signatures": [
       {
         "code": "connection.createInstance(props)",
-        "description": "\n\n  If there is no instance in the [can.connect/constructor-store.instanceStore]\n  for `props`'s [can-connect/base/base.id], an instance is [can-connect/constructor.hydrateInstance hydrated],\n  added to the store, and then [can-connect/real-time/real-time.createdData] is called with\n  `props` and the hydrated instance's serialized data. [can-connect/real-time/real-time.createdData]\n  will add this instance to any lists the instance belongs to.\n\n  If this instance has already been created, calls\n  [can-connect/real-time/real-time.updateInstance] with `props`.\n",
+        "description": "\n\n  If there is no instance in the [can-connect/constructor/store/store.instanceStore]\n  for `props`'s [can-connect/base/base.id], an instance is [can-connect/constructor/constructor.hydrateInstance hydrated],\n  added to the store, and then [can-connect/real-time/real-time.createdData] is called with\n  `props` and the hydrated instance's serialized data. [can-connect/real-time/real-time.createdData]\n  will add this instance to any lists the instance belongs to.\n\n  If this instance has already been created, calls\n  [can-connect/real-time/real-time.updateInstance] with `props`.\n",
         "params": [
           {
             "types": [
@@ -18412,7 +18412,7 @@
     "signatures": [
       {
         "code": "connection.createdData(props, params, [cid])",
-        "description": "\n\n  Updates lists with the created instance.\n\n  Gets the instance created for this request. Then, updates the instance with\n  the response data `props`.\n\n  Next, it goes through every list in the [can.connect/constructor-store.listStore],\n  test if the instance's data belongs in that list.  If it does,\n  adds the instance's data to the serialized list data and\n  [can-connect/constructor.updatedList updates the list].\n\n\n\n\t ",
+        "description": "\n\n  Updates lists with the created instance.\n\n  Gets the instance created for this request. Then, updates the instance with\n  the response data `props`.\n\n  Next, it goes through every list in the [can-connect/constructor/store/store.listStore],\n  test if the instance's data belongs in that list.  If it does,\n  adds the instance's data to the serialized list data and\n  [can-connect/constructor.updatedList updates the list].\n\n\n\n\t ",
         "params": []
       }
     ]
