@@ -52,6 +52,12 @@
         margin-left: auto;
         margin-bottom: 0;
         flex-wrap: wrap;
+        display: none;
+        
+
+        @media screen and (min-width: @breakpoint){
+          display: unset;        
+        }
         
          > li {
            display: inline-block;
