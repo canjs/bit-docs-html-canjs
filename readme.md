@@ -1,8 +1,22 @@
-Generate example site:
+## Initial install: 
+
+```
+npm install
+```
+
+## Generate example site:
 
 ```
 node make-example.js -f
 ```
+
+## Start a simple server: 
+
+```
+http-server
+```
+
+Site will be available at `http://127.0.0.1:8080/`
 
 ## Change Styles
 
