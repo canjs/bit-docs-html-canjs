@@ -53,6 +53,11 @@
         margin-bottom: 0;
         flex-wrap: wrap;
         
+
+        @media screen and (max-width: @breakpoint){
+          display: none;          
+        }
+        
          > li {
            display: inline-block;
          }
