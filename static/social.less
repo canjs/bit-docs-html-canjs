@@ -1,58 +1,49 @@
 ul.social-ul { 
-    .flex;
-        justify-content: flex-end;
-        margin-left: auto;
-        margin-bottom: 0px;
-        flex-wrap: wrap;
-        display: none;
-        background: red;
-        
-        @media screen and (min-width: @breakpoint){
-          display: unset;        
-        }
-        
+  .flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-bottom: 0px;
+    flex-wrap: wrap;
+    display: none;
+    background: red;
+    @media screen and (min-width: @breakpoint){
+      display: unset;        
+    }
     li.social-li {
-        display: inline-block;
-        background: green;
-
-        .border-bottom;
-            margin-bottom: @gutter/2;
-
-        .flex;
-              align-items: flex-end;
-              flex-wrap: wrap;
-              padding-bottom: @gutter/2;
-
+      display: inline-block;
+      background: green;
+      .border-bottom;
+      margin-bottom: @gutter/2;
+      .flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      padding-bottom: @gutter/2;
     code {
-        border: 1px solid @gray;
-        font-size: 14px;
-        white-space: nowrap;
-        padding-top: 1px;
-        padding-bottom: 1px;
-        background: red;
-        
-        @media screen and (min-width: @breakpoint) {
-          margin-left: @gutter;
-        }
+      border: 1px solid @gray;
+      font-size: 14px;
+      white-space: nowrap;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      background: red;
+      @media screen and (min-width: @breakpoint) {
+        margin-left: @gutter;
       }
-
-      strong {
-        font-size: 20px;
-        line-height: 25px;
-        margin-right: 5px;
-      }
-      small {
-        color: @gray;
-        font-size: 80%;
-        margin-right: 5px;
-      }
-      
-      iframe {
-        top: 4px;
-        position: relative;
-        margin-left: 5px;
-      }
-
-         }
-       }
+    }
+    strong {
+      font-size: 20px;
+      line-height: 25px;
+      margin-right: 5px;
+    }
+    small {
+      color: @gray;
+      font-size: 80%;
+      margin-right: 5px;
+    }
+    iframe {
+      top: 4px;
+      position: relative;
+      margin-left: 5px;
+    }
+  }
+}
 

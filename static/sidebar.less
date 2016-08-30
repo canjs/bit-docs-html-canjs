@@ -11,16 +11,13 @@
   overflow-x: hidden;
   overflow-y:scroll;
   background: #fff;
-  
   ul {
     padding-left: @gutter/1.5;
     margin: 0;
     margin-bottom: @gutter;
     list-style: none;
-    
     li {
       position: relative;
-      
       a {
         display: block;
         padding-top: 3px;
@@ -40,11 +37,9 @@
     text-decoration: underline;
     color: darken(@link-color,10%);
   }
-
   // Highest parent level
   > ul {
     padding-left: 0;
-    
     > li {
       list-style: none;
       list-style-type: none;
@@ -88,19 +83,18 @@
     }
   }
 }
-
 @media screen and (min-width: @breakpoint) {
-    .sidebar {
-      flex-shrink: 0;
-      margin-right: @gutter*2;
-      padding-top: @gutter;
-      position: relative;
-      overflow: visible;
-      width: auto;
-      min-width: auto;
-      height: auto;
-      top: auto;
-      left: auto;
-      z-index: 3;
-    }
+  .sidebar {
+    flex-shrink: 0;
+    margin-right: @gutter*2;
+    padding-top: @gutter;
+    position: relative;
+    overflow: visible;
+    width: auto;
+    min-width: auto;
+    height: auto;
+    top: auto;
+    left: auto;
+    z-index: 3;
+  }
 }

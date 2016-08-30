@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
 header {
   font-family: 'Lato', sans-serif;
   margin-left: -@gutter;
@@ -8,20 +7,18 @@ header {
   position: relative;
   background: #fff;
   left: 0;
-  
   .navbar {
     .flex;
     -webkit-align-items: center;
     align-items: center;
     -webkit-justify-content: center;
-     justify-content: center;
+    justify-content: center;
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     width: 100%;
     .border-bottom;
     padding: 0 @gutter;
     margin-bottom: @gutter;
-    
     .navbar-items {
       .flex;
       align-items: center;
@@ -30,35 +27,31 @@ header {
       margin: 0 auto;
       padding: 0;
       flex-basis: 100%;
-      
       > li {
         font-size: 14px;
         margin-right: @gutter;
-        
           > a {
-          font-weight: 700;
-          font-size: 12px;
-          padding: 2px 10px;
-          text-transform: uppercase;
-          line-height: 20px;
-          .border-radius;
-          border: 1px solid lighten(@link-color, 40%);
-          text-decoration: none;
-          background: white;
-          
-          &:hover {
+            font-weight: 700;
+            font-size: 12px;
+            padding: 2px 10px;
+            text-transform: uppercase;
+            line-height: 20px;
+            .border-radius;
             border: 1px solid lighten(@link-color, 40%);
             text-decoration: none;
-            background: @border-color;
+            background: white;
+            &:hover {
+              border: 1px solid lighten(@link-color, 40%);
+              text-decoration: none;
+              background: @border-color;
+            }
           }
         }
-      }
       .active a, .active a:hover {
         background: @link-color;
         color: #fff;
         border: 1px solid darken(@link-color, 20%);
         .font-smoothing;
-        
         &:hover {
           border: 1px solid darken(@link-color, 40%);
         }
@@ -78,7 +71,6 @@ header {
   }
   .dropdown {
     position: relative;
-    
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -95,10 +87,8 @@ header {
       list-style-type: none;
       width: 240px;
       .box-shadow;
-      
       > li {
         font-weight: 400;
-        
          > a {
           display: block;
           padding: @gutter/3 @gutter;
@@ -107,7 +97,6 @@ header {
           font-size: 14px;
           line-height: 32px;
           color: #706f70;
-          
           &:hover {
             background-color: @border-color;
             text-decoration: none;
@@ -121,44 +110,40 @@ header {
       }
     }
   }
-  
   .bitovi-menu {
-      .flex;
-      padding: 0;
-      margin: 0;
-      margin-left: auto;
-      align-items: center;
-      list-style: none;
-      
-      .bitovi.icon-bits {
-        text-indent: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        padding: @gutter @gutter*2;
-        width: 50px;
-        display: block;
-        background: url(img/bitovi_bits.svg) no-repeat;
-        background-size: 30px auto;
-        background-position: center;
-        border: 1px solid transparent;
+    .flex;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+    align-items: center;
+    list-style: none;
+    .bitovi.icon-bits {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: @gutter @gutter*2;
+      width: 50px;
+      display: block;
+      background: url(img/bitovi_bits.svg) no-repeat;
+      background-size: 30px auto;
+      background-position: center;
+      border: 1px solid transparent;
+      border-top: none;
+      border-bottom: none;
+      &:hover {
+        border: 1px solid @border-color;
         border-top: none;
         border-bottom: none;
-        
-        &:hover {
-          border: 1px solid @border-color;
-          border-top: none;
-          border-bottom: none;
-        }
-      }
-      .dropdown {
-        .dropdown-menu {
-          right: 0;
-          left: auto;
-          top: 49px;
-        }
       }
     }
-    
+    .dropdown {
+      .dropdown-menu {
+        right: 0;
+        left: auto;
+        top: 49px;
+      }
+    }
+  }
   @media screen and (min-width: 550px) {
     .navbar {
       .navbar-items {
@@ -172,7 +157,6 @@ header {
     }
   }
 }
-
 // -- Mobile Menu Menu
 .nav-trigger {
   position: fixed;
@@ -205,11 +189,9 @@ label[for="nav-trigger"] {
 .nav-trigger + label, .content-container, header, footer {
     transition: left 0.2s;
 }
-    
 @media screen and (min-width: @breakpoint) {
   header {
     margin: 0;
-    
     .navbar {  
       .brand {
         margin-left: 0;
@@ -220,4 +202,3 @@ label[for="nav-trigger"] {
     display: none;
   } 
 }
-

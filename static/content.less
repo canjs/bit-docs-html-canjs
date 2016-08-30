@@ -8,10 +8,8 @@
     ul, ol {
       margin-bottom: @gutter;
       list-style-type: disc;
-
       li {
         line-height: 1.6;
-
         > p:first-of-type {
           display: inline;
         }
@@ -41,14 +39,12 @@
       padding-right: @gutter;
       margin-bottom: @gutter;
       border: 1px solid @border-color;
-
       .signature-title {
         background: lighten(@border-color, 5%);
         margin-top: 0;
         margin-left: -@gutter;
         margin-right: -@gutter;
         padding-left: @gutter/2;
-
         code {
           font-weight: bold;
           .font-smoothing;
@@ -60,7 +56,6 @@
     }
     .parameters, .options, .returns {
       padding: 0 @gutter;
-
       .parameters-title, .options-title, .returns-title {
         border: none;
       }
@@ -70,7 +65,6 @@
         margin: 0 0 1.5em;
         padding: 0;
         counter-reset: item;
-
         > li {
           margin: 0;
           padding: 0 0 0 2em;
@@ -78,7 +72,6 @@
           counter-increment: item;
           margin-left: -@gutter*2;
           margin-bottom: @gutter;
-
           &:before {
             display: inline-block;
             width: 1em;
@@ -107,30 +100,25 @@
     }
   } // article
 } //.main-container
-
 .on-this-page {
   padding: 0;
   border: 1px solid darken(@border-color, 10%);
   background: #fff;
   font-size: 1.5em;
   font-weight: 700;
-
   li {
     list-style: none;
     list-style-type: none;
-
     a {
       display: block;
       padding: 5px 10px;
       border-top: 1px solid transparent;
       border-bottom: 1px solid transparent;
-
       &:hover {
         border-top: 1px solid @border-color;
         border-bottom: 1px solid @border-color;
       }
     }
-
     &:first-child a, &:first-child a:hover {
       border-top: none;
     }
@@ -150,7 +138,6 @@
     margin: 0;
     margin-top: -1px;
     left: auto;
-
     li {
       display: none;
 
@@ -158,18 +145,15 @@
         display: block;
       }
     }
-
     &:hover {
       li {
         display: block;
       }
     }
   }
-
   &.disabled {
     li {
       display: none;
     }
   }
-
 } //.on-this-page
