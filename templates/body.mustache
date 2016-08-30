@@ -1,3 +1,20 @@
 <section class="body">
     {{{chain "renderAsTemplate" "makeHtml" "makeLinks" body}}}
 </section>
+
+<div class="demo_wrapper" data-demo-src="demos/button-groups/basic-example/demo.html"><div class="demo">
+    <ul>
+        <li class="tab active" data-tab="demo">Demo</li>
+        <li class="tab" data-tab="html">HTML</li>
+        <li class="tab" data-tab="js">JS</li>
+    </ul>
+    <div class="tab-content" data-for="demo" style="display: block;">
+        <iframe src="../demos/button-groups/basic-example/demo.html" style="height: 150px;"></iframe>
+    </div>
+    <div class="tab-content" data-for="html" style="display: none;">
+
+    </div>
+    <div class="tab-content" data-for="js" style="display: none;">
+        <pre class="prettyprint lang-js"></pre>
+    </div>
+</div></div>
