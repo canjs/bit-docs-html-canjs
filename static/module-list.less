@@ -36,15 +36,13 @@
         white-space: nowrap;
         padding-top: 1px;
         padding-bottom: 1px;
-        
-        @media screen and (min-width: @breakpoint) {
-          margin-left: @gutter;
-        }
+       
       }
       iframe {
         top: 4px;
         position: relative;
         margin-left: 5px;
+
       }
       > ul { 
         .flex;
@@ -53,10 +51,9 @@
         margin-bottom: 0;
         flex-wrap: wrap;
         display: none;
-        
 
-        @media screen and (min-width: @breakpoint){
-          display: unset;        
+        @media screen and (min-width: @breakpoint) {
+          display: unset;
         }
         
          > li {
