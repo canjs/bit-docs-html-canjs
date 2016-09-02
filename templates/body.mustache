@@ -1,20 +1,53 @@
 <section class="body">
-    {{{chain "renderAsTemplate" "makeHtml" "makeLinks" body}}}
+  {{{chain "renderAsTemplate" "makeHtml" "makeLinks" body}}}
 </section>
 
-<div class="demo_wrapper" data-demo-src="demos/button-groups/basic-example/demo.html"><div class="demo">
-    <ul>
-        <li class="tab active" data-tab="demo">Demo</li>
-        <li class="tab" data-tab="html">HTML</li>
-        <li class="tab" data-tab="js">JS</li>
-    </ul>
-    <div class="tab-content" data-for="demo" style="display: block;">
-        <iframe src="../demos/button-groups/basic-example/demo.html" style="height: 150px;"></iframe>
-    </div>
-    <div class="tab-content" data-for="html" style="display: none;">
 
-    </div>
-    <div class="tab-content" data-for="js" style="display: none;">
-        <pre class="prettyprint lang-js"></pre>
-    </div>
-</div></div>
+
+<section class="description">
+	<div class="demo_wrapper" data-demo-src="demos/button-groups/basic-example/demo.html">
+		<div class="demo">
+			<ul>
+				<li class="tab active" data-tab="demo">Demo</li>
+				<li class="tab" data-tab="html">HTML</li>
+				<li class="tab" data-tab="js">JS</li>
+			</ul>
+			<div class="tab-content" data-for="demo">
+				<div class="bs-example" data-example-id="simple-button-group">
+		      <div class="btn-group" role="group" aria-label="Basic example">
+		        <button type="button" class="btn btn-default">Left</button>
+		        <button type="button" class="btn btn-default">Middle</button>
+		        <button type="button" class="btn btn-default">Right</button>
+		      </div>
+		    </div>
+			</div>
+			<div class="tab-content" data-for="html">
+				<pre class="prettyprint"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bs-example"</span><span class="pln"> </span><span class="atn">data-example-id</span><span class="pun">=</span><span class="atv">"simple-button-group"</span><span class="tag">&gt;</span><span class="pln">
+		      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"btn-group"</span><span class="pln"> </span><span class="atn">role</span><span class="pun">=</span><span class="atv">"group"</span><span class="pln"> </span><span class="atn">aria-label</span><span class="pun">=</span><span class="atv">"Basic example"</span><span class="tag">&gt;</span><span class="pln">
+		        </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"btn btn-default"</span><span class="tag">&gt;</span><span class="pln">Left</span><span class="tag">&lt;/button&gt;</span><span class="pln">
+		        </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"btn btn-default"</span><span class="tag">&gt;</span><span class="pln">Middle</span><span class="tag">&lt;/button&gt;</span><span class="pln">
+		        </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"btn btn-default"</span><span class="tag">&gt;</span><span class="pln">Right</span><span class="tag">&lt;/button&gt;</span><span class="pln">
+		      </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+		    </span><span class="tag">&lt;/div&gt;</span></pre>
+			</div>
+			<div class="tab-content" data-for="js">
+				<pre class="prettyprint lang-js">
+					<code>var Construct = require(&quot;can-construct&quot;);
+						var Animal = Construct.extend({
+						    legs: 4
+						}, {
+						    init: function(sound) {
+						        this.sound = sound;
+						    },
+						    speak: function() {
+						        console.log(this.sound);
+						    }
+						});
+					</code>
+				</pre>
+			</div>
+		</div>
+	</div>
+</section>
+
+				  
