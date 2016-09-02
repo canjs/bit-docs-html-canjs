@@ -144,16 +144,14 @@ header {
       }
     }
   }
-  @media screen and (min-width: 550px) {
-    .navbar {
-      .navbar-items {
-        margin: 0;
-        order: 2;
-        flex-basis: auto;
-      }
-      .bitovi-menu {
-        order: 3;
-      }
+  .navbar {
+    .navbar-items {
+      margin: 0;
+      order: 2;
+      flex-basis: auto;
+    }
+    .bitovi-menu {
+      order: 3;
     }
   }
 }
@@ -201,4 +199,12 @@ label[for="nav-trigger"] {
   .nav-trigger, label[for="nav-trigger"] {
     display: none;
   } 
+}
+
+li.header-desktop{
+  display: none;
+
+  @media screen and (min-width: @breakpoint){
+    display: unset;
+  }
 }
