@@ -1,0 +1,54 @@
+// demo
+.demo {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: @border;
+  padding-bottom: 15px;
+  ul {
+    list-style: none;
+    padding: 0;
+    border-bottom: @border;
+    padding-left: 10px;
+  }
+  li.tab {
+    display: inline-block;
+    padding: 10px 15px;
+    color: @rain;
+    cursor: pointer;
+    border: solid 1px transparent;
+    margin-bottom: -1px;
+    margin-left: 5px;
+  }
+  li.tab.active {
+    font-weight: bold;
+    border: @border;
+    border-bottom: solid 2px white;
+    border-radius: 4px 4px 0 0;
+    color: @darkSkies;
+    background-color: white;
+  }
+  div.tab-content {
+    clear: both;
+    margin-top: 15px;
+  }
+  pre {
+    margin-bottom: 0px;
+  }
+  body.style-demo {
+    background-color: @clear;
+    padding: 10px;
+  }
+}
+
+// button styles
+.btn-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+button.btn.btn-default {
+    border: @border;
+    color: @code-color;
+  }
