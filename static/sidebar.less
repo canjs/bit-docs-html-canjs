@@ -11,11 +11,13 @@
   overflow-x: hidden;
   overflow-y:scroll;
   background: #fff;
+  padding-top: @gutter;
   ul {
     padding-left: @gutter/1.5;
     margin: 0;
     margin-bottom: @gutter;
     list-style: none;
+    .border-top;
     li {
       position: relative;
       a {
@@ -98,25 +100,48 @@
     z-index: 3;
   }
 }
+
+
+
 ul.social-side{
   margin: 0;
   list-style: none;
   padding-bottom: 0;
-  margin-bottom: 0;
-  display: unset;
-
+  border: 1px solid white;
+  padding-bottom: @gutter;
   @media screen and (min-width: @breakpoint){
     display: none;
   }
-
   > li{
-    padding-top: @gutter;
-    padding-bottom: @gutter;
+    display: inline-block;
+    margin-right: @gutter;
+    border-bottom: none; 
+    border: 1px solid red;
+     &:first-child{
+      width: 60px;
+    }
+    > a.header-mobile{
+      font-weight: 700;
+      width: auto !important;
+      font-size: 12px;
+      padding: 3px 10px 3px 10px;
+      text-transform: sentence-case;
+      .border-radius;
+      border: 1px solid lighten(@link-color, 40%);
+      text-decoration: none;
+      background: white;
+      &:hover {
+        border: 1px solid lighten(@link-color, 40%);
+        text-decoration: none;
+        background: @border-color;
+      }
+    }   
   }
 }
 
 
-    
+
+
       
 
 
