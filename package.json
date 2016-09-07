@@ -4,9 +4,7 @@
   "description": "prettify code plugin",
   "main": "static/canjs",
   "scripts": {
-    "test": "mocha test.js --reporter spec",
     "postversion": "git push --tags && git push",
-    "preversion": "npm test",
     "release:pre": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
