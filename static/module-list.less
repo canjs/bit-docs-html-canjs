@@ -4,7 +4,6 @@
     margin: 0;
     list-style-type: none;
     list-style: none;
-    
      li { 
        list-style-type: none;
        list-style: none;
@@ -18,7 +17,6 @@
       align-items: flex-end;
       flex-wrap: wrap;
       padding-bottom: @gutter/2;
-      
       strong {
         font-size: 20px;
         line-height: 25px;
@@ -36,13 +34,9 @@
         white-space: nowrap;
         padding-top: 1px;
         padding-bottom: 1px;
-        
-        @media screen and (min-width: @breakpoint) {
-          margin-left: @gutter;
-        }
       }
       iframe {
-        top: 4px;
+        top: 6px;
         position: relative;
         margin-left: 5px;
       }
@@ -52,7 +46,10 @@
         margin-left: auto;
         margin-bottom: 0;
         flex-wrap: wrap;
-        
+        display: none;
+        @media screen and (min-width: @breakpoint) {
+          display: unset;
+        }
          > li {
            display: inline-block;
          }

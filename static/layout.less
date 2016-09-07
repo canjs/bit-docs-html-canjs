@@ -1,11 +1,9 @@
 html, body {
   height:100%;
 }
-
 body {
   overflow-x: hidden;
 }
-
 .main-container {
   margin: 0 @gutter*2;
   padding-top: @gutter;
@@ -14,11 +12,9 @@ body {
   margin: 0;
   margin-top: -@gutter;
   height: 100%;
-
   > article > section > h1 {
     margin-top: 0;
   }
-  
   .content-container {
     min-width: 100%;
     min-height: 100%;
@@ -31,17 +27,14 @@ body {
     padding: @gutter;
   }
 }
-
 @media screen and (min-width: @breakpoint) {
-    
-    .main-container {
-      .flex;
-      height: auto;
-      
-      .content-container {
-        min-width: 0;
-        min-height: 0;
-        bottom: auto;
-      }
+  .main-container {
+    .flex;
+    height: auto;
+    .content-container {
+      min-width: 0;
+      min-height: 0;
+      bottom: auto;
     }
+  }
 }
