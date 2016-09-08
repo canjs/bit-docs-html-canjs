@@ -29,11 +29,7 @@
     "q": "^1.4.1",
     "connect": "^2.14.4",
     "normalize.css": "^4.1.1",
-    "zombie": "^4.2.1"
-  },
-  "dependencies": {
-    "can-control": "^3.0.0-pre.5",
-    "can-stache": "^3.0.0-pre.11",
-    "can-stache-bindings": "^3.0.0-pre.8"
+    "zombie": "^4.2.1",
+		"bit-docs-html-toc": "^0.2.0"
   }
 }
