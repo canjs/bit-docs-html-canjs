@@ -5,6 +5,7 @@
       margin-bottom: @gutter;
       line-height: 1.6;
     }
+
     ul, ol {
       margin-bottom: @gutter;
       list-style-type: disc;
@@ -23,6 +24,10 @@
       background: @border-color;
       font-size: .9em;
       color: @code-color;
+      .highlight {
+        background-color: #e5f6e5;
+        padding: 3px 0;
+      }
     }
     pre code {
       background: none;
@@ -141,7 +146,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     }
     &::after {
-      content: '\2329';    
+      content: '\2329';
       padding-bottom: 0px;
       padding-right: @gutter/2;
       margin-bottom: 0px;
@@ -165,7 +170,7 @@
     }
     &:hover {
       li {
-        display: block; 
+        display: block;
       }
       &::after {
         display: none;
