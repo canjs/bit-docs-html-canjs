@@ -4,9 +4,11 @@ header {
   margin-left: -@gutter;
   margin-right: -@gutter;
   z-index: 10;
-  position: relative;
+  position: fixed;
   background: #fff;
   left: 0;
+  width: 100%;
+  top: 0;
   .navbar {
     .flex;
     -webkit-align-items: center;
@@ -17,9 +19,9 @@ header {
     flex-flow: row wrap;
     width: 100%;
     .border-bottom;
-    padding: 0 @gutter;
-    margin-bottom: @gutter;
-    .navbar-items {
+    padding: 0 @gutter*2;
+/*    margin-bottom: @gutter;
+*/    .navbar-items {
       .flex;
       align-items: center;
       justify-content: center;
