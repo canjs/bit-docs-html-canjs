@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-header {
+/*header {
   font-family: 'Lato', sans-serif;
   margin-left: -@gutter;
   margin-right: -@gutter;
@@ -8,7 +8,7 @@ header {
   background: #fff;
   left: 0;
   width: 100%;
-  top: 0;
+  top: 0;*/
   .navbar {
     .flex;
     -webkit-align-items: center;
@@ -20,13 +20,9 @@ header {
     width: 100%;
     .border-bottom;
     padding: 0 @gutter*2;
-/*    margin-bottom: @gutter;
-*/    .navbar-items {
+   .navbar-items {
       .flex;
-      align-items: center;
-      justify-content: center;
       list-style: none;
-      margin: 0 auto;
       padding: 0;
       flex-basis: 100%;
       > li {
@@ -151,12 +147,14 @@ header {
       margin: 0;
       order: 2;
       flex-basis: auto;
-    }
+      /*border: 1px solid red;*/
+/*      margin: 0 auto;
+*/    }
     .bitovi-menu {
       order: 3;
     }
   }
-}
+
 // -- Mobile Menu Menu
 .nav-trigger {
   position: fixed;
@@ -209,3 +207,4 @@ li.header-desktop{
     display: unset;
   }
 }
+
