@@ -4,48 +4,27 @@
   {{/unless}}
 
   <div class="content-container">
-   <nav class="navbar">
-    <ul class="bitovi-menu">
-      <li class="dropdown">
-        <a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
-        <ul class="dropdown-menu">
-          <li><a href="http://bitovi.com">Bitovi.com</a></li>
-          <li><a href="http://bitovi.com/blog/">Blog</a></li>
-          <li><a href="http://bitovi.com/consulting/">Consulting</a></li>
-          <li><a href="http://bitovi.com/training/">Training</a></li>
-          <li><a href="http://bitovi.com/open-source/">Open Source</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="navbar-items">
-      <li class="header-desktop">
-        <a href="https://gitter.im/canjs/canjs">Chat</a>
-      </li>
-      <li class="header-desktop">
-        <a href="http://forums.donejs.com/c/canjs">Forum</a>
-      </li>
-      <li class="header-desktop">
-        <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
-      </li>
-      <li class="header-desktop">
-          <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </li>
-    </ul>
+   {{#unless hideHeader}}
+    {{> header.mustache}}
+  {{/unless}}
 
-</nav>
-  <div class="breadcrumb"><a>CanJS</a> / <a>Core</a> / <a>can-connect</a> /  <a>On this page</a></div>
 
-<!-- <a class="rabbit">test</a> -->
+  <div class="breadcrumb">
+    <a>CanJS</a> / <a>Core</a> / <a>can-connect</a> /  <a>On this page</a>
+  </div>
+
 <ul class="on-this-page"></ul>
-  <!-- <a class="rabbit-1">hover</a>
-  <div class="rabbit-2">show me</div> -->
- 
- 
     <article>
+    <div class="title-area">
     	{{#unless hideTitle}}
     		{{> title.mustache}}
     	{{/unless}}
-
+      {{#unless hideDescription}}
+        {{#if description}}
+          {{> description.mustache}}
+        {{/if}}
+      {{/unless}}
+      </div>
      
 
         {{#if deprecated.length}}
@@ -60,12 +39,6 @@
 				{{/deprecated}}
 			</section>
 		{{/if}}
-
-    	{{#unless hideDescription}}
-    		{{#if description}}
-    			{{> description.mustache}}
-    		{{/if}}
-    	{{/unless}}
 
     {{#unless hideBody}}
     {{#if signatures}}

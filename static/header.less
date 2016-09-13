@@ -18,13 +18,15 @@
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     width: 100%;
-    .border-bottom;
-    padding: 0 @gutter*2;
+    position: fixed;
+/*   border: 1px solid red;
+*/    padding: 0px;
    .navbar-items {
       .flex;
       list-style: none;
       padding: 0;
       flex-basis: 100%;
+      text-align: left;
       > li {
         font-size: 14px;
         margin-right: @gutter;
@@ -54,17 +56,6 @@
           border: 1px solid darken(@link-color, 40%);
         }
       }
-    }
-    .brand {
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100px;
-      height: 39px;
-      background-image: url(img/canjs_logo.svg);
-      background-size: cover;
-      margin-right: @gutter*2;
-      margin-left: 80px;
     }
   }
   .dropdown {
@@ -115,6 +106,9 @@
     margin-left: auto;
     align-items: center;
     list-style: none;
+   /* position: fixed;*/
+    top: 0;
+ /*   border: 1px solid lime;*/
     .bitovi.icon-bits {
       text-indent: 100%;
       white-space: nowrap;
@@ -128,6 +122,8 @@
       border: 1px solid transparent;
       border-top: none;
       border-bottom: none;
+      margin-top:0;
+      margin-bottom: 0px;
       &:hover {
         border: 1px solid @border-color;
         border-top: none;
@@ -147,9 +143,7 @@
       margin: 0;
       order: 2;
       flex-basis: auto;
-      /*border: 1px solid red;*/
-/*      margin: 0 auto;
-*/    }
+    }
     .bitovi-menu {
       order: 3;
     }
@@ -188,14 +182,16 @@ label[for="nav-trigger"] {
     transition: left 0.2s;
 }
 @media screen and (min-width: @breakpoint) {
-  header {
-    margin: 0;
-    .navbar {  
+    .navbar { 
+    background: white;
+    z-index: 10;
+    padding-left: @gutter*2;
+    .border-bottom;
       .brand {
         margin-left: 0;
       }
     }
-  } 
+  
   .nav-trigger, label[for="nav-trigger"] {
     display: none;
   } 

@@ -10,6 +10,7 @@
   overflow-x: hidden;
   overflow-y:scroll;
   background: #fbfbfb;
+  .border-bottom;
 
   .border-right;
   ul {
@@ -100,6 +101,7 @@
     top: auto;
     left: auto;
     z-index: 3;
+
   }
 }
 ul.social-side{
@@ -165,42 +167,31 @@ img.social-icon-small{
   margin-right: 4px;
   vertical-align: middle;
 }
+.version{
+  .border-bottom;
+   padding: @gutter @gutter*2;
+  p{
+    border: none;
+    margin: 0px;
+    color: lighten(@text-color, 20%);
+    font-weight: 300;
+  }
+}
 
+.brand {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 48px;
+  height: 18px;
+  background-image: url(img/canjs_logo.svg);
+  display: block;
+}
 
-
-  .version{
-      .border-bottom;
-    // background: white;
-     padding: @gutter @gutter*2;
-
-      p{
-        border: none;
-        margin: 0px;
-        color: lighten(@text-color, 20%);
-        font-weight: 300;
-      }
-    }
-
-
-
-  .brand {
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100px;
-      height: 39px;
-      background-image: url(img/canjs_logo.svg);
-      background-size: cover;
-      
-     margin-top: @gutter;
-     // border: 1px solid red;
-    }
-
-  .header-left{
+.header-left{
   .border-bottom;
   padding: @gutter @gutter*2;
   background: white;
-
 }
 
 

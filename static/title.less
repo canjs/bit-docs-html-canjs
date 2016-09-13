@@ -33,27 +33,32 @@ ul.title-social{
 }
 h1{
 	font-size: 45px;
-	/*padding-top: @gutter*2;*/
-	padding-bottom: @gutter*2;
-	padding-right: @gutter*2;
-	padding-left: @gutter*2;
 	color: #4B5057;
-	.border-bottom;
+	border: none;
 	margin-top:0px;
+	margin-bottom: 0px;
 }
 
 h2{ 
-	color: #BA0FA2;
-	margin-top: 100px !important;
-	border-top: 2px solid #BA0FA2;
+	font-size: 30px;
+	color: lighten(@link-color, 10%);
+	margin-top: @gutter*2;
+
+	code{
+		color: lighten(@link-color, 5%) !important;
+	}
  }
 
  h3{
- 	color: #85BA0F;
-	margin-top: 100px !important;
+ 	color: darken(@link-color, 10%);
+	margin-top: @gutter*2;
 	border-top: 2px solid #85BA0F;
 	border-bottom: 2px solid #85BA0F;
  }
 
+.title-area{
+/*	.border-bottom;
+*/	padding: @gutter*2;
+}
 
 
