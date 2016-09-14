@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-/*header {
+header {
   font-family: 'Lato', sans-serif;
   margin-left: -@gutter;
   margin-right: -@gutter;
@@ -8,7 +8,8 @@
   background: #fff;
   left: 0;
   width: 100%;
-  top: 0;*/
+  top: 0;
+}
   .navbar {
     .flex;
     -webkit-align-items: center;
@@ -19,47 +20,12 @@
     flex-flow: row wrap;
     width: 100%;
     position: fixed;
-/*   border: 1px solid red;
-*/    padding: 0px;
-   .navbar-items {
-      .flex;
-      list-style: none;
-      padding: 0;
-      flex-basis: 100%;
-      text-align: left;
-      > li {
-        font-size: 14px;
-        margin-right: @gutter;
-          > a {
-            font-weight: 700;
-            font-size: 12px;
-            padding: 2px 10px;
-            text-transform: sentence-case;
-            line-height: 20px;
-            .border-radius;
-            border: 1px solid lighten(@link-color, 40%);
-            text-decoration: none;
-            background: white;
-            &:hover {
-              border: 1px solid lighten(@link-color, 40%);
-              text-decoration: none;
-              background: @border-color;
-            }
-          }
-        }
-      .active a, .active a:hover {
-        background: @link-color;
-        color: #fff;
-        border: 1px solid darken(@link-color, 20%);
-        .font-smoothing;
-        &:hover {
-          border: 1px solid darken(@link-color, 40%);
-        }
-      }
-    }
+  padding: 0px;
+   
   }
   .dropdown {
-    position: relative;
+    position: fixed;
+    .border;
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -100,15 +66,15 @@
     }
   }
   .bitovi-menu {
+      flex-basis: 100%;
     .flex;
     padding: 0;
-    margin: 0;
+    margin-top:0;
     margin-left: auto;
     align-items: center;
     list-style: none;
-   /* position: fixed;*/
     top: 0;
- /*   border: 1px solid lime;*/
+    border: 1px solid lime;
     .bitovi.icon-bits {
       text-indent: 100%;
       white-space: nowrap;
@@ -148,8 +114,6 @@
       order: 3;
     }
   }
-
-// -- Mobile Menu Menu
 .nav-trigger {
   position: fixed;
   clip: rect(0, 0, 0, 0);
@@ -203,4 +167,41 @@ li.header-desktop{
     display: unset;
   }
 }
+
+.navbar-items {
+      .flex;
+      list-style: none;
+      padding: 0;
+      flex-basis: 100%;
+      border: 1px solid red;
+      > li {
+        font-size: 14px;
+        margin-right: @gutter;
+          > a {
+            font-weight: 700;
+            font-size: 12px;
+            padding: 2px 10px;
+            text-transform: sentence-case;
+            line-height: 20px;
+            .border-radius;
+            border: 1px solid lighten(@link-color, 40%);
+            text-decoration: none;
+            background: white;
+            &:hover {
+              border: 1px solid lighten(@link-color, 40%);
+              text-decoration: none;
+              background: @border-color;
+            }
+          }
+        }
+      .active a, .active a:hover {
+        background: @link-color;
+        color: #fff;
+        border: 1px solid darken(@link-color, 20%);
+        .font-smoothing;
+        &:hover {
+          border: 1px solid darken(@link-color, 40%);
+        }
+      }
+    }
 
