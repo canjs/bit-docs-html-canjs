@@ -8,36 +8,30 @@
     {{> header.mustache}}
   {{/unless}}
 
-
   <div class="breadcrumb">
-    <li>CanJS</li> / <li>Core</li> / <li>can-connect</li> /   <li class="breadcrumb-dropdown">On this page
-          <ul class="on-this-page"></ul>
-        </li>
+    <li><a>CanJS</a></li> 
+    / 
+    <li><a>Core</a></li> 
+    / 
+    <li><a>can-connect</a>
+    </li> 
+    /   
+    <li class="breadcrumb-dropdown"><a href="#">On this page<a>
+      <ul class="on-this-page"></ul>
+    </li>
   </div>
-
-
-
-      
-  
-        
-  
-
-
-
-
   
     <article>
-    <div class="title-area">
-    	{{#unless hideTitle}}
-    		{{> title.mustache}}
-    	{{/unless}}
-      {{#unless hideDescription}}
-        {{#if description}}
-          {{> description.mustache}}
-        {{/if}}
-      {{/unless}}
+      <div class="title-area">
+      	{{#unless hideTitle}}
+      		{{> title.mustache}}
+      	{{/unless}}
+        {{#unless hideDescription}}
+          {{#if description}}
+            {{> description.mustache}}
+          {{/if}}
+        {{/unless}}
       </div>
-     
 
         {{#if deprecated.length}}
 			<section class='warnings'>
@@ -64,16 +58,12 @@
     {{/if}}
     {{/unless}}
 
-
     	{{#unless hideBody}}
     		{{#if body}}
     			{{> body.mustache}}
     		{{/if}}
     	{{/unless}}
-
       <p class="footer-p">CanJS is part of <a href="http://donejs.com">DoneJS</a>. Created and maintained by the open source team at <a href="http://bitovi.com">Bitovi</a>. <strong>Currently v3.0.0.</strong></p>
-
     </article>
   </div>
-
 </div>
