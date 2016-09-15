@@ -9,15 +9,15 @@
     flex-flow: row wrap;
     width: 100%;
     .border-bottom;
-    padding: 0 @gutter;
+    padding: @gutter;
     margin-bottom: @gutter;
     .navbar-items {
       .flex;
       align-items: center;
-      justify-content: center;
       list-style: none;
       margin: 0 auto;
       padding: 0;
+      padding-left: @gutter;
       flex-basis: 100%;
       > li {
         font-size: 14px;
@@ -103,7 +103,9 @@
     }
   }
   .bitovi-menu {
-    .flex;
+    z-index: 51;
+    position: fixed;
+    right: 0;
     padding: 0;
     margin: 0;
     margin-left: auto;
@@ -113,7 +115,7 @@
       text-indent: 100%;
       white-space: nowrap;
       overflow: hidden;
-      padding: @gutter @gutter*2;
+      padding: 17px @gutter*2;
       width: 50px;
       display: block;
       background: url(img/bitovi_bits.svg) no-repeat;
@@ -132,7 +134,7 @@
       .dropdown-menu {
         right: 0;
         left: auto;
-        top: 49px;
+        top: 53px;
       }
     }
   }
@@ -140,8 +142,7 @@
     .navbar-items {
       margin: 0;
       order: 2;
-      flex-basis: auto;
-    }
+     }
     .bitovi-menu {
       order: 3;
     }
@@ -202,4 +203,16 @@ li.header-desktop{
   @media screen and (min-width: @breakpoint){
     display: unset;
   }
-}
+
+
+
+
+
+
+
+
+
+ }
+ 
+   
+

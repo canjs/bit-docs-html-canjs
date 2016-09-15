@@ -1,7 +1,7 @@
 .sidebar {
-  width: @sidebar-width;
+  min-width: @sidebar-width;
   height: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   overflow-y:scroll;
   background: #fbfbfb;
   top: 0;
@@ -11,13 +11,9 @@
   z-index: 0;
   position: fixed;
   .border-bottom;
-  .border-right;
-  padding-left: @gutter;
-  padding-top: @gutter;
-
-
-
-
+  // .border-right;
+  // padding-left: @gutter;
+  // padding-top: @gutter;
 
    ul {
     margin: 0;
@@ -81,7 +77,6 @@
               > a {
                 padding-bottom: @gutter/2;
                 margin-left: -1px;
-                background: #fff;
               }
             }
              //Third level
@@ -167,6 +162,7 @@ img.social-icon-small{
   .border-bottom;
   padding: @gutter @gutter*2;
   @media screen and (min-width: @breakpoint){
+    margin-top: 54px;
   }
   p{
     border: none;
@@ -180,10 +176,11 @@ img.social-icon-small{
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  width: 54px;
-  height: 22px;
+  width: 55px;
+  height: 23px;
   background-image: url(img/canjs_logo.svg);
   display: block;
+  border: 1px solid white;
 }
 
 .header-left{
@@ -191,6 +188,10 @@ img.social-icon-small{
   padding: @gutter @gutter*2;
   background: white;
   @media screen and (min-width: @breakpoint){
+    position: fixed;
+    width: 100%;
+    z-index: 54;
+
   }
 
 }
