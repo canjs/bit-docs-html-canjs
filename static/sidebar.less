@@ -1,5 +1,5 @@
 .bottom-left {
-  padding: @gutter*2;
+  padding: @gutter*2 @gutter*2 0 @gutter*2;
   background: @light-color;
   ul {
     padding-left: @gutter/1.5;
@@ -37,7 +37,7 @@
       list-style-type: none;
       padding: 0;
       .border-bottom;
-      
+
       > a {
         font-size: 110%;
         padding-bottom: @gutter;
@@ -55,7 +55,7 @@
             }
             &.expanded {
               border-left: 1px solid @border-color;
-              
+
               > a {
                 padding-bottom: @gutter/2;
                 margin-left: -1px;
@@ -101,7 +101,7 @@ ul.social-side{
   > li{
     display: inline-block;
     margin-right: @gutter/2;
-    border-bottom: none; 
+    border-bottom: none;
     text-align: center;
     width: 79px;
     > a.header-mobile{
@@ -119,7 +119,7 @@ ul.social-side{
         text-decoration: none;
         background: @border-color;
       }
-    } 
+    }
     > a.twitter{
       background: #1da1f2;
       border: 1px solid darken(#1da1f2,5%);
@@ -128,7 +128,7 @@ ul.social-side{
         background: darken(#1da1f2,10%);
         border: 1px solid darken(#1da1f2,15%);
       }
-    } 
+    }
     > a.github{
       background: #f3f3f3;
       color: #333333;
@@ -150,6 +150,3 @@ img.social-icon-small{
     font-weight: 300;
   }
 }
-
-
-

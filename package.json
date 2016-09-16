@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
   "system": {},
+  "dependencies": {
+	"jquery": "^2.2.4"  
+  },
   "devDependencies": {
     "bit-docs-generate-html": "^0.1.0",
     "q": "^1.4.1",
