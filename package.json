@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "prettify code plugin",
   "main": "static/canjs",
   "scripts": {
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
   "system": {},
   "dependencies": {
-	"jquery": "^2.2.4"  
+    "jquery": "^2.2.4"
   },
   "devDependencies": {
     "bit-docs-generate-html": "^0.1.0",
