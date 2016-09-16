@@ -1,32 +1,19 @@
-.sidebar {
-  width: @sidebar-width; 
-  padding-left: @gutter;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-  overflow-x: hidden;
-  overflow-y:scroll;
-  background: #fff;
-  padding-top: @gutter;
+.bottom-left {
+  padding: @gutter*2;
+  background: @light-color;
   ul {
     padding-left: @gutter/1.5;
     margin: 0;
     margin-bottom: @gutter;
     list-style: none;
-    .border-top;
-    @media screen and (min-width: @breakpoint){
-      border-top: 0px;
-    }
     li {
       position: relative;
       a {
         display: block;
         padding-top: 3px;
         padding-bottom: 3px;
+        color: @link-color;
+        text-decoration: none;
       }
       span {
         color: #555;
@@ -72,7 +59,6 @@
               > a {
                 padding-bottom: @gutter/2;
                 margin-left: -1px;
-                background: #fff;
               }
             }
              //Third level
@@ -154,8 +140,16 @@ img.social-icon-small{
   margin-right: 4px;
   vertical-align: middle;
 }
-
-
+.version{
+  border-top: 1px solid #eee;
+  padding: @gutter @gutter*2;
+  p{
+    border: none;
+    margin: 0px;
+    color: #5d5d5d;
+    font-weight: 300;
+  }
+}
 
 
 
