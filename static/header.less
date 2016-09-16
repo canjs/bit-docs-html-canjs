@@ -74,7 +74,7 @@
     border: 1px solid transparent;
     border-top: none;
     border-bottom: none;
-    margin: 0;      
+    margin: 0;
   }
   .dropdown {
     position: relative;
@@ -121,12 +121,11 @@
 }
 .breadcrumb{
   padding: @gutter;
-  color: @border-color;
-  border-top: 1px solid #eee;
-  background: white;
+  color: white;
+  background: black;
   cursor: pointer;
    &::after {
-    content: '\2329';    
+    content: '\2329';
     padding-bottom: 0px;
     padding-right: @gutter/2;
     margin-bottom: 0px;
@@ -136,6 +135,7 @@
     -o-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
     transform: rotate(270deg);
+    font-size: 0.7em;
   }
   li{
     display: inline-block;
@@ -143,6 +143,9 @@
     color: @link-color;
     padding-left: @gutter;
     padding-right: @gutter;
+    a{
+      color: white;
+    }
   }
 }
 .description{
@@ -195,9 +198,9 @@
       }
     }
     &::before {
-      content: '';  
+      content: '';
       width:10px;
-      height: 10px;  
+      height: 10px;
       background: #fbfbfb;
       position: absolute;
       top:-6px;
@@ -252,15 +255,15 @@ label[for="nav-trigger"] {
 @media screen and (min-width: @breakpoint) {
   header {
     margin: 0;
-    .navbar {  
+    .navbar {
       .brand {
         margin-left: 0;
       }
     }
-  } 
+  }
   .nav-trigger, label[for="nav-trigger"] {
     display: none;
-  } 
+  }
 }
 li.header-desktop{
   display: none;
