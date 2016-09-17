@@ -1,0 +1,11 @@
+<div class="breadcrumb">
+	{{#each (getLinkableParents)}}
+		<li><a href="{{urlTo name}}">{{getShortTitle .}}</a></li> /
+	{{/each}}
+	{{#with (getCurrent)}}
+	<li><a href="{{urlTo name}}">{{getShortTitle .}}</a></li>
+	{{/with}}
+	<li class="breadcrumb-dropdown"><a href="#"> On this page</a>
+	  <ul class="on-this-page"></ul>
+	</li>
+</div>
