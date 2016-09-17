@@ -28,7 +28,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 
             // if it's a constructor add new
 			if(this.type === "constructor"){
-				sig += "new "
+				sig += "new ";
 			}
 
 			// get the name part right
@@ -59,13 +59,13 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         "makeParams": function(){
             var result = "<b>"+this.name+"</b>";
             if(this.types) {
-                result += " <code>"+helpers.makeTypesString(this.types)+"</code>"
+                result += " <code>"+helpers.makeTypesString(this.types)+"</code>";
             }
             return result;
         },
         makeReturn: function(){
             if(this.types) {
-                return " <code>"+helpers.makeTypesString(this.types)+"</code>"
+                return " <code>"+helpers.makeTypesString(this.types)+"</code>";
             }
         },
         makeTypesString: function (types) {
@@ -95,7 +95,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 
 				if(t.constructs && t.constructs.types){
 					fn = "constructor"+fn;
-					fn += " => "+helpers.makeTypes(t.constructs.types)
+					fn += " => "+helpers.makeTypes(t.constructs.types);
 				} else {
 					fn = "function"+fn;
 				}
@@ -105,17 +105,17 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 			var type = docMap[t.type];
 			var title = type && type.title || undefined;
 			var txt = helpers.linkTo(t.type, title);
-
+            var params;
 			if(t.template && t.template.length){
 				txt += "&lt;"+t.template.map(function(templateItem){
-					return helpers.makeTypes(templateItem.types)
+					return helpers.makeTypes(templateItem.types);
 				}).join(",")+"&gt;";
 			}
 			if(type){
 				if(type.type === "function" && (type.params || type.signatures)){
-					var params = type.params || (type.signatures[0] && type.signatures[0].params ) || []
+					params = type.params || (type.signatures[0] && type.signatures[0].params ) || [];
 				} else if(type.type === "typedef" && type.types && type.types[0] && type.types[0].type == "function"){
-					var params = type.types[0].params;
+					params = type.types[0].params;
 				}
 				if(params){
 					txt += "("+helpers.makeParamsString(params)+")";
@@ -130,7 +130,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             }
             return params.map(function(param){
                 // try to look up the title
-                var type = param.types && param.types[0] && param.types[0].type
+                var type = param.types && param.types[0] && param.types[0].type;
                 return helpers.linkTo(type, param.name) +
                     ( param.variable ? "..." : "" );
             }).join(", ");
@@ -155,6 +155,20 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         },
         getCurrentTree: function(){
             return docMapInfo.getCurrentTree();
+        },
+        getParents: function(){
+            return docMapInfo.getParents(docMapInfo.getCurrent());
+        },
+        getCurrent: function(){
+            return docMapInfo.getCurrent();
+        },
+        getLinkableParents: function(){
+            var current = docMapInfo.getCurrent();
+            var parentsAndSelf = docMapInfo.getParents(current);
+            //parentsAndSelf.push(current);
+            return parentsAndSelf.filter(function(docObject){
+                return !docMapInfo.isGroup(docObject);
+            });
         },
         indent: function(content, spaces){
             if(typeof content === "string") {
@@ -207,7 +221,9 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 	}
 
 	while(parent){
-        cb && cb(parent);
+        if(cb) {
+            cb(parent);
+        }
 		parents.unshift(parent);
 		if(names[parent.name]){
 			return parents;
@@ -218,7 +234,7 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 	return parents;
 };
 DocMapInfo.prototype.getTitle = function(docObject) {
-    return docObject.title || docObject.name
+    return docObject.title || docObject.name;
 };
 DocMapInfo.prototype.getShortTitle = function(docObject) {
 
@@ -231,7 +247,7 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
         if(parentModule) {
 
             if(docObject.name.indexOf( parentModule.name+"/" ) === 0 ) {
-                name = docObject.name.replace(parentModule.name+"/", "./")
+                name = docObject.name.replace(parentModule.name+"/", "./");
             }
             var basename = path.basename(name);
             if(name.endsWith("/"+basename+"/"+basename)) {
@@ -245,7 +261,7 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
 
 };
 DocMapInfo.prototype.isGroup = function(docObject) {
-    return ["group","static","prototype"].indexOf(docObject.type) !== -1
+    return ["group","static","prototype"].indexOf(docObject.type) !== -1;
 };
 DocMapInfo.prototype.getCurrentTree = function(){
     // [{docObject, children<>},{docObject}]
@@ -269,7 +285,7 @@ DocMapInfo.prototype.getCurrentTree = function(){
     });
 
     if(!curChildren) {
-        return {children: []}
+        return {children: []};
     } else {
         return {children: curChildren};
     }
@@ -283,14 +299,14 @@ DocMapInfo.prototype.getNestedDocObject = function(docObject){
         return {
             docObject: docObject,
             children: this.getNestedChildren(docObject)
-        }
+        };
     } else {
         return {docObject: docObject};
     }
 };
 DocMapInfo.prototype.getNestedChildren = function(docObject){
     return this.getChildren(docObject).map(this.getNestedDocObject.bind(this));
-}
+};
 
 var levelMap = ["collection","modules"];
 
@@ -307,7 +323,7 @@ function makeChildrenMap(docMap){
         }
     }
     return childrenMap;
-};
+}
 
 
 var compareDocObjects = function(child1, child2){
@@ -318,16 +334,16 @@ var compareDocObjects = function(child1, child2){
 			return 1;
 		} else {
 			if(child1.type === "prototype"){
-				return -1
+				return -1;
 			}
 			if(child2.type === "prototype"){
-				return 1
+				return 1;
 			}
 			if(child1.type === "static"){
-				return -1
+				return -1;
 			}
 			if(child2.type === "static"){
-				return 1
+				return 1;
 			}
 
 		}
@@ -342,7 +358,7 @@ var compareDocObjects = function(child1, child2){
 			if(child1.order == child2.order){
 				// sort by name
 				if(child1.name < child2.name){
-					return -1
+					return -1;
 				}
 				return 1;
 			} else {
@@ -358,7 +374,7 @@ var compareDocObjects = function(child1, child2){
 		} else {
 			// alphabetical
 			if(child1.name < child2.name){
-				return -1
+				return -1;
 			}
 			return 1;
 		}

@@ -17,11 +17,19 @@ $(document.body).on("click","a",function(ev){
 
 			var nav = $content.find(".bottom-left>ul");
 			var article = $content.find("article");
+			var breadcrumb = $content.find(".breadcrumb");
 
-			$("article").replaceWith(article);
-
-			// find what I clicked on in the current nav ... try positioning it in the same place.
 			$(".bottom-left>ul").replaceWith(nav);
+			$("article").replaceWith(article);
+			$(".breadcrumb").replaceWith(breadcrumb);
+			// find what I clicked on in the current nav ... try positioning it in the same place.
+
+			// go through every package and re-init
+			for(var packageName in window.PACKAGES) {
+				if(typeof PACKAGES[packageName] === "function") {
+					PACKAGES[packageName]();
+				}
+			}
 		}, function(){
 			debugger;
 		});

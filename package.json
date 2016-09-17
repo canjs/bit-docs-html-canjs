@@ -28,7 +28,7 @@
     "jquery": "^2.2.4"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.1.0",
+    "bit-docs-generate-html": "^0.2.0",
     "q": "^1.4.1",
     "connect": "^2.14.4",
     "normalize.css": "^4.1.1",
