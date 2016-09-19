@@ -1,0 +1,36 @@
+{{#unless hideTitle}}
+  {{> title.mustache}}
+{{/unless}}
+{{#if deprecated.length}}
+<section class='warnings'>
+  {{#deprecated}}
+    <div class='deprecated warning'>
+      <h3>Deprecated {{version}}</h3>
+      <div class='signature-wrapper'>
+        {{{makeHtml (makeLinks description)}}}
+      </div>
+    </div>
+  {{/deprecated}}
+</section>
+{{/if}}
+{{#unless hideDescription}}
+  {{#if description}}
+    {{> description.mustache}}
+  {{/if}}
+{{/unless}}
+{{#unless hideBody}}
+{{#if signatures}}
+{{#each signatures}}
+{{> signature.mustache}}
+{{/each}}
+{{else}}
+{{#types}}
+{{> signature.mustache}}
+{{/types}}
+{{/if}}
+{{/unless}}
+{{#unless hideBody}}
+  {{#if body}}
+    {{> body.mustache}}
+  {{/if}}
+{{/unless}}
