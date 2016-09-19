@@ -6,12 +6,14 @@
     padding-left: @gutter/1.5;
     margin: 0;
     list-style: none;
+    padding-bottom: @gutter;
+    padding-top: @gutter/2;
     li {
       position: relative;
       a {
         display: block;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         color: @link-color;
         text-decoration: none;
       }
@@ -56,18 +58,28 @@
             &.expanded {
 
               > a {
-                padding-bottom: @gutter/2;
+                padding-bottom: @gutter/3;
                 margin-left: -1px;
               }
               > ul {
                 border-left: 1px solid @border-color;
+                padding-bottom: @gutter/3;
               }
             }
              //Third level
             > ul {
                 li {
                   ul {
-                   margin-top: @gutter/3;
+                   margin-top: 0;
+                   margin-bottom: 0;
+                   padding-bottom: @gutter/3;
+
+                   a{
+                    padding-top: @gutter/3;
+                    padding-bottom: @gutter/3;
+                    border-left: 1px solid @border-color;
+                    padding-left: @gutter/2;
+                   }
                  }
                }
              }
