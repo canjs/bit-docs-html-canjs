@@ -55,28 +55,37 @@
   .flex;
   padding: 0;
   margin: 0;
-  margin-left: auto;
-  align-items: center;
+/*  margin-left: auto;*/
   list-style: none;
+  left: 0;
+  padding-top: @gutter;
+  padding-bottom: @gutter;
+
   &:hover {
-    border: 1px solid @border-color;
-    border-top: none;
-    border-bottom: none;
+    background: #eee;
   }
   .bitovi.icon-bits {
-    text-indent: 100%;
+    
+    margin-left: @gutter*2;
+    margin-right: @gutter*2;
+    /*text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
-    padding: @gutter @gutter*2;
-    width: 100px;
-    display: block;
+    padding: @gutter @gutter*2;*/
+    /*width: auto;*/
+    /*display: block;*/
     background: url(img/bitovi_bits.svg) no-repeat;
-    background-size: 30px auto;
+    /*background-size: 30px auto;
     background-position: center;
     border: 1px solid transparent;
     border-top: none;
     border-bottom: none;
-    margin: 0;
+    margin: 0 auto;*/
+
+    flex-shrink: 0;
+    height: auto;
+    text-indent: 100%;
+    color: rgba(0, 0, 0, 0.0);
   }
   .dropdown {
     position: relative;
@@ -88,7 +97,7 @@
       border-top: none;
       right: 0;
       z-index: 10;
-      top: 50px;
+      top: 38px;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -114,13 +123,24 @@
         }
       }
     }
-    &:hover {
+    /*&:hover {
+      .dropdown-menu {
+        display: block;
+      }
+    }*/
+  }
+}
+
+.top-right-bitovi {
+  &:hover {
       .dropdown-menu {
         display: block;
       }
     }
-  }
 }
+
+
+
 .breadcrumb{
   padding: @gutter;
   color: white;
@@ -210,7 +230,7 @@
       height: 10px;
       background: #fbfbfb;
       position: absolute;
-      top:-6px;
+      top:-4px;
       left: @gutter;
       -webkit-transform: rotate(-45deg);
       -moz-transform: rotate(-45deg);
