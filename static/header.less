@@ -125,18 +125,21 @@
   color: white;
   background: black;
   cursor: pointer;
-   &::after {
-    content: '\2329';
-    padding-bottom: 0px;
-    padding-right: @gutter/2;
-    margin-bottom: 0px;
-    display: inline-block;
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    transform: rotate(270deg);
-    font-size: 0.7em;
+  .breadcrumb-dropdown{
+    &::after {
+      content: '\2329';
+      padding-bottom: 0px;
+      padding-right: @gutter/4;
+      margin-bottom: 0px;
+      display: inline-block;
+      -webkit-transform: rotate(270deg);
+      -moz-transform: rotate(270deg);
+      -o-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
+      font-size: 0.7em;
+      color: white;
+    }
   }
   li{
     display: inline-block;
@@ -169,6 +172,8 @@
     }
   }
 }
+
+
 .on-this-page {
   width: 100%;
   font-size: 12px;
