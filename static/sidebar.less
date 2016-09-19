@@ -5,17 +5,14 @@
   ul {
     padding-left: @gutter/1.5;
     margin: 0;
+    margin-bottom: @gutter;
     list-style: none;
-    padding-bottom: @gutter;
-    padding-top: @gutter/2;
     li {
       position: relative;
       a {
         display: block;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        color: @link-color;
-        text-decoration: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
       }
       span {
         color: #555;
@@ -56,30 +53,17 @@
               padding-top: @gutter/3;
             }
             &.expanded {
-
               > a {
-                padding-bottom: @gutter/3;
+                padding-bottom: @gutter/2;
                 margin-left: -1px;
-              }
-              > ul {
-                border-left: 1px solid @border-color;
-                padding-bottom: @gutter/3;
               }
             }
              //Third level
             > ul {
+              border-left: 1px solid @border-color;
                 li {
                   ul {
-                   margin-top: 0;
-                   margin-bottom: 0;
-                   padding-bottom: @gutter/3;
-
-                   a{
-                    padding-top: @gutter/3;
-                    padding-bottom: @gutter/3;
-                    border-left: 1px solid @border-color;
-                    padding-left: @gutter/2;
-                   }
+                    margin-top: @gutter/3;
                  }
                }
              }
