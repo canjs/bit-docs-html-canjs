@@ -9,29 +9,27 @@
 	<link rel="stylesheet" type="text/css" href="{{pathToDest}}/static/bundles/bit-docs-site/static.css">
 	{{/devBuild}}
 </head>
-<body>
-	<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-  <label for="nav-trigger">Menu</label>
-  	{{{content}}}
-	<script type="text/javascript">
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+	  <label for="nav-trigger">Menu</label>
+	  {{{content}}}
+		<script type="text/javascript">
 		var docObject = {{{docObjectString}}};
-	</script>
-	{{#if devBuild}}
-		<script type='text/javascript'
-			data-main="bit-docs-site/static"
-			src="./static/node_modules/steal/steal.js"></script>
-	{{else}}
-		<script>
-		  steal = {
-		    instantiated: {
-		      "bundles/bit-docs-site/static.css!$css" : null
-		    }
-		  }
 		</script>
+		{{#if devBuild}}
 		<script type='text/javascript'
 				data-main="bit-docs-site/static"
-				src="{{pathToDest}}/static/node_modules/steal/steal.production.js"></script>
-	{{/if}}
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
+				src="./static/node_modules/steal/steal.js"></script>
+		{{else}}
+		<script>
+			steal = {
+			  instantiated: {
+			    "bundles/bit-docs-site/static.css!$css" : null
+			  }
+			}
+		</script>
+		<script type='text/javascript' data-main="bit-docs-site/static" src="{{pathToDest}}/static/node_modules/steal/steal.production.js"></script>
+		{{/if}}
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+	</body>
 </html>

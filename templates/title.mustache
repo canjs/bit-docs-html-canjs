@@ -2,10 +2,14 @@
 	<h1>{{getTitle .}}</h1>
 	<ul class="title-social">
 		{{#if package}}
-		<li><code>npm install {{package}} --save</code></li>
+		<li>
+			<code>npm install {{package}} --save</code>
+		</li>
 		{{/if}}
 		{{#if github}}
-		<li><a class="github-button" href="https://github.com/{{github}}" data-count-href="/{{github}}/stargazers" data-count-api="/repos/{{github}}#stargazers_count">Star</a></li>
+		<li>
+			<a class="github-button" href="https://github.com/{{github}}" data-count-href="/{{github}}/stargazers" data-count-api="/repos/{{github}}#stargazers_count">Star</a>
+		</li>
 		{{/if}}
 	</ul>
 </section>

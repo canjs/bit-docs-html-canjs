@@ -1,100 +1,23 @@
 <div id="everything">
-    <div id="left" class="column">
-      <div class="top-left">
-        <div class="brand">
-          <a href="{{urlTo 'canjs'}}">CanJS</a>
-        </div>
-        <div class="version">
-          <p>Version 3.0.0-pre</p>
-      </div>
-      </div>
-
-      <div class="bottom-left">
-        {{#with (getCurrentTree)}}
-            {{>menu.mustache}}
-        {{/with}}
-      </div>
+  <div id="left" class="column">
+    <div class="top-left">
+      {{#with (getCurrentTree)}}
+          {{>header-left.mustache}}
+      {{/with}}
     </div>
-
-    <div id="right" class="column">
-      <div class="top-right">
-      <div class="top-right-top">
-        <ul class="top-right-bitovi">
-          <li class="dropdown">
-            <a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
-            <ul class="dropdown-menu">
-              <li><a href="http://bitovi.com">Bitovi.com</a></li>
-              <li><a href="http://bitovi.com/blog/">Blog</a></li>
-              <li><a href="http://bitovi.com/consulting/">Consulting</a></li>
-              <li><a href="http://bitovi.com/training/">Training</a></li>
-              <li><a href="http://bitovi.com/open-source/">Open Source</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="top-right-links">
-          <li>
-            <a href="https://gitter.im/canjs/canjs">Chat</a>
-          </li>
-          <li>
-            <a href="http://forums.donejs.com/c/canjs">Forum</a>
-          </li>
-          <li>
-            <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
-          </li>
-          <li>
-            <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-          </li>
-        </ul>
-        </div>
-        {{> breadcrumb.mustache }}
-  </div>
-
-      <div class="bottom-right">
-        <article>
-          {{#unless hideTitle}}
-            {{> title.mustache}}
-          {{/unless}}
-
-            {{#if deprecated.length}}
-          <section class='warnings'>
-            {{#deprecated}}
-              <div class='deprecated warning'>
-                <h3>Deprecated {{version}}</h3>
-                <div class='signature-wrapper'>
-                  {{{makeHtml (makeLinks description)}}}
-                </div>
-              </div>
-            {{/deprecated}}
-          </section>
-        {{/if}}
-
-          {{#unless hideDescription}}
-            {{#if description}}
-              {{> description.mustache}}
-            {{/if}}
-          {{/unless}}
-
-        {{#unless hideBody}}
-        {{#if signatures}}
-        {{#each signatures}}
-        {{> signature.mustache}}
-        {{/each}}
-        {{else}}
-        {{#types}}
-        {{> signature.mustache}}
-        {{/types}}
-        {{/if}}
-        {{/unless}}
-
-
-          {{#unless hideBody}}
-            {{#if body}}
-              {{> body.mustache}}
-            {{/if}}
-          {{/unless}}
-
-        </article>
-         <footer>{{> footer.mustache}}</footer>
-      </div>
+    <div class="bottom-left">
+      {{#with (getCurrentTree)}}
+          {{>menu.mustache}}
+      {{/with}}
     </div>
   </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      {{> header-right.mustache}}
+    </div>
+    <div class="bottom-right">
+      <article>{{> article.mustache}}</article>
+      <footer>{{> footer.mustache}}</footer>
+    </div>
+  </div>
+</div>
