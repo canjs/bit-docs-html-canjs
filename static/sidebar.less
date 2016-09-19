@@ -53,31 +53,17 @@
               padding-top: @gutter/3;
             }
             &.expanded {
-              border-left: 1px solid @border-color;
-        
               > a {
                 padding-bottom: @gutter/2;
                 margin-left: -1px;
               }
-              // > ul {
-              //   border-left: 1px solid @border-color;
-              //   padding-bottom: @gutter/3;
-              // }
             }
              //Third level
             > ul {
+              border-left: 1px solid @border-color;
                 li {
                   ul {
-                   // margin-top: 0;
-                   // margin-bottom: 0;
-                   // padding-bottom: @gutter/3;
-                   margin-top: @gutter/3;
-                   // a{
-                   //  padding-top: @gutter/3;
-                   //  padding-bottom: @gutter/3;
-                   //  border-left: 1px solid @border-color;
-                   //  padding-left: @gutter/2;
-                   // }
+                    margin-top: @gutter/3;
                  }
                }
              }
