@@ -1,7 +1,4 @@
 .bottom-left {
-  padding: @gutter*2;
-  padding-bottom: 0;
-  background: white;
   ul {
     padding-left: @gutter/1.5;
     margin: 0;
@@ -11,11 +8,11 @@
       position: relative;
       a {
         display: block;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: @gutter/5;
+        padding-bottom: @gutter/5;
       }
       span {
-        color: #555;
+        color: @gray;
         font-size: 90%;
       }
     }
@@ -36,7 +33,6 @@
       list-style-type: none;
       padding: 0;
       .border-bottom;
-
       > a {
         font-size: 110%;
         padding-bottom: @gutter;
@@ -46,29 +42,29 @@
         padding-bottom: @gutter/3;
       }
       // Second level
-        > ul {
-          > li {
+      > ul {
+        > li {
+          > a {
+            padding-bottom: @gutter/3;
+            padding-top: @gutter/3;
+          }
+          &.expanded {
             > a {
-              padding-bottom: @gutter/3;
-              padding-top: @gutter/3;
+              padding-bottom: @gutter/2;
+              margin-left: -1px;
             }
-            &.expanded {
-              > a {
-                padding-bottom: @gutter/2;
-                margin-left: -1px;
+          }
+           //Third level
+          > ul {
+            border-left: 1px solid @border-color;
+            li {
+              ul {
+                margin-top: @gutter/3;
               }
             }
-             //Third level
-            > ul {
-              border-left: 1px solid @border-color;
-                li {
-                  ul {
-                    margin-top: @gutter/3;
-                 }
-               }
-             }
           }
         }
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-// ---------- BOTTOM RIGHT SCROLLABLE CONTENT ----------
 article {
   margin-top: 0px;
   p {
@@ -8,7 +7,6 @@ article {
   }
   ul, ol {
     margin-bottom: @gutter;
-    // list-style-type: disc;
     li {
       line-height: 1.6;
       > p:first-of-type {
@@ -20,16 +18,15 @@ article {
     font-size: 90%;
   }
   code {
-    .border-radius;
-    background: @border-color;
-    font-size: .9em;
-    .highlight {
-      background-color: #e5f6e5;
-      padding: 3px 0;
+    .code{
+      .highlight {
+        background: @highlight-color;
+        padding: 3px 0;
+      }
     }
     .expand {
       height: 20px;
-      background-color: #f4f7fb;
+      background-color: @light-color;
       text-align: center;
       padding: 4px 0px;
       border-top: 1px solid #d2dff0;
@@ -53,10 +50,6 @@ article {
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
-    // .border-bottom;
-    // .border-top;
-    // border-top: 1px solid @link-color;
-    // border-bottom: 1px solid @link-color;
     border:1px solid @link-color;
     border-radius: 4px;
     .signature-title {
@@ -65,7 +58,6 @@ article {
       code {
         font-weight: bold;
         .font-smoothing;
-        color: darken(@code-color,10%);
         padding: 0;
         background: none;
       }
@@ -82,7 +74,6 @@ article {
       margin: 0 0 1.5em;
       padding: 0;
       counter-reset: item;
-      
       > li {
         margin: 0;
         padding: 0 0 0 2em;
@@ -116,8 +107,6 @@ article {
     }
   }
 }
-// ---------- BOTTOM RIGHT SCROLLABLE CONTENT ----------
-// ---------- NPM AND GITHUB START NEXT TO TITLE ----------
 ul.title-social{
   float: right;
   margin-top: -60px;
@@ -152,4 +141,3 @@ ul.title-social{
     }
   }
 }
-// ---------- NPM AND GITHUB START NEXT TO TITLE ----------

@@ -10,6 +10,9 @@
 .border-right {
   border-right: 1px solid @border-color;
 }
+.border {
+  border: 1px solid @border-color;
+}
 .flex {  
   display: -webkit-box;
   display: -moz-box;
@@ -26,4 +29,10 @@
 }
 .box-shadow (@horizontal: 3px, @vertical: 3px, @blur: 10px, @color: rgba(0,0,0,.05)) {
   box-shadow: @horizontal @vertical @blur @color;
+}
+.code {
+  .border-radius;
+  background: @border-color;
+  font-size: .9em;
+  color: @code-color;
 }

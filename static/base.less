@@ -9,16 +9,7 @@ html {
 * {
   box-sizing: border-box;
 }
-a {
-  color: @link-color;
-  text-decoration: none;
-  &:hover, &:active {
-    text-decoration: underline;
-  }
-}
-// Horizontal lines
-hr,
-.rule {
+hr,.rule {
   height: 0;
   margin: @gutter 0;
   overflow: hidden;
@@ -26,7 +17,6 @@ hr,
   border: 0;
   .border-bottom;
 }
-// Remove most spacing between table cells.
 table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -34,11 +24,4 @@ table {
 td, th {
   padding: 0;
 }
-// Headings
-h1,h2,h3,h4,h5,h6 {
-  margin-top: 1em;
-  margin-bottom: @gutter;
-  font-weight: bold;
-  line-height: 1.4;
-  .border-bottom;
-}
+

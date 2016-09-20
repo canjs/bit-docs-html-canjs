@@ -16,7 +16,6 @@
   padding: 0px;
 }
 #right {
-  height: 100%;
   min-height: 100%;
   max-height: 100%;
   flex-grow: 1;
@@ -38,20 +37,19 @@
 .top-left {
   flex-shrink: 0;
   height: auto;
-/*  border-bottom: 1px solid #eee;
-*//*  background: @light-color;*/
 }
 .top-right {
   flex-shrink: 0;
   flex-wrap: nowrap;
   height: auto;
-/*  border-bottom: 1px solid #eee;
-*//*  background: @light-color;
-*/}
+}
 .bottom-left {
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: @gutter*2;
+  padding-bottom: 0;
+  background: white;
 }
 .bottom-right {
   flex-grow: 1;
