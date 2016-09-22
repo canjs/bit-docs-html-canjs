@@ -13,6 +13,8 @@ $(document.body).on("click","a",function(ev){
 		ev.preventDefault();
 		window.history.pushState(null, null, this.href);
 		$.ajax(href,{dataType: "text"}).then(function(content){
+			$('#right .bottom-right').scrollTop(0);
+
 			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 
 			var nav = $content.find(".bottom-left>ul");
