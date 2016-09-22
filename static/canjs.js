@@ -12,28 +12,42 @@ $(document.body).on("click","a",function(ev){
 		var href = this.href;
 		ev.preventDefault();
 		window.history.pushState(null, null, this.href);
-		$.ajax(href,{dataType: "text"}).then(function(content){
-			$('#right .bottom-right').scrollTop(0);
-
-			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
-
-			var nav = $content.find(".bottom-left>ul");
-			var article = $content.find("article");
-			var breadcrumb = $content.find(".breadcrumb");
-
-			$(".bottom-left>ul").replaceWith(nav);
-			$("article").replaceWith(article);
-			$(".breadcrumb").replaceWith(breadcrumb);
-			// find what I clicked on in the current nav ... try positioning it in the same place.
-
-			// go through every package and re-init
-			for(var packageName in window.PACKAGES) {
-				if(typeof PACKAGES[packageName] === "function") {
-					PACKAGES[packageName]();
-				}
-			}
-		}, function(){
-			debugger;
-		});
+		navigate(href);
 	}
 });
+
+function navigate(href) {
+	$.ajax(href,{dataType: "text"}).then(function(content){
+		$('#right .bottom-right').scrollTop(0);
+
+		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
+
+		// find what I clicked on in the current nav ... try positioning it in the same place.
+		var nav = $content.find(".bottom-left>ul");
+		var article = $content.find("article");
+		var breadcrumb = $content.find(".breadcrumb");
+
+		$(".bottom-left>ul").replaceWith(nav);
+		$("article").replaceWith(article);
+		$(".breadcrumb").replaceWith(breadcrumb);
+
+		// Initialize any scripts in the content
+		var scripts = article.find('script');
+		$.each(scripts, function(index, script) {
+			var src = script.src;
+			if (src) {
+				$.getScript(src);
+			}
+		});
+
+		// go through every package and re-init
+		for(var packageName in window.PACKAGES) {
+			if(typeof PACKAGES[packageName] === "function") {
+				PACKAGES[packageName]();
+			}
+		}
+	}, function(){
+		debugger;
+	});
+}
+
