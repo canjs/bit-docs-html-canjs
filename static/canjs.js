@@ -35,3 +35,17 @@ $(document.body).on("click","a",function(ev){
 		});
 	}
 });
+
+// Show/Hide the top navigation on scroll
+// using a duration results in a disjointed animation.
+var lastScrollTop = 0,
+	topNav = $('#right .top-right-top, #left .brand');
+$('#right .bottom-right').scroll(function(e) {
+	var newScrollTop = $(this).scrollTop();
+	if (lastScrollTop > newScrollTop) {
+		topNav.show(); // scrolling up, show nav
+	} else {
+		topNav.hide(); // scrolling down, hide nav
+	}
+	lastScrollTop = newScrollTop;
+});
