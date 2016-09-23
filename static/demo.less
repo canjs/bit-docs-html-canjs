@@ -2,12 +2,12 @@
   border: none;
   border-radius: 0;
   background-color: transparent;
-  border-bottom: @border;
+  border-bottom: @border-color;
   padding-bottom: 15px;
   ul {
     list-style: none;
     padding: 0;
-    border-bottom: @border;
+    border-bottom: @border-color;
     padding-left: 10px;
   }
   li.tab {
@@ -21,7 +21,7 @@
   }
   li.tab.active {
     font-weight: bold;
-    border: @border;
+    border: @border-color;
     border-bottom: solid 2px white;
     border-radius: 4px 4px 0 0;
     color: @gray;
@@ -35,7 +35,7 @@
     margin-bottom: 0px;
   }
   body.style-demo {
-    background-color: @clear;
+    background-color: transparent;
     padding: 10px;
   }
 }
@@ -45,6 +45,6 @@
   vertical-align: middle;
 }
 button.btn.btn-default {
-  border: @border;
+  border: @border-color;
   color: @code-color;
 }
