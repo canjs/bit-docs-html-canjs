@@ -23,7 +23,6 @@ article {
       padding: 3px 0;
     }
     .expand {
-      height: 20px;
       background-color: @light-color;
       text-align: center;
       padding: 4px 0px;
@@ -32,8 +31,15 @@ article {
       color: black;
     }
     .expand:before {
-      content: "..."
+      content: url(../static/img/expand_icon.svg);
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: 0 auto;
     }
+    .expand:hover{
+        opacity: .7;
+      }
   }
   pre code {
     background: none;
