@@ -1,17 +1,21 @@
 require("./canjs.less!");
 $ = require("jquery");
 
+window.addEventListener('popstate', function(e) {
+	var href = window.location.href;
+	navigate(href);
+});
+
 $(document.body).on("click","a",function(ev){
 	// make sure we're in the right spot
-	if(this.href === "javascript://") {
+	if (this.href === "javascript://") {
 		return;
 	}
 	// this might need to change if we add other things
 	if(this.hostname === window.location.hostname) {
-		var node = $(this);
 		var href = this.href;
 		ev.preventDefault();
-		window.history.pushState(null, null, this.href);
+		window.history.pushState(null, null, href);
 		navigate(href);
 	}
 });
@@ -19,7 +23,6 @@ $(document.body).on("click","a",function(ev){
 function navigate(href) {
 	$.ajax(href,{dataType: "text"}).then(function(content){
 		$('#right .bottom-right').scrollTop(0);
-
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 
 		// find what I clicked on in the current nav ... try positioning it in the same place.
@@ -50,4 +53,3 @@ function navigate(href) {
 		debugger;
 	});
 }
-

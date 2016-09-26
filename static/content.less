@@ -23,7 +23,6 @@ article {
       padding: 3px 0;
     }
     .expand {
-      height: 20px;
       background-color: @light-color;
       text-align: center;
       padding: 4px 0px;
@@ -32,8 +31,15 @@ article {
       color: black;
     }
     .expand:before {
-      content: "..."
+      content: url(../static/img/expand_icon.svg);
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: 0 auto;
     }
+    .expand:hover{
+        opacity: .7;
+      }
   }
   pre code {
     background: none;
@@ -100,6 +106,9 @@ article {
     padding: @gutter;
     border: 1px solid @warning-color;
     margin-bottom: @gutter;
+    margin-left: @gutter*2;
+    margin-right: @gutter*2;
+    margin-top: @gutter;
     padding-bottom: 0;
     h3 {
       margin: 0;
@@ -140,5 +149,20 @@ ul.title-social{
     @media screen and (min-width: @breakpoint) {
       margin-left: @gutter;
     }
+  }
+}
+video{
+  background: @border-color;
+}
+blockquote{
+  display: block;
+  background: #f4f4f4;
+  padding: @gutter @gutter*2;
+  margin: 0 0 20px;
+  position: relative;
+  border-left: 15px solid @dark-border-color;
+  border-right: 2px solid @dark-border-color;
+  > p{
+    margin-bottom: 0px;
   }
 }
