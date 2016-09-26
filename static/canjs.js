@@ -56,11 +56,6 @@ function navigate(href) {
 	});
 }
 
-<<<<<<< HEAD
-$(document.body).on("click",".header-item",function(ev) {
-	var offset = $(ev.target).offset().top;
-	$('#right .bottom-right').scrollTop(offset);
-=======
 $(document.body).on("click", ".header-item", function(ev) {
 	var container = $('#right .bottom-right'),
 		targetContent = $(ev.currentTarget).html(),
@@ -75,7 +70,6 @@ $(document.body).on("click", ".header-item", function(ev) {
 
 	var position = scrollTo.offset().top - container.offset().top + container.scrollTop();
 	container.scrollTop(position);
->>>>>>> d525afde93bbd016209448787ebf4f373d776430
 });
 
 function setOnThisPage() {
