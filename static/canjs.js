@@ -25,6 +25,7 @@ function navigate(href) {
 		$('#right .bottom-right').scrollTop(0);
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 
+		// find what I clicked on in the current nav ... try positioning it in the same place.
 		var nav = $content.find(".bottom-left>ul");
 		var article = $content.find("article");
 		var breadcrumb = $content.find(".breadcrumb");
@@ -32,7 +33,15 @@ function navigate(href) {
 		$(".bottom-left>ul").replaceWith(nav);
 		$("article").replaceWith(article);
 		$(".breadcrumb").replaceWith(breadcrumb);
-		// find what I clicked on in the current nav ... try positioning it in the same place.
+
+		// Initialize any scripts in the content
+		var scripts = article.find('script');
+		$.each(scripts, function(index, script) {
+			var src = script.src;
+			if (src) {
+				$.getScript(src);
+			}
+		});
 
 		// go through every package and re-init
 		for(var packageName in window.PACKAGES) {
