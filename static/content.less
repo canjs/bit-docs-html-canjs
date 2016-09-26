@@ -54,8 +54,14 @@ article {
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
-    border:1px solid @link-color;
-    border-radius: 4px;
+    // border:1px solid @link-color;
+    // border-radius: 4px;
+    border-left: 15px solid @link-color;
+    border-right: 2px solid @link-color;
+    background: lighten(@link-color, 48%);
+    h3{
+      margin-top: @gutter*2;
+    }
     .signature-title {
       margin-top: 0;
       border-bottom: 0;
@@ -165,4 +171,7 @@ blockquote{
   > p{
     margin-bottom: 0px;
   }
+}
+.description{
+  margin-bottom: @gutter;
 }
