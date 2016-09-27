@@ -174,3 +174,28 @@ blockquote{
     margin-bottom: 0px;
   }
 }
+pre{
+  padding: 0 !important;
+}
+// ---- FOR CODE LINES IN EXPAND CODE CONTAINER ----
+span.line{
+  display: block;
+  padding: 0 @gutter !important;
+}
+code.language-js.prettyprint.prettyprinted{
+  display: block;
+  padding: @gutter 0 !important;
+  // ---- FOR CODE LINES IN REGULAR CODE CONTAINER ----
+  span.line{
+    margin: 0;
+    padding: 0 @gutter/3;
+  }
+}
+
+// ---------- STYLE FOR EXPANDED CODE - needs to be added to Markdown ----------
+article code .obscured{
+  background: @border-color;
+}
+// ---------- STYLE FOR EXPANDED CODE - needs to be added to Markdown ----------
+
+ 
