@@ -1,15 +1,11 @@
 <section class="title">
 	<h1>{{getTitle .}}</h1>
 	<ul class="title-social">
-		{{#if package}}
 		<li>
-			<code>npm install {{package}} --save</code>
+			<code>npm install can-connect --save</code>
 		</li>
-		{{/if}}
-		{{#if github}}
 		<li>
-			<a class="github-button" href="https://github.com/{{github}}" data-count-href="/{{github}}/stargazers" data-count-api="/repos/{{github}}#stargazers_count">Star</a>
-		</li>
-		{{/if}}
+    		<a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  		</li>
 	</ul>
 </section>
