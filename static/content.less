@@ -125,40 +125,6 @@ article {
     }
   }
 }
-ul.title-social{
-  float: right;
-  margin-top: -60px;
-  line-height: 1.6;
-  margin-bottom: @gutter;
-  list-style-type: disc;
-  display: none;
-  @media screen and (min-width: @breakpoint) {
-    display: unset;
-    }
-  li{
-    list-style: none;
-    display: inline-block;
-    vertical-align: top;
-    iframe {
-      top: 1px;
-      position: relative;
-      margin-left: 5px;
-    }
-  }
-  code {
-    background: white;
-    border: 1px solid @gray;
-    color: @code-color;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    vertical-align: top;
-    @media screen and (min-width: @breakpoint) {
-      margin-left: @gutter;
-    }
-  }
-}
 video{
   background: @light-color;
   border: 1px solid @dark-border-color;
@@ -179,4 +145,7 @@ blockquote{
   > p{
     margin-bottom: 0px;
   }
+}
+.description{
+  margin-bottom: @gutter*3;
 }
