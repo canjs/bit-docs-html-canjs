@@ -3,6 +3,35 @@
 		<h1>{{getTitle .}}</h1>
 		<div>constructor</div>
 	</div>
+	{{#unless hideDescription}}
+  {{#if description}}
+    {{> description.mustache}}
+  {{/if}}
+{{/unless}}
+	
+</section>
+<section class="on-this-page-table">
+	<ol>
+		<li>compute(getterSetter[, context])</li>
+		<li>compute(initialValue [, settings])</li>
+		<li>compute(initialValue, setter(newVal,oldVal))</li>
+		<li>compute(object, propertyName [, eventName])</li>
+		<li>Use</li>
+		<li>Observing a value</li>
+		<li>Derived computes</li>
+		<li>Translator computes - computes that update their derived values</li>
+		<li>Events</li>
+	</ol>
+</section>
+<section class="title-top-links">
+	<ul class="title-links">
+		<li><a href="#">docco</a></li>
+		<li><a href="#">source</a></li>
+		<li><a href="#">download</a></li>
+		<li><a href="#">tests</a></li>
+	</ul>
+</section>
+<section>
 	<ul class="title-social">
 		<li>
 			<button class="button-social">
@@ -13,13 +42,5 @@
 		<li>
     	<a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
   		</li>
-	</ul>
-</section>
-<section class="title-top-links">
-	<ul class="title-links">
-		<li><a href="#">docco</a></li>
-		<li><a href="#">source</a></li>
-		<li><a href="#">download</a></li>
-		<li><a href="#">tests</a></li>
 	</ul>
 </section>
