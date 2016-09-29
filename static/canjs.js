@@ -12,7 +12,7 @@ function init() {
 	$articleContainer = $('#right .bottom-right');
 	$onThisPage = $('.on-this-page');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
-	$tableOfContents = $('on-this-page-table ol');
+	$tableOfContents = $('.on-this-page-table');
 	$headers = getHeaders();
 
 	// remove anything in the "On This Page" list
@@ -24,6 +24,10 @@ function init() {
 		}
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
+
+	if ($headers.length) {
+		buildTOC();
+	}
 
 	var $currentHeader = $(window.location.hash);
 	scrollToElement($currentHeader);
@@ -112,7 +116,7 @@ function navigate(href) {
 
 function getHeaders() {
 	var	outline = window.docObject && parseInt(window.docObject.outline),
-		outlineLevel = !isNaN() ? outline : 1,
+		outlineLevel = !isNaN(outline) ? outline : 1,
 		headerArr = [];
 	for (var i = 1; i <= outlineLevel; i++) {
 		headerArr.push('h' + (outlineLevel + 1));
@@ -138,4 +142,37 @@ function scrollToElement($element) {
 
 function setOnThisPageTitle(title) {
 	$onThisPageTitle.html(title || 'On this page');
+}
+
+function buildTOC() {
+	var level = 0,
+		baseLevel = $headers[0].nodeName.substr(1),
+		toc = "<ol>";
+
+	$headers.each(function(index, element) {
+		var $el = $(element);
+		var title = $el.text().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+		var link = '#' + generateId($el[0]);
+
+		var prevLevel = level;
+		level = element.nodeName.substr(1);
+
+		var newContent;
+
+		if (prevLevel === 0) {
+			newContent = '<li>';
+		} else if (level === prevLevel) {
+			newContent = '</li><li>';
+		} else if (level > prevLevel) {
+			newContent = Array(level - prevLevel + 1).join('<ol><li>');
+		} else if(level < prevLevel) {
+			newContent = Array(prevLevel - level + 1).join('</li></ol>') + '</li><li>';
+		}
+
+		newContent += "<a href='" + link + "'>" + title + "</a>";
+		toc += newContent;
+	});
+
+	toc += Array(level - baseLevel + 1).join('</li></ol>') + "</li></ol>";
+	$tableOfContents.append(toc);
 }
