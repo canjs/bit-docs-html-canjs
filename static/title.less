@@ -1,38 +1,94 @@
+.title {
+	padding: @gutter*2 @gutter*2 0 @gutter*2;
+}
+section.title-footer{
+	display: flex;
+	margin: 0 @gutter*2 @gutter*3 @gutter*2;
+}
 ul.title-social{
-	float: right;
-	margin-top: -47px;
-  line-height: 1.6;
-	margin-bottom: @gutter;
-	list-style-type: disc;
-	display: none;
-	@media screen and (min-width: @breakpoint) {
-		display: unset;
+	display: flex;
+	padding-left: 0;
+	justify-content: flex-start;
+	margin: 0;
+  li{
+    list-style: none;
+    line-height:normal;
+    margin-right: @gutter*2;
+    line-height: 14px;
+    .button-social{
+    	display: inline-flex;
+			color: white;
+			font-size: 12px;
+			font-weight: 500;
+			margin: 0;
+			border: 0;
+			cursor: pointer;
+			padding: 0;
+			line-height: 12px;
+    }
+    .button-social:hover{
+				opacity: .5;
+			}
+    .button-left{
+    	border-radius: 2px 0 0 2px;
+			.border;
+			padding: 3px 10px;
+			border-right: 0;
+			color: @link-color;
+    }
+    .button-right{
+    	border-radius: 0 2px 2px 0px;
+			background: @link-color;
+			padding: 3px 10px;
+    }
   }
-	> li{
+}
+ul.title-links {
+	padding-left: 0;
+	padding-top: 3px;
+	margin: 0;
+	li {
 		list-style: none;
 		display: inline-block;
-		vertical-align: top;
-		iframe {
-	    top: 1px;
-      position: relative;
-      margin-left: 5px;
-  	}
-	}
-	code {
-    background: white;
-    border: 1px solid @gray;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    vertical-align: top; 
-    @media screen and (min-width: @breakpoint) {
-      margin-left: @gutter;
-    }
+		margin-right: @gutter/2;
+		line-height: 14px;
+		font-size: 14px;
 	}
 }
-.title{
-	padding-top: @gutter*2;
-	padding-left: @gutter*2;
-	padding-right: @gutter*2;
+.page-type{
+	h1{
+		display: inline-block;
+	}
+	div{
+		display: inline-block;
+		font-size: 14px;
+		color: lighten(@gray, 35%);
+		margin-left: @gutter/2;
+	}
+}
+.on-this-page-table{
+	ol { 
+		counter-reset: item;
+		margin-right: @gutter*2;
+		margin-left:@gutter*2;
+		padding: 0; 
+		li { 
+	  	display: block; 
+	  	color: @link-color;
+	  	line-height: 1.7em;
+	  	cursor: pointer;
+		  a:hover{
+		  	text-decoration: underline;
+		  }
+		}	
+	}
+  ol li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    color: @gray;
+  }
+}
+.description{
+  margin-left: 0;
+  margin-bottom: 0;
 }

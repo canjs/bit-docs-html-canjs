@@ -1,15 +1,43 @@
 <section class="title">
-	<h1>{{getTitle .}}</h1>
+	<div class="page-type">
+		<h1>{{getTitle .}}</h1>
+		<div>constructor</div>
+	</div>
+	{{#unless hideDescription}}
+  {{#if description}}
+    {{> description.mustache}}
+  {{/if}}
+	{{/unless}}
+</section>
+<section class="on-this-page-table">
+	<ol>
+		<li><a>compute(getterSetter[, context])</a></li>
+		<li><a>compute(initialValue [, settings])</a></li>
+		<li><a>compute(initialValue, setter(newVal,oldVal))</a></li>
+		<li><a>compute(object, propertyName [, eventName])</a></li>
+		<li><a>Use</a></li>
+		<li><a>Observing a value</a></li>
+		<li><a>Derived computes</a></li>
+		<li><a>Translator computes - computes that update their derived values</a></li>
+		<li><a>Events</a></li>
+	</ol>
+</section>
+<section class="title-footer">
 	<ul class="title-social">
-		{{#if package}}
 		<li>
-			<code>npm install {{package}} --save</code>
+			<button class="button-social">
+			 <div class="button-left">npm pacakage</div>
+			<div class="button-right">1.6.11</div>
+			</button>
 		</li>
-		{{/if}}
-		{{#if github}}
 		<li>
-			<a class="github-button" href="https://github.com/{{github}}" data-count-href="/{{github}}/stargazers" data-count-api="/repos/{{github}}#stargazers_count">Star</a>
-		</li>
-		{{/if}}
+    	<a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  	</li>
+  </ul>
+	<ul class="title-links">
+		<li><a href="#">docco</a></li>
+		<li><a href="#">source</a></li>
+		<li><a href="#">download</a></li>
+		<li><a href="#">tests</a></li>
 	</ul>
 </section>
