@@ -17,17 +17,24 @@ article {
   small {
     font-size: 90%;
   }
+  pre{
+    padding: 0;
+  }
   code {
     .highlight {
 	  background: @highlight-color;
-      padding: 3px 0;
+    padding: 3px 0;
+    }
+    .obscured{
+      background: lighten(@border-color, 2%);
     }
     .expand {
-      background-color: @light-color;
+      background-color: @border-color;
       text-align: center;
       padding: 4px 0px;
-      border-top: 1px solid #d2dff0;
-      border-bottom: 1px solid #d2dff0;
+      margin: @gutter/2 0;
+      border-top: 1px solid @dark-border-color;
+      border-bottom: 1px solid @dark-border-color;
       color: black;
     }
     .expand:before {
@@ -38,11 +45,14 @@ article {
       margin: 0 auto;
     }
     .expand:hover{
-        opacity: .7;
+        opacity: .6;
+        cursor: pointer;
       }
   }
   pre code {
     background: none;
+    display: block;
+    margin: @gutter;
   }
   .title {
     .type {
@@ -147,6 +157,15 @@ blockquote{
     margin-bottom: 0px;
   }
 }
+
+.line-highlight{
+  margin: @gutter 0;
+  span.line{
+    padding: 0 @gutter;
+    display: block;
+  }
+}
+
 .description{
   margin-bottom: @gutter*3;
 }
