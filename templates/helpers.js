@@ -148,7 +148,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             return docMapInfo.getTitle(this);
         },
         getShortTitle: function(docObject){
-            return docMapInfo.getShortTitle(this);
+            return docMapInfo.getShortTitle(docObject);
         },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
