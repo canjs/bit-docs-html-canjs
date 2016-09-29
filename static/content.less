@@ -64,8 +64,9 @@ article {
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
-    border:1px solid @link-color;
-    border-radius: 4px;
+    border-left:15px solid @link-color;
+    border-right:2px solid @link-color;
+    background: lighten(@link-color, 45%);
     .signature-title {
       margin-top: 0;
       border-bottom: 0;
@@ -135,42 +136,14 @@ article {
     }
   }
 }
-ul.title-social{
-  float: right;
-  margin-top: -60px;
-  line-height: 1.6;
-  margin-bottom: @gutter;
-  list-style-type: disc;
-  display: none;
-  @media screen and (min-width: @breakpoint) {
-    display: unset;
-    }
-  li{
-    list-style: none;
-    display: inline-block;
-    vertical-align: top;
-    iframe {
-      top: 1px;
-      position: relative;
-      margin-left: 5px;
-    }
-  }
-  code {
-    background: white;
-    border: 1px solid @gray;
-    color: @code-color;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    vertical-align: top;
-    @media screen and (min-width: @breakpoint) {
-      margin-left: @gutter;
-    }
-  }
-}
 video{
-  background: @border-color;
+  background: @light-color;
+  border: 1px solid @dark-border-color;
+  margin: @gutter*2 0;
+  width: 100%;
+  @media screen and (min-width: @breakpoint-xl) {
+    width: 1000px;
+  }
 }
 blockquote{
   display: block;
@@ -184,6 +157,7 @@ blockquote{
     margin-bottom: 0px;
   }
 }
+<<<<<<< HEAD
 .line-highlight{
   margin: @gutter 0;
   span.line{
@@ -193,3 +167,8 @@ blockquote{
 }
 
  
+=======
+.description{
+  margin-bottom: @gutter*3;
+}
+>>>>>>> master
