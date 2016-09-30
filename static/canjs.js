@@ -92,14 +92,8 @@ function navigate(href) {
 		$("article").replaceWith(article);
 		$(".breadcrumb").replaceWith(breadcrumb);
 
-		// Initialize any scripts in the content
-		var scripts = article.find('script');
-		$.each(scripts, function(index, script) {
-			var src = script.src;
-			if (src) {
-				$.getScript(src);
-			}
-		});
+		// Initialize any jsbin scripts in the content
+		delete window.jsbinified;
 
 		// go through every package and re-init
 		for (var packageName in window.PACKAGES) {
