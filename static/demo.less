@@ -2,49 +2,55 @@
   border: none;
   border-radius: 0;
   background-color: transparent;
-  border-bottom: @border-color;
-  padding-bottom: 15px;
+  margin: @gutter*2 0;
   ul {
-    list-style: none;
     padding: 0;
-    border-bottom: @border-color;
-    padding-left: 10px;
+    display: flex;
+    margin-bottom: 0;
+    padding-left: @gutter;
+    li.tab {
+      display: inline-block;
+      padding: @gutter/3 @gutter*2;
+      color: white;
+      cursor: pointer;
+      border: 1px solid @dark-border-color;
+      margin-bottom: -1px;
+      border-radius: 4px 4px 0 0;
+      background: @dark-border-color;
+      z-index: 10;
+      margin-right: @gutter/2;
+    }
+    li.tab .active {
+      font-weight: bold;
+      border: 1px solid #eee;
+      border-bottom: solid 2px white;
+      border-radius: 4px 4px 0 0;
+      color: @gray;
+      background-color: white;
+    }
   }
-  li.tab {
-    display: inline-block;
-    padding: 10px 15px;
-    color: @link-color;
-    cursor: pointer;
-    border: solid 1px transparent;
-    margin-bottom: -1px;
-    margin-left: 5px;
-  }
-  li.tab.active {
-    font-weight: bold;
-    border: @border-color;
-    border-bottom: solid 2px white;
-    border-radius: 4px 4px 0 0;
-    color: @gray;
-    background-color: white;
-  }
-  div.tab-content {
+  .tab-content{
     clear: both;
-    margin-top: 15px;
-  }
-  pre {
-    margin-bottom: 0px;
-  }
-  body.style-demo {
-    background-color: transparent;
-    padding: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    word-wrap: break-word;
+    iframe{
+      background-color: white;
+      border: 1px solid @dark-border-color;
+      border-radius: 5px;
+      margin: 0;
+      vertical-align: top;
+      overflow: auto;
+      padding: @gutter;
+      width: 100%;
+      z-index: 1;
+    }
+    pre{
+      font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+      font-size: 14px;
+      border: 1px solid @dark-border-color;
+      padding: @gutter;
+    }
   }
 }
-.btn-group {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-}
-button.btn.btn-default {
-  border: @border-color;
-  color: @code-color;
-}
+
