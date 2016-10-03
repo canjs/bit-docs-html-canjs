@@ -1,38 +1,48 @@
 .brand {
-  white-space: nowrap;
-  overflow: hidden;
   width: 58px;
   height: 23px;
-  background-image: url(img/canjs_logo.svg);
-  background-size: cover;
   margin: @gutter @gutter*2;
-  align-self: flex-start;
-  a{
-    opacity: 0;
-    font-size: 1.5em;
+  background: white;
+  a { 
+    display: none;
+  }
+  @media screen and (min-width: @breakpoint){
+    white-space: nowrap;
+    overflow: hidden;
+    background-image: url(img/canjs_logo.svg);
+    background-size: cover;
+    align-self: flex-start;
+    a{
+      opacity: 0;
+      font-size: 1.5em;
+    }
   }
 }
 .top-right-links {
-  .flex;
-  list-style: none;
-  margin: @gutter @gutter*2;
-  height: 23px; /* Keeps flashing twitter stuff from breaking height */
-  padding: 0;
-  flex-basis: 100%;
-  align-self: flex-start;
-  > li {
-    font-size: 14px;
-    margin-right: @gutter;
-    > a {
-      font-weight: 700;
-      font-size: 12px;
-      padding: 2px 10px;
-      line-height: 20px;
-      .border-radius;
-      .border;
-      &:hover {
-        text-decoration: none;
-        background: @border-color;
+  display: none;
+  @media screen and (min-width: @breakpoint){
+    display: flex;
+    .flex;
+    list-style: none;
+    margin: @gutter @gutter*2;
+    height: 23px; /* Keeps flashing twitter stuff from breaking height */
+    padding: 0;
+    flex-basis: 100%;
+    align-self: flex-start;
+    > li {
+      font-size: 14px;
+      margin-right: @gutter;
+      > a {
+        font-weight: 700;
+        font-size: 12px;
+        padding: 2px 10px;
+        line-height: 20px;
+        .border-radius;
+        .border;
+        &:hover {
+          text-decoration: none;
+          background: @border-color;
+        }
       }
     }
   }
@@ -43,6 +53,10 @@
   margin: 0;
   list-style: none;
   left: 0;
+  padding-bottom: 17px;
+  @media screen and (min-width: @breakpoint){
+    padding-bottom: 0;
+  }
   &:hover {
     background: @border-color;
   }
@@ -102,38 +116,44 @@
   }
 }
 .breadcrumb{
-  padding-left: @gutter;
-  color: white;
-  background: @code-color;
-  cursor: pointer;
-  .breadcrumb-dropdown{
-    padding: @gutter;
-    &::after {
-      content: '\2329';
-      padding-bottom: 0px;
-      padding-right: @gutter/4;
-      margin-bottom: 0px;
-      display: inline-block;
-      -webkit-transform: rotate(270deg);
-      -moz-transform: rotate(270deg);
-      -o-transform: rotate(270deg);
-      -ms-transform: rotate(270deg);
-      transform: rotate(270deg);
-      font-size: 0.7em;
-      color: white;
+  display: none;
+  @media screen and (min-width: @breakpoint){
+    display: block;
+    padding-left: @gutter*2;
+    color: white;
+    background: @code-color;
+    cursor: pointer;
+    color: lighten(@gray, 10%);
+    .breadcrumb-dropdown{
+      padding: @gutter @gutter/4;
+      &::after {
+        content: '\2329';
+        padding-bottom: 0px;
+        padding-right: @gutter/4;
+        margin-bottom: 0px;
+        display: inline-block;
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+        font-size: 0.7em;
+        color: white;
+      }
     }
-  }
-  li{
-    display: inline-block;
-    list-style: none;
-    color: @link-color;
-    padding-left: @gutter;
-    padding-right: @gutter;
-    a{
-      color: white;
-      code{
-        background: none;
-        line-height: 14px;
+    li{
+      display: inline-block;
+      list-style: none;
+      color: @link-color;
+      padding-left: @gutter/4;
+      padding-right: @gutter/4;
+      a{
+        color: white;
+        font-size: 14px;
+        code{
+          background: none;
+          line-height: 14px;
+        }
       }
     }
   }
@@ -225,8 +245,10 @@
 .top-right-top{
   display: inline-flex;
   flex-direction: row-reverse;
-  justify-content: space-around;
   width: 100%;
+  @media screen and (min-width: @breakpoint){
+    justify-content: space-around;
+  }
 }
 // -- Mobile Menu Menu
 .nav-trigger {
@@ -235,8 +257,8 @@
 }
 label[for="nav-trigger"] {
   position: fixed;
-  top: 7px;
-  left: 10px;
+  top: 9px;
+  left: @gutter*2;
   z-index: 12;
   font-family: Lato, sans-serif;
   border: 1px solid @border-color;
@@ -248,17 +270,24 @@ label[for="nav-trigger"] {
   font-weight: 700;
   .border-radius;
 }
-.nav-trigger:checked + label,
-.nav-trigger:checked ~ header {
-    left: @sidebar-width+15;
+
+label:hover{
+  background: @border-color;
 }
-.nav-trigger:checked ~ .main-container .content-container,
-.nav-trigger:checked ~ footer {
-    left: @sidebar-width;
-    .box-shadow (0, 0, 10px);
+.nav-trigger:checked + label{
+    left: 265px;
 }
-.nav-trigger + label, .content-container, header, footer {
+.nav-trigger:checked + #right {
+  flex-grow: 0;
+  display: block;
+  margin-left: 250px;
+  overflow-x: hidden;
+  border: 1px solid lime;
+  .box-shadow (0, 0, 10px);
+}
+.nav-trigger + label, #right {
     transition: left 0.2s;
+
 }
 @media screen and (min-width: @breakpoint) {
   header {
@@ -275,7 +304,6 @@ label[for="nav-trigger"] {
 }
 li.header-desktop{
   display: none;
-
   @media screen and (min-width: @breakpoint){
     display: unset;
   }
