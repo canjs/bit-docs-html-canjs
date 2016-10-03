@@ -6,22 +6,9 @@
       {{/with}}
     </div>
     <div class="bottom-left">
-    <ul class="social-side">
-    <li>
-      <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../images/github.png">Github</a>
-    </li>
-    <li>
-      <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../images/twitter.png">Twitter</a>
-    </li>
-  </ul>
-  <ul class="social-side">
-    <li>
-      <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
-    </li>
-    <li>
-      <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
-    </li>
-  </ul>
+      {{#with (getCurrentTree)}}
+        {{>social.mustache}}
+      {{/with}}
       {{#with (getCurrentTree)}}
           {{>menu.mustache}}
       {{/with}}
