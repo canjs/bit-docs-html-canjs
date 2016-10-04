@@ -273,20 +273,17 @@ label[for="nav-trigger"] {
   .border-radius;
   z-index: 99;
 }
-
-
-
 label:hover{
   background: @border-color;
 }
 .nav-trigger:checked + label{
-    left: 280px;
+    left: @sidebar-width + @gutter*2;
 }
 .nav-trigger:checked ~ #everything #right {
   flex-shrink: 0;
   display: block;
   position: fixed;
-  left: 250px;
+  left: @sidebar-width;
   overflow-x: hidden;
   z-index: 50;
 }
@@ -325,7 +322,4 @@ li.header-desktop{
   }
 }
 
-#everything #right{
-
-}
 

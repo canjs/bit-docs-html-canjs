@@ -13,8 +13,7 @@
 }
 #left {
   position: fixed;
-  width: 250px;
-  // z-index: 1;
+  width: @sidebar-width;
   opacity: .99;
   @media screen and (min-width: @breakpoint){
     flex-shrink: 0;
@@ -24,23 +23,19 @@
   }
 }
 #right {
+  height: 100%;
   min-height: 100%;
   max-height: 100%;
-  // flex-grow: 1;
-  // z-index: 10;
   background: white;
-   // flex-shrink: 0;
-  display: block;
-  // left: 250px;
+  .box-shadow;
   overflow-x: hidden;
   z-index: 90;
-  .box-shadow;
   position: relative;
-
   @media screen and (min-width: @breakpoint){
     box-shadow: none;
+    display: flex;
+    flex-grow: 1;
   }
-
 }
 .column {
   height: 100%;
