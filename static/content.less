@@ -68,12 +68,14 @@ article {
     border-left: 15px solid @link-color;
     border-right: 2px solid @link-color;
     background: lighten(@link-color, 48%);
+    word-wrap: break-word;
     h3{
       margin-top: @gutter*2;
     }
     .signature-title {
       margin-top: 0;
       border-bottom: 0;
+      word-wrap: break-word;
       code {
         font-weight: bold;
         .font-smoothing;
@@ -166,4 +168,5 @@ blockquote{
 }
 .description{
   margin-bottom: @gutter*3;
+  margin-top: @gutter;
 }

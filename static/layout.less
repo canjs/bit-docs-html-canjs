@@ -14,7 +14,8 @@
 #left {
   position: fixed;
   width: 250px;
-  z-index: 1;
+  // z-index: 1;
+  opacity: .99;
   @media screen and (min-width: @breakpoint){
     flex-shrink: 0;
     padding: 0px;
@@ -26,20 +27,15 @@
   min-height: 100%;
   max-height: 100%;
   // flex-grow: 1;
-  z-index: 10;
+  // z-index: 10;
   background: white;
-
-
    // flex-shrink: 0;
   display: block;
-  // position: fixed;
-  left: 250px;
+  // left: 250px;
   overflow-x: hidden;
-  z-index: 50;
-
-
-
+  z-index: 90;
   .box-shadow;
+  position: relative;
 
   @media screen and (min-width: @breakpoint){
     box-shadow: none;

@@ -274,10 +274,7 @@ label[for="nav-trigger"] {
   z-index: 99;
 }
 
-#right{
-  -webkit-transition: left 2s; /* Safari */
-    transition: left 2s;
-}
+
 
 label:hover{
   background: @border-color;
@@ -295,14 +292,8 @@ label:hover{
 }
 
 .nav-trigger + label {
-    transition: left 0.5s;
+    transition: left .75s;
 }
-
-.nav-trigger ~ #everything #right {
-    transition: left 0.5s;
-}
-
-
 
 @media screen and (min-width: @breakpoint) {
   
@@ -317,6 +308,13 @@ li.header-desktop{
   }
 }
 
+#right{
+  -webkit-transition: left .75s; /* Safari */
+  -moz-transition: left .75s;
+  -o-transition: left .75s;
+  transition: left .75s;
+}
+
 .top-right-top{
   .brand{
     display: inline-flex;
@@ -328,6 +326,6 @@ li.header-desktop{
 }
 
 #everything #right{
- 
+
 }
 
