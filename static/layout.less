@@ -26,9 +26,13 @@
   min-height: 100%;
   max-height: 100%;
   flex-grow: 1;
-  // z-index: 10;
+  z-index: 10;
   background: white;
-  opacity: .95;
+  .box-shadow;
+  @media screen and (min-width: @breakpoint){
+    box-shadow: none;
+  }
+
 }
 .column {
   height: 100%;
@@ -46,7 +50,10 @@
 }
 .top-left {
   flex-shrink: 0;
-  height: auto;
+  height: 0;
+  @media screen and (min-width: @breakpoint){
+    height: auto;
+  }
 }
 .top-right {
   flex-shrink: 0;
