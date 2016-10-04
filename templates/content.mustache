@@ -6,12 +6,12 @@
       {{/with}}
     </div>
     <div class="bottom-left">
-      {{#with (getCurrentTree)}}
+       <div class="social-side-container">
         {{>social.mustache}}
-      {{/with}}
-      {{#with (getCurrentTree)}}
-          {{>menu.mustache}}
-      {{/with}}
+      </div>
+        {{#with (getCurrentTree)}}
+            {{>menu.mustache}}
+        {{/with}}
     </div>
   </div>
   <div id="right" class="column">
