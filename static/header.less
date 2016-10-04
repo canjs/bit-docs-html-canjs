@@ -281,19 +281,15 @@ label:hover{
 }
 .nav-trigger:checked ~ #everything #right {
   flex-shrink: 0;
-  display: block;
   position: fixed;
   left: @sidebar-width;
   overflow-x: hidden;
   z-index: 50;
 }
-
 .nav-trigger + label {
-    transition: left .75s;
+  transition: left .75s;
 }
-
 @media screen and (min-width: @breakpoint) {
-  
   .nav-trigger, label[for="nav-trigger"] {
     display: none;
   }
@@ -303,13 +299,6 @@ li.header-desktop{
   @media screen and (min-width: @breakpoint){
     display: unset;
   }
-}
-
-#right{
-  -webkit-transition: left .75s; /* Safari */
-  -moz-transition: left .75s;
-  -o-transition: left .75s;
-  transition: left .75s;
 }
 
 .top-right-top{
