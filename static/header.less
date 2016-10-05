@@ -4,18 +4,19 @@
   margin: @gutter @gutter*2;
   background: white;
   white-space: nowrap;
-    overflow: hidden;
-    background-image: url(img/canjs_logo.svg);
-    background-size: cover;
-    align-self: flex-start;
+  overflow: hidden;
+  background-image: url(img/canjs_logo.svg);
+  background-size: cover;
+  align-self: flex-start;
+  // display: none;
   a { 
     display: none;
   }
   @media screen and (min-width: @breakpoint){
-    
     a{
       opacity: 0;
       font-size: 1.5em;
+      display: unset;
     }
   }
 }
@@ -252,55 +253,12 @@
     
   }
 }
-// -- Mobile Menu Menu
-.nav-trigger {
-  position: fixed;
-  clip: rect(0, 0, 0, 0);
-}
-label[for="nav-trigger"] {
-  position: fixed;
-  top: 9px;
-  left: @gutter*2;
-  z-index: 12;
-  font-family: Lato, sans-serif;
-  border: 1px solid @border-color;
-  padding: 10px;
-  background: #fff;
-  text-transform: uppercase;
-  font-size: 12px;
-  cursor: pointer;
-  font-weight: 700;
-  .border-radius;
-  z-index: 99;
-}
-label:hover{
-  background: @border-color;
-}
-.nav-trigger:checked + label{
-    left: @sidebar-width + @gutter*2;
-}
-.nav-trigger:checked ~ #everything #right {
-  flex-shrink: 0;
-  position: fixed;
-  left: @sidebar-width;
-  overflow-x: hidden;
-  z-index: 50;
-}
-.nav-trigger + label {
-  transition: left .75s;
-}
-@media screen and (min-width: @breakpoint) {
-  .nav-trigger, label[for="nav-trigger"] {
-    display: none;
-  }
-}
 li.header-desktop{
   display: none;
   @media screen and (min-width: @breakpoint){
     display: unset;
   }
 }
-
 .top-right-top{
   .brand{
     display: inline-flex;

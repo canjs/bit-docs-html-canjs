@@ -31,10 +31,11 @@
   overflow-x: hidden;
   z-index: 90;
   position: relative;
-  transition: left .75s;
-  -webkit-transition: left .75s; /* Safari */
-  -moz-transition: left .75s;
-  -o-transition: left .75s;
+  
+  -webkit-transition: left .75s !important;
+  -moz-transition: left .75s !important;
+  -o-transition: left .75s !important;
+  transition: left .75s !important;
   @media screen and (min-width: @breakpoint){
     box-shadow: none;
     display: flex;
