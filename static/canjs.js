@@ -68,11 +68,10 @@ $(document.body).on("click", "a", function(ev) {
 		return;
 	}
 
-	var href = this.href;
-	ev.preventDefault();
-	window.history.pushState(null, null, href);
-
 	if (this.hostname === window.location.hostname) {
+		var href = this.href;
+		ev.preventDefault();
+		window.history.pushState(null, null, href);
 		if (this.pathname === window.location.pathname && window.location.hash) {
 			scrollToElement($(window.location.hash));
 		} else {
