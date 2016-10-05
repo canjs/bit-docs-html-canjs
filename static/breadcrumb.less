@@ -1,0 +1,122 @@
+.breadcrumb{
+  display: none;
+  @media screen and (min-width: @breakpoint){
+    display: block;
+    padding-left: @gutter*2;
+    color: white;
+    background: @code-color;
+    cursor: pointer;
+    color: lighten(@gray, 10%);
+    .breadcrumb-dropdown{
+      padding: @gutter @gutter/4;
+      &::after {
+        content: '\2329';
+        padding-bottom: 0px;
+        padding-right: @gutter/4;
+        margin-bottom: 0px;
+        display: inline-block;
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+        font-size: 0.7em;
+        color: white;
+      }
+    }
+    li{
+      display: inline-block;
+      list-style: none;
+      color: @link-color;
+      padding-left: @gutter/4;
+      padding-right: @gutter/4;
+      a{
+        color: white;
+        font-size: 14px;
+        code{
+          background: none;
+          line-height: 14px;
+        }
+      }
+    }
+    .breadcrumb-dropdown {
+      position: relative;
+      &:hover {
+        .on-this-page {
+          display: flex;
+          li{
+            flex-grow: 1;
+            flex-basis: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+.on-this-page {
+  width: 100%;
+  font-size: 14px;
+  margin-top:@gutter/2;
+  margin-bottom: @gutter !important;
+  background: #fbfbfb;
+  list-style: none;
+  line-height: 1.5em;
+  a {
+    color: @link-color !important;
+  }
+  @media screen and (min-width: @breakpoint) {
+    padding: @gutter;
+    margin: 0;
+    position: fixed;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+    z-index: 15;
+    cursor: pointer;
+    display: none;
+    margin-top: 15px;
+    width: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    li{
+      padding: 0px;
+      margin: 0px;
+      code{
+        background: none;
+        font-weight: 600;
+        padding: 0;
+      }
+      a{
+        width: auto;
+        padding: 0px;
+        margin: 0px;
+      }
+    }
+    li:hover{
+      text-decoration: underline;
+    }
+    li .current{
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    &::before {
+      content: '';
+      width:10px;
+      height: 10px;
+      background: #fbfbfb;
+      position: absolute;
+      top:-4px;
+      left: @gutter;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      z-index: 16;
+    }
+  }
+}
+.on-this-page:empty{
+  visibility: hidden;
+}

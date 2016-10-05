@@ -1,9 +1,5 @@
 #everything {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  .flex;
   -webkit-flex-flow: row wrap;
   justify-content: flex-start;
   align-items: stretch;
@@ -31,11 +27,8 @@
   overflow-x: hidden;
   z-index: 90;
   position: relative;
-  
-  -webkit-transition: left .75s !important;
-  -moz-transition: left .75s !important;
-  -o-transition: left .75s !important;
-  transition: left .75s !important;
+  left: 0;
+  .transition-left;
   @media screen and (min-width: @breakpoint){
     box-shadow: none;
     display: flex;
@@ -45,15 +38,10 @@
 .column {
   height: 100%;
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  .flex;
   justify-content: flex-start;
   align-items: stretch;
   flex-wrap: nowrap;
-  box-sizing: border-box;
   flex-direction: column;
 }
 .top-left {

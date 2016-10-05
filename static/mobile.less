@@ -17,6 +17,7 @@ label[for="nav-trigger"] {
   font-weight: 700;
   .border-radius;
   z-index: 99;
+  transition: background .25s;
 }
 label:hover{
   background: @border-color;
@@ -32,13 +33,19 @@ label:hover{
   z-index: 50;
 }
 .nav-trigger + label {
-  transition: left .75s;
-  // -webkit-transition: left .75s;
-  // -moz-transition: left .75s;
-  // -o-transition: left .75s;
+  .transition-left
 }
 @media screen and (min-width: @breakpoint) {
   .nav-trigger, label[for="nav-trigger"] {
     display: none;
+  }
+}
+.top-right-top{
+  .brand{
+    display: inline-flex;
+    margin-left: 100px;
+    @media screen and (min-width: @breakpoint){
+      display: none;
+    }
   }
 }
