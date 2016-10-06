@@ -180,15 +180,23 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 
                 return new Array(depth+1).join("  ");
             }
-
         },
         customSort: function(children) {
+            var isOrdered = false;
+            children.forEach(function(el) {
+                if (typeof el.order === 'number') {
+                    isOrdered = true;
+                }
+            });
+            if (isOrdered) {
+                return children;
+            }
             return children.sort(function(x,y) {
                 var a = x.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b'),
                     b = y.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b');
                 return a > b;
             });
-        }
+        },
     };
 };
 
