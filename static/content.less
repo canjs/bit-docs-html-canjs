@@ -1,5 +1,4 @@
 article {
-  margin-top: 0px;
   p {
     margin-top: 0;
     margin-bottom: @gutter;
@@ -22,7 +21,7 @@ article {
   }
   code {
     .highlight {
-	  background: @highlight-color;
+    background: @highlight-color;
     padding: 3px 0;
     }
     .obscured{
@@ -45,33 +44,30 @@ article {
       margin: 0 auto;
     }
     .expand:hover{
-        opacity: .6;
-        cursor: pointer;
-      }
+      opacity: .6;
+      cursor: pointer;
+    }
   }
   pre code {
     background: none;
     display: block;
     margin: @gutter;
-  }
-  .title {
-    .type {
-      font-weight: normal;
-      color: #666;
-      font-size: 50%;
-    }
+    word-wrap: break-word;
   }
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
-    border: 1px solid @link-color;
+    border-left: 15px solid @link-color;
+    border-right: 2px solid @link-color;
     background: lighten(@link-color, 48%);
+    word-wrap: break-word;
     h3{
       margin-top: @gutter*2;
     }
     .signature-title {
       margin-top: 0;
       border-bottom: 0;
+      word-wrap: break-word;
       code {
         font-weight: bold;
         .font-smoothing;
@@ -116,44 +112,14 @@ article {
     }
   }
   .deprecated.warning {
-    display: block;
-    background: lighten(@warning-color, 50%);
-    padding: @gutter @gutter*2;
-    position: relative;
-    border-left: 15px solid @warning-color;
-    border-right: 2px solid @warning-color;
-    margin-bottom: @gutter;
-    margin-left: @gutter*2;
-    margin-right: @gutter*2;
-    margin-top: @gutter;
-    padding-bottom:@gutter/2;
-    > p{
-      margin-bottom: 0px;
-    }   
-    > h3 {
-      margin: 0;
-      margin-bottom: @gutter;
-      color: @warning-color;
-      border-bottom: 1px solid lighten(@warning-color, 40%);
-    }
+    .notify-warning;
   }
 }
 video{
-  background: @light-color;
-  border: 1px solid @dark-border-color;
-  margin: 15px 0;
+  .video;
 }
 blockquote{
-  display: block;
-  background: #f4f4f4;
-  padding: @gutter @gutter*2;
-  margin: 0 0 20px;
-  position: relative;
-  border-left: 15px solid @dark-border-color;
-  border-right: 2px solid @dark-border-color;
-  > p{
-    margin-bottom: 0px;
-  }
+  .notify-normal;
 }
 .line-highlight{
   margin: @gutter 0;
@@ -162,6 +128,6 @@ blockquote{
     display: block;
   }
 }
-.description{
-  margin-bottom: @gutter*3;
+.body{
+  margin: @gutter*2;
 }

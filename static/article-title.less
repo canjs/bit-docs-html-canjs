@@ -25,10 +25,10 @@ ul.title-social{
 			cursor: pointer;
 			padding: 0;
 			line-height: 12px;
-    }
-    .button-social:hover{
+			>:hover{
 				opacity: .5;
 			}
+    }
     .button-left{
     	border-radius: 2px 0 0 2px;
 			.border;
@@ -63,7 +63,8 @@ ul.title-links {
 		display: inline-block;
 		font-size: 14px;
 		color: lighten(@gray, 35%);
-		margin-left: @gutter/2;
+		padding-top: @gutter;
+		
 	}
 }
 .on-this-page-table{
@@ -89,6 +90,5 @@ ul.title-links {
   }
 }
 .description{
-  margin-left: 0;
-  margin-bottom: 0;
+  margin: @gutter 0;
 }
