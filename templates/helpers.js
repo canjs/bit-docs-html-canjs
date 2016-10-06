@@ -153,6 +153,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
         },
+        getRoot: function() {
+            return docMap.canjs;
+        },
         getCurrentTree: function(){
             return docMapInfo.getCurrentTree();
         },
