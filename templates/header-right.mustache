@@ -1,6 +1,9 @@
 <div class="top-right-top">
-  
-{{> dropdown.mustache }}
-{{> nav-links.mustache }}
+	{{> dropdown.mustache }}
+	<div class="brand">
+		<a href="{{urlTo 'canjs'}}">CanJS</a>
+	</div>
+	{{> nav-links.mustache }}
+
 </div>
 {{> breadcrumb.mustache }}
