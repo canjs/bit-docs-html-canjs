@@ -18,7 +18,7 @@ function init() {
 	// remove anything in the "On This Page" list
 	$onThisPage.empty();
 	// add items to on-this-page dropdown
-	$.each($headers, function(index, header) {
+	$.each($('h2'), function(index, header) {
 		if (!header.id) {
 			header.id = generateId(header);
 		}
