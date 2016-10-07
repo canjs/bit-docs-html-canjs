@@ -1,7 +1,7 @@
 <div id="everything">
   <div id="left" class="column">
     <div class="top-left">
-      {{#with (getCurrentTree)}}
+      {{#with (getRoot)}}
           {{>header-left.mustache}}
       {{/with}}
     </div>
@@ -20,7 +20,8 @@
     </div>
     <div class="bottom-right">
       <article>{{> article.mustache}}</article>
-      <footer>{{> footer.mustache}}</footer>
-    </div>
+	  {{#with (getRoot)}}
+        <footer>{{> footer.mustache}}</footer>
+	  {{/with}}    </div>
   </div>
 </div>
