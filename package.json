@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "description": "prettify code plugin",
   "main": "static/canjs",
   "scripts": {
