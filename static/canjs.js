@@ -64,7 +64,7 @@ $articleContainer.on("scroll", function(ev) {
 // Override link behavior
 $(document.body).on("click", "a", function(ev) {
 	// make sure we're in the right spot
-	if (this.href === "javascript://") {
+	if (this.href === "javascript://") { // jshint ignore:line
 		return;
 	}
 
@@ -84,6 +84,9 @@ function navigate(href) {
 	$.ajax(href, {dataType: "text"}).then(function(content) {
 		// set content positions
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
+		if (!$content.length) {
+			window.location.reload();
+		}
 		var nav = $content.find(".bottom-left>ul");
 		var article = $content.find("article");
 		var breadcrumb = $content.find(".breadcrumb");
@@ -96,14 +99,14 @@ function navigate(href) {
 
 		// go through every package and re-init
 		for (var packageName in window.PACKAGES) {
-			if (typeof PACKAGES[packageName] === "function") {
-				PACKAGES[packageName]();
+			if (typeof window.PACKAGES[packageName] === "function") {
+				window.PACKAGES[packageName]();
 			}
 		}
 
 		init();
 	}, function(){
-		debugger;
+		window.location.reload();
 	});
 }
 
