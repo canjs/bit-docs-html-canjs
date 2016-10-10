@@ -84,12 +84,17 @@ function navigate(href) {
 	$.ajax(href, {dataType: "text"}).then(function(content) {
 		// set content positions
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
-		var nav = $content.find(".bottom-left>ul");
-		var article = $content.find("article");
-		var breadcrumb = $content.find(".breadcrumb");
-		$(".bottom-left>ul").replaceWith(nav);
-		$("article").replaceWith(article);
-		$(".breadcrumb").replaceWith(breadcrumb);
+		if (!$content.length) {
+			window.location.reload();
+		}
+		var $nav = $content.find(".bottom-left>ul");
+		var $article = $content.find("article");
+		var $breadcrumb = $content.find(".breadcrumb");
+		var $logo = $content.find(".top-left>.brand");
+		$(".bottom-left>ul").replaceWith($nav);
+		$("article").replaceWith($article);
+		$(".breadcrumb").replaceWith($breadcrumb);
+		$(".top-left>.brand").replaceWith($logo);
 
 		// Initialize any jsbin scripts in the content
 		delete window.jsbinified;
