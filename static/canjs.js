@@ -19,9 +19,6 @@ function init() {
 	$onThisPage.empty();
 	// add items to on-this-page dropdown
 	$.each($('h2'), function(index, header) {
-		if (!header.id) {
-			header.id = generateId(header);
-		}
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
 
@@ -41,7 +38,6 @@ function init() {
 			$articleContainer.scrollTop(0);
 		}
 	}
-
 }
 init();
 
@@ -134,9 +130,13 @@ function getHeaders() {
 		outlineLevel = !isNaN(outline) ? outline : 1,
 		headerArr = [];
 	for (var i = 1; i <= outlineLevel; i++) {
-		headerArr.push('h' + (outlineLevel + 1));
+		headerArr.push('h' + (i + 1));
 	}
-	return $(headerArr.join(', '));
+	return $(headerArr.join(', ')).each(function(index, header) {
+		if (!header.id) {
+			header.id = generateId(header);
+		}
+	});
 }
 
 function generateId(element) {
