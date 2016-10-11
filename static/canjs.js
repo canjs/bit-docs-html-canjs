@@ -79,15 +79,13 @@ $(document.body).on("click", "a", function(ev) {
 	if (this.hostname === window.location.hostname) {
 		var href = this.href;
 		ev.preventDefault();
-		var stateObj = { articleScroll: $articleContainer.scrollTop()};
 		window.history.pushState(null, null, href);
-
 		navigate(href);
 	}
 });
 
 function navigate(href) {
-	if (this.pathname === window.location.pathname && window.location.hash) {
+	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
 		return scrollToElement($(window.location.hash));
 	}
 	$.ajax(href, {dataType: "text"}).then(function(content) {
