@@ -25,8 +25,12 @@ label:hover{
 .nav-trigger:checked + label{
     left: @sidebar-width + @gutter*2;
 }
+.nav-trigger ~ #everything #right {
+	width: 100%;
+}
 .nav-trigger:checked ~ #everything #right {
   flex-shrink: 0;
+  width: auto;
   position: fixed;
   left: @sidebar-width;
   overflow-x: hidden;
