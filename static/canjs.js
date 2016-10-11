@@ -29,9 +29,19 @@ function init() {
 		buildTOC();
 	}
 
-	var $currentHeader = $(window.location.hash);
-	scrollToElement($currentHeader);
-	setOnThisPageTitle($currentHeader.html());
+	if (window.location.hash) {
+		var $currentHeader = $(window.location.hash);
+		scrollToElement($currentHeader);
+		setOnThisPageTitle($currentHeader.html());
+	} else {
+		var articleScroll = window.history.state && window.history.state.articleScroll;
+		if (articleScroll) {
+			$articleContainer.scrollTop(articleScroll);
+		} else {
+			$articleContainer.scrollTop(0);
+		}
+	}
+
 }
 init();
 
@@ -42,6 +52,8 @@ window.addEventListener('popstate', function(ev) {
 
 // Update the "On This Page" placeholder with header text at scroll position
 $articleContainer.on("scroll", function(ev) {
+	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
+
 	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
 		// Show last header if at bottom of page
 		var $header = $($headers[$headers.length-1]);
@@ -71,28 +83,32 @@ $(document.body).on("click", "a", function(ev) {
 	if (this.hostname === window.location.hostname) {
 		var href = this.href;
 		ev.preventDefault();
+		var stateObj = { articleScroll: $articleContainer.scrollTop()};
 		window.history.pushState(null, null, href);
-		if (this.pathname === window.location.pathname && window.location.hash) {
-			scrollToElement($(window.location.hash));
-		} else {
-			navigate(href);
-		}
+
+		navigate(href);
 	}
 });
 
 function navigate(href) {
+	if (this.pathname === window.location.pathname && window.location.hash) {
+		return scrollToElement($(window.location.hash));
+	}
 	$.ajax(href, {dataType: "text"}).then(function(content) {
 		// set content positions
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 		if (!$content.length) {
 			window.location.reload();
 		}
-		var nav = $content.find(".bottom-left>ul");
-		var article = $content.find("article");
-		var breadcrumb = $content.find(".breadcrumb");
-		$(".bottom-left>ul").replaceWith(nav);
-		$("article").replaceWith(article);
-		$(".breadcrumb").replaceWith(breadcrumb);
+
+		var $nav = $content.find(".bottom-left>ul");
+		var $article = $content.find("article");
+		var $breadcrumb = $content.find(".breadcrumb");
+		var $logo = $content.find(".top-left>.brand");
+		$(".bottom-left>ul").replaceWith($nav);
+		$("article").replaceWith($article);
+		$(".breadcrumb").replaceWith($breadcrumb);
+		$(".top-left>.brand").replaceWith($logo);
 
 		// Initialize any jsbin scripts in the content
 		delete window.jsbinified;
