@@ -113,6 +113,9 @@ function navigate(href) {
 		// Initialize any jsbin scripts in the content
 		delete window.jsbinified;
 
+		// Initialize github buttons
+		$.getScript('https://buttons.github.io/buttons.js');
+
 		// go through every package and re-init
 		for (var packageName in window.PACKAGES) {
 			if (typeof window.PACKAGES[packageName] === "function") {
