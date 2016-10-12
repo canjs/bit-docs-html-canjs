@@ -83,7 +83,6 @@ $(document.body).on("click", "a", function(ev) {
 	if (this.hostname === window.location.hostname) {
 		var href = this.href;
 		ev.preventDefault();
-		var stateObj = { articleScroll: $articleContainer.scrollTop()};
 		window.history.pushState(null, null, href);
 
 		navigate(href);
@@ -95,6 +94,9 @@ function navigate(href) {
 		return scrollToElement($(window.location.hash));
 	}
 	$.ajax(href, {dataType: "text"}).then(function(content) {
+		// Google Analytics
+		ga('send', 'pageview', window.location.pathname);
+
 		// set content positions
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 		if (!$content.length) {
