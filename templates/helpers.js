@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+var escapeHTML = require("escape-html");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
 
@@ -11,7 +12,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         "makeSignature": function(code){
 
             if(code){
-				return code;
+				return escapeHTML(code);
 			}
 
 			var sig = "";
