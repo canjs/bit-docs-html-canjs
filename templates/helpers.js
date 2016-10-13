@@ -185,6 +185,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
                 return new Array(depth+1).join("  ");
             }
         },
+        imagePath: function(filename) {
+            return helpers.urlTo('canjs').replace('index.html', 'docs/images/' + filename);
+        },
         customSort: function(children) {
             var isOrdered = false;
             children.forEach(function(el) {
