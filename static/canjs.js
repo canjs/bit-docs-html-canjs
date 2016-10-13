@@ -19,9 +19,6 @@ function init() {
 	$onThisPage.empty();
 	// add items to on-this-page dropdown
 	$.each($('h2'), function(index, header) {
-		if (!header.id) {
-			header.id = generateId(header);
-		}
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
 
@@ -32,7 +29,6 @@ function init() {
 	if (window.location.hash) {
 		var $currentHeader = $(window.location.hash);
 		scrollToElement($currentHeader);
-		setOnThisPageTitle($currentHeader.html());
 	} else {
 		var articleScroll = window.history.state && window.history.state.articleScroll;
 		if (articleScroll) {
@@ -41,56 +37,57 @@ function init() {
 			$articleContainer.scrollTop(0);
 		}
 	}
-
 }
-init();
 
-// Allow use of Back/Forward navigation
-window.addEventListener('popstate', function(ev) {
-	navigate(window.location.href);
-});
+$().ready(function() {
+	init();
 
-// Update the "On This Page" placeholder with header text at scroll position
-$articleContainer.on("scroll", function(ev) {
-	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
+	// Allow use of Back/Forward navigation
+	window.addEventListener('popstate', function(ev) {
+		navigate(window.location.href);
+	});
 
-	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
-		// Show last header if at bottom of page
-		var $header = $($headers[$headers.length-1]);
-		setOnThisPageTitle($header.html());
-	} else {
-		// Otherwise, try to set to last header value before scroll position
-		var contOffsetTop = $articleContainer.offset().top,
-			headerContent;
-		$.each($headers, function(index, header) {
-			var $header = $(header);
-			var marginTop = parseInt($header.css('margin-top')) || 20;
-			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
-				headerContent = $header.html();
-			}
-		});
-		setOnThisPageTitle(headerContent);
-	}
-});
+	// Update the "On This Page" placeholder with header text at scroll position
+	$articleContainer.on("scroll", function(ev) {
+		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
-// Override link behavior
-$(document.body).on("click", "a", function(ev) {
-	// make sure we're in the right spot
-	if (this.href === "javascript://") { // jshint ignore:line
-		return;
-	}
+		if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
+			// Show last header if at bottom of page
+			var $header = $($headers[$headers.length-1]);
+			setOnThisPageTitle($header.html());
+		} else {
+			// Otherwise, try to set to last header value before scroll position
+			var contOffsetTop = $articleContainer.offset().top,
+				headerContent;
+			$.each($headers, function(index, header) {
+				var $header = $(header);
+				var marginTop = parseInt($header.css('margin-top')) || 20;
+				if ($header.offset().top - marginTop - contOffsetTop <= 0) {
+					headerContent = $header.html();
+				}
+			});
+			setOnThisPageTitle(headerContent);
+		}
+	});
 
-	if (this.hostname === window.location.hostname) {
-		var href = this.href;
-		ev.preventDefault();
-		window.history.pushState(null, null, href);
+	// Override link behavior
+	$(document.body).on("click", "a", function(ev) {
+		// make sure we're in the right spot
+		if (this.href === "javascript://") { // jshint ignore:line
+			return;
+		}
 
-		navigate(href);
-	}
+		if (this.hostname === window.location.hostname) {
+			var href = this.href;
+			ev.preventDefault();
+			window.history.pushState(null, null, href);
+			navigate(href);
+		}
+	});
 });
 
 function navigate(href) {
-	if (this.pathname === window.location.pathname && window.location.hash) {
+	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
 		return scrollToElement($(window.location.hash));
 	}
 	$.ajax(href, {dataType: "text"}).then(function(content) {
@@ -136,9 +133,13 @@ function getHeaders() {
 		outlineLevel = !isNaN(outline) ? outline : 1,
 		headerArr = [];
 	for (var i = 1; i <= outlineLevel; i++) {
-		headerArr.push('h' + (outlineLevel + 1));
+		headerArr.push('h' + (i + 1));
 	}
-	return $(headerArr.join(', '));
+	return $(headerArr.join(', ')).each(function(index, header) {
+		if (!header.id) {
+			header.id = generateId(header);
+		}
+	});
 }
 
 function generateId(element) {
