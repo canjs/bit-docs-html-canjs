@@ -1,6 +1,6 @@
 <div class="breadcrumb">
 	{{#each (getLinkableParents)}}
-		<li><a href="{{urlTo name}}">{{getShortTitle .}}</a></li> /
+		<li class="truncate"><a href="{{urlTo name}}">{{getShortTitle .}}</a></li> /
 	{{/each}}
 	{{#with (getCurrent)}}
 	<li><a href="{{urlTo name}}">{{getShortTitle .}}</a></li> /

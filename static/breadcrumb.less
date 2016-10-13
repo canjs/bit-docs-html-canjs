@@ -30,6 +30,15 @@
       color: @link-color;
       padding-left: @gutter/4;
       padding-right: @gutter/4;
+      
+      &.truncate {
+	      max-width: 5%;
+			  white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			  color: #fff;
+			  line-height: 12px;
+      }
       a{
         color: white;
         font-size: 14px;
