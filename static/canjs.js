@@ -29,7 +29,6 @@ function init() {
 	if (window.location.hash) {
 		var $currentHeader = $(window.location.hash);
 		scrollToElement($currentHeader);
-		setOnThisPageTitle($currentHeader.html());
 	} else {
 		var articleScroll = window.history.state && window.history.state.articleScroll;
 		if (articleScroll) {
@@ -39,49 +38,52 @@ function init() {
 		}
 	}
 }
-init();
 
-// Allow use of Back/Forward navigation
-window.addEventListener('popstate', function(ev) {
-	navigate(window.location.href);
-});
+$().ready(function() {
+	init();
 
-// Update the "On This Page" placeholder with header text at scroll position
-$articleContainer.on("scroll", function(ev) {
-	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
+	// Allow use of Back/Forward navigation
+	window.addEventListener('popstate', function(ev) {
+		navigate(window.location.href);
+	});
 
-	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
-		// Show last header if at bottom of page
-		var $header = $($headers[$headers.length-1]);
-		setOnThisPageTitle($header.html());
-	} else {
-		// Otherwise, try to set to last header value before scroll position
-		var contOffsetTop = $articleContainer.offset().top,
-			headerContent;
-		$.each($headers, function(index, header) {
-			var $header = $(header);
-			var marginTop = parseInt($header.css('margin-top')) || 20;
-			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
-				headerContent = $header.html();
-			}
-		});
-		setOnThisPageTitle(headerContent);
-	}
-});
+	// Update the "On This Page" placeholder with header text at scroll position
+	$articleContainer.on("scroll", function(ev) {
+		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
-// Override link behavior
-$(document.body).on("click", "a", function(ev) {
-	// make sure we're in the right spot
-	if (this.href === "javascript://") { // jshint ignore:line
-		return;
-	}
+		if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
+			// Show last header if at bottom of page
+			var $header = $($headers[$headers.length-1]);
+			setOnThisPageTitle($header.html());
+		} else {
+			// Otherwise, try to set to last header value before scroll position
+			var contOffsetTop = $articleContainer.offset().top,
+				headerContent;
+			$.each($headers, function(index, header) {
+				var $header = $(header);
+				var marginTop = parseInt($header.css('margin-top')) || 20;
+				if ($header.offset().top - marginTop - contOffsetTop <= 0) {
+					headerContent = $header.html();
+				}
+			});
+			setOnThisPageTitle(headerContent);
+		}
+	});
 
-	if (this.hostname === window.location.hostname) {
-		var href = this.href;
-		ev.preventDefault();
-		window.history.pushState(null, null, href);
-		navigate(href);
-	}
+	// Override link behavior
+	$(document.body).on("click", "a", function(ev) {
+		// make sure we're in the right spot
+		if (this.href === "javascript://") { // jshint ignore:line
+			return;
+		}
+
+		if (this.hostname === window.location.hostname) {
+			var href = this.href;
+			ev.preventDefault();
+			window.history.pushState(null, null, href);
+			navigate(href);
+		}
+	});
 });
 
 function navigate(href) {
