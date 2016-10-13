@@ -89,6 +89,9 @@ function navigate(href) {
 		return scrollToElement($(window.location.hash));
 	}
 	$.ajax(href, {dataType: "text"}).then(function(content) {
+		// Google Analytics
+		ga('send', 'pageview', window.location.pathname);
+
 		// set content positions
 		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 		if (!$content.length) {

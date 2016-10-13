@@ -1,9 +1,11 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "0.3.19",
+  "version": "0.3.20",
   "description": "prettify code plugin",
   "main": "static/canjs",
   "scripts": {
+    "start": "node make-example.js -f",
+    "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && node make-example.js -f",
     "postversion": "git push --tags && git push",
     "release:pre": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
@@ -25,6 +27,7 @@
   "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
   "system": {},
   "dependencies": {
+    "escape-html": "^1.0.3",
     "jquery": "^2.2.4"
   },
   "devDependencies": {
