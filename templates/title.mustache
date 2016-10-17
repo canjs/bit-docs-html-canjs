@@ -12,7 +12,7 @@
 <section class="on-this-page-table">
 </section>
 <section class="title-footer">
-	{{#with (getClosestWithPackage)}}
+	{{#if package}}
 		<ul class="title-social">
 			<li>
 				<a class="npm-button" href="https://www.npmjs.com/package/{{name}}">
@@ -23,11 +23,13 @@
 			<a class="github-button nav-social" href="https://github.com/canjs/{{name}}" data-count-href="/canjs/{{name}}/stargazers" data-count-api="/repos/canjs/{{name}}#stargazers_count">Star</a>
 	  	</li>
 		</ul>
-		<!-- <ul class="title-links">
-			<li><a href="#">docco</a></li>
-			<li><a href="#">source</a></li>
-			<li><a href="#">download</a></li>
-			<li><a href="#">tests</a></li>
-		</ul> -->
+	{{/if}}
+	{{#with (getClosestWithPackage)}}
+		<ul class="title-links">
+			<!-- <li><a href="#">docco</a></li> -->
+			<!-- <li><a href="#">source</a></li> -->
+			<!-- <li><a href="#">download</a></li> -->
+			<!-- <li><a href="#">tests</a></li> -->
+		</ul>
 	{{/with}}
 </section>
