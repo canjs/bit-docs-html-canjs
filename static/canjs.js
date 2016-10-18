@@ -9,7 +9,12 @@ var $articleContainer,
 
 // Init
 function init() {
-	document.title = window.docObject.title || window.docObject.name;
+	var title = window.docObject.title || window.docObject.name;
+	if (title.toLowerCase() === 'canjs') {
+		document.title = title;
+	} else {
+		document.title = 'CanJS - ' + title;
+	}
 
 	$articleContainer = $('#right .bottom-right');
 	$onThisPage = $('.on-this-page');
