@@ -9,6 +9,8 @@ var $articleContainer,
 
 // Init
 function init() {
+	document.title = window.docObject.title || window.docObject.name;
+
 	$articleContainer = $('#right .bottom-right');
 	$onThisPage = $('.on-this-page');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
