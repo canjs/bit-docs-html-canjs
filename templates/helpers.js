@@ -154,6 +154,19 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
         },
+        getClosestWithPackage: function(){
+            var current = docMapInfo.getCurrent();
+            if (current.package) {
+                return current;
+            }
+            var parents = docMapInfo.getParents(current);
+            for (var i = parents.length-1; i >= 0; i--) {
+                if (parents[i].package) {
+                    return parents[i];
+                }
+            }
+            return docMap.canjs;
+        },
         getRoot: function() {
             return docMap.canjs;
         },

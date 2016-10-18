@@ -5,28 +5,31 @@
 	</div>
 	{{#unless hideDescription}}
   {{#if description}}
-    {{> description.mustache}}
+	{{> description.mustache}}
   {{/if}}
 	{{/unless}}
 </section>
 <section class="on-this-page-table">
 </section>
-<!-- <section class="title-footer">
-	<ul class="title-social">
-		<li>
-			<button class="button-social">
-			 <div class="button-left">npm pacakage</div>
-			<div class="button-right">1.6.11</div>
-			</button>
-		</li>
-		<li>
-    	<a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
-  	</li>
-  </ul>
-	<ul class="title-links">
-		<li><a href="#">docco</a></li>
-		<li><a href="#">source</a></li>
-		<li><a href="#">download</a></li>
-		<li><a href="#">tests</a></li>
-	</ul>
-</section> -->
+<section class="title-footer">
+	{{#if package}}
+		<ul class="title-social">
+			<li>
+				<a class="npm-button" href="https://www.npmjs.com/package/{{name}}">
+					<img src="https://img.shields.io/npm/v/{{name}}.svg?label=npm%20package" alt="npm package badge" />
+				</a>
+			</li>
+			<li>
+			<a class="github-button nav-social" href="https://github.com/canjs/{{name}}" data-count-href="/canjs/{{name}}/stargazers" data-count-api="/repos/canjs/{{name}}#stargazers_count">Star</a>
+	  	</li>
+		</ul>
+	{{/if}}
+	{{#with (getClosestWithPackage)}}
+		<ul class="title-links">
+			<!-- <li><a href="#">docco</a></li> -->
+			<!-- <li><a href="#">source</a></li> -->
+			<!-- <li><a href="#">download</a></li> -->
+			<!-- <li><a href="#">tests</a></li> -->
+		</ul>
+	{{/with}}
+</section>
