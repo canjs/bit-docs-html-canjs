@@ -18,11 +18,13 @@ article {
   }
   pre{
     padding: 0;
+    .border-radius(0);
   }
   code {
+	  
     .highlight {
-    background: @highlight-color;
-    padding: 3px 0;
+	    background: @highlight-color;
+	    padding: 3px 0;
     }
     .obscured{
       background: lighten(@border-color, 2%);
@@ -53,9 +55,14 @@ article {
     display: block;
     margin: @gutter;
     word-wrap: break-word;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0;
+    -webkit-font-smoothing: initial;
+    
     &.line-highlight {
-        display: inline-block;
-        min-width: 100%;
+      display: inline-block;
+      min-width: 100%;
     }
   }
   .signature {
