@@ -1,5 +1,4 @@
 article {
-  margin-top: 0px;
   p {
     margin-top: 0;
     margin-bottom: @gutter;
@@ -17,44 +16,68 @@ article {
   small {
     font-size: 90%;
   }
+  pre{
+    padding: 0;
+    .border-radius(0);
+  }
   code {
-    .code{
-      .highlight {
-        background: @highlight-color;
-        padding: 3px 0;
-      }
+	  
+    .highlight {
+	    background: @highlight-color;
+	    padding: 3px 0;
+    }
+    .obscured{
+      background: lighten(@border-color, 2%);
     }
     .expand {
-      height: 20px;
-      background-color: @light-color;
+      background-color: @border-color;
       text-align: center;
       padding: 4px 0px;
-      border-top: 1px solid #d2dff0;
-      border-bottom: 1px solid #d2dff0;
+      margin: @gutter/2 0;
+      border-top: 1px solid @dark-border-color;
+      border-bottom: 1px solid @dark-border-color;
       color: black;
     }
     .expand:before {
-      content: "..."
+      content: url(../static/img/expand_icon.svg);
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: 0 auto;
+    }
+    .expand:hover{
+      opacity: .6;
+      cursor: pointer;
     }
   }
   pre code {
     background: none;
-  }
-  .title {
-    .type {
-      font-weight: normal;
-      color: #666;
-      font-size: 50%;
+    display: block;
+    margin: @gutter;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0;
+    -webkit-font-smoothing: initial;
+    
+    &.line-highlight {
+      display: inline-block;
+      min-width: 100%;
     }
   }
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
-    border:1px solid @link-color;
-    border-radius: 4px;
+    border: 1px solid @link-color;
+    background: lighten(@link-color, 48%);
+    word-wrap: break-word;
+    h3{
+      margin-top: @gutter*2;
+    }
     .signature-title {
       margin-top: 0;
       border-bottom: 0;
+      word-wrap: break-word;
       code {
         font-weight: bold;
         .font-smoothing;
@@ -62,6 +85,9 @@ article {
         background: none;
       }
     }
+  }
+  .returns > p {
+    display: inline;
   }
   .parameters, .options, .returns {
     padding: 0 @gutter;
@@ -96,48 +122,22 @@ article {
     }
   }
   .deprecated.warning {
-    padding: @gutter;
-    border: 1px solid @warning-color;
-    margin-bottom: @gutter;
-    padding-bottom: 0;
-    h3 {
-      margin: 0;
-      margin-bottom: @gutter;
-      color: @warning-color;
-    }
+    .notify-warning;
   }
 }
-ul.title-social{
-  float: right;
-  margin-top: -60px;
-  line-height: 1.6;
-  margin-bottom: @gutter;
-  list-style-type: disc;
-  display: none;
-  @media screen and (min-width: @breakpoint) {
-    display: unset;
-    }
-  li{
-    list-style: none;
-    display: inline-block;
-    vertical-align: top;
-    iframe {
-      top: 1px;
-      position: relative;
-      margin-left: 5px;
-    }
+video{
+  .video;
+}
+blockquote{
+  .notify-normal;
+}
+.line-highlight{
+  margin: @gutter 0;
+  span.line{
+    padding: 0 @gutter;
+    display: block;
   }
-  code {
-    background: white;
-    border: 1px solid @gray;
-    color: @code-color;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    vertical-align: top;
-    @media screen and (min-width: @breakpoint) {
-      margin-left: @gutter;
-    }
-  }
+}
+.body{
+  margin: @gutter*2;
 }

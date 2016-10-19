@@ -13,11 +13,7 @@
   {{/deprecated}}
 </section>
 {{/if}}
-{{#unless hideDescription}}
-  {{#if description}}
-    {{> description.mustache}}
-  {{/if}}
-{{/unless}}
+
 {{#unless hideBody}}
 {{#if signatures}}
 {{#each signatures}}
@@ -34,3 +30,7 @@
     {{> body.mustache}}
   {{/if}}
 {{/unless}}
+
+<script type="text/javascript">
+  var docObject = {{{docObjectString}}};
+</script>

@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+var escapeHTML = require("escape-html");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
 
@@ -11,7 +12,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         "makeSignature": function(code){
 
             if(code){
-				return code;
+				return escapeHTML(code);
 			}
 
 			var sig = "";
@@ -145,13 +146,36 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             return docMapInfo.hasOrIsCurrent(docObject);
         },
         getTitle: function(docObject){
-            return docMapInfo.getTitle(docObject);
+            return docMapInfo.getTitle(this);
         },
         getShortTitle: function(docObject){
             return docMapInfo.getShortTitle(docObject);
         },
+        getDocumentTitle: function(docObject){
+            var title = docMapInfo.getTitle(docObject);
+            if (title && title.toLowerCase() === 'canjs') {
+                return title;
+            }
+            return 'CanJS - ' + title;
+        },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
+        },
+        getClosestWithPackage: function(){
+            var current = docMapInfo.getCurrent();
+            if (current.package) {
+                return current;
+            }
+            var parents = docMapInfo.getParents(current);
+            for (var i = parents.length-1; i >= 0; i--) {
+                if (parents[i].package) {
+                    return parents[i];
+                }
+            }
+            return docMap.canjs;
+        },
+        getRoot: function() {
+            return docMap.canjs;
         },
         getCurrentTree: function(){
             return docMapInfo.getCurrentTree();
@@ -180,8 +204,26 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 
                 return new Array(depth+1).join("  ");
             }
-
-        }
+        },
+        imagePath: function(filename) {
+            return helpers.urlTo('canjs').replace('index.html', 'docs/images/' + filename);
+        },
+        customSort: function(children) {
+            var isOrdered = false;
+            children.forEach(function(el) {
+                if (typeof el.order === 'number') {
+                    isOrdered = true;
+                }
+            });
+            if (isOrdered) {
+                return children;
+            }
+            return children.sort(function(x,y) {
+                var a = x.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b'),
+                    b = y.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b');
+                return a > b;
+            });
+        },
     };
 };
 
