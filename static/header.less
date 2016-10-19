@@ -8,66 +8,108 @@
 
 // ----- CANJS LOGO ALL -----
 .brand {
+    display: none;
+    height: 53px;
+    padding-top: @gutter;
     background: white;
-    white-space: nowrap;
-    overflow: hidden;
-    align-self: flex-start;
-	margin-right: 60px;
-	display: none;
-    > a {
-		display: block;
-		width: 60px;
-		height: 23px;
-		margin: @gutter 0;
-		background-image: url(img/canjs_logo.svg);
-		background-size: cover;
-		background-repeat: no-repeat;
-      	font-size: 1.5em;
-		&:hover {
-			opacity: .7;
-		}
+
+    .dropdown {
+        display:none;
+    }
+    .logo {
+        display: inline-block;
+        width: 60px;
+        height: 100%;
+        margin-right: @gutter;
+        cursor: pointer;
+        &:hover > a {
+            opacity: .7;
+        }
+        > a {
+            display: block;
+            height: 23px;
+            width: 100%;
+            cursor: pointer;
+            background-image: url(img/canjs_logo.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
     }
 }
 
-// ----- CANJS LOGO DESKTOP -----
+// ----- CANJS LOGO AND VERSION DESKTOP -----
 @media screen and (min-width: @breakpoint) {
-	.brand {
-    	display: flex;
-    	position: relative;
-		> a {
-			margin: @gutter @gutter*2;
-		}
-	    .project-dropdown {
-	        display: none;
-	        position: absolute;
-	        top: 52px;
-			left: 20px;
-	        z-index: 91;
-	        background-color: white;
-	        min-width: 180px;
-	        border: 1px solid #ccc;
-	        box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	    }
-	    .project-dropdown a {
-			color: black;
-			font-size: 14px;
-			opacity: 1;
-			padding: 12px 16px;
-			text-decoration: none;
-			display: block;
-			&:hover {
-				background-color: @light-gray-color;
-			}
-	    }
-	    &:hover {
-	        overflow: visible;
-	    }
-	    &:hover .project-dropdown {
-	      	display: block;
-	    }
-  	}
-}
+    .brand {
+        display: block;
+        .dropdown {
+            position: absolute;
+            top: 52px;
+            z-index: 91;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
 
+        .logo {
+            margin: 0 @gutter 0 @gutter*2;
+
+            &:hover .dropdown {
+                display: block;
+            }
+    	    .project-dropdown {
+    			left: 20px;
+                width: 180px;
+    	    }
+    	    .project-dropdown a {
+    			color: black;
+    			font-size: 14px;
+    			padding: 12px 16px;
+    			text-decoration: none;
+    			display: block;
+    			&:hover {
+    				background-color: @light-gray-color;
+    			}
+    	    }
+        }
+        .version {
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+            padding-top: 9px;
+            font-size: 12px;
+            cursor: pointer;
+            .version-number::after {
+                content: '\2329';
+                padding-right: @gutter/3;
+                display: inline-block;
+                -webkit-transform: rotate(270deg);
+                -moz-transform: rotate(270deg);
+                -o-transform: rotate(270deg);
+                -ms-transform: rotate(270deg);
+                transform: rotate(270deg);
+            }
+            &:hover > a {
+                opacity: .7;
+            }
+            &:hover .dropdown {
+                display: block;
+            }
+            .version-dropdown {
+    			left: 100px;
+                width: 100px;
+    	    }
+    	    .version-dropdown a {
+    			color: black;
+    			padding: 5px 10px;
+    			text-decoration: none;
+    			display: block;
+    			&:hover {
+    				background-color: @light-gray-color;
+    			}
+    	    }
+        }
+    }
+}
 
 // ----- CHAT, FORUM, GITHUB STAR, TWITTER -----
 .top-right-links {

@@ -1,13 +1,24 @@
 <div class="brand">
-	<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
-	<div class="project-dropdown">
-	    <a href="https://donejs.com/">DoneJS</a>
-	    <a href="http://stealjs.com/">StealJS</a>
-	    <a href="http://jquerypp.com/">jQuery ++</a>
-		<a href="https://funcunit.com/">FuncUnit</a>
-		<a href="http://documentjs.com/">DocumentJS</a>
-  	</div>
+	<div class="logo">
+		<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="http://stealjs.com/">StealJS</a>
+			<a href="http://jquerypp.com/">jQuery ++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="http://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			{{package.version}}
+		</div>
+		<div class="dropdown version-dropdown">
+			<a href="https://v2.canjs.com">2.3.27</a>
+		</div>
+	</div>
 </div>
-<div class="version">
-	<p>Version {{package.version}}</p>
+
+<div class="search-bar">
+	&nbsp;
 </div>
