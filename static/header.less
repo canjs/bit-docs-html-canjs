@@ -1,19 +1,73 @@
 // ----- RIGHT HEADER -----
-.top-right-top{
+.top-right-top {
   display: inline-flex;
   flex-direction: row-reverse;
   width: 100%;
   justify-content: space-between;
 }
 
-// ----- CANJS LOGO DESKTOP -----
+// ----- CANJS LOGO ALL -----
 .brand {
-  .canjs-logo;
-  display: none;
-  @media screen and (min-width: @breakpoint){
-    display: flex;
-  }
+    background: white;
+    white-space: nowrap;
+    overflow: hidden;
+    align-self: flex-start;
+	margin-right: 60px;
+	display: none;
+    > a {
+		display: block;
+		width: 60px;
+		height: 23px;
+		margin: @gutter 0;
+		background-image: url(img/canjs_logo.svg);
+		background-size: cover;
+		background-repeat: no-repeat;
+      	font-size: 1.5em;
+		&:hover {
+			opacity: .7;
+		}
+    }
 }
+
+// ----- CANJS LOGO DESKTOP -----
+@media screen and (min-width: @breakpoint) {
+	.brand {
+    	display: flex;
+    	position: relative;
+		> a {
+			margin: @gutter @gutter*2;
+		}
+	    .project-dropdown {
+	        display: none;
+	        position: absolute;
+	        top: 52px;
+			left: 20px;
+	        z-index: 91;
+	        background-color: white;
+	        min-width: 180px;
+	        border: 1px solid #ccc;
+	        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	    }
+	    .project-dropdown a {
+			color: black;
+			font-size: 14px;
+			opacity: 1;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			&:hover {
+				background-color: @light-gray-color;
+			}
+	    }
+	    &:hover {
+	        overflow: visible;
+	    }
+	    &:hover .project-dropdown {
+	      	display: block;
+	    }
+  	}
+}
+
 
 // ----- CHAT, FORUM, GITHUB STAR, TWITTER -----
 .top-right-links {
