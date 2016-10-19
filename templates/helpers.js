@@ -269,7 +269,11 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 	return parents;
 };
 DocMapInfo.prototype.getTitle = function(docObject) {
-    return docObject.title || docObject.name;
+    var title = docObject.title || docObject.name;
+    if (title.toLowerCase() === 'canjs') {
+        return title;
+    }
+    return 'CanJS - ' + title;
 };
 DocMapInfo.prototype.getShortTitle = function(docObject) {
 
