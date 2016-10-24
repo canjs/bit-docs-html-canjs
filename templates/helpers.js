@@ -154,6 +154,13 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getAltVersions: function() {
             return options.altVersions;
         },
+        getDocumentTitle: function(docObject){
+            var title = docMapInfo.getTitle(docObject);
+            if (title && title.toLowerCase() === 'canjs') {
+                return title;
+            }
+            return 'CanJS - ' + title;
+        },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
         },
@@ -272,11 +279,7 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 	return parents;
 };
 DocMapInfo.prototype.getTitle = function(docObject) {
-    var title = docObject.title || docObject.name;
-    if (title.toLowerCase() === 'canjs') {
-        return title;
-    }
-    return 'CanJS - ' + title;
+    return docObject.title || docObject.name;
 };
 DocMapInfo.prototype.getShortTitle = function(docObject) {
 
