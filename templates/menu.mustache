@@ -1,6 +1,6 @@
 {{#if children.length}}
 	<ul>
-		{{#each children}}
+		{{#each (customSort children)}}
 			{{^if docObject.hide}}
 				{{#if (isGroup docObject)}}
 					<li>
