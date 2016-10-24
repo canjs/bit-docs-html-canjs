@@ -151,6 +151,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getShortTitle: function(docObject){
             return docMapInfo.getShortTitle(docObject);
         },
+        getAltVersions: function() {
+            return options.altVersions;
+        },
         getDocumentTitle: function(docObject){
             var title = docMapInfo.getTitle(docObject) || 'CanJS';
             if (title && title.toLowerCase() === 'canjs') {
