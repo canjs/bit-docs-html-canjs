@@ -152,7 +152,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             return docMapInfo.getShortTitle(docObject);
         },
         getDocumentTitle: function(docObject){
-            var title = docMapInfo.getTitle(docObject);
+            var title = docMapInfo.getTitle(docObject) || 'CanJS';
             if (title && title.toLowerCase() === 'canjs') {
                 return title;
             }
