@@ -8,7 +8,8 @@ var $articleContainer,
 	$onThisPageTitle,
 	$everything,
 	$headers,
-	headerHidden;
+	headerHidden,
+	scrolled;
 
 // Run immediately
 setState();
@@ -48,9 +49,20 @@ $articleContainer.on("scroll", function(ev) {
 	// Maintain scroll state in history
 	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
-	// Update the "On This Page" placeholder with header text at scroll position
-    setOnThisPageScroll();
+	scrolled = true;
 });
+
+// Use 100ms interval to reduce performance costs of scroll functions
+setInterval(function() {
+	if (scrolled) {
+		// Update the "On This Page" placeholder with header text at scroll position
+		setOnThisPageScroll();
+
+		// Show/Hide top nav with scroll position
+		toggleNav();
+		scrolled = false;
+	}
+}, 100);
 
 //////////
 
@@ -226,7 +238,7 @@ function toggleNav() {
 	}
 
 	// Scroll hiding breakpoint
-	var headerHeight = $('.top-right-top').outerHeight();
+	var headerHeight = 53;
 
 	// Checks if scroll position is past hiding breakpoint
 	var toHide = $articleContainer.scrollTop() >= headerHeight;
@@ -244,15 +256,25 @@ function toggleNav() {
 	// Set headerHidden before starting animation to prevent multiple calls
 	headerHidden = toHide;
 
+	// Combination of elements that make up top nav
+	var $nav = $('.top-left > .brand, .top-right-top');
+
 	if (toHide) {
 		$everything.animate({
 			"margin-top": 0-headerHeight,
 			"height": parseFloat($everything.css('height')) + headerHeight
-		}, 250);
+		}, 250, function() {
+			$nav.hide();
+			$everything.css('height', '');
+			$everything.css('margin-top', '');
+		});
 	} else {
+		$everything.css('height', parseFloat($everything.css('height')) + headerHeight);
+		$everything.css('margin-top', 0-headerHeight);
+		$nav.show();
 		$everything.animate({
-			"margin-top": 0,
-			"height": parseFloat($everything.css('height')) - headerHeight
+			"margin-top": '0',
+			"height": '100%'
 		}, 250);
 	}
 }
