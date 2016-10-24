@@ -6,7 +6,10 @@ var $articleContainer,
 	$onThisPage,
 	$tableOfContents,
 	$onThisPageTitle,
-	$headers;
+	$everything,
+	$headers,
+	headerHidden,
+	scrolled;
 
 // Run immediately
 setState();
@@ -19,6 +22,8 @@ if ($dynamic.length) {
 } else {
 	setScrollPosition();
 }
+
+toggleNav();
 
 // Override link behavior
 $(document.body).on("click", "a", function(ev) {
@@ -44,9 +49,20 @@ $articleContainer.on("scroll", function(ev) {
 	// Maintain scroll state in history
 	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
-	// Update the "On This Page" placeholder with header text at scroll position
-    setOnThisPageScroll();
+	scrolled = true;
 });
+
+// Use 100ms interval to reduce performance costs of scroll functions
+setInterval(function() {
+	if (scrolled) {
+		// Update the "On This Page" placeholder with header text at scroll position
+		setOnThisPageScroll();
+
+		// Show/Hide top nav with scroll position
+		toggleNav();
+		scrolled = false;
+	}
+}, 100);
 
 //////////
 
@@ -55,6 +71,7 @@ function setState() {
 	$onThisPage = $('.on-this-page');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
 	$tableOfContents = $('.on-this-page-table');
+	$everything = $('#everything');
 	$headers = getHeaders();
 }
 
@@ -79,6 +96,8 @@ function setScrollPosition() {
 			$articleContainer.scrollTop(0);
 		}
 	}
+
+	toggleNav();
 }
 
 function setOnThisPageScroll() {
@@ -155,6 +174,7 @@ function getHeaders() {
 	for (var i = 1; i <= outlineLevel; i++) {
 		headerArr.push('h' + (i + 1));
 	}
+
 	return $(headerArr.join(', ')).each(function(index, header) {
 		if (!header.id) {
 			header.id = generateId(header);
@@ -189,6 +209,74 @@ function setOnThisPageContent() {
 
 function setOnThisPageTitle(title) {
 	$onThisPageTitle.html(title || 'On this page');
+}
+
+function setOnThisPageScroll() {
+	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
+		// Show last header if at bottom of page
+		var $header = $($headers[$headers.length-1]);
+		setOnThisPageTitle($header.html());
+	} else {
+		// Otherwise, try to set to last header value before scroll position
+		var contOffsetTop = $articleContainer.offset().top,
+			headerContent;
+		$.each($headers, function(index, header) {
+			var $header = $(header);
+			var marginTop = parseInt($header.css('margin-top')) || 20;
+			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
+				headerContent = $header.html();
+			}
+		});
+		setOnThisPageTitle(headerContent);
+	}
+}
+
+function toggleNav() {
+	// Don't run in mobile
+	if (window.innerWidth < 1000) {
+		return;
+	}
+
+	// Scroll hiding breakpoint
+	var headerHeight = 53;
+
+	// Checks if scroll position is past hiding breakpoint
+	var toHide = $articleContainer.scrollTop() >= headerHeight;
+
+	// Don't run headerHidden isn't changing
+	if (toHide === headerHidden) {
+		return;
+	}
+
+	// Don't run on page load if not after breakpoint
+	if (headerHidden === undefined && toHide === false) {
+		return;
+	}
+
+	// Set headerHidden before starting animation to prevent multiple calls
+	headerHidden = toHide;
+
+	// Combination of elements that make up top nav
+	var $nav = $('.top-left > .brand, .top-right-top');
+
+	if (toHide) {
+		$everything.animate({
+			"margin-top": 0-headerHeight,
+			"height": parseFloat($everything.css('height')) + headerHeight
+		}, 250, function() {
+			$nav.hide();
+			$everything.css('height', '');
+			$everything.css('margin-top', '');
+		});
+	} else {
+		$everything.css('height', parseFloat($everything.css('height')) + headerHeight);
+		$everything.css('margin-top', 0-headerHeight);
+		$nav.show();
+		$everything.animate({
+			"margin-top": '0',
+			"height": '100%'
+		}, 250);
+	}
 }
 
 function buildTOC() {
