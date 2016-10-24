@@ -1,38 +1,73 @@
 require("./canjs.less!");
 $ = require("jquery");
 
+// state
 var $articleContainer,
 	$onThisPage,
 	$tableOfContents,
 	$onThisPageTitle,
 	$headers;
 
-// Init
-function init() {
+// Run immediately
+setState();
+setOnThisPageContent();
+buildTOC();
+
+var $dynamic = $articleContainer.find('iframe, video, img');
+if ($dynamic.length) {
+	$dynamic.load(setScrollPosition);
+} else {
+	setScrollPosition();
+}
+
+// Override link behavior
+$(document.body).on("click", "a", function(ev) {
+	// make sure we're in the right spot
+	if (this.href === "javascript://") { // jshint ignore:line
+		return;
+	}
+
+	if (this.hostname === window.location.hostname) {
+		var href = this.href;
+		ev.preventDefault();
+		window.history.pushState(null, null, href);
+		navigate(href);
+	}
+});
+
+// Allow use of Back/Forward navigation
+window.addEventListener('popstate', function(ev) {
+	navigate(window.location.href);
+});
+
+$articleContainer.on("scroll", function(ev) {
+	// Maintain scroll state in history
+	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
+
+	// Update the "On This Page" placeholder with header text at scroll position
+    setOnThisPageScroll();
+});
+
+//////////
+
+function setState() {
+	$articleContainer = $('#right .bottom-right');
+	$onThisPage = $('.on-this-page');
+	$onThisPageTitle = $('.breadcrumb-dropdown a');
+	$tableOfContents = $('.on-this-page-table');
+	$headers = getHeaders();
+}
+
+function setDocTitle() {
 	var title = window.docObject.title || window.docObject.name;
 	if (title.toLowerCase() === 'canjs') {
 		document.title = title;
 	} else {
 		document.title = 'CanJS - ' + title;
 	}
+}
 
-	$articleContainer = $('#right .bottom-right');
-	$onThisPage = $('.on-this-page');
-	$onThisPageTitle = $('.breadcrumb-dropdown a');
-	$tableOfContents = $('.on-this-page-table');
-	$headers = getHeaders();
-
-	// remove anything in the "On This Page" list
-	$onThisPage.empty();
-	// add items to on-this-page dropdown
-	$.each($('h2'), function(index, header) {
-		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
-	});
-
-	if ($headers.length) {
-		buildTOC();
-	}
-
+function setScrollPosition() {
 	if (window.location.hash) {
 		var $currentHeader = $(window.location.hash);
 		scrollToElement($currentHeader);
@@ -46,52 +81,25 @@ function init() {
 	}
 }
 
-$().ready(function() {
-	init();
-
-	// Allow use of Back/Forward navigation
-	window.addEventListener('popstate', function(ev) {
-		navigate(window.location.href);
-	});
-
-	// Update the "On This Page" placeholder with header text at scroll position
-	$articleContainer.on("scroll", function(ev) {
-		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
-
-		if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
-			// Show last header if at bottom of page
-			var $header = $($headers[$headers.length-1]);
-			setOnThisPageTitle($header.html());
-		} else {
-			// Otherwise, try to set to last header value before scroll position
-			var contOffsetTop = $articleContainer.offset().top,
-				headerContent;
-			$.each($headers, function(index, header) {
-				var $header = $(header);
-				var marginTop = parseInt($header.css('margin-top')) || 20;
-				if ($header.offset().top - marginTop - contOffsetTop <= 0) {
-					headerContent = $header.html();
-				}
-			});
-			setOnThisPageTitle(headerContent);
-		}
-	});
-
-	// Override link behavior
-	$(document.body).on("click", "a", function(ev) {
-		// make sure we're in the right spot
-		if (this.href === "javascript://") { // jshint ignore:line
-			return;
-		}
-
-		if (this.hostname === window.location.hostname) {
-			var href = this.href;
-			ev.preventDefault();
-			window.history.pushState(null, null, href);
-			navigate(href);
-		}
-	});
-});
+function setOnThisPageScroll() {
+	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
+		// Show last header if at bottom of page
+		var $header = $($headers[$headers.length-1]);
+		setOnThisPageTitle($header.html());
+	} else {
+		// Otherwise, try to set to last header value before scroll position
+		var contOffsetTop = $articleContainer.offset().top,
+			headerContent;
+		$.each($headers, function(index, header) {
+			var $header = $(header);
+			var marginTop = parseInt($header.css('margin-top')) || 20;
+			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
+				headerContent = $header.html();
+			}
+		});
+		setOnThisPageTitle(headerContent);
+	}
+}
 
 function navigate(href) {
 	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
@@ -106,7 +114,6 @@ function navigate(href) {
 		if (!$content.length) {
 			window.location.reload();
 		}
-
 		var $nav = $content.find(".bottom-left>ul");
 		var $article = $content.find("article");
 		var $breadcrumb = $content.find(".breadcrumb");
@@ -129,8 +136,14 @@ function navigate(href) {
 			}
 		}
 
-		init();
+		setState();
+		setDocTitle();
+		setOnThisPageContent();
+		buildTOC();
+		setScrollPosition();
+
 	}, function(){
+		// just reload the page if this fails
 		window.location.reload();
 	});
 }
@@ -165,11 +178,24 @@ function scrollToElement($element) {
 	setOnThisPageTitle($element.html());
 }
 
+function setOnThisPageContent() {
+	// remove anything in the "On This Page" list
+	$onThisPage.empty();
+	// add items to on-this-page dropdown
+	$.each($('h2'), function(index, header) {
+		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
+	});
+}
+
 function setOnThisPageTitle(title) {
 	$onThisPageTitle.html(title || 'On this page');
 }
 
 function buildTOC() {
+	if (!$headers.length) {
+		return;
+	}
+
 	var level = 0,
 		baseLevel = $headers[0].nodeName.substr(1),
 		toc = "<ol>";
