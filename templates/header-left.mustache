@@ -14,7 +14,9 @@
 			{{package.version}}
 		</div>
 		<div class="dropdown version-dropdown">
-			<a href="https://v2.canjs.com">2.3.27</a>
+			{{#each (getAltVersions)}}
+				<a href="{{.}}">{{@key}}</a>
+			{{/each}}
 		</div>
 	</div>
 </div>

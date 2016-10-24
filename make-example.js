@@ -22,6 +22,9 @@ generate(docMap,{
     dest: path.join(__dirname, "temp"),
     parent: "canjs",
     forceBuild: forceBuild,
-		minifyBuild: false,
+	minifyBuild: false,
+	altVersions: {
+		"2.3.27": "https://v2.canjs.com"
+	},
     debug: true
 }).done();

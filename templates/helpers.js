@@ -151,6 +151,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getShortTitle: function(docObject){
             return docMapInfo.getShortTitle(docObject);
         },
+        getAltVersions: function() {
+            return options.altVersions;
+        },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
         },
