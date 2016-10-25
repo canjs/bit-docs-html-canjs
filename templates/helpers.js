@@ -214,7 +214,8 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         customSort: function(children) {
             var isOrdered = false;
             children.forEach(function(el) {
-                if (typeof el.order === 'number') {
+                var doc = el.docObject;
+                if (doc && typeof doc.order === 'number') {
                     isOrdered = true;
                 }
             });
