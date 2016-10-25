@@ -16,6 +16,8 @@ setState();
 setOnThisPageContent();
 buildTOC();
 
+$('#left').css('min-width', $('.top-left').width());
+
 var $dynamic = $articleContainer.find('iframe, video, img');
 if ($dynamic.length) {
 	$dynamic.load(setScrollPosition);
