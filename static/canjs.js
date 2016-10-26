@@ -167,6 +167,10 @@ function getHeaders() {
 		headerArr.push('h' + (i + 1));
 	}
 
+	if (headerArr.length < 2) {
+		return;
+	}
+
 	return $(headerArr.join(', ')).each(function(index, header) {
 		if (!header.id) {
 			header.id = generateId(header);
@@ -193,8 +197,13 @@ function scrollToElement($element) {
 function setOnThisPageContent() {
 	// remove anything in the "On This Page" list
 	$onThisPage.empty();
+	// don't bother with 1 header
+	var $h2 = $('h2');
+	if ($h2.length < 2) {
+		return;
+	}
 	// add items to on-this-page dropdown
-	$.each($('h2'), function(index, header) {
+	$.each($h2, function(index, header) {
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
 }
