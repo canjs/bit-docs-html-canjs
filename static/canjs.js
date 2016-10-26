@@ -8,6 +8,7 @@ var $articleContainer,
 	$onThisPageTitle,
 	$everything,
 	$headers,
+	$nav,
 	headerHidden,
 	animating;
 
@@ -15,6 +16,7 @@ var $articleContainer,
 setState();
 setOnThisPageContent();
 buildTOC();
+setNavToggleListener();
 
 $('#left').css('min-width', $('.top-left').width());
 
@@ -67,6 +69,8 @@ function setState() {
 	$tableOfContents = $('.on-this-page-table');
 	$everything = $('#everything');
 	$headers = getHeaders();
+	$nav = $('.top-left > .brand, .top-right-top');
+	headerHidden = undefined;
 }
 
 function setDocTitle() {
@@ -92,26 +96,6 @@ function setScrollPosition() {
 	}
 }
 
-function setOnThisPageScroll() {
-	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
-		// Show last header if at bottom of page
-		var $header = $($headers[$headers.length-1]);
-		setOnThisPageTitle($header.html());
-	} else {
-		// Otherwise, try to set to last header value before scroll position
-		var contOffsetTop = $articleContainer.offset().top,
-			headerContent;
-		$.each($headers, function(index, header) {
-			var $header = $(header);
-			var marginTop = parseInt($header.css('margin-top')) || 20;
-			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
-				headerContent = $header.html();
-			}
-		});
-		setOnThisPageTitle(headerContent);
-	}
-}
-
 function navigate(href) {
 	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
 		return scrollToElement($(window.location.hash));
@@ -125,14 +109,14 @@ function navigate(href) {
 		if (!$content.length) {
 			window.location.reload();
 		}
-		var $nav = $content.find(".bottom-left>ul");
+		var $nav = $content.find(".bottom-left > ul");
 		var $article = $content.find("article");
 		var $breadcrumb = $content.find(".breadcrumb");
-		var $logo = $content.find(".top-left>.brand");
+		var homeLink = $content.find(".logo > a").attr('href');
 		$(".bottom-left>ul").replaceWith($nav);
 		$("article").replaceWith($article);
 		$(".breadcrumb").replaceWith($breadcrumb);
-		$(".top-left>.brand").replaceWith($logo);
+		$(".logo > a").attr('href', homeLink);
 
 		// Initialize any jsbin scripts in the content
 		delete window.jsbinified;
@@ -151,6 +135,7 @@ function navigate(href) {
 		setDocTitle();
 		setOnThisPageContent();
 		buildTOC();
+		setNavToggleListener();
 		setScrollPosition();
 
 	}, function(){
@@ -223,7 +208,14 @@ function setOnThisPageScroll() {
 	setOnThisPageTitle(onThisPageTitle);
 }
 
-function toggleNav() {
+function setNavToggleListener() {
+	$('.nav-toggle').on('click', function(){
+		$articleContainer.scrollTop(0);
+		toggleNav(false);
+	});
+}
+
+function toggleNav(hide) {
 	// Don't run in mobile
 	if (window.innerWidth < 1000) {
 		return;
@@ -235,14 +227,28 @@ function toggleNav() {
 		return;
 	}
 
-	// Scroll hiding breakpoint
-	var breakpoint = 50;
+	var breakpoint = 20,
+		headerHeight = 53;
 
-	// Checks if scroll position is past hiding breakpoint
-	var shouldHide = $articleContainer.scrollTop() >= breakpoint;
+	if ($nav.css('display') === 'none') {
+		$('.nav-toggle').show();
+	}
 
-	// Don't run on page load if not after breakpoint
-	if (headerHidden === undefined && shouldHide === false) {
+	// Determines if the nav should hide (true) or show (false)
+	// Use `hide` argument if passed
+	// Otherwise, check if scroll position is past hiding breakpoint
+	var shouldHide = hide === undefined ? $articleContainer.scrollTop() >= breakpoint : hide;
+
+	// Don't run on new page if not after breakpoint
+	// Unless `hide` argument is passed
+	if (headerHidden === undefined && shouldHide === false && hide === undefined) {
+		return;
+	}
+
+	// Don't hide if already hidden
+	// Make sure hidden states are set
+	if (shouldHide && $nav.css('display') === 'none') {
+		headerHidden = true;
 		return;
 	}
 
@@ -255,11 +261,8 @@ function toggleNav() {
 	headerHidden = shouldHide;
 	animating = true;
 
-	// Combination of elements that make up top nav
-	var $nav = $('.top-left > .brand, .top-right-top'),
-		headerHeight = 53;
-
 	if (shouldHide) {
+		$('.nav-toggle').show();
 		$everything.animate({
 			"margin-top": 0-headerHeight,
 			"height": parseFloat($everything.css('height')) + headerHeight
@@ -273,6 +276,7 @@ function toggleNav() {
 			}
 		});
 	} else {
+		$('.nav-toggle').hide();
 		$everything.css('height', parseFloat($everything.css('height')) + headerHeight);
 		$everything.css('margin-top', 0-headerHeight);
 		$nav.show();
