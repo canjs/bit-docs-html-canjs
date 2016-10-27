@@ -9,7 +9,8 @@ var $articleContainer,
 	$everything,
 	$headers,
 	headerHidden,
-	animating;
+	animating,
+	navigating;
 
 // Run immediately
 setState();
@@ -18,7 +19,8 @@ buildTOC();
 
 $('#left').css('min-width', $('.top-left').width());
 
-var $dynamic = $articleContainer.find('iframe, video, img');
+// This doesn't work very well.
+var $dynamic = $(document).find('iframe, video, img');
 if ($dynamic.length) {
 	$dynamic.load(setScrollPosition);
 } else {
@@ -29,6 +31,10 @@ if ($dynamic.length) {
 $(document.body).on("click", "a", function(ev) {
 	// make sure we're in the right spot
 	if (this.href === "javascript://") { // jshint ignore:line
+		return;
+	}
+
+	if (navigating) {
 		return;
 	}
 
@@ -113,49 +119,59 @@ function setOnThisPageScroll() {
 }
 
 function navigate(href) {
+	navigating = true;
 	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
-		return scrollToElement($(window.location.hash));
+		scrollToElement($(window.location.hash));
+		navigating = false;
+		return;
 	}
-	$.ajax(href, {dataType: "text"}).then(function(content) {
-		// Google Analytics
-		ga('send', 'pageview', window.location.pathname);
 
-		// set content positions
-		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
-		if (!$content.length) {
-			window.location.reload();
-		}
-		var $nav = $content.find(".bottom-left>ul");
-		var $article = $content.find("article");
-		var $breadcrumb = $content.find(".breadcrumb");
-		var $logo = $content.find(".top-left>.brand");
-		$(".bottom-left>ul").replaceWith($nav);
-		$("article").replaceWith($article);
-		$(".breadcrumb").replaceWith($breadcrumb);
-		$(".top-left>.brand").replaceWith($logo);
+	$.ajax(href, {
+		dataType: "text",
+		success: function(content) {
+			// Google Analytics
+			ga('send', 'pageview', window.location.pathname);
 
-		// Initialize any jsbin scripts in the content
-		delete window.jsbinified;
-
-		// Initialize github buttons
-		$.getScript('https://buttons.github.io/buttons.js');
-
-		// go through every package and re-init
-		for (var packageName in window.PACKAGES) {
-			if (typeof window.PACKAGES[packageName] === "function") {
-				window.PACKAGES[packageName]();
+			// set content positions
+			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
+			if (!$content.length) {
+				window.location.reload();
 			}
+			var $nav = $content.find(".bottom-left>ul");
+			var $article = $content.find("article");
+			var $breadcrumb = $content.find(".breadcrumb");
+			var $logo = $content.find(".top-left>.brand");
+			$(".bottom-left>ul").replaceWith($nav);
+			$("article").replaceWith($article);
+			$(".breadcrumb").replaceWith($breadcrumb);
+			$(".top-left>.brand").replaceWith($logo);
+
+			// Initialize any jsbin scripts in the content
+			delete window.jsbinified;
+
+			// Initialize github buttons
+			$.getScript('https://buttons.github.io/buttons.js');
+
+			// go through every package and re-init
+			for (var packageName in window.PACKAGES) {
+				if (typeof window.PACKAGES[packageName] === "function") {
+					window.PACKAGES[packageName]();
+				}
+			}
+
+			setState();
+			setDocTitle();
+			setOnThisPageContent();
+			buildTOC();
+			setScrollPosition();
+		},
+		error: function() {
+			// just reload the page if this fails
+			window.location.reload();
+		},
+		complete: function() {
+			navigating = false;
 		}
-
-		setState();
-		setDocTitle();
-		setOnThisPageContent();
-		buildTOC();
-		setScrollPosition();
-
-	}, function(){
-		// just reload the page if this fails
-		window.location.reload();
 	});
 }
 
