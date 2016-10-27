@@ -212,21 +212,43 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             return helpers.urlTo('canjs').replace('index.html', 'docs/images/' + filename);
         },
         customSort: function(children) {
-            var isOrdered = false;
+            var ordered = [],
+                sorted = [];
+
             children.forEach(function(el) {
                 var doc = el.docObject;
                 if (doc && typeof doc.order === 'number') {
-                    isOrdered = true;
+                    ordered.push(el);
+                } else {
+                    sorted.push(el);
                 }
             });
-            if (isOrdered) {
-                return children;
-            }
-            return children.sort(function(x,y) {
-                var a = x.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b'),
-                    b = y.docObject.name.replace(/\//g, 'a').replace(/-/g, 'b');
-                return a > b;
+
+            // Sort alphabetically, "/" comes before "-"
+            sorted.sort(function(x,y) {
+                var a = x.docObject.name.replace(/\//g, '!'),
+                    b = y.docObject.name.replace(/\//g, '!');
+
+                if (a < b) {
+                    return -1;
+                }
+                if (a > b) {
+                    return 1;
+                }
+                return 0;
             });
+
+            // Sort by docObject "ordered" property
+            ordered.sort(function(x,y) {
+                return x.docObject.order > y.docObject.order;
+            });
+
+            // Insert ordered items to their index in the alphabetical array
+            ordered.forEach(function(el) {
+                sorted.splice(el.docObject.order, 0, el);
+            });
+
+            return sorted;
         },
     };
 };
