@@ -159,16 +159,17 @@ function navigate(href) {
 	});
 }
 
-function getHeaders() {
-	var	outline = window.docObject && parseInt(window.docObject.outline),
-		outlineLevel = !isNaN(outline) ? outline : 1,
-		headerArr = [];
-	for (var i = 1; i <= outlineLevel; i++) {
-		headerArr.push('h' + (i + 1));
+function getHeaders(useOutline) {
+	var headerArr = [],
+		headerDepth = 1;
+
+	if (useOutline) {
+		var	outline = window.docObject && parseInt(window.docObject.outline);
+		headerDepth = !isNaN(outline) ? outline : 1;
 	}
 
-	if (headerArr.length < 2) {
-		return;
+	for (var i = 1; i <= headerDepth; i++) {
+		headerArr.push('h' + (i + 1));
 	}
 
 	return $(headerArr.join(', ')).each(function(index, header) {
@@ -202,6 +203,7 @@ function setOnThisPageContent() {
 	if ($h2.length < 2) {
 		return;
 	}
+	$('.breadcrumb-dropdown').css('display', 'inline-block');
 	// add items to on-this-page dropdown
 	$.each($h2, function(index, header) {
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
@@ -298,15 +300,17 @@ function toggleNav() {
 }
 
 function buildTOC() {
-	if (!$headers.length) {
+	var $tocHeaders = getHeaders(true);
+
+	if (!$tocHeaders.length || $tocHeaders.length < 2) {
 		return;
 	}
 
 	var level = 0,
-		baseLevel = $headers[0].nodeName.substr(1),
+		baseLevel = $tocHeaders[0].nodeName.substr(1),
 		toc = "<ol>";
 
-	$headers.each(function(index, element) {
+	$tocHeaders.each(function(index, element) {
 		var $el = $(element);
 		var title = $el.text().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 		var link = '#' + generateId($el[0]);
