@@ -10,7 +10,8 @@ var $articleContainer,
 	$headers,
 	$nav,
 	headerHidden,
-	animating;
+	animating,
+	navigating;
 
 // Run immediately
 setState();
@@ -20,7 +21,8 @@ setNavToggleListener();
 
 $('#left').css('min-width', $('.top-left').width());
 
-var $dynamic = $articleContainer.find('iframe, video, img');
+// This doesn't work very well.
+var $dynamic = $(document).find('iframe, video, img');
 if ($dynamic.length) {
 	$dynamic.load(setScrollPosition);
 } else {
@@ -31,6 +33,10 @@ if ($dynamic.length) {
 $(document.body).on("click", "a", function(ev) {
 	// make sure we're in the right spot
 	if (this.href === "javascript://") { // jshint ignore:line
+		return;
+	}
+
+	if (navigating) {
 		return;
 	}
 
@@ -97,58 +103,73 @@ function setScrollPosition() {
 }
 
 function navigate(href) {
+	navigating = true;
 	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
-		return scrollToElement($(window.location.hash));
+		scrollToElement($(window.location.hash));
+		navigating = false;
+		return;
 	}
-	$.ajax(href, {dataType: "text"}).then(function(content) {
-		// Google Analytics
-		ga('send', 'pageview', window.location.pathname);
 
-		// set content positions
-		var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
-		if (!$content.length) {
-			window.location.reload();
-		}
-		var $nav = $content.find(".bottom-left > ul");
-		var $article = $content.find("article");
-		var $breadcrumb = $content.find(".breadcrumb");
-		var homeLink = $content.find(".logo > a").attr('href');
-		$(".bottom-left>ul").replaceWith($nav);
-		$("article").replaceWith($article);
-		$(".breadcrumb").replaceWith($breadcrumb);
-		$(".logo > a").attr('href', homeLink);
+	$.ajax(href, {
+		dataType: "text",
+		success: function(content) {
+			// Google Analytics
+			ga('send', 'pageview', window.location.pathname);
 
-		// Initialize any jsbin scripts in the content
-		delete window.jsbinified;
-
-		// Initialize github buttons
-		$.getScript('https://buttons.github.io/buttons.js');
-
-		// go through every package and re-init
-		for (var packageName in window.PACKAGES) {
-			if (typeof window.PACKAGES[packageName] === "function") {
-				window.PACKAGES[packageName]();
+			// set content positions
+			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
+			if (!$content.length) {
+				window.location.reload();
 			}
+			var $nav = $content.find(".bottom-left > ul");
+			var $article = $content.find("article");
+			var $breadcrumb = $content.find(".breadcrumb");
+			var homeLink = $content.find(".logo > a").attr('href');
+			$(".bottom-left>ul").replaceWith($nav);
+			$("article").replaceWith($article);
+			$(".breadcrumb").replaceWith($breadcrumb);
+			$(".logo > a").attr('href', homeLink);
+
+			// Initialize any jsbin scripts in the content
+			delete window.jsbinified;
+
+			// Initialize github buttons
+			$.getScript('https://buttons.github.io/buttons.js');
+
+			// go through every package and re-init
+			for (var packageName in window.PACKAGES) {
+				if (typeof window.PACKAGES[packageName] === "function") {
+					window.PACKAGES[packageName]();
+				}
+			}
+
+			setState();
+			setDocTitle();
+			setOnThisPageContent();
+			buildTOC();
+			setNavToggleListener();
+			setScrollPosition();
+		},
+		error: function() {
+			// just reload the page if this fails
+			window.location.reload();
+		},
+		complete: function() {
+			navigating = false;
 		}
-
-		setState();
-		setDocTitle();
-		setOnThisPageContent();
-		buildTOC();
-		setNavToggleListener();
-		setScrollPosition();
-
-	}, function(){
-		// just reload the page if this fails
-		window.location.reload();
 	});
 }
 
-function getHeaders() {
-	var	outline = window.docObject && parseInt(window.docObject.outline),
-		outlineLevel = !isNaN(outline) ? outline : 1,
-		headerArr = [];
-	for (var i = 1; i <= outlineLevel; i++) {
+function getHeaders(useOutline) {
+	var headerArr = [],
+		headerDepth = 1;
+
+	if (useOutline) {
+		var	outline = window.docObject && parseInt(window.docObject.outline);
+		headerDepth = !isNaN(outline) ? outline : 1;
+	}
+
+	for (var i = 1; i <= headerDepth; i++) {
 		headerArr.push('h' + (i + 1));
 	}
 
@@ -178,8 +199,14 @@ function scrollToElement($element) {
 function setOnThisPageContent() {
 	// remove anything in the "On This Page" list
 	$onThisPage.empty();
+	// don't bother with 1 header
+	var $h2 = $('h2');
+	if ($h2.length < 2) {
+		return;
+	}
+	$('.breadcrumb-dropdown').css('display', 'inline-block');
 	// add items to on-this-page dropdown
-	$.each($('h2'), function(index, header) {
+	$.each($h2, function(index, header) {
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
 }
@@ -293,15 +320,17 @@ function toggleNav(hide) {
 }
 
 function buildTOC() {
-	if (!$headers.length) {
+	var $tocHeaders = getHeaders(true);
+
+	if (!$tocHeaders.length || $tocHeaders.length < 2) {
 		return;
 	}
 
 	var level = 0,
-		baseLevel = $headers[0].nodeName.substr(1),
+		baseLevel = $tocHeaders[0].nodeName.substr(1),
 		toc = "<ol>";
 
-	$headers.each(function(index, element) {
+	$tocHeaders.each(function(index, element) {
 		var $el = $(element);
 		var title = $el.text().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 		var link = '#' + generateId($el[0]);
