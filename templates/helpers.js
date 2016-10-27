@@ -211,6 +211,10 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         imagePath: function(filename) {
             return helpers.urlTo('canjs').replace('index.html', 'docs/images/' + filename);
         },
+        badgeLink: function(version) {
+            version = version.replace(/-/g, '--');
+            return 'https://img.shields.io/badge/npm%20package-'+version+'-brightgreen.svg';
+        },
         customSort: function(children) {
             var ordered = [],
                 sorted = [];
