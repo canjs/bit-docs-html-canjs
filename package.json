@@ -28,10 +28,11 @@
   "system": {},
   "dependencies": {
     "escape-html": "^1.0.3",
+	"unescape-html": "^1.0.0",
     "jquery": "^2.2.4"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.2.1",
+    "bit-docs-generate-html": "^0.3.0",
     "q": "^1.4.1",
     "connect": "^2.14.4",
     "normalize.css": "^4.1.1",

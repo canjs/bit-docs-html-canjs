@@ -1,6 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var escapeHTML = require("escape-html");
+var unescapeHTML = require("unescape-html");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
 
@@ -147,6 +148,11 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         },
         getTitle: function(docObject){
             return docMapInfo.getTitle(this);
+        },
+        getLinkTitle: function(docObject) {
+            var description = docObject.description || docObject.name;
+            description = helpers.stripMarkdown(description);
+            return unescapeHTML(description);
         },
         getShortTitle: function(docObject){
             return docMapInfo.getShortTitle(docObject);
