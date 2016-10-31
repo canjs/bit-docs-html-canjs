@@ -1,14 +1,18 @@
-// ----- TOP LEFT HEADER - CANJS VERSION # -----
-.search-bar{
-  background: @code-color;
-  padding: @gutter @gutter*2;
-  height: 48px;
-  p {
-    border: none;
-    margin: 0px;
-    color: white;
-    font-weight: 300;
-  }
+
+.search-bar {
+	display:none;
+  	background: @code-color;
+  	padding: @gutter @gutter*2;
+  	height: 48px;
+  	p {
+    	border: none;
+    	margin: 0px;
+    	color: white;
+    	font-weight: 300;
+  	}
+	@media screen and (min-width: @breakpoint) {
+      	display: block;
+    }
 }
 
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
