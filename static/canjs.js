@@ -11,7 +11,8 @@ var $articleContainer,
 	$nav,
 	headerHidden,
 	animating,
-	navigating;
+	navigating,
+	scrollPositionInterval;
 
 // Run immediately
 setState();
@@ -19,15 +20,10 @@ setOnThisPageContent();
 buildTOC();
 setNavToggleListener();
 
+// prevent sidebar from changing width when header hides
 $('#left').css('min-width', $('.top-left').width());
 
-// This doesn't work very well.
-var $dynamic = $(document).find('iframe, video, img');
-if ($dynamic.length) {
-	$dynamic.load(setScrollPosition);
-} else {
-	setScrollPosition();
-}
+setScrollPosition();
 
 // Override link behavior
 $(document.body).on("click", "a", function(ev) {
@@ -40,6 +36,9 @@ $(document.body).on("click", "a", function(ev) {
 		return;
 	}
 
+	// Clear scroll interval if it's still alive
+	clearInterval(scrollPositionInterval);
+
 	if (this.hostname === window.location.hostname) {
 		var href = this.href;
 		ev.preventDefault();
@@ -50,6 +49,7 @@ $(document.body).on("click", "a", function(ev) {
 
 // Allow use of Back/Forward navigation
 window.addEventListener('popstate', function(ev) {
+	clearInterval(scrollPositionInterval);
 	navigate(window.location.href);
 });
 
@@ -88,18 +88,30 @@ function setDocTitle() {
 	}
 }
 
+// Set the scroll position until user scrolls or navigates away.
+// This ensures that the scroll position is correctly set to the target element,
+// regarless of deferred elements.
 function setScrollPosition() {
-	if (window.location.hash) {
-		var $currentHeader = $(window.location.hash);
-		scrollToElement($currentHeader);
-	} else {
-		var articleScroll = window.history.state && window.history.state.articleScroll;
-		if (articleScroll) {
-			$articleContainer.scrollTop(articleScroll);
+	var lastAutoScroll;
+	scrollPositionInterval = setInterval(function() {
+		var currentScroll = $articleContainer.scrollTop();
+		if (lastAutoScroll === undefined || lastAutoScroll === currentScroll) {
+			if (window.location.hash) {
+				var $currentHeader = $(window.location.hash);
+				scrollToElement($currentHeader);
+			} else {
+				var articleScroll = window.history.state && window.history.state.articleScroll;
+				if (articleScroll) {
+					$articleContainer.scrollTop(articleScroll);
+				} else {
+					$articleContainer.scrollTop(0);
+				}
+			}
+			lastAutoScroll = $articleContainer.scrollTop();
 		} else {
-			$articleContainer.scrollTop(0);
+			clearInterval(scrollPositionInterval);
 		}
-	}
+	}, 250);
 }
 
 function navigate(href) {
