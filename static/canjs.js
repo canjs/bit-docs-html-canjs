@@ -197,14 +197,21 @@ function scrollToElement($element) {
 }
 
 function setOnThisPageContent() {
-	// remove anything in the "On This Page" list
-	$onThisPage.empty();
+	// Don't show on touch devices
+	if ('ontouchstart' in window || !!(navigator.msMaxTouchPoints)) {
+		return;
+	}
+
 	// don't bother with 1 header
 	var $h2 = $('h2');
 	if ($h2.length < 2) {
 		return;
 	}
-	$('.breadcrumb-dropdown').css('display', 'inline-block');
+
+	// remove anything in the "On This Page" list
+	$onThisPage.empty();
+	
+	$onThisPage.parent().css('display', 'inline-block');
 	// add items to on-this-page dropdown
 	$.each($h2, function(index, header) {
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
