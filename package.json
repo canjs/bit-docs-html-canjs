@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "prettify code plugin",
   "main": "static/canjs",
   "scripts": {
@@ -28,7 +28,7 @@
   "system": {},
   "dependencies": {
     "escape-html": "^1.0.3",
-	"unescape-html": "^1.0.0",
+    "unescape-html": "^1.0.0",
     "jquery": "^2.2.4"
   },
   "devDependencies": {
