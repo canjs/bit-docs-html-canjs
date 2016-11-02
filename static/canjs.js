@@ -14,61 +14,45 @@ var $articleContainer,
 	navigating,
 	scrollPositionInterval;
 
-// Run immediately
-setState();
-setOnThisPageContent();
-buildTOC();
-setNavToggleListener();
+(function() {
+	init();
 
-// prevent sidebar from changing width when header hides
-$('#left').css('min-width', $('.top-left').width());
+	// prevent sidebar from changing width when header hides
+	$('#left').css('min-width', $('.top-left').width());
 
-setScrollPosition();
+	// Override link behavior
+	$(document.body).on("click", "a", function(ev) {
+		if (this.hostname === window.location.hostname) {
+			ev.preventDefault();
+			var href = this.href;
+			window.history.pushState(null, null, href);
+			navigate(href);
+		}
+	});
 
-// Override link behavior
-$(document.body).on("click", "a", function(ev) {
-	// make sure we're in the right spot
-	if (this.href === "javascript://") { // jshint ignore:line
-		return;
-	}
+	// Back/Forward navigation
+	window.addEventListener('popstate', function(ev) {
+		navigate(window.location.href);
+	});
 
-	if (navigating) {
-		return;
-	}
+	$articleContainer.on("scroll", function(ev) {
+		// Maintain scroll state in history
+		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
-	// Clear scroll interval if it's still alive
-	clearInterval(scrollPositionInterval);
+		// Update the "On This Page" placeholder with header text at scroll position
+		setOnThisPageScroll();
+	});
 
-	if (this.hostname === window.location.hostname) {
-		var href = this.href;
-		ev.preventDefault();
-		window.history.pushState(null, null, href);
-		navigate(href);
-	}
-});
-
-// Allow use of Back/Forward navigation
-window.addEventListener('popstate', function(ev) {
-	clearInterval(scrollPositionInterval);
-	navigate(window.location.href);
-});
-
-$articleContainer.on("scroll", function(ev) {
-	// Maintain scroll state in history
-	window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
-
-	// Update the "On This Page" placeholder with header text at scroll position
-	setOnThisPageScroll();
-});
-
-// toggle nav on interval instead of scroll to prevent queueing issues
-setInterval(function() {
-	toggleNav();
-}, 100);
+	// toggle nav on interval instead of scroll to prevent queueing issues
+	setInterval(function() {
+		toggleNav();
+	}, 200);
+})();
 
 //////////
 
-function setState() {
+function init() {
+	// Set state
 	$articleContainer = $('#right .bottom-right');
 	$onThisPage = $('.on-this-page');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
@@ -77,6 +61,11 @@ function setState() {
 	$headers = getHeaders();
 	$nav = $('.top-left > .brand, .top-right-top');
 	headerHidden = undefined;
+
+	setOnThisPageContent();
+	buildTOC();
+	setNavToggleListener();
+	setScrollPosition();
 }
 
 function setDocTitle() {
@@ -90,7 +79,7 @@ function setDocTitle() {
 
 // Set the scroll position until user scrolls or navigates away.
 // This ensures that the scroll position is correctly set to the target element,
-// regarless of deferred elements.
+// regardless of asynchonously embedded elements.
 function setScrollPosition() {
 	var lastAutoScroll;
 	scrollPositionInterval = setInterval(function() {
@@ -115,20 +104,33 @@ function setScrollPosition() {
 }
 
 function navigate(href) {
-	navigating = true;
-	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
-		scrollToElement($(window.location.hash));
-		navigating = false;
+	// make sure we're in the right spot
+	if (href === "javascript://") { // jshint ignore:line
 		return;
 	}
 
+	// disable links while navigating
+	if (navigating) {
+		return;
+	}
+
+	// clear existing scroll interval if it's still alive
+	clearInterval(scrollPositionInterval);
+
+	// just scroll to hash if possible
+	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
+		scrollToElement($(window.location.hash));
+		return;
+	}
+
+	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
 		success: function(content) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
 
-			// set content positions
+			// set new content
 			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
 			if (!$content.length) {
 				window.location.reload();
@@ -142,7 +144,7 @@ function navigate(href) {
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
 
-			// Initialize any jsbin scripts in the content
+			// Initialize jsbin scripts
 			delete window.jsbinified;
 
 			// Initialize github buttons
@@ -155,12 +157,8 @@ function navigate(href) {
 				}
 			}
 
-			setState();
+			init();
 			setDocTitle();
-			setOnThisPageContent();
-			buildTOC();
-			setNavToggleListener();
-			setScrollPosition();
 		},
 		error: function() {
 			// just reload the page if this fails
@@ -222,7 +220,7 @@ function setOnThisPageContent() {
 
 	// remove anything in the "On This Page" list
 	$onThisPage.empty();
-	
+
 	$onThisPage.parent().css('display', 'inline-block');
 	// add items to on-this-page dropdown
 	$.each($h2, function(index, header) {
@@ -276,23 +274,23 @@ function toggleNav(hide) {
 	var breakpoint = 20,
 		headerHeight = 53;
 
+	// Show the toggle button if nav is hidden
 	if ($nav.css('display') === 'none') {
 		$('.nav-toggle').show();
 	}
 
 	// Determines if the nav should hide (true) or show (false)
-	// Use `hide` argument if passed
+	// Use `hide` override if passed as argument
 	// Otherwise, check if scroll position is past hiding breakpoint
 	var shouldHide = hide === undefined ? $articleContainer.scrollTop() >= breakpoint : hide;
 
 	// Don't run on new page if not after breakpoint
-	// Unless `hide` argument is passed
+	// unless `hide` override is passed as argument.
 	if (headerHidden === undefined && shouldHide === false && hide === undefined) {
 		return;
 	}
 
-	// Don't hide if already hidden
-	// Make sure hidden states are set
+	// Don't hide if already hidden, set hidden state
 	if (shouldHide && $nav.css('display') === 'none') {
 		headerHidden = true;
 		return;
