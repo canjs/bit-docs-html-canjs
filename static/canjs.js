@@ -49,6 +49,9 @@ var $articleContainer,
 	}, 200);
 })();
 
+// Touch support
+$('body').on('touchstart', function() {});
+
 //////////
 
 function init() {
@@ -211,11 +214,6 @@ function scrollToElement($element) {
 }
 
 function setOnThisPageContent() {
-	// Don't show on touch devices
-	if ('ontouchstart' in window || !!(navigator.msMaxTouchPoints)) {
-		return;
-	}
-
 	// don't bother with 1 header
 	var $h2 = $('h2');
 	if ($h2.length < 2) {
@@ -228,6 +226,9 @@ function setOnThisPageContent() {
 	$onThisPage.parent().css('display', 'inline-block');
 	// add items to on-this-page dropdown
 	$.each($h2, function(index, header) {
+		if (header.tagName === 'A') {
+			header = header.innerHTML;
+		}
 		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
 	});
 }
