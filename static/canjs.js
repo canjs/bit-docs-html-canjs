@@ -82,6 +82,7 @@ function setDocTitle() {
 // regardless of asynchonously embedded elements.
 function setScrollPosition() {
 	var lastAutoScroll;
+	animating = true; // flag animating on first run only
 	scrollPositionInterval = setInterval(function() {
 		var currentScroll = $articleContainer.scrollTop();
 		if (lastAutoScroll === undefined || lastAutoScroll === currentScroll) {
@@ -94,12 +95,15 @@ function setScrollPosition() {
 					$articleContainer.scrollTop(articleScroll);
 				} else {
 					$articleContainer.scrollTop(0);
+					clearInterval(scrollPositionInterval);
 				}
 			}
 			lastAutoScroll = $articleContainer.scrollTop();
 		} else {
+			// User manually scrolled
 			clearInterval(scrollPositionInterval);
 		}
+		animating = false;
 	}, 250);
 }
 
@@ -114,14 +118,14 @@ function navigate(href) {
 		return;
 	}
 
-	// clear existing scroll interval if it's still alive
-	clearInterval(scrollPositionInterval);
-
 	// just scroll to hash if possible
 	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
 		scrollToElement($(window.location.hash));
 		return;
 	}
+
+	// clear existing scroll interval if it's still alive
+	clearInterval(scrollPositionInterval);
 
 	navigating = true;
 	$.ajax(href, {
@@ -284,8 +288,7 @@ function toggleNav(hide) {
 	// Otherwise, check if scroll position is past hiding breakpoint
 	var shouldHide = hide === undefined ? $articleContainer.scrollTop() >= breakpoint : hide;
 
-	// Don't run on new page if not after breakpoint
-	// unless `hide` override is passed as argument.
+	// Don't run on new page before breakpoint unless `hide` override is passed as argument.
 	if (headerHidden === undefined && shouldHide === false && hide === undefined) {
 		return;
 	}
