@@ -1,6 +1,7 @@
-require("./canjs.less!");
 $ = require("jquery");
 var debounce = require("lodash/debounce");
+require("./canjs.less!");
+require('./search').getSearchData();
 
 // state
 var $articleContainer,

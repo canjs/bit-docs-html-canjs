@@ -33,7 +33,7 @@
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.3.0",
+    "bit-docs-generate-html": "^0.3.6",
     "q": "^1.4.1",
     "connect": "^2.14.4",
     "normalize.css": "^4.1.1",

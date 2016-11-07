@@ -32,5 +32,6 @@
 {{/unless}}
 
 <script type="text/javascript">
-  var docObject = {{{docObjectString}}};
+  window.docObject = {{{docObjectString}}};
+  window.pathPrefix = '{{pathToDest}}';
 </script>
