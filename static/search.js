@@ -12,7 +12,17 @@ var Search = Control({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		dataUrl: window.pathPrefix + '/searchMap.json'
+		dataUrl: window.pathPrefix + '/searchMap.json',
+
+		//callbacks
+		onResultsHide: null,
+		onResultsHidden: null,
+		onResultsShow: null,
+		onResultsShown: null,
+		navigate:null, // function(href) - provide a custom method for navigation
+
+		//results classes
+		keyboardActiveClass: "keyboard-active"
 	},
 
 	dataPromise: null,
@@ -196,19 +206,41 @@ var Search = Control({
 	//  ---- END SEARCHING / PARSING ---- //
 }, {
 
+	// ---- PROPERTIES ---- //
+
+	//elements
+	$element: null,
+	$inputWrap: null,
+	$input: null,
+
+	//results elements
+	$resultsContainer: null, 			//contains all the markup for the search results
+	$resultsWrap: null, 					//used to replace its inner content via searchResultsRenderer
+	$resultsContainerParent: null,
+	$resultsCancelLink: null,
+	$resultsList: null, // the ul that holds the results (refreshed every time the dom is updated with new results)
+
+	//results navigation elements
+	$activeResult: null,
+
+	// ---- END PROPERTIES ---- //
+
+
 	// ---- SETUP / TEARDOWN ---- //
 
 	init(el,options){
 
+		//ensure data has been requested
 		if(!this.constructor.dataPromise){
 			this.constructor.getData(this.options.dataUrl);
 		}
 
+		//init elements
 		this.$element = $(this.element);
 		this.$inputWrap = this.$element.find('.search-wrap');
 		this.$input = this.$inputWrap.find(".search");
-		this.$resultsContainer = $(options.searchResultsContainerSelector); //contains all the markup for the search results
-		this.$resultsWrap = this.$resultsContainer.find(".search-results-wrap"); //used to replace its inner content via searchResultsRenderer
+		this.$resultsContainer = $(options.searchResultsContainerSelector); 
+		this.$resultsWrap = this.$resultsContainer.find(".search-results-wrap");
 		this.$resultsContainerParent = this.$resultsContainer.closest(options.searchResultsContainerParentSelector);
 		this.$resultsCancelLink = this.$resultsContainer.find(".search-cancel");
 
@@ -235,7 +267,11 @@ var Search = Control({
 
 	// ---- EVENTS ---- //
 
-	//listen for keyup
+	//keyup
+	//  esc exits search results
+	//  down activates next result
+	//  up activates previous result
+	//  any other key triggers search
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
 
@@ -252,6 +288,14 @@ var Search = Control({
 			case 27: //esc
 				this.clear();
 				break;
+			case 40: //down
+				this.activateNextResult();
+				break;
+			case 38: //up
+				this.activatePrevResult();
+				break;
+			case 13: //enter
+				this.selectActiveResult();
 			default:
 				this.search(value);
 				this.showResults();
@@ -283,9 +327,19 @@ var Search = Control({
 			});
 		}
 
-		//hide the search on result link click
+		// if we click the list item, navigate
+		// if the target element is an anchor tag, simply clear
 		if(this.$resultsContainer && this.$resultsContainer.length){
-			this.$resultsContainer.on("click.search-component", ".search-results a", (ev) => {
+			this.$resultsContainer.on("click.search-component", ".search-results > ul > li", (ev) => {
+				var $target = $(ev.target),
+						$a;
+
+				if(!$target.is("a")){
+					$a = $target.closest("li").find("a");
+					this.navigate($a.attr("href"));
+					return;
+				}
+
 				this.clear();
 			});
 		}
@@ -336,18 +390,25 @@ var Search = Control({
 	//  with stache rendered data based on given falue
 	search(value){
 		var resultsMap = this.constructor.searchEngineSearch(value),
+				numResults = Object.keys(resultsMap).length,
 				resultsFrag = this.options.resultsRenderer({
 					results:resultsMap,
-					numResults:Object.keys(resultsMap).length,
+					numResults:numResults,
 					searchValue:value,
-					pathPrefix:this.options.pathPrefix
+					pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
 				});
 
 		this.$resultsWrap.empty();
 		this.$resultsWrap[0].appendChild(resultsFrag);
+
+		//refresh necessary dom
+		this.$resultsList = null;
+		if(numResults){
+			this.$resultsList = this.$resultsWrap.find(".search-results > ul");
+		}
 	},
 
-	// ---- SEARCH VIEW ---- //
+	// ---- SHOW/HIDE ---- //
 
 	// function clear
 	// - hides the results
@@ -358,27 +419,181 @@ var Search = Control({
 		this.hideResults();
 	},
 
+	// function hideResults
+	// animate the results out
 	hideResults(){
 		if(this.$resultsContainer.is(":visible")){
+
+			if(this.options.onResultsHide){
+				this.options.onResultsHide();
+			}
+			this.deactivateResult();
 			this.$resultsContainer.stop().fadeOut({
 				duration: 400,
 				complete: () => {
 					this.$resultsContainerParent.removeClass("search-active");
+					if(this.options.onResultsHidden){
+						this.options.onResultsHidden();
+					}
 				}
 			});
 		}
 	},
 
+	// function showResults
+	// animate the results in
 	showResults(){
 		if(!this.$resultsContainer.is(":visible")){
+			if(this.options.onResultsShow){
+				this.options.onResultsShow();
+			}
 			this.$resultsContainerParent.stop().addClass("search-active");
 			this.$resultsContainer.fadeIn({
-				duration: 400
+				duration: 400,
+				complete: () => {
+					if(this.options.onResultsShown){
+						this.options.onResultsShown();
+					}
+				}
 			});
+			
+			this.$resultsContainer.scrollTop(0);
 		}
-	}
-	// ---- END SEARCH VIEW ---- //
+	},
 
+	// ---- END SHOW/HIDE ---- //
+
+
+	// ---- KEYBOARD NAVIGATION ---- //
+
+	// function activateNextResult
+	// finds the next result in the results to activate
+	activateNextResult(){
+		var $nextResult;
+
+		if(!this.$resultsContainer.is(":visible")){
+			return;
+		}
+		if(!this.$resultsList){
+			return;
+		}
+
+		//if no currently active result,
+		//  activate the first one
+		if(!this.$activeResult){
+			this.activateResult(this.$resultsList.find("li").first());
+			return;
+		}
+
+		$nextResult = this.$activeResult.next("li");
+
+		//if no next result, 
+		//  activate the first one
+		if(!$nextResult || ($nextResult && !$nextResult.length)){
+			this.activateResult(this.$resultsList.find("li").first());
+			return;
+		}
+		this.activateResult($nextResult);
+	},
+	// function activateNextResult
+	// finds the previous result in the results to activate
+	activatePrevResult(){
+		var $prevResult;
+
+		if(!this.$resultsContainer.is(":visible")){
+			return;
+		}
+		if(!this.$resultsList){
+			return;
+		}
+
+		//if no currently active result,
+		//  activate the last one
+		if(!this.$activeResult){
+			this.activateResult(this.$resultsList.find("li").last());
+			return;
+		}
+
+		$prevResult = this.$activeResult.prev("li");
+
+		//if no prev result, 
+		//  activate the last one
+		if(!$prevResult || ($prevResult && !$prevResult.length)){
+			this.activateResult(this.$resultsList.find("li").last());
+			return;
+		}
+		this.activateResult($prevResult);
+	},
+
+	// function activateResult
+	// sets property and adds class to active result
+	activateResult($result){
+		this.deactivateResult(); 
+		this.$activeResult = $result;
+		this.$activeResult.addClass(this.options.keyboardActiveClass);
+
+		var activeResultOffset = this.getActiveResultOffset();
+
+		this.$resultsContainer.scrollTop(this.$activeResult.position().top - activeResultOffset);
+	},
+
+	// function deactivateResult
+	// unsets property and removes class to active result
+	deactivateResult(){
+		if(this.$activeResult){
+			this.$activeResult.removeClass(this.options.keyboardActiveClass);
+			this.$activeResult = null;
+		}
+	},
+
+	// function selectActiveResult
+	// navigates to active result's href it there is an active result present
+	selectActiveResult(){
+		if(!this.$activeResult){
+			return;
+		}
+
+		var $a = this.$activeResult.find("a"),
+				href = $a.attr("href");
+
+		this.navigate(href);
+	},
+
+	// function getActiveResultOffset
+	// if method provided, use the return value
+	// otherwise, use the position().top of the first list item
+	getActiveResultOffset(){
+		
+		if(this.options.getActiveResultOffset){
+			return this.options.getActiveResultOffset();
+		}
+
+		var $item = this.$resultsList.find("li").first();
+		if(!$item || ($item && !$item.length)){
+			return 0;
+		}
+		return $item.position().top;
+	},
+
+	// ---- END KEYBOARD NAVIGATION ---- //
+
+
+	// ---- HELPERS ---- //
+
+	// function navigate	
+	//if we've been given a navigate method, call it
+	//  otherwise, just navigate normally
+	navigate(href){
+		if(this.options.navigate){
+			this.options.navigate(href);
+		}else{
+			window.location.href = href;
+		}
+
+		this.clear();
+		
+	}
+	// ---- END HELPERS ---- //
 
 });
 

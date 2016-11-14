@@ -45,6 +45,7 @@
 	    border: none;
 	    padding: 0;
 	    // text-indent: 1.5em;
+	    .placeholder(@gray);
 
 			&:focus{
 				outline:none;
@@ -87,10 +88,12 @@
 		}
 
 		ul{
+			padding:0;
 			> li{
-				padding: .5em 0;
+				padding: .5em;
 				margin-bottom: .5em;
 				border-bottom: 1px solid @light-gray-color;
+				border-left:3px solid transparent;
 				a{
 					color: @link-color;
 					padding-bottom:0;
@@ -113,11 +116,19 @@
 					color: @gray;
 			    margin-top: 1em;
 				}
+
+				&:hover,
+				&.keyboard-active{
+					background-color: @highlight-color;
+					border-left-color:@gray;
+					cursor:pointer;
+				}
 			}
 		}
 
 		.search-results-heading{
 			padding:0 .5em;
+			border-left: 3px solid transparent;
 			.count{
 				font-weight:bold;
 			}

@@ -83,7 +83,12 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
-	searchControl = new SearchControl(".search-bar");
+	searchControl = new SearchControl(".search-bar", {
+		navigate(href){
+			window.history.pushState(null, null, href);
+			navigate(href);
+		}
+	});
 }
 
 function setDocTitle() {
