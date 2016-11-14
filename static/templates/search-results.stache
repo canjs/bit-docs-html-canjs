@@ -16,9 +16,16 @@
     <ul>
       {{#each results as result}}
         <li>
-          <a href="{{pathPrefix}}/{{result.url}}" title="{{result.title}}" class="result-name">
-            {{result.name}}
+          <a href="/{{pathPrefix}}/{{result.url}}" title="{{result.name}}" class="result-name">
+            {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
           </a>
+
+          {{#if result.title}}
+          <span class="name">
+						({{result.name}})
+          </span>	
+          {{/if}}
+
           {{#if result.description}}
             <div class="result-description" title="{{result.description}}">
               {{result.description}}

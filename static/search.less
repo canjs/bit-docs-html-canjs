@@ -89,20 +89,29 @@
 		ul{
 			> li{
 				padding: .5em 0;
+				margin-bottom: .5em;
 				border-bottom: 1px solid @light-gray-color;
 				a{
 					color: @link-color;
+					padding-bottom:0;
 				}
 
+				.name{
+			    line-height: 1;
+			    font-size: .75em;
+			    font-weight: bold;
+			    font-style: italic;
+			    display: inline-block;
+				}
 				.result-description{
 					font-size: .9em;
-					font-style: italic;
-					white-space: nowrap;
-					text-overflow: ellipsis;
+					// white-space: nowrap;
+					// text-overflow: ellipsis;
+					// overflow: hidden;
 					width: 100%;
-					overflow: hidden;
 					display:block;
 					color: @gray;
+			    margin-top: 1em;
 				}
 			}
 		}

@@ -1,12 +1,7 @@
 $ = require("jquery");
 var debounce = require("lodash/debounce");
 require("./canjs.less!");
-var searchHelpers = require('./search');
-var searchResultsRenderer = require("./templates/search-results.stache!");
-var searchEngineSearch = searchHelpers.searchEngineSearch;
-
-//do this as soon as we can
-searchHelpers.getSearchData();
+var SearchControl = require('./search');
 
 // state
 var $articleContainer,
@@ -27,7 +22,8 @@ var $articleContainer,
 	$searchResultsContainerParent, //.bottom-left
 	$searchResultsContainer, //contains all the markup for the search results
 	$searchResultsWrap, //used to replace its inner content via searchResultsRenderer
-	$searchResultsCancelLink;
+	$searchResultsCancelLink,
+	searchControl;
 
 (function() {
 	init();
@@ -87,119 +83,8 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
-	initSearch();
+	searchControl = new SearchControl(".search-bar");
 }
-
-
-function initSearch(){
-	$searchBar = $(".search-bar");
-	$searchInputWrap = $searchBar.find('.search-wrap');
-	$searchInput = $searchInputWrap.find(".search");
-	$searchResultsContainer = $(".search-results-container");
-	$searchResultsWrap = $searchResultsContainer.find(".search-results-wrap");
-	$searchResultsContainerParent = $searchResultsContainer.closest(".bottom-left");
-	$searchResultsCancelLink = $searchResultsContainer.find(".search-cancel");
-	//only do stuff if we have an input to work with
-	if($searchInput && $searchInput.length){
-
-		//focus the search on init
-		$searchInput.trigger("focus");
-
-		//cancel search on cancel click
-		$searchBar.on("click", ".search-icon-cancel", function(ev){
-			ev.preventDefault();
-			ev.stopPropagation();
-			hideSearchResults();
-			clearSearch();
-		});
-
-		//focus the search input when we click the search bar
-		$searchBar.on("click", function(ev){
-			$searchInput.trigger("focus");
-		});
-
-		//hide the search on cancel click
-		if($searchResultsCancelLink && $searchResultsCancelLink.length){
-			$searchResultsCancelLink.on("click", function(ev){
-				ev.preventDefault();
-				hideSearchResults();
-				clearSearch();
-			});
-		}
-
-		//hide the search on result link click
-		$searchResultsContainer.on("click", ".search-results a", function(ev){
-			hideSearchResults();
-			clearSearch();
-		});
-
-		//listen for keyup
-		$searchInput.on("keyup", function(ev){
-			var value = ev.target.value;
-
-			//hide search if input is empty
-			if(!value || !value.length){
-				hideSearchResults();
-				$searchInputWrap.removeClass("has-value");
-				return;
-			}
-
-			$searchInputWrap.addClass("has-value");
-
-			switch(ev.keyCode){
-				default:
-					runSearch(value, $searchResultsWrap);
-					showSearchResults();
-					break;
-			}
-		});
-	}
-}
-
-// function runSeach
-// takes a value and performs the following:
-//  - get a map of data relevant to the given value
-//  - swap out the content of $resultsWrap for the rendered results fragment
-function runSearch(value, $resultsWrap){
-	var searchResultsMap = searchEngineSearch(value),
-			resultsFrag = searchResultsRenderer({
-				results:searchResultsMap,
-				numResults:Object.keys(searchResultsMap).length,
-				searchValue:value,
-				pathPrefix:pathPrefix
-			});
-
-	$resultsWrap.empty();
-	$resultsWrap[0].appendChild(resultsFrag);
-}
-
-
-// ---- SEARCH VIEW ---- //
-function clearSearch(){
-	$searchInput.val("").trigger("focus");
-	$searchInputWrap.removeClass("has-value");
-}
-
-function hideSearchResults(){
-	if($searchResultsContainer.is(":visible")){
-		$searchResultsContainer.stop().fadeOut({
-			duration: 400,
-			complete: function(){
-				$searchResultsContainerParent.removeClass("search-active");
-			}
-		});
-	}
-}
-function showSearchResults(){
-	if(!$searchResultsContainer.is(":visible")){
-		$searchResultsContainerParent.stop().addClass("search-active");
-		$searchResultsContainer.fadeIn({
-			duration: 400
-		});
-	}
-}
-// ---- END SEARCH VIEW ---- //
-
 
 function setDocTitle() {
 	var title = window.docObject.title || window.docObject.name;

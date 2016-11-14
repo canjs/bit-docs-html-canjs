@@ -17,7 +17,8 @@ generate(docMap,{
             "bit-docs-html-canjs": __dirname,
             "bit-docs-prettify": "^0.1.0",
 			"bit-docs-html-highlight-line": "^0.2.2",
-			"steal-stache": "^3.0.1"
+			"steal-stache": "^3.0.1",
+			"can-control": "^3.0.3"
         }
     },
     dest: path.join(__dirname, "temp"),
