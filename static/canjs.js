@@ -12,7 +12,8 @@ var $articleContainer,
 	headerHidden,
 	animating,
 	navigating,
-	scrollPositionInterval;
+	scrollPositionInterval,
+	currentHref;
 
 (function() {
 	init();
@@ -65,6 +66,7 @@ function init() {
 	$headers = getHeaders();
 	$nav = $('.top-left > .brand, .top-right-top');
 	headerHidden = undefined;
+	currentHref = window.location.href;
 
 	setOnThisPageContent();
 	buildTOC();
@@ -125,10 +127,10 @@ function navigate(href) {
 	$articleContainer.scrollTop(0);
 
 	// just scroll to hash if possible
-	if ($(window.location.hash).length && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
-		scrollToElement($(window.location.hash));
-		return;
-	}
+    if (window.location.hash && href.replace(/#.*/, '') === currentHref.replace(/#.*/, '')) {
+        scrollToElement($(window.location.hash));
+        return;
+    }
 
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
