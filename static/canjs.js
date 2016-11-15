@@ -32,6 +32,7 @@ var $articleContainer,
 
 	// Back/Forward navigation
 	window.addEventListener('popstate', function(ev) {
+		ev.preventDefault();
 		navigate(window.location.href);
 	});
 
@@ -116,13 +117,15 @@ function navigate(href) {
 		return;
 	}
 
+	$articleContainer.scrollTop(0);
+
 	// disable links while navigating
 	if (navigating) {
 		return;
 	}
 
 	// just scroll to hash if possible
-	if (window.location.hash && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
+	if ($(window.location.hash).length && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
 		scrollToElement($(window.location.hash));
 		return;
 	}
