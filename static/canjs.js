@@ -117,12 +117,12 @@ function navigate(href) {
 		return;
 	}
 
-	$articleContainer.scrollTop(0);
-
 	// disable links while navigating
 	if (navigating) {
 		return;
 	}
+
+	$articleContainer.scrollTop(0);
 
 	// just scroll to hash if possible
 	if ($(window.location.hash).length && href.replace(/#.*/, '') === window.location.href.replace(/#.*/, '')) {
