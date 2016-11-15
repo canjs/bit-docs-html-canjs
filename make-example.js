@@ -17,8 +17,9 @@ generate(docMap,{
             "bit-docs-html-canjs": __dirname,
             "bit-docs-prettify": "^0.1.0",
 			"bit-docs-html-highlight-line": "^0.2.2",
-			"steal-stache": "^3.0.1",
-			"can-control": "^3.0.3"
+			//TODO: This should not be include here and should only be included in package.json.
+			//  we get an error without this, here, though
+			"steal-stache": "^3.0.1"
         }
     },
     dest: path.join(__dirname, "temp"),

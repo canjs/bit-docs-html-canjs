@@ -16,7 +16,7 @@
     <ul>
       {{#each results as result}}
         <li>
-          <a href="{{pathPrefix}}{{result.url}}" title="{{result.name}}" class="result-name">
+          <a href="{{docUrl}}" title="{{result.name}}" class="result-name">
             {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
           </a>
 

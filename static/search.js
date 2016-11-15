@@ -1,6 +1,7 @@
 var $ = require("jquery");
 var Control = require("can-control");
-var searchResultsRenderer = require("./templates/search-results.stache!");
+var searchResultsRenderer = require("./templates/search-results.stache!steal-stache");
+var joinURIs = require("can-util/js/join-uris/");
 
 var Search = Control({
 
@@ -396,6 +397,19 @@ var Search = Control({
 					numResults:numResults,
 					searchValue:value,
 					pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
+				},{
+					docUrl: function(){
+						if(!docObject.pathToRoot){
+							return this.url;
+						}
+
+						var root = joinURIs(window.location.href, docObject.pathToRoot);
+						if(root.substr(-1) === "/"){
+							root = root.substr(0, root.length-1);
+						}
+
+						return root + "/" + this.url;
+					}
 				});
 
 		this.$resultsWrap.empty();
