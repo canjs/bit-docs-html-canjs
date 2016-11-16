@@ -1,0 +1,49 @@
+.screenshots {
+	span {
+		position: relative;
+		display: block;
+    .border;
+    border-bottom: none;
+    box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+    padding: 15px;
+    padding-left: 20px;
+    color: @gray;
+    text-decoration: none;
+    font-size: 10px;
+    max-width: 1024px;
+    
+    &:hover, &:visited {
+			color: @gray;
+			text-decoration: none;
+    }
+    &:after {
+	    content: "";
+		  display: inline-block;
+		  background: #fff;
+	    border: 1px solid #ccc;
+	    width: 80%;
+	    height: calc(~"100% - 30px");
+	    position: absolute;
+	    top: 15px;
+	    left: 15px;
+	    z-index: -1;
+    }
+    &:before {
+	    content: "";
+	    display: inline-block;
+	    width: 22px;
+	    height: 22px;
+	    position: absolute;
+	    right: 15px;
+	    border-radius: 50%;
+	    background: #ccc;
+    }
+	}
+	img {
+		.border;
+    box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+    width: 100%;
+    height: auto;
+    max-width: 1024px;
+	}
+}
