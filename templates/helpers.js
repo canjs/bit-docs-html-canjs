@@ -325,22 +325,48 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 DocMapInfo.prototype.getTitle = function(docObject) {
     return docObject.title || docObject.name;
 };
+
+function getShortTitle(name, parent){
+    if(parent && (parent.type === "module" || parent.type === "group")) {
+
+        if(name.indexOf( parent.name+"/" ) === 0 ) {
+            name = name.replace(parent.name+"/", "./");
+        } else {
+            return;
+        }
+        var basename = path.basename(name);
+        if(name.endsWith("/"+basename+"/"+basename)) {
+            return path.dirname(name)+"/";
+        } else {
+            return name;
+        }
+    }
+}
 DocMapInfo.prototype.getShortTitle = function(docObject) {
 
     if(docObject.type === "module") {
-        var parents = this.getParents(docObject);
+        var parents = this.getParents(docObject).reverse();
+
         var parentModule = parents.find(function(docObject){
             return docObject.type === "module";
         });
-        var name = docObject.name;
-        if(parentModule) {
+        var parentGroup = parents[0] && parents[0].type === "group" && parents[0];
 
-            if(docObject.name.indexOf( parentModule.name+"/" ) === 0 ) {
-                name = docObject.name.replace(parentModule.name+"/", "./");
+        var name = docObject.name,
+            shortTitle;
+
+        if(parentGroup) {
+            shortTitle = getShortTitle(name, parentGroup);
+            if(shortTitle) {
+                return shortTitle;
             }
-            var basename = path.basename(name);
-            if(name.endsWith("/"+basename+"/"+basename)) {
-                return path.dirname(name)+"/";
+        }
+
+        if(parentModule) {
+            shortTitle = getShortTitle(name, parentModule);
+
+            if(shortTitle) {
+                return shortTitle;
             }
         }
         return name;
