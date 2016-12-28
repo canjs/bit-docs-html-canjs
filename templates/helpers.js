@@ -328,12 +328,20 @@ DocMapInfo.prototype.getTitle = function(docObject) {
 
 function getShortTitle(name, parent){
     if(parent && (parent.type === "module" || parent.type === "group")) {
+        var modeletName = path.dirname(parent.name),
+            moduleName = path.basename(parent.name);
 
         if(name.indexOf( parent.name+"/" ) === 0 ) {
             name = name.replace(parent.name+"/", "./");
-        } else {
+        }
+        // can-util/dom/events/attributes/attributes's parent is can-util/dom/events/events
+        else if( moduleName && modeletName.endsWith(moduleName) && name.indexOf( modeletName+"/" ) === 0  ) {
+            name = name.replace(modeletName+"/", "./");
+        }
+        else {
             return;
         }
+
         var basename = path.basename(name);
         if(name.endsWith("/"+basename+"/"+basename)) {
             return path.dirname(name)+"/";
@@ -364,7 +372,6 @@ DocMapInfo.prototype.getShortTitle = function(docObject) {
 
         if(parentModule) {
             shortTitle = getShortTitle(name, parentModule);
-
             if(shortTitle) {
                 return shortTitle;
             }
