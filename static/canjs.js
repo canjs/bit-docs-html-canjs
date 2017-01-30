@@ -1,5 +1,6 @@
 require("./canjs.less!");
 $ = require("jquery");
+var debounce = require("lodash/debounce");
 
 // state
 var $articleContainer,
@@ -38,13 +39,13 @@ var $articleContainer,
 		navigate(window.location.href);
 	});
 
-	$articleContainer.on("scroll", function(ev) {
+	$articleContainer.on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
 		// Update the "On This Page" placeholder with header text at scroll position
 		setOnThisPageScroll();
-	});
+	}, 50));
 
 	// toggle nav on interval instead of scroll to prevent queueing issues
 	setInterval(function() {
