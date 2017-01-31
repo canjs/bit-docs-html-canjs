@@ -28,8 +28,9 @@
   "system": {},
   "dependencies": {
     "escape-html": "^1.0.3",
-    "unescape-html": "^1.0.0",
-    "jquery": "^2.2.4"
+    "jquery": "^2.2.4",
+    "lodash": "^4.17.4",
+    "unescape-html": "^1.0.0"
   },
   "devDependencies": {
     "bit-docs-generate-html": "^0.3.0",
