@@ -182,6 +182,7 @@ function navigate(href) {
 			navigating = false;
 		}
 	});
+	Pace.restart();
 }
 
 function getHeaders(useOutline) {
