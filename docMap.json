@@ -15120,7 +15120,7 @@
         "params": []
       }
     ],
-    "parent": "can-core",
+    "parent": "can-define",
     "alias": "can.DefineList",
     "inherits": "can.Construct",
     "signatures": [
@@ -17362,7 +17362,7 @@
       }
     ],
     "name": "can-event/async/async",
-    "parent": "can-infrastructure",
+    "parent": "can-event",
     "signatures": [
       {
         "code": "Object",
@@ -17807,7 +17807,7 @@
       }
     ],
     "name": "can-event/batch/batch",
-    "parent": "can-infrastructure",
+    "parent": "can-event",
     "signatures": [
       {
         "code": "Object",
@@ -37928,7 +37928,7 @@
       }
     ],
     "name": "can-define/map/map",
-    "parent": "can-core",
+    "parent": "can-define",
     "alias": "can.DefineMap",
     "inherits": "can.Construct",
     "signatures": [
@@ -40299,7 +40299,7 @@
       }
     ],
     "name": "can-stache/helpers/route",
-    "parent": "can-core"
+    "parent": "can-stache"
   },
   "can-stache.helpers.routeCurrent": {
     "src": {
