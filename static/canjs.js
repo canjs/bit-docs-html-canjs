@@ -148,9 +148,7 @@ function navigate(href) {
 			xhr.addEventListener("progress", function(evt){
 				if (evt.lengthComputable) {
 					var percentComplete = evt.loaded / evt.total;
-					//Do something with download progress
 					nanobar.go(percentComplete);
-					console.log('precentcomplete', percentComplete);
 				}
 			}, false);
 			return xhr;
