@@ -1,6 +1,9 @@
 require("./canjs.less!");
 $ = require("jquery");
 var debounce = require("lodash/debounce");
+var NanoBar = require("nanobar");
+
+var nanobar = new NanoBar();
 
 // state
 var $articleContainer,
@@ -140,6 +143,18 @@ function navigate(href) {
 	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
+		xhr: function() {
+			var xhr = new window.XMLHttpRequest();
+			xhr.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = evt.loaded / evt.total;
+					//Do something with download progress
+					nanobar.go(percentComplete);
+					console.log('precentcomplete', percentComplete);
+				}
+			}, false);
+			return xhr;
+		},
 		success: function(content) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
@@ -170,6 +185,8 @@ function navigate(href) {
 					window.PACKAGES[packageName]();
 				}
 			}
+
+			nanobar.go(100);
 
 			init();
 			setDocTitle();
