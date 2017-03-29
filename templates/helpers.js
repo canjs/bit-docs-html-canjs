@@ -4,7 +4,6 @@ var escapeHTML = require("escape-html");
 var unescapeHTML = require("unescape-html");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
-
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
     var docMapInfo = new DocMapInfo(docMap, getCurrent);
@@ -175,6 +174,21 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             if (current.package) {
                 return current;
             }
+
+            var splittedName = current.name.split('/');
+            var hasSlash = splittedName.length > 1;
+            /* Sometimes we give a different name for the parent because we want
+             the module to be placed differently on the page. This is to make
+             sure we retrieve the actual closest package to the current docObject
+            */
+            if (hasSlash && current.parent) {
+              var parentHasObjName = current.parent.includes(splittedName[0]);
+              if (!parentHasObjName) {
+                var parent = docMapInfo.docMap[splittedName[0]];
+                return parent;
+              }
+            }
+
             var parents = docMapInfo.getParents(current);
             for (var i = parents.length-1; i >= 0; i--) {
                 if (parents[i].package) {
