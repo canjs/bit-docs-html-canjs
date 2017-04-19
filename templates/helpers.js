@@ -242,7 +242,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             var name = packageObject.name,
                 version = 'v' + packageObject.package.version,
                 srcPath = current.src.path.replace('node_modules/' + name + '/', ''),
-                line = current.src.line ? '#L' + current.src.line : '';
+                line = current.src.line ? '#L' + (current.src.line + 1) : '';
             return '//github.com/canjs/' + name + '/edit/master/' + srcPath + line;
         },
         customSort: function(children) {
