@@ -17,27 +17,24 @@ label[for="nav-trigger"] {
   font-weight: 700;
   .border-radius;
   z-index: 99;
-  transition: background @transition-speed;
+  transition: background .25s;
 }
 label:hover{
   background: @border-color;
 }
 .nav-trigger:checked + label{
-  left: @sidebar-width + @gutter*2;
-  transition: left @transition-speed*2;
+    left: @sidebar-width + @gutter*2;
 }
 .nav-trigger ~ #everything #right {
 	width: 100%;
 }
 .nav-trigger:checked ~ #everything #right {
-  @media screen and (max-width: @breakpoint){
-    flex-shrink: 0;
-    width: auto;
-    position: fixed;
-    left: @sidebar-width;
-    overflow-x: hidden;
-    z-index: 50;
-  }
+  flex-shrink: 0;
+  width: auto;
+  position: fixed;
+  left: @sidebar-width;
+  overflow-x: hidden;
+  z-index: 50;
 }
 .nav-trigger + label {
   .transition-left
