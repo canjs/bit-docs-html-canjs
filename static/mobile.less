@@ -58,7 +58,8 @@ label:hover{
 }
 .top-right-top{
   .brand{
-    display: inline-flex;
+    -js-display: flex; // ie9/10 flexbox fix
+    display: flex;
     margin-left: 100px;
     @media screen and (min-width: @breakpoint){
       display: none;

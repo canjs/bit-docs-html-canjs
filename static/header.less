@@ -112,10 +112,9 @@
 
 // ----- CHAT, FORUM, GITHUB STAR, TWITTER -----
 .top-right-links {
-    -js-display: flex; // ie9/10 flexbox fix
     display: none;
     @media screen and (min-width: @breakpoint){
-        display: flex;
+        -js-display: flex; // ie9/10 flexbox fix
         .flex;
         list-style: none;
         margin: @gutter @gutter*2;
@@ -124,6 +123,8 @@
         flex-basis: 100%;
         align-self: flex-start;
         > li {
+            -js-display: flex; // ie9/10 flexbox fix
+            display: flex;
             font-size: 14px;
             margin-right: @gutter;
             > a {
