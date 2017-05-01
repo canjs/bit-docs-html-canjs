@@ -32,7 +32,8 @@ var $articleContainer,
 	init();
 
 	// flexbox for ie9/10
-	flexibility(document.documentElement);
+	flexibility(document.getElementById('everything'));
+	//flexibility(document.documentElement);
 
 	// prevent sidebar from changing width when header hides
 	$('#left').css('min-width', $('.top-left').width());
