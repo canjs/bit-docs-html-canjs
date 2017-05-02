@@ -7,6 +7,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
     var docMapInfo = new DocMapInfo(docMap, getCurrent);
+    var SRC_PREFIX_REGEX = /node_modules\/[^\/]+/;
 
     return {
         "makeSignature": function(code){
@@ -240,8 +241,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
                 return false;
             }
             var name = packageObject.name,
-                version = 'v' + packageObject.package.version,
-                srcPath = current.src.path.replace('node_modules/' + name + '/', ''),
+                srcPath = current.src.path.replace(SRC_PREFIX_REGEX, ''),
                 line = current.src.line ? '#L' + (current.src.line + 1) : '';
             return '//github.com/canjs/' + name + '/edit/master/' + srcPath + line;
         },
