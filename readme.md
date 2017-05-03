@@ -1,5 +1,7 @@
 ## Initial install:
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/canjs/bit-docs-html-canjs.svg)](https://greenkeeper.io/)
+
 ```
 npm install
 ```
