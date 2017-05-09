@@ -1,13 +1,10 @@
 .top-right-top {
-  -js-display: flex; // ie9/10 flexbox fix
-  display: flex;
+  .flex;
   flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
   flex-shrink: 0;
-  height: 53px;
+  height: @brand-height;
   justify-content: space-between;
-}
-.top-left {
-    display: none;
 }
 .brand {
     height: @brand-height;
@@ -114,7 +111,6 @@
 .top-right-links {
     display: none;
     @media screen and (min-width: @breakpoint){
-        -js-display: flex; // ie9/10 flexbox fix
         .flex;
         list-style: none;
         margin: @gutter @gutter*2;
@@ -123,8 +119,7 @@
         flex-basis: 100%;
         align-self: flex-start;
         > li {
-            -js-display: flex; // ie9/10 flexbox fix
-            display: flex;
+            .flex;
             font-size: 14px;
             margin-right: @gutter;
             > a {
@@ -136,7 +131,6 @@
 
 // ----- BITOVI BITS DROPDOWN -----
 .top-right-bitovi {
-    -js-display: flex; // ie9/10 flexbox fix
     .flex;
     padding: 0;
     margin: 0;

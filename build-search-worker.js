@@ -14,7 +14,7 @@ var dest = siteConfig.dest + '/static/search-worker.js';
 
 fs.mkdir(siteConfig.dest, function() {
   stealTools.export({
-    system: {
+    steal: {
       config: __dirname + '/package.json!npm',
       main: 'static/search-worker'
     },
