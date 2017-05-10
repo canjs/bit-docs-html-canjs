@@ -149,7 +149,6 @@ function navigate(href) {
 			xhr.addEventListener("progress", function(evt){
 				if (evt.lengthComputable) {
 					var percentComplete = (evt.loaded / evt.total) * 100;
-					console.log(percentComplete);
 					loader.update(Math.floor(percentComplete));
 				}
 			}, false);
