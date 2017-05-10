@@ -1,6 +1,6 @@
 function LoadingBar(c){
     this.meter = $('<span>', {style: 'width:0%;'});
-    this.elem = $('<div>', {styles: 'display:none', class: 'meter animate '+c}).append(
+    this.elem = $('<div>', {style: 'display:none', class: 'meter animate '+c}).append(
       this.meter.append($('<span>'))
   );
   $('body').prepend(this.elem);
