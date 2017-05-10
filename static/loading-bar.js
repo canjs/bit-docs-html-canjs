@@ -8,7 +8,7 @@ function LoadingBar(c){
 }
 
 LoadingBar.prototype.start = function(){
-    this.meter.css('width', '0%');
+    this.meter.css('width', '1%');
     this.elem.show();
 };
 
