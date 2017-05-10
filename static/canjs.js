@@ -139,21 +139,21 @@ function navigate(href) {
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
 
-	loader.start()
+	loader.start();
 	
-	xhr: function() {
-		var xhr = new window.XMLHttpRequest();
-		xhr.addEventListener("progress", function(evt){
-			if (evt.lengthComputable) {
-				var percentComplete = evt.loaded / evt.total;
-				loader.update(percentComplete);
-			}
-		}, false);
-		return xhr;
-	},
 	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
+		xhr: function() {
+			var xhr = new window.XMLHttpRequest();
+			xhr.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = evt.loaded / evt.total;
+					loader.update(percentComplete);
+				}
+			}, false);
+			return xhr;
+		},
 		success: function(content) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
@@ -178,7 +178,7 @@ function navigate(href) {
 			// Initialize github buttons
 			$.getScript('https://buttons.github.io/buttons.js');
 
-			loader.end()
+			loader.end();
 			
 			// go through every package and re-init
 			for (var packageName in window.PACKAGES) {
