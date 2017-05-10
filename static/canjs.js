@@ -147,9 +147,10 @@ function navigate(href) {
 		xhr: function() {
 			var xhr = new window.XMLHttpRequest();
 			xhr.addEventListener("progress", function(evt){
+				console.log(evt.loaded / evt.total);
 				if (evt.lengthComputable) {
-					var percentComplete = evt.loaded / evt.total;
-					loader.update(percentComplete);
+					var percentComplete = (evt.loaded / evt.total) * 100;
+					loader.update(Math.floor(percentComplete));
 				}
 			}, false);
 			return xhr;
