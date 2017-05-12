@@ -3,6 +3,9 @@ var Control = require("can-control");
 var searchResultsRenderer = require("./templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
 
+//https://lunrjs.com/guides/getting_started.html
+var searchEngine = require("lunr");
+
 var Search = Control({
 
 	defaults: {
@@ -34,7 +37,9 @@ var Search = Control({
 				dataType: "json",
 				cache: true
 			}).then((data) => {
-				this.buildData(data);
+				//save search map
+				this.searchMap = data;
+				this.initSearchEngine(data);
 			});
 		}
 
@@ -42,32 +47,20 @@ var Search = Control({
 	},
 
 	searchData: {},
-	buildData(searchMap) {
-		var parts, part, i, fullName;
-		for (fullName in searchMap) {
-	    fullName.split(".").forEach((part) => {
-        this.addChars(fullName, part.toLowerCase());
-	    });
-		}
+	searchEngine: null,
+	initSearchEngine(searchMap){
+		this.searchEngine = searchEngine(function(){
+			this.ref('name');
+			this.field('title');
+			this.field('description');
+			this.field('url');
 
-		this.searchMap = searchMap;
-	},
-
-	addChars(data, tag) {
-	    var letter, l, depth = 3,
-			current = this.searchData;
-
-	    for ( l = 0; l < depth; l++ ) {
-	        letter = tag.substring(l, l + 1);
-	        if (!current[letter] ) {
-	            current[letter] = {};
-	            current[letter].list = [];
-	        }
-	        if ( $.inArray(current[letter].list, data) === -1 ) {
-	            current[letter].list.push(data);
-	        }
-	        current = current[letter];
-	    }
+			for (var itemKey in searchMap) {
+			  if (searchMap.hasOwnProperty(itemKey)) {
+			    this.add(searchMap[itemKey])
+			  }
+			}
+		});
 	},
 
 	//  ---- SEARCHING / PARSING ---- //
@@ -75,133 +68,46 @@ var Search = Control({
 	// function searchEngineSearch
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch(value){
-				//get the most relevant list of items from the data
-		var dataList = this.buildDataList(value),
-				//get the data associated with the dataList (from canjsSearchMap);
-				mappedData = this.buildMapDataFromList(dataList),
-				//filter the search results based on value
-				filteredData = this.filterMappedData(value, mappedData);
+		var formatSearchTerm = (term) => {
+					//if term has ":", split and see if the first part
+					//matches a search field
+					let colonParts = term.split(":"),
+							//turn additional colons into wildcards
+							colonReplacement = "*",
+							fields = ["name", "title", "description", "url"],
+							hasFieldSearch = colonParts.length > 1,
+							fieldToSearch = hasFieldSearch ? colonParts.shift() : null,
+							isFieldToSearchInFields = fields.indexOf(fieldToSearch) >= 0,
+							wildcardChar = "*";
 
-		return filteredData;
-	},
+					//replace colons because they can confuse the search engine
+					term = colonParts.join(colonReplacement);
+					term += "*";
+					if(!isFieldToSearchInFields){
+						term = "*" + term;
+					}
 
-	// function buildDataList 
-	// takes a 3-deep nested list and returns the most relevant list
-	// {
-	//   "a": {
-	//      "b": {
-	//      		"r": {
-	//      			list: ["abra", "abraham"]
-	//      		},
-	//      		"b": {
-	//      			list: ["abba"]
-	//      		},
-	//      		list: ["abra","abraham","abba"]
-	//      	},
+					return term;
+				},
+				searchTerm = formatSearchTerm(value),
+				searchEngineResults = this.searchEngine.search(searchTerm),
+				mappedData = this.buildMapDataFromSearchEngineResults(searchEngineResults);
 
-	//      "c": {
-	//      		"c": {
-	//      			list: ["accent"]
-	//      		},
-	//      		"u": {
-	//      			list: ["acura"]
-	//      		},
-	//      		list: ["accent", "acura"]
-	//      	}
-	//      list: ["abra", "abraham", "abba", "accent", "acura"]
-	//    },
-	//    "b": { ... },
-	//    ...
-	// }
-	// Examples:
-	// buildDataList("ab") => ["abra","abraham","abba"]
-	// buildDataList("ad") => []
-	// buildDataList("abr") => ["abra", "abraham"]
-	// buildDataList("abz") => []
-	// buildDataList("abrANYTHINGELSE") => []
-	buildDataList(value){
-		var lowerValue = value.toLowerCase();
-		var searchData = this.searchData;
-
-		//no data to search
-		if(!searchData){
-			return [];
-		}
-
-		//no value 
-		//  - return empty list
-		if(lowerValue.length === 0){
-			return [];
-		}
-
-		//only one letter
-		//  - return empty list if no associated top-level list
-		//  - return empty list otherwise
-		if(lowerValue.length === 1){
-			return searchData[lowerValue] ? searchData[lowerValue].list : [];
-		}
-
-		//two letters
-		//  - return empty list if no associated top-level list
-		//  - return empty list if no associated second-level
-		//  - return second-level list otherwise
-		if(lowerValue.length === 2){
-			if(!searchData[lowerValue[0]]){
-				return [];
-			}
-			return searchData[lowerValue[0]][lowerValue[1]] ? searchData[lowerValue[0]][lowerValue[1]].list : [];
-		}
-
-		//more than 2 letters
-		//  - return empty list if no associated top-level list
-		//  - return empty list if no associated second-level
-		//  - return empty list if no associated third-level list
-		//  - return third-level list otherwise
-		if(lowerValue.length > 2){
-			if(!searchData[lowerValue[0]] || !searchData[lowerValue[0]][lowerValue[1]]){
-				return [];
-			}
-
-			return searchData[lowerValue[0]][lowerValue[1]][lowerValue[2]] ? searchData[lowerValue[0]][lowerValue[1]][lowerValue[2]].list : [];
-		}
+		return mappedData;
 	},
 
 
-	// function buildMapDataFromList
+	// function buildMapDataFromSearchEngineResults
 	// takes an array of strings, and returns an object 
 	//  with the keys as the array items and the values as the values from searchMap
-	buildMapDataFromList(list){
+	buildMapDataFromSearchEngineResults(searchResults){
 		var mapData = {},
 				searchMap = this.searchMap;
 
-		list.forEach(function(k){
-			mapData[k] = searchMap[k];
+		searchResults.forEach(function(k){
+			mapData[k.ref] = searchMap[k.ref];
 		});
 		return mapData;
-	},
-
-	// function filterMappedData
-	// takes the search value and a map of the search data
-	//  returns a subset of the data using indexof on key and title
-	filterMappedData(value, data){
-		if(value.length <= 3){
-			return data;
-		}
-
-		var objOut = {},
-				lowerValue = value.toLowerCase(),
-				description, name, title;
-				
-		for(var key in data){
-			name = data[key].name ? data[key].name.toLowerCase() : "";
-			title = data[key].title ? data[key].title.toLowerCase() : "";
-
-			if(key.toLowerCase().indexOf(lowerValue) >= 0 || 
-				title.indexOf(lowerValue) >= 0){
-				objOut[key] = data[key];
-			}
-		}
-		return objOut;
 	}
 
 	//  ---- END SEARCHING / PARSING ---- //
@@ -275,6 +181,10 @@ var Search = Control({
 	//  any other key triggers search
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
+
+		//TODO: debounce
+		//TODO: min-length (3?)
+		//TODO: don't search if value hasn't changed
 
 		//hide search if input is empty
 		if(!value || !value.length){
