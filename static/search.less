@@ -7,46 +7,45 @@
 	cursor:pointer;
 
 	.search-wrap{
-    position: relative;
-    padding: 0 1.5em;
+		position: relative;
+		padding: 0 1.5em;
 		.search-icon{
-	    display: block;
-	    position: absolute;
-	    top: 1px;
-	    left: 0;
-	    height: 1em;
-	    width: 1em;
-	    font-size: 1em;
-	    cursor: pointer;
-	    background-image: url(img/icon-search-white.svg);
-	    background-size: cover;
-	    background-repeat: no-repeat;
+			display: block;
+			position: absolute;
+			top: 1px;
+			left: 0;
+			height: 1em;
+			width: 1em;
+			font-size: 1em;
+			cursor: pointer;
+			background-image: url(img/icon-search-white.svg);
+			background-size: cover;
+			background-repeat: no-repeat;
 		}
 		.search-icon-cancel{
-	    display: block;
-	    position: absolute;
-	    right: 0;
-	    height: 1em;
-	    width: 1em;
-	    font-size: .8em;
-	    top: 0.25em;
-	    cursor: pointer;
-	    background-color: @code-color;
-	    background-image: url(img/icon-x-white.svg);
-	    background-size: cover;
-	    background-repeat: no-repeat;
-	    display:none;
+			display: block;
+			position: absolute;
+			right: 0;
+			height: 1em;
+			width: 1em;
+			font-size: .8em;
+			top: 0.25em;
+			cursor: pointer;
+			background-color: @code-color;
+			background-image: url(img/icon-x-white.svg);
+			background-size: cover;
+			background-repeat: no-repeat;
+			display:none;
 		}
 
 
 		.search{
 			background: @code-color;
 			color: #ffffff;
-	    border: none;
-	    padding: 0;
-	    // text-indent: 1.5em;
-	    .placeholder(@gray);
-
+			border: none;
+			padding: 0;
+			// text-indent: 1.5em;
+			.placeholder(@gray);
 			&:focus{
 				outline:none;
 			}
@@ -100,11 +99,11 @@
 				}
 
 				.name{
-			    line-height: 1;
-			    font-size: .75em;
-			    font-weight: bold;
-			    font-style: italic;
-			    display: inline-block;
+					line-height: 1;
+					font-size: .75em;
+					font-weight: bold;
+					font-style: italic;
+					display: inline-block;
 				}
 				.result-description{
 					font-size: .9em;
@@ -114,7 +113,7 @@
 					width: 100%;
 					display:block;
 					color: @gray;
-			    margin-top: 1em;
+					margin-top: 1em;
 				}
 
 				&:hover,
@@ -138,8 +137,8 @@
 				color: @gray;
 			}
 			.key{
-		    margin: .5em 0;
-		    text-align: center;
+				margin: .5em 0;
+				text-align: center;
 			}
 		}
 	}
