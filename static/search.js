@@ -425,6 +425,9 @@ var Search = Control({
 					this.$resultsContainer.removeClass("is-hiding");
 					if(!this.$resultsContainer.is(".is-showing")){
 						this.$resultsContainerParent.removeClass("search-active");
+						if(this.$resultsWrap && this.$resultsWrap.length){
+							this.$resultsWrap.empty();
+						}
 						if(this.options.onResultsHidden){
 							this.options.onResultsHidden();
 						}
