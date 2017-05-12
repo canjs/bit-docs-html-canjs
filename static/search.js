@@ -222,18 +222,14 @@ var Search = Control({
 
 	//keyup
 	//  esc exits search results
-	//  down activates next result
-	//  up activates previous result
 	//  any other key triggers search
+	searchTerm: "",
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
 
-		//TODO: don't search if value hasn't changed
-
 		//hide search if input is empty or less than min length
 		if(!value || !value.length || value.length < this.options.minSearchLength){
-			this.hideResults();
-			this.$inputWrap.removeClass("has-value");
+			this.unsetSearchState();
 			return;
 		}
 
@@ -243,17 +239,31 @@ var Search = Control({
 			case 27: //esc
 				this.clear();
 				break;
+			case 13: //enter
+				this.selectActiveResult();
+				break;
+			default:
+				if(value !== this.searchTerm){
+					this.searchTerm = value;
+					this.search(value);
+					this.showResults();
+				}
+				break;
+		}
+	},
+
+	//keydown
+	//  down activates next result
+	//  up activates previous result
+	".search keydown": function(el, ev){
+		switch(ev.keyCode){
 			case 40: //down
+				ev.preventDefault();
 				this.activateNextResult();
 				break;
 			case 38: //up
+				ev.preventDefault();
 				this.activatePrevResult();
-				break;
-			case 13: //enter
-				this.selectActiveResult();
-			default:
-				this.search(value);
-				this.showResults();
 				break;
 		}
 	},
@@ -384,11 +394,19 @@ var Search = Control({
 	// ---- SHOW/HIDE ---- //
 
 	// function clear
-	// - hides the results
-	// - empties and focuses the input
+	// - clears & focuses the input
+	// - unsets the search state
 	clear(){
 		this.$input.val("").trigger("focus");
+		this.unsetSearchState();
+	},
+	// function unsetSearchState
+	// - hides the results
+	// - empties and focuses the input
+	unsetSearchState(){
+		clearTimeout(this.searchDebounceHandle);
 		this.$inputWrap.removeClass("has-value");
+		this.searchTerm = "";
 		this.hideResults();
 	},
 
@@ -401,12 +419,15 @@ var Search = Control({
 				this.options.onResultsHide();
 			}
 			this.deactivateResult();
-			this.$resultsContainer.stop().fadeOut({
+			this.$resultsContainer.stop().addClass("is-hiding").fadeOut({
 				duration: 400,
 				complete: () => {
-					this.$resultsContainerParent.removeClass("search-active");
-					if(this.options.onResultsHidden){
-						this.options.onResultsHidden();
+					this.$resultsContainer.removeClass("is-hiding");
+					if(!this.$resultsContainer.is(".is-showing")){
+						this.$resultsContainerParent.removeClass("search-active");
+						if(this.options.onResultsHidden){
+							this.options.onResultsHidden();
+						}
 					}
 				}
 			});
@@ -416,17 +437,20 @@ var Search = Control({
 	// function showResults
 	// animate the results in
 	showResults(){
-		if(!this.$resultsContainer.is(":visible")){
+		if(!this.$resultsContainer.is(":visible") || this.$resultsContainer.is(".is-hiding")){
 			if(this.options.onResultsShow){
 				this.options.onResultsShow();
 			}
 			this.$resultsContainerParent.stop().addClass("search-active");
-			this.$resultsContainer.fadeIn({
+			this.$resultsContainer.addClass("is-showing").fadeIn({
 				duration: 400,
 				complete: () => {
-					if(this.options.onResultsShown){
-						this.options.onResultsShown();
-					}
+					if(!this.$resultsContainer.is(".is-hiding")){
+						this.$resultsContainer.removeClass("is-showing")
+						if(this.options.onResultsShown){
+							this.options.onResultsShown();
+						}
+				}
 				}
 			});
 			
