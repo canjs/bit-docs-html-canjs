@@ -1,6 +1,13 @@
 require("./canjs.less!");
+require("./progress-bar/pace.css");
+require("./progress-bar/pace.js");
 $ = require("jquery");
 var debounce = require("lodash/debounce");
+
+// Progress bar configuration
+Pace.start({
+	restartOnPushState: false
+});
 
 // state
 var $articleContainer,
@@ -182,6 +189,7 @@ function navigate(href) {
 			navigating = false;
 		}
 	});
+	Pace.restart();
 }
 
 function getHeaders(useOutline) {
