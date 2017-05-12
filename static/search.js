@@ -26,7 +26,9 @@ var Search = Control({
 		navigate:null, // function(href) - provide a custom method for navigation
 
 		//results classes
-		keyboardActiveClass: "keyboard-active"
+		keyboardActiveClass: "keyboard-active",
+
+		minSearchLength: 3
 	},
 
 
@@ -226,11 +228,10 @@ var Search = Control({
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
 
-		//TODO: min-length (3?)
 		//TODO: don't search if value hasn't changed
 
-		//hide search if input is empty
-		if(!value || !value.length){
+		//hide search if input is empty or less than min length
+		if(!value || !value.length || value.length < this.options.minSearchLength){
 			this.hideResults();
 			this.$inputWrap.removeClass("has-value");
 			return;
