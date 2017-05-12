@@ -226,7 +226,6 @@ var Search = Control({
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
 
-		//TODO: debounce
 		//TODO: min-length (3?)
 		//TODO: don't search if value hasn't changed
 
@@ -343,37 +342,42 @@ var Search = Control({
 	// function search
 	// replaces the content in the results element
 	//  with stache rendered data based on given falue
+	searchDebounceHandle: 0,
+	searchDebounceTimeout: 400,
 	search(value){
-		var resultsMap = this.constructor.searchEngineSearch(value),
-				numResults = Object.keys(resultsMap).length,
-				resultsFrag = this.options.resultsRenderer({
-					results:resultsMap,
-					numResults:numResults,
-					searchValue:value,
-					pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
-				},{
-					docUrl: function(){
-						if(!docObject.pathToRoot){
-							return this.url;
+		clearTimeout(this.searchDebounceHandle);
+		this.searchDebounceHandle = setTimeout(() => {
+			var resultsMap = this.constructor.searchEngineSearch(value),
+					numResults = Object.keys(resultsMap).length,
+					resultsFrag = this.options.resultsRenderer({
+						results:resultsMap,
+						numResults:numResults,
+						searchValue:value,
+						pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
+					},{
+						docUrl: function(){
+							if(!docObject.pathToRoot){
+								return this.url;
+							}
+
+							var root = joinURIs(window.location.href, docObject.pathToRoot);
+							if(root.substr(-1) === "/"){
+								root = root.substr(0, root.length-1);
+							}
+
+							return root + "/" + this.url;
 						}
+					});
 
-						var root = joinURIs(window.location.href, docObject.pathToRoot);
-						if(root.substr(-1) === "/"){
-							root = root.substr(0, root.length-1);
-						}
+			this.$resultsWrap.empty();
+			this.$resultsWrap[0].appendChild(resultsFrag);
 
-						return root + "/" + this.url;
-					}
-				});
-
-		this.$resultsWrap.empty();
-		this.$resultsWrap[0].appendChild(resultsFrag);
-
-		//refresh necessary dom
-		this.$resultsList = null;
-		if(numResults){
-			this.$resultsList = this.$resultsWrap.find(".search-results > ul");
-		}
+			//refresh necessary dom
+			this.$resultsList = null;
+			if(numResults){
+				this.$resultsList = this.$resultsWrap.find(".search-results > ul");
+			}
+		}, this.searchDebounceTimeout);
 	},
 
 	// ---- SHOW/HIDE ---- //
