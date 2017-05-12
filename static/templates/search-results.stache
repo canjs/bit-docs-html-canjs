@@ -4,7 +4,7 @@
     <span class="description">
       <span class="count">{{numResults}}</span>
       <span class="count-label">
-        {{#eq numResults 1}}result{{else}}results{{/eq}} found for:
+        {{#eq numResults 1}}result{{else}}results{{/eq}} found for
       </span>
     </span>
     <span class="key">
