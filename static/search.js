@@ -29,38 +29,82 @@ var Search = Control({
 		keyboardActiveClass: "keyboard-active"
 	},
 
+
+	//  ---- LOCAL STORAGE ---- //
+	getLocalStorageItem(key){
+		if(!window.localStorage){
+			return null;
+		}
+
+		let storageItem = localStorage.getItem(key);
+
+		if(storageItem){
+			return JSON.parse(storageItem);	
+		}
+
+		return null;
+	},
+	setLocalStorageItem(key, data){
+		if(!window.localStorage){
+			return null;
+		}
+		if(data){
+			localStorage.setItem(key, JSON.stringify(data));
+			return true;
+		}
+		return null;
+	},
+	//  ---- END LOCAL STORAGE ---- //
+
+	searchMapLocalStorageKey: "searchMap",
+	searchMap: null,
 	dataPromise: null,
 	getData(dataUrl) {
 		if(!this.dataPromise){
-			this.dataPromise = $.ajax({
-				url: dataUrl,
-				dataType: "json",
-				cache: true
-			}).then((data) => {
-				//save search map
-				this.searchMap = data;
-				this.initSearchEngine(data);
-			});
+			this.searchMap = this.getLocalStorageItem(this.searchMapLocalStorageKey);
+			if(this.searchMap){
+				this.initSearchEngine(this.searchMap);
+				this.dataPromise = Promise.resolve(this.searchMap);
+			}else{
+				this.dataPromise = $.ajax({
+					url: dataUrl,
+					dataType: "json",
+					cache: true
+				}).then((data) => {
+					//save search map
+					this.searchMap = data;
+					this.setLocalStorageItem(this.searchMapLocalStorageKey, data);
+					this.initSearchEngine(data);
+				});
+			}
+
 		}
 
 		return this.dataPromise;
 	},
 
+	searchIndexLocalStorageKey: "searchIndex",
 	searchData: {},
 	searchEngine: null,
 	initSearchEngine(searchMap){
-		this.searchEngine = searchEngine(function(){
-			this.ref('name');
-			this.field('title');
-			this.field('description');
-			this.field('url');
+		let index = this.getLocalStorageItem(this.searchIndexLocalStorageKey);
+		if(index){
+			this.searchEngine = searchEngine.Index.load(index);
+		}else{
+			this.searchEngine = searchEngine(function(){
+				this.ref('name');
+				this.field('title');
+				this.field('description');
+				this.field('url');
 
-			for (var itemKey in searchMap) {
-			  if (searchMap.hasOwnProperty(itemKey)) {
-			    this.add(searchMap[itemKey])
-			  }
-			}
-		});
+				for (var itemKey in searchMap) {
+				  if (searchMap.hasOwnProperty(itemKey)) {
+				    this.add(searchMap[itemKey])
+				  }
+				}
+			});
+			this.setLocalStorageItem(this.searchIndexLocalStorageKey, this.searchEngine);
+		}
 	},
 
 	//  ---- SEARCHING / PARSING ---- //
