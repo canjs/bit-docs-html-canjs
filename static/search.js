@@ -6,7 +6,7 @@ var joinURIs = require("can-util/js/join-uris/");
 //https://lunrjs.com/guides/getting_started.html
 var searchEngine = require("lunr");
 
-var Search = Control({
+var Search = Control.extend({
 
 	defaults: {
 		//dom selectors
@@ -16,7 +16,8 @@ var Search = Control({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		dataUrl: window.pathPrefix + '/searchMap.json',
+		docMapHashUrl: window.pathPrefix + '/docMapHash.json', 
+		searchMapUrl: window.pathPrefix + '/searchMap.json',
 
 		//callbacks
 		onResultsHide: null,
@@ -28,135 +29,12 @@ var Search = Control({
 		//results classes
 		keyboardActiveClass: "keyboard-active",
 
-		minSearchLength: 3
-	},
+		//search options
+		minSearchLength: 3,
+		searchTimeout: 400,
 
-
-	//  ---- LOCAL STORAGE ---- //
-	getLocalStorageItem(key){
-		if(!window.localStorage){
-			return null;
-		}
-
-		let storageItem = localStorage.getItem(key);
-
-		if(storageItem){
-			return JSON.parse(storageItem);	
-		}
-
-		return null;
-	},
-	setLocalStorageItem(key, data){
-		if(!window.localStorage){
-			return null;
-		}
-		if(data){
-			localStorage.setItem(key, JSON.stringify(data));
-			return true;
-		}
-		return null;
-	},
-	//  ---- END LOCAL STORAGE ---- //
-
-	searchMapLocalStorageKey: "searchMap",
-	searchMap: null,
-	dataPromise: null,
-	getData(dataUrl) {
-		if(!this.dataPromise){
-			this.searchMap = this.getLocalStorageItem(this.searchMapLocalStorageKey);
-			if(this.searchMap){
-				this.initSearchEngine(this.searchMap);
-				this.dataPromise = Promise.resolve(this.searchMap);
-			}else{
-				this.dataPromise = $.ajax({
-					url: dataUrl,
-					dataType: "json",
-					cache: true
-				}).then((data) => {
-					//save search map
-					this.searchMap = data;
-					this.setLocalStorageItem(this.searchMapLocalStorageKey, data);
-					this.initSearchEngine(data);
-				});
-			}
-
-		}
-
-		return this.dataPromise;
-	},
-
-	searchIndexLocalStorageKey: "searchIndex",
-	searchData: {},
-	searchEngine: null,
-	initSearchEngine(searchMap){
-		let index = this.getLocalStorageItem(this.searchIndexLocalStorageKey);
-		if(index){
-			this.searchEngine = searchEngine.Index.load(index);
-		}else{
-			this.searchEngine = searchEngine(function(){
-				this.ref('name');
-				this.field('title');
-				this.field('description');
-				this.field('url');
-
-				for (var itemKey in searchMap) {
-				  if (searchMap.hasOwnProperty(itemKey)) {
-				    this.add(searchMap[itemKey])
-				  }
-				}
-			});
-			this.setLocalStorageItem(this.searchIndexLocalStorageKey, this.searchEngine);
-		}
-	},
-
-	//  ---- SEARCHING / PARSING ---- //
-
-	// function searchEngineSearch
-	// takes a value and returns a map of all relevant search items
-	searchEngineSearch(value){
-		var formatSearchTerm = (term) => {
-					//if term has ":", split and see if the first part
-					//matches a search field
-					let colonParts = term.split(":"),
-							//turn additional colons into wildcards
-							colonReplacement = "*",
-							fields = ["name", "title", "description", "url"],
-							hasFieldSearch = colonParts.length > 1,
-							fieldToSearch = hasFieldSearch ? colonParts.shift() : null,
-							isFieldToSearchInFields = fields.indexOf(fieldToSearch) >= 0,
-							wildcardChar = "*";
-
-					//replace colons because they can confuse the search engine
-					term = colonParts.join(colonReplacement);
-					term += "*";
-					if(!isFieldToSearchInFields){
-						term = "*" + term;
-					}
-
-					return term;
-				},
-				searchTerm = formatSearchTerm(value),
-				searchEngineResults = this.searchEngine.search(searchTerm),
-				mappedData = this.buildMapDataFromSearchEngineResults(searchEngineResults);
-
-		return mappedData;
-	},
-
-
-	// function buildMapDataFromSearchEngineResults
-	// takes an array of strings, and returns an object 
-	//  with the keys as the array items and the values as the values from searchMap
-	buildMapDataFromSearchEngineResults(searchResults){
-		var mapData = {},
-				searchMap = this.searchMap;
-
-		searchResults.forEach(function(k){
-			mapData[k.ref] = searchMap[k.ref];
-		});
-		return mapData;
+		localStorageKeyPrefix: "bit-docs"
 	}
-
-	//  ---- END SEARCHING / PARSING ---- //
 }, {
 
 	// ---- PROPERTIES ---- //
@@ -181,41 +59,253 @@ var Search = Control({
 
 	// ---- SETUP / TEARDOWN ---- //
 
-	init(el,options){
-
-		//ensure data has been requested
-		if(!this.constructor.dataPromise){
-			this.constructor.getData(this.options.dataUrl);
-		}
+	init(){
 
 		//init elements
+		this.setElements();
+
+		//hide the input until the search engine is ready
+		this.$inputWrap.hide();
+
+		this.checkDocMapHash(this.options.docMapHashUrl).then((localStorageCleared) => {
+			this.getSearchMap(this.options.searchMapUrl, localStorageCleared).then((searchMap) => {
+				this.initSearchEngine(searchMap);
+
+				//show the search input when the search engine is ready
+				this.$inputWrap.fadeIn(400);
+
+				//focus the search on init
+				//only do stuff if we have an input to work with
+				if(this.$input && this.$input.length){
+						this.$input.trigger("focus");
+				}
+
+				this.bindResultsEvents();
+			});
+		});
+	},
+	destroy(){
+		this.unbindResultsEvents();
+		this.unsetElements();
+	},
+
+	setElements(){
 		this.$element = $(this.element);
 		this.$inputWrap = this.$element.find('.search-wrap');
 		this.$input = this.$inputWrap.find(".search");
-		this.$resultsContainer = $(options.searchResultsContainerSelector); 
+		this.$resultsContainer = $(this.options.searchResultsContainerSelector); 
 		this.$resultsWrap = this.$resultsContainer.find(".search-results-wrap");
-		this.$resultsContainerParent = this.$resultsContainer.closest(options.searchResultsContainerParentSelector);
+		this.$resultsContainerParent = this.$resultsContainer.closest(this.options.searchResultsContainerParentSelector);
 		this.$resultsCancelLink = this.$resultsContainer.find(".search-cancel");
-
-		//focus the search on init
-		this.constructor.dataPromise.then(() => {
-			//only do stuff if we have an input to work with
-			if(this.$input && this.$input.length){
-					this.$input.trigger("focus");
-			}
-
-			this.bindResultsEvents();
-			this.bindWindowEvents();
-		});
 	},
-
-	destroy(){
-		this.unbindResultsEvents();
-		this.unbindWindowEvents();
+	unsetElements(){
+		this.$element = null;
+		this.$inputWrap = null;
+		this.$input = null;
+		this.$resultsContainer = null;
+		this.$resultsWrap = null;
+		this.$resultsContainerParent = null;
+		this.$resultsCancelLink = null;
 	},
 
 	// ---- SETUP / TEARDOWN ---- //
 
+
+//  ---- LOCAL STORAGE ---- //
+	getLocalStorageItem(key){
+		if(!window.localStorage){
+			return null;
+		}
+
+		let storageItem = localStorage.getItem(key);
+
+		if(storageItem){
+			return JSON.parse(storageItem);	
+		}
+
+		return null;
+	},
+	setLocalStorageItem(key, data){
+		if(!window.localStorage){
+			return null;
+		}
+		if(data){
+			localStorage.setItem(key, JSON.stringify(data));
+			return true;
+		}
+		return null;
+	},
+	// function formatLocalStorageKey
+	// prefixes a key based on options.localStorageKeyPrefix
+	formatLocalStorageKey(key){
+		return this.options.localStorageKeyPrefix + "-" + key;
+	},
+	//  ---- END LOCAL STORAGE ---- //
+
+
+	//  ---- END DATA RETRIEVAL ---- //
+	searchMapLocalStorageKey: "searchMap",
+	searchMap: null,
+
+	// function getSearchMap
+	// retrieves the searchMap either from localStorage
+	// or the specified url
+	//
+	// @param dataUrl the url of the searchMap.json file
+	// @param localStorageCleared whether or not the localStorage was cleared
+	//
+	// @returns promise
+	getSearchMap(dataUrl, localStorageCleared) {
+		return new Promise((resolve, reject) => {
+			let localStorageKey = this.formatLocalStorageKey(this.searchMapLocalStorageKey);
+			this.searchMap = this.getLocalStorageItem(localStorageKey);
+			if(this.searchMap){
+				resolve(this.searchMap);
+			}else{
+				$.ajax({
+					url: dataUrl,
+					dataType: "json",
+					cache: true
+				}).then((data) => {
+					//save search map
+					this.searchMap = data;
+					this.setLocalStorageItem(localStorageKey, data);
+					resolve(data);
+				}, reject);
+			}
+		});
+	},
+
+	docMapHashLocalStorageKey: "docMapHash",
+	// function getDocMapHash
+	// retrieves the docMapHash localStorage (if present)
+	// and from the specified url
+	// then compares the two.  If they're different, localStorage is cleared
+	//
+	// @param dataUrl the url of the docMapHash.json file
+	//
+	// @returns promise that resolves to true if localStorage was cleared and false otherwise
+	checkDocMapHash(dataUrl) {
+		
+		return new Promise((resolve, reject) => {
+				//no need to do anything if localStorage isn't present
+				if(!window.localStorage){
+					resolve(false);
+					return;
+				}
+
+				$.ajax({
+					url: dataUrl,
+					dataType: "json",
+					cache: false
+				}).then((data) => {
+					let localStorageKey = this.formatLocalStorageKey(this.docMapHashLocalStorageKey),
+							docMapHashLocalStorage = this.getLocalStorageItem(localStorageKey),
+							lsHash = docMapHashLocalStorage && docMapHashLocalStorage.hash,
+							dataHash = data && data.hash;
+
+					//no lsHash && no dataHash => resolve
+					//lsHash && no dataHash => resolve
+					if(!dataHash){
+						resolve(false);
+						return;
+					}
+
+					//no lsHash && dataHash => save && resolve
+					//lsHash && dataHash => check if same
+					if(lsHash !== dataHash){
+
+						//TODO: wait until after we've attempted to get a new
+						//searchMap before clearing?
+						localStorage.clear();
+						this.setLocalStorageItem(localStorageKey, data);
+						resolve(true);
+						return;
+					}
+
+					resolve(false);
+				}, reject);
+		});
+	},
+
+
+	//  ---- END DATA RETRIEVAL ---- //
+
+
+
+	//  ---- SEARCHING / PARSING ---- //
+
+	searchIndexLocalStorageKey: "searchIndex",
+	searchEngine: null,
+	// function initSearchEngine
+	// checks localStorage for an index
+	//   if found
+	//     generates search engine from saved index
+	//   else
+	//     generates search engine from searchMap & saves index to local storage
+	initSearchEngine(searchMap){
+		let localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey),
+				index = this.getLocalStorageItem(localStorageKey);
+		if(index){
+			this.searchEngine = searchEngine.Index.load(index);
+		}else{
+			this.searchEngine = searchEngine(function(){
+				this.ref('name');
+				this.field('title');
+				this.field('description');
+				this.field('url');
+
+				for (var itemKey in searchMap) {
+				  if (searchMap.hasOwnProperty(itemKey)) {
+				    this.add(searchMap[itemKey])
+				  }
+				}
+			});
+			this.setLocalStorageItem(localStorageKey, this.searchEngine);
+		}
+	},
+
+	// function searchEngineSearch
+	// takes a value and returns a map of all relevant search items
+	searchEngineSearch(value){
+		return this.searchEngine
+					//run the search
+					.search(this.formatSearchTerm(value))
+					//convert the results into a searchMap subset
+					.map(result => this.searchMap[result.ref]);
+	},
+
+	//function formatSearchTerm
+	// replace colons because they can confuse the search engine
+	// if they're not part of a field search
+	// @param term
+	formatSearchTerm(term){
+		let colonParts = term.split(":"),
+				wildcardChar = "*"
+
+		//go ahead and leave if no colons found
+		if(colonParts.length === 1){
+			return wildcardChar + term + wildcardChar;
+		}
+
+		let colonReplacement = "*",
+				fields = ["name", "title", "description", "url"],
+				hasFieldSearch = colonParts.length > 1,
+				fieldToSearch = hasFieldSearch ? colonParts.shift() : null,
+				isFieldToSearchInFields = fields.indexOf(fieldToSearch) >= 0;
+
+		term = colonParts.join(colonReplacement) + wildcardChar;
+
+		if(isFieldToSearchInFields){
+			term = fieldToSearch + ":" + term;
+		}else{
+			term = wildcardChar + term;
+		}
+
+		return term;
+	},
+
+	//  ---- END SEARCHING / PARSING ---- //
 
 
 	// ---- EVENTS ---- //
@@ -317,7 +407,7 @@ var Search = Control({
 
 		//hide the search on result link click
 		if(this.$resultsContainer && this.$resultsContainer.length){
-			this.$resultsContainer.off("click.search-component", ".search-results a");
+			this.$resultsContainer.off("click.search-component", ".search-results > ul > li");
 		}
 	},
 	// ---- END RESULTS EVENTS ---- //
@@ -326,22 +416,16 @@ var Search = Control({
 	// ---- WINDOW EVENTS ---- //
 
 	// [ctrl + k] focuses the search input
-	bindWindowEvents(){
-		$(window).on("keyup.search-component", (ev) => {
-			if(!ev.ctrlKey){
-				return true;
-			}
+	"{window} keyup": function(el, ev){
+		if(!ev.ctrlKey){
+			return true;
+		}
 
-			switch(ev.keyCode){
-				case 75: // 'k'
-					this.$input.trigger("focus");
-					break;
-			}
-			
-		});
-	},
-	unbindWindowEvents(){
-		$(window).off("keyup.search-component");
+		switch(ev.keyCode){
+			case 75: // 'k'
+				this.$input.trigger("focus");
+				break;
+		}
 	},
 
 	// ---- END WINDOW EVENTS ---- //
@@ -354,11 +438,10 @@ var Search = Control({
 	// replaces the content in the results element
 	//  with stache rendered data based on given falue
 	searchDebounceHandle: 0,
-	searchDebounceTimeout: 400,
 	search(value){
 		clearTimeout(this.searchDebounceHandle);
 		this.searchDebounceHandle = setTimeout(() => {
-			var resultsMap = this.constructor.searchEngineSearch(value),
+			var resultsMap = this.searchEngineSearch(value),
 					numResults = Object.keys(resultsMap).length,
 					resultsFrag = this.options.resultsRenderer({
 						results:resultsMap,
@@ -366,7 +449,7 @@ var Search = Control({
 						searchValue:value,
 						pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
 					},{
-						docUrl: function(){
+						docUrl(){
 							if(!docObject.pathToRoot){
 								return this.url;
 							}
@@ -388,7 +471,7 @@ var Search = Control({
 			if(numResults){
 				this.$resultsList = this.$resultsWrap.find(".search-results > ul");
 			}
-		}, this.searchDebounceTimeout);
+		}, this.options.searchTimeout);
 	},
 
 	// ---- SHOW/HIDE ---- //

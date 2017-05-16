@@ -16,13 +16,6 @@ var $articleContainer,
 	navigating,
 	scrollPositionInterval,
 	currentHref,
-	$searchBar,
-	$searchInputWrap,
-	$searchInput,
-	$searchResultsContainerParent, //.bottom-left
-	$searchResultsContainer, //contains all the markup for the search results
-	$searchResultsWrap, //used to replace its inner content via searchResultsRenderer
-	$searchResultsCancelLink,
 	searchControl;
 
 (function() {
