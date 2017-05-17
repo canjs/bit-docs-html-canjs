@@ -1,6 +1,7 @@
-require("./canjs.less!");
 $ = require("jquery");
 var debounce = require("lodash/debounce");
+require("./canjs.less!");
+var SearchControl = require('./search');
 
 // state
 var $articleContainer,
@@ -14,7 +15,8 @@ var $articleContainer,
 	animating,
 	navigating,
 	scrollPositionInterval,
-	currentHref;
+	currentHref,
+	searchControl;
 
 (function() {
 	init();
@@ -74,6 +76,12 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
+	searchControl = new SearchControl(".search-bar", {
+		navigate(href){
+			window.history.pushState(null, null, href);
+			navigate(href);
+		}
+	});
 }
 
 function setDocTitle() {
