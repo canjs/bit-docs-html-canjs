@@ -1,16 +1,16 @@
 var generate = require("bit-docs-generate-html/generate");
+var generateSearchMap = require("bit-docs-generate-searchmap/generate");
 var Q = require("q");
 var fs = require("fs");
 var readFile = Q.denodeify(fs.readFile);
 var path = require("path");
 
+var forceBuild = process.argv.indexOf("-f") !== -1;
+
 var docMap = readFile(__dirname+"/docMap.json").then(function(source){
     return JSON.parse(""+source);
 });
-
-var forceBuild = process.argv.indexOf("-f") !== -1;
-
-generate(docMap,{
+var siteConfig = {
     html: {
         templates: path.join(__dirname, "templates"),
         dependencies: {
@@ -30,4 +30,8 @@ generate(docMap,{
 		"2.3.27": "https://v2.canjs.com"
 	},
     debug: true
+};
+
+generate(docMap,siteConfig).then(function(){
+	return generateSearchMap(docMap, siteConfig);
 }).done();

@@ -16,7 +16,7 @@ var Search = Control.extend({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		docMapHashUrl: window.pathPrefix + '/docMapHash.json', 
+		docMapHashUrl: window.pathPrefix + '/searchMapHash.json', 
 		searchMapUrl: window.pathPrefix + '/searchMap.json',
 
 		//callbacks
