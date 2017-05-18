@@ -409,7 +409,7 @@ var Search = Control.extend({
 	// ---- END EVENTS ---- //
 
 	// ---- RESULTS EVENTS ---- //
-	bindResultsEvents(){
+	bindResultsEvents: function(){
 		var self = this;
 
 		//hide the search on cancel click
