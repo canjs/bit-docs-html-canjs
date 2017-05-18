@@ -80,7 +80,7 @@ function init() {
 	setNavToggleListener();
 	setScrollPosition();
 	searchControl = new SearchControl(".search-bar", {
-		navigate(href){
+		navigate: function(href){
 			window.history.pushState(null, null, href);
 			navigate(href);
 		}
