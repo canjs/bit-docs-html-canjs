@@ -26,8 +26,11 @@ var $articleContainer,
 
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
-		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey;
-		if (noModifierKeys && this.hostname === window.location.hostname) {
+		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
+				sameHostname = this.hostname === window.location.hostname,
+				sameProtocol = this.protocol === window.location.protocol;
+
+		if (noModifierKeys && sameHostname && sameProtocol) {
 			ev.preventDefault();
 			var href = this.href;
 			window.history.pushState(null, null, href);
