@@ -16,7 +16,7 @@ var Search = Control.extend({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		docMapHashUrl: window.pathPrefix + '/searchMapHash.json', 
+		searchMapHashUrl: window.pathPrefix + '/searchMapHash.json', 
 		searchMapUrl: window.pathPrefix + '/searchMap.json',
 
 		//callbacks
@@ -33,7 +33,7 @@ var Search = Control.extend({
 		minSearchLength: 3,
 		searchTimeout: 400,
 
-		localStorageKeyPrefix: "bit-docs"
+		localStorageKeyPrefix: "bit-docs-search"
 	}
 }, {
 
@@ -69,8 +69,8 @@ var Search = Control.extend({
 		//hide the input until the search engine is ready
 		this.$inputWrap.hide();
 
-		this.checkDocMapHash(this.options.docMapHashUrl).then(function(localStorageCleared){
-			self.getSearchMap(self.options.searchMapUrl, localStorageCleared).then(function(searchMap){
+		this.checkSearchMapHash(this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
+			self.getSearchMap(self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
 				self.initSearchEngine(searchMap);
 
 				//show the search input when the search engine is ready
@@ -83,7 +83,11 @@ var Search = Control.extend({
 				}
 
 				self.bindResultsEvents();
+			}, function(error){
+				console.error("getSearchMap error", error);
 			});
+		}, function(error){
+			console.error("checkSearchMapHash error", error);
 		});
 	},
 	destroy: function(){
@@ -154,42 +158,69 @@ var Search = Control.extend({
 	// or the specified url
 	//
 	// @param dataUrl the url of the searchMap.json file
-	// @param localStorageCleared whether or not the localStorage was cleared
+	// @param searchMapHashChangedObject {localStorageKey, data} if we should clear localStorage
+	//				false otherwise
 	//
 	// @returns thenable
-	getSearchMap: function(dataUrl, localStorageCleared) {
+	getSearchMap: function(dataUrl, searchMapHashChangedObject) {
 		var self = this,
 				returnDeferred = $.Deferred(),
 				localStorageKey = this.formatLocalStorageKey(this.searchMapLocalStorageKey);
 
 		this.searchMap = this.getLocalStorageItem(localStorageKey);
-		if(this.searchMap){
+		if(this.searchMap && !searchMapHashChangedObject){
 			returnDeferred.resolve(this.searchMap);
 		}else{
+
 			$.ajax({
 				url: dataUrl,
 				dataType: "json",
 				cache: true
 			}).then(function(data){
+				if(!data){
+					if(self.searchMap){
+						returnDeferred.resolve(self.searchMap);
+					}else{
+						returnDeferred.reject({
+							error: "No searchMap data"
+						});
+					}
+
+					return false;
+				}
+
+				//wait until after we have a new searchMap before clearing (if necessary)
+				if(searchMapHashChangedObject){
+					localStorage.clear();
+					//set the searchMapHash item
+					self.setLocalStorageItem(searchMapHashChangedObject.localStorageKey, searchMapHashChangedObject.data);
+				}
+
 				//save search map
 				self.searchMap = data;
 				self.setLocalStorageItem(localStorageKey, data);
 				returnDeferred.resolve(data);
-			}, returnDeferred.reject);
+			}, function(error){
+				if(self.searchMap){
+					returnDeferred.resolve(self.searchMap);
+				}else{
+					returnDeferred.reject(error);
+				}
+			});
 		}
 		return returnDeferred;
 	},
 
-	docMapHashLocalStorageKey: "docMapHash",
-	// function getDocMapHash
-	// retrieves the docMapHash localStorage (if present)
+	searchMapHashLocalStorageKey: "searchMapHash",
+	// function checkSearchMapHash
+	// retrieves the searchMapHash localStorage (if present)
 	// and from the specified url
 	// then compares the two.  If they're different, localStorage is cleared
 	//
-	// @param dataUrl the url of the docMapHash.json file
+	// @param dataUrl the url of the searchMapHash.json file
 	//
 	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
-	checkDocMapHash(dataUrl) {
+	checkSearchMapHash(dataUrl) {
 		var self = this,
 				returnDeferred = $.Deferred();
 
@@ -204,9 +235,9 @@ var Search = Control.extend({
 			dataType: "json",
 			cache: false
 		}).then(function(data){
-			var localStorageKey = self.formatLocalStorageKey(self.docMapHashLocalStorageKey),
-					docMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
-					lsHash = docMapHashLocalStorage && docMapHashLocalStorage.hash,
+			var localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey),
+					searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
+					lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash,
 					dataHash = data && data.hash;
 
 			//no lsHash && no dataHash => resolve
@@ -219,12 +250,10 @@ var Search = Control.extend({
 			//no lsHash && dataHash => save && resolve
 			//lsHash && dataHash => check if same
 			if(lsHash !== dataHash){
-
-				//TODO: wait until after we've attempted to get a new
-				//searchMap before clearing?
-				localStorage.clear();
-				self.setLocalStorageItem(localStorageKey, data);
-				returnDeferred.resolve(true);
+				returnDeferred.resolve({
+					localStorageKey: localStorageKey,
+					data: data
+				});
 				return;
 			}
 
