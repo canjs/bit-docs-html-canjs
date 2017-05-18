@@ -220,7 +220,7 @@ var Search = Control.extend({
 	// @param dataUrl the url of the searchMapHash.json file
 	//
 	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
-	checkSearchMapHash(dataUrl) {
+	checkSearchMapHash: function(dataUrl) {
 		var self = this,
 				returnDeferred = $.Deferred();
 
