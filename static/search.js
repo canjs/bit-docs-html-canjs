@@ -59,7 +59,9 @@ var Search = Control.extend({
 
 	// ---- SETUP / TEARDOWN ---- //
 
-	init(){
+	init: function(){
+
+		var self = this;
 
 		//init elements
 		this.setElements();
@@ -67,29 +69,29 @@ var Search = Control.extend({
 		//hide the input until the search engine is ready
 		this.$inputWrap.hide();
 
-		this.checkDocMapHash(this.options.docMapHashUrl).then((localStorageCleared) => {
-			this.getSearchMap(this.options.searchMapUrl, localStorageCleared).then((searchMap) => {
-				this.initSearchEngine(searchMap);
+		this.checkDocMapHash(this.options.docMapHashUrl).then(function(localStorageCleared){
+			self.getSearchMap(self.options.searchMapUrl, localStorageCleared).then(function(searchMap){
+				self.initSearchEngine(searchMap);
 
 				//show the search input when the search engine is ready
-				this.$inputWrap.fadeIn(400);
+				self.$inputWrap.fadeIn(400);
 
 				//focus the search on init
 				//only do stuff if we have an input to work with
-				if(this.$input && this.$input.length){
-						this.$input.trigger("focus");
+				if(self.$input && self.$input.length){
+						self.$input.trigger("focus");
 				}
 
-				this.bindResultsEvents();
+				self.bindResultsEvents();
 			});
 		});
 	},
-	destroy(){
+	destroy: function(){
 		this.unbindResultsEvents();
 		this.unsetElements();
 	},
 
-	setElements(){
+	setElements: function(){
 		this.$element = $(this.element);
 		this.$inputWrap = this.$element.find('.search-wrap');
 		this.$input = this.$inputWrap.find(".search");
@@ -98,7 +100,7 @@ var Search = Control.extend({
 		this.$resultsContainerParent = this.$resultsContainer.closest(this.options.searchResultsContainerParentSelector);
 		this.$resultsCancelLink = this.$resultsContainer.find(".search-cancel");
 	},
-	unsetElements(){
+	unsetElements: function(){
 		this.$element = null;
 		this.$inputWrap = null;
 		this.$input = null;
@@ -112,12 +114,12 @@ var Search = Control.extend({
 
 
 //  ---- LOCAL STORAGE ---- //
-	getLocalStorageItem(key){
+	getLocalStorageItem: function(key){
 		if(!window.localStorage){
 			return null;
 		}
 
-		let storageItem = localStorage.getItem(key);
+		var storageItem = localStorage.getItem(key);
 
 		if(storageItem){
 			return JSON.parse(storageItem);	
@@ -125,7 +127,7 @@ var Search = Control.extend({
 
 		return null;
 	},
-	setLocalStorageItem(key, data){
+	setLocalStorageItem: function(key, data){
 		if(!window.localStorage){
 			return null;
 		}
@@ -137,7 +139,7 @@ var Search = Control.extend({
 	},
 	// function formatLocalStorageKey
 	// prefixes a key based on options.localStorageKeyPrefix
-	formatLocalStorageKey(key){
+	formatLocalStorageKey: function(key){
 		return this.options.localStorageKeyPrefix + "-" + key;
 	},
 	//  ---- END LOCAL STORAGE ---- //
@@ -154,26 +156,28 @@ var Search = Control.extend({
 	// @param dataUrl the url of the searchMap.json file
 	// @param localStorageCleared whether or not the localStorage was cleared
 	//
-	// @returns promise
-	getSearchMap(dataUrl, localStorageCleared) {
-		return new Promise((resolve, reject) => {
-			let localStorageKey = this.formatLocalStorageKey(this.searchMapLocalStorageKey);
-			this.searchMap = this.getLocalStorageItem(localStorageKey);
-			if(this.searchMap){
-				resolve(this.searchMap);
-			}else{
-				$.ajax({
-					url: dataUrl,
-					dataType: "json",
-					cache: true
-				}).then((data) => {
-					//save search map
-					this.searchMap = data;
-					this.setLocalStorageItem(localStorageKey, data);
-					resolve(data);
-				}, reject);
-			}
-		});
+	// @returns thenable
+	getSearchMap: function(dataUrl, localStorageCleared) {
+		var self = this,
+				returnDeferred = $.Deferred(),
+				localStorageKey = this.formatLocalStorageKey(this.searchMapLocalStorageKey);
+
+		this.searchMap = this.getLocalStorageItem(localStorageKey);
+		if(this.searchMap){
+			returnDeferred.resolve(this.searchMap);
+		}else{
+			$.ajax({
+				url: dataUrl,
+				dataType: "json",
+				cache: true
+			}).then(function(data){
+				//save search map
+				self.searchMap = data;
+				self.setLocalStorageItem(localStorageKey, data);
+				returnDeferred.resolve(data);
+			}, returnDeferred.reject);
+		}
+		return returnDeferred;
 	},
 
 	docMapHashLocalStorageKey: "docMapHash",
@@ -184,48 +188,50 @@ var Search = Control.extend({
 	//
 	// @param dataUrl the url of the docMapHash.json file
 	//
-	// @returns promise that resolves to true if localStorage was cleared and false otherwise
+	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
 	checkDocMapHash(dataUrl) {
-		
-		return new Promise((resolve, reject) => {
-				//no need to do anything if localStorage isn't present
-				if(!window.localStorage){
-					resolve(false);
-					return;
-				}
+		var self = this,
+				returnDeferred = $.Deferred();
 
-				$.ajax({
-					url: dataUrl,
-					dataType: "json",
-					cache: false
-				}).then((data) => {
-					let localStorageKey = this.formatLocalStorageKey(this.docMapHashLocalStorageKey),
-							docMapHashLocalStorage = this.getLocalStorageItem(localStorageKey),
-							lsHash = docMapHashLocalStorage && docMapHashLocalStorage.hash,
-							dataHash = data && data.hash;
+		//no need to do anything if localStorage isn't present
+		if(!window.localStorage){
+			returnDeferred.resolve(false);
+			return;
+		}
 
-					//no lsHash && no dataHash => resolve
-					//lsHash && no dataHash => resolve
-					if(!dataHash){
-						resolve(false);
-						return;
-					}
+		$.ajax({
+			url: dataUrl,
+			dataType: "json",
+			cache: false
+		}).then(function(data){
+			var localStorageKey = self.formatLocalStorageKey(self.docMapHashLocalStorageKey),
+					docMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
+					lsHash = docMapHashLocalStorage && docMapHashLocalStorage.hash,
+					dataHash = data && data.hash;
 
-					//no lsHash && dataHash => save && resolve
-					//lsHash && dataHash => check if same
-					if(lsHash !== dataHash){
+			//no lsHash && no dataHash => resolve
+			//lsHash && no dataHash => resolve
+			if(!dataHash){
+				returnDeferred.resolve(false);
+				return;
+			}
 
-						//TODO: wait until after we've attempted to get a new
-						//searchMap before clearing?
-						localStorage.clear();
-						this.setLocalStorageItem(localStorageKey, data);
-						resolve(true);
-						return;
-					}
+			//no lsHash && dataHash => save && resolve
+			//lsHash && dataHash => check if same
+			if(lsHash !== dataHash){
 
-					resolve(false);
-				}, reject);
-		});
+				//TODO: wait until after we've attempted to get a new
+				//searchMap before clearing?
+				localStorage.clear();
+				self.setLocalStorageItem(localStorageKey, data);
+				returnDeferred.resolve(true);
+				return;
+			}
+
+			returnDeferred.resolve(false);
+		}, returnDeferred.reject);
+
+		return returnDeferred;
 	},
 
 
@@ -243,8 +249,8 @@ var Search = Control.extend({
 	//     generates search engine from saved index
 	//   else
 	//     generates search engine from searchMap & saves index to local storage
-	initSearchEngine(searchMap){
-		let localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey),
+	initSearchEngine: function(searchMap){
+		var localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey),
 				index = this.getLocalStorageItem(localStorageKey);
 		if(index){
 			this.searchEngine = searchEngine.Index.load(index);
@@ -267,20 +273,21 @@ var Search = Control.extend({
 
 	// function searchEngineSearch
 	// takes a value and returns a map of all relevant search items
-	searchEngineSearch(value){
+	searchEngineSearch: function(value){
+		var self = this;
 		return this.searchEngine
 					//run the search
 					.search(this.formatSearchTerm(value))
 					//convert the results into a searchMap subset
-					.map(result => this.searchMap[result.ref]);
+					.map(function(result){ return self.searchMap[result.ref] });
 	},
 
 	//function formatSearchTerm
 	// replace colons because they can confuse the search engine
 	// if they're not part of a field search
 	// @param term
-	formatSearchTerm(term){
-		let colonParts = term.split(":"),
+	formatSearchTerm: function(term){
+		var colonParts = term.split(":"),
 				wildcardChar = "*"
 
 		//go ahead and leave if no colons found
@@ -288,7 +295,7 @@ var Search = Control.extend({
 			return wildcardChar + term + wildcardChar;
 		}
 
-		let colonReplacement = "*",
+		var colonReplacement = "*",
 				fields = ["name", "title", "description", "url"],
 				hasFieldSearch = colonParts.length > 1,
 				fieldToSearch = hasFieldSearch ? colonParts.shift() : null,
@@ -374,32 +381,34 @@ var Search = Control.extend({
 
 	// ---- RESULTS EVENTS ---- //
 	bindResultsEvents(){
+		var self = this;
+
 		//hide the search on cancel click
 		if(this.$resultsCancelLink && this.$resultsCancelLink.length){
-			this.$resultsCancelLink.on("click.search-component", (ev) =>{
+			this.$resultsCancelLink.on("click.search-component", function(ev){
 				ev.preventDefault();
-				this.clear();
+				self.clear();
 			});
 		}
 
 		// if we click the list item, navigate
 		// if the target element is an anchor tag, simply clear
 		if(this.$resultsContainer && this.$resultsContainer.length){
-			this.$resultsContainer.on("click.search-component", ".search-results > ul > li", (ev) => {
+			this.$resultsContainer.on("click.search-component", ".search-results > ul > li", function(ev){
 				var $target = $(ev.target),
 						$a;
 
 				if(!$target.is("a")){
 					$a = $target.closest("li").find("a");
-					this.navigate($a.attr("href"));
+					self.navigate($a.attr("href"));
 					return;
 				}
 
-				this.clear();
+				self.clear();
 			});
 		}
 	},
-	unbindResultsEvents(){
+	unbindResultsEvents: function(){
 		//hide the search on cancel click
 		if(this.$resultsCancelLink && this.$resultsCancelLink.length){
 			this.$resultsCancelLink.off("click.search-component");
@@ -438,20 +447,21 @@ var Search = Control.extend({
 	// replaces the content in the results element
 	//  with stache rendered data based on given falue
 	searchDebounceHandle: 0,
-	search(value){
+	search: function(value){
 		clearTimeout(this.searchDebounceHandle);
-		this.searchDebounceHandle = setTimeout(() => {
-			var resultsMap = this.searchEngineSearch(value),
+		var self = this;
+		this.searchDebounceHandle = setTimeout(function(){
+			var resultsMap = self.searchEngineSearch(value),
 					numResults = Object.keys(resultsMap).length,
-					resultsFrag = this.options.resultsRenderer({
+					resultsFrag = self.options.resultsRenderer({
 						results:resultsMap,
 						numResults:numResults,
 						searchValue:value,
-						pathPrefix: (this.options.pathPrefix === '.') ? '' : '/' + this.options.pathPrefix + '/'
+						pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
 					},{
-						docUrl(){
+						docUrl: function(){
 							if(!docObject.pathToRoot){
-								return this.url;
+								return self.url;
 							}
 
 							var root = joinURIs(window.location.href, docObject.pathToRoot);
@@ -459,17 +469,17 @@ var Search = Control.extend({
 								root = root.substr(0, root.length-1);
 							}
 
-							return root + "/" + this.url;
+							return root + "/" + self.url;
 						}
 					});
 
-			this.$resultsWrap.empty();
-			this.$resultsWrap[0].appendChild(resultsFrag);
+			self.$resultsWrap.empty();
+			self.$resultsWrap[0].appendChild(resultsFrag);
 
 			//refresh necessary dom
-			this.$resultsList = null;
+			self.$resultsList = null;
 			if(numResults){
-				this.$resultsList = this.$resultsWrap.find(".search-results > ul");
+				self.$resultsList = self.$resultsWrap.find(".search-results > ul");
 			}
 		}, this.options.searchTimeout);
 	},
@@ -479,14 +489,14 @@ var Search = Control.extend({
 	// function clear
 	// - clears & focuses the input
 	// - unsets the search state
-	clear(){
+	clear: function(){
 		this.$input.val("").trigger("focus");
 		this.unsetSearchState();
 	},
 	// function unsetSearchState
 	// - hides the results
 	// - empties and focuses the input
-	unsetSearchState(){
+	unsetSearchState: function(){
 		clearTimeout(this.searchDebounceHandle);
 		this.$inputWrap.removeClass("has-value");
 		this.searchTerm = "";
@@ -495,7 +505,8 @@ var Search = Control.extend({
 
 	// function hideResults
 	// animate the results out
-	hideResults(){
+	hideResults: function(){
+		var self = this;
 		if(this.$resultsContainer.is(":visible")){
 
 			if(this.options.onResultsHide){
@@ -504,15 +515,15 @@ var Search = Control.extend({
 			this.deactivateResult();
 			this.$resultsContainer.stop().addClass("is-hiding").fadeOut({
 				duration: 400,
-				complete: () => {
-					this.$resultsContainer.removeClass("is-hiding");
-					if(!this.$resultsContainer.is(".is-showing")){
-						this.$resultsContainerParent.removeClass("search-active");
-						if(this.$resultsWrap && this.$resultsWrap.length){
-							this.$resultsWrap.empty();
+				complete: function(){
+					self.$resultsContainer.removeClass("is-hiding");
+					if(!self.$resultsContainer.is(".is-showing")){
+						self.$resultsContainerParent.removeClass("search-active");
+						if(self.$resultsWrap && self.$resultsWrap.length){
+							self.$resultsWrap.empty();
 						}
-						if(this.options.onResultsHidden){
-							this.options.onResultsHidden();
+						if(self.options.onResultsHidden){
+							self.options.onResultsHidden();
 						}
 					}
 				}
@@ -522,7 +533,8 @@ var Search = Control.extend({
 
 	// function showResults
 	// animate the results in
-	showResults(){
+	showResults: function(){
+		var self = this;
 		if(!this.$resultsContainer.is(":visible") || this.$resultsContainer.is(".is-hiding")){
 			if(this.options.onResultsShow){
 				this.options.onResultsShow();
@@ -530,13 +542,13 @@ var Search = Control.extend({
 			this.$resultsContainerParent.stop().addClass("search-active");
 			this.$resultsContainer.addClass("is-showing").fadeIn({
 				duration: 400,
-				complete: () => {
-					if(!this.$resultsContainer.is(".is-hiding")){
-						this.$resultsContainer.removeClass("is-showing")
-						if(this.options.onResultsShown){
-							this.options.onResultsShown();
+				complete: function(){
+					if(!self.$resultsContainer.is(".is-hiding")){
+						self.$resultsContainer.removeClass("is-showing")
+						if(self.options.onResultsShown){
+							self.options.onResultsShown();
 						}
-				}
+					}
 				}
 			});
 			
@@ -551,7 +563,7 @@ var Search = Control.extend({
 
 	// function activateNextResult
 	// finds the next result in the results to activate
-	activateNextResult(){
+	activateNextResult: function(){
 		var $nextResult;
 
 		if(!this.$resultsContainer.is(":visible")){
@@ -580,7 +592,7 @@ var Search = Control.extend({
 	},
 	// function activateNextResult
 	// finds the previous result in the results to activate
-	activatePrevResult(){
+	activatePrevResult: function(){
 		var $prevResult;
 
 		if(!this.$resultsContainer.is(":visible")){
@@ -610,7 +622,7 @@ var Search = Control.extend({
 
 	// function activateResult
 	// sets property and adds class to active result
-	activateResult($result){
+	activateResult: function($result){
 		this.deactivateResult(); 
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
@@ -622,7 +634,7 @@ var Search = Control.extend({
 
 	// function deactivateResult
 	// unsets property and removes class to active result
-	deactivateResult(){
+	deactivateResult: function(){
 		if(this.$activeResult){
 			this.$activeResult.removeClass(this.options.keyboardActiveClass);
 			this.$activeResult = null;
@@ -631,7 +643,7 @@ var Search = Control.extend({
 
 	// function selectActiveResult
 	// navigates to active result's href it there is an active result present
-	selectActiveResult(){
+	selectActiveResult: function(){
 		if(!this.$activeResult){
 			return;
 		}
@@ -645,7 +657,7 @@ var Search = Control.extend({
 	// function getActiveResultOffset
 	// if method provided, use the return value
 	// otherwise, use the position().top of the first list item
-	getActiveResultOffset(){
+	getActiveResultOffset: function(){
 		
 		if(this.options.getActiveResultOffset){
 			return this.options.getActiveResultOffset();
@@ -666,7 +678,7 @@ var Search = Control.extend({
 	// function navigate	
 	//if we've been given a navigate method, call it
 	//  otherwise, just navigate normally
-	navigate(href){
+	navigate: function(href){
 		if(this.options.navigate){
 			this.options.navigate(href);
 		}else{
