@@ -16,8 +16,8 @@ var Search = Control.extend({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		searchMapHashUrl: window.pathPrefix + '/searchMapHash.json', 
-		searchMapUrl: window.pathPrefix + '/searchMap.json',
+		searchMapHashUrl: '/searchMapHash.json', 
+		searchMapUrl: '/searchMap.json',
 
 		//callbacks
 		onResultsHide: null,
@@ -33,7 +33,10 @@ var Search = Control.extend({
 		minSearchLength: 3,
 		searchTimeout: 400,
 
-		localStorageKeyPrefix: "bit-docs-search"
+		localStorageKeyPrefix: "bit-docs-search",
+
+		//whether or not to animate in upon initialization
+		animateInOnStart: true
 	}
 }, {
 
@@ -69,12 +72,16 @@ var Search = Control.extend({
 		//hide the input until the search engine is ready
 		this.$inputWrap.hide();
 
-		this.checkSearchMapHash(this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
-			self.getSearchMap(self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
+		this.checkSearchMapHash(this.options.pathPrefix + this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
+			self.getSearchMap(self.options.pathPrefix + self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
 				self.initSearchEngine(searchMap);
 
 				//show the search input when the search engine is ready
-				self.$inputWrap.fadeIn(400);
+				if(self.options.animateInOnStart){
+					self.$inputWrap.fadeIn(400);
+				}else{
+					self.$inputWrap.show();
+				}
 
 				//focus the search on init
 				//only do stuff if we have an input to work with
@@ -222,7 +229,10 @@ var Search = Control.extend({
 	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
 	checkSearchMapHash: function(dataUrl) {
 		var self = this,
-				returnDeferred = $.Deferred();
+				returnDeferred = $.Deferred(),
+				localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey),
+				searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
+				lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
 
 		//no need to do anything if localStorage isn't present
 		if(!window.localStorage){
@@ -230,15 +240,17 @@ var Search = Control.extend({
 			return;
 		}
 
+
+		localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey);
+		searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey);
+		lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
+
 		$.ajax({
 			url: dataUrl,
 			dataType: "json",
 			cache: false
 		}).then(function(data){
-			var localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey),
-					searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
-					lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash,
-					dataHash = data && data.hash;
+			var dataHash = data && data.hash;
 
 			//no lsHash && no dataHash => resolve
 			//lsHash && no dataHash => resolve
@@ -258,7 +270,14 @@ var Search = Control.extend({
 			}
 
 			returnDeferred.resolve(false);
-		}, returnDeferred.reject);
+		}, function(error){
+			//if we have a localStorage item, use it
+			if(searchMapHashLocalStorage){
+				returnDeferred.resolve(false);
+			}else{
+				returnDeferred.reject(error);
+			}
+		});
 
 		return returnDeferred;
 	},
@@ -490,7 +509,7 @@ var Search = Control.extend({
 					},{
 						docUrl: function(){
 							if(!docObject.pathToRoot){
-								return self.url;
+								return this.url;
 							}
 
 							var root = joinURIs(window.location.href, docObject.pathToRoot);
@@ -498,7 +517,7 @@ var Search = Control.extend({
 								root = root.substr(0, root.length-1);
 							}
 
-							return root + "/" + self.url;
+							return root + "/" + this.url;
 						}
 					});
 
