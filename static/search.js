@@ -508,11 +508,11 @@ var Search = Control.extend({
 						pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
 					},{
 						docUrl: function(){
-							if(!docObject.pathToRoot){
+							if(!self.options.pathPrefix){
 								return this.url;
 							}
 
-							var root = joinURIs(window.location.href, docObject.pathToRoot);
+							var root = joinURIs(window.location.href, self.options.pathPrefix);
 							if(root.substr(-1) === "/"){
 								root = root.substr(0, root.length-1);
 							}
