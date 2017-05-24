@@ -44,10 +44,9 @@
   flex-wrap: nowrap;
   flex-direction: column;
 }
-.top-left {
-  flex-shrink: 0;
-  height: 0;
-  @media screen and (min-width: @breakpoint){
+
+@media screen and (min-width: @breakpoint){
+  .top-left {
     height: auto;
   }
 }

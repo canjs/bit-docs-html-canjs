@@ -1,6 +1,5 @@
  //Search
 .search-bar {
-	display:none;
 	background: @code-color;
 	padding: @gutter @gutter*2;
 	height: 48px;
@@ -149,5 +148,20 @@
 	&.search-active{
 		overflow-y:hidden;
 		position:relative;
+	}
+}
+
+/* Highlight search results */
+.highlighted {
+    position: relative;
+    display: inline-block;
+	&:after {
+		content:"";
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		background-color: hsla(32, 96%, 49%, 0.61);
 	}
 }
