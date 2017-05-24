@@ -20,16 +20,16 @@
 				</a>
 			</li>
 			<li>
-			<a class="github-button nav-social" href="https://github.com/canjs/{{name}}"
-				data-count-href="/canjs/{{name}}/stargazers"
-				data-count-api="/repos/canjs/{{name}}#stargazers_count">Star</a>
-	  	</li>
+				<a class="github-button nav-social" href="https://github.com/canjs/{{repoName}}"
+				   data-count-href="/canjs/{{repoName}}/stargazers"
+				   data-count-api="/repos/canjs/{{repoName}}#stargazers_count">Star</a>
+			</li>
 		</ul>
 	{{/if}}
 	{{#with (getClosestWithPackage)}}
 		<ul class="title-links">
 			<!-- <li><a href="#">docco</a></li> -->
-			<li><a href="{{sourceLink}}">Edit on GitHub</a></li>
+			<li><a href="{{sourceLink (repoName)}}">Edit on GitHub</a></li>
 			<!-- <li><a href="#">download</a></li> -->
 			<!-- <li><a href="#">tests</a></li> -->
 		</ul>

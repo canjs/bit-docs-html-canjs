@@ -234,23 +234,32 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             version = version.replace(/-/g, '--');
             return 'https://img.shields.io/badge/npm%20package-'+version+'-brightgreen.svg';
         },
-				sourceLink: function() {
-						var current = docMapInfo.getCurrent();
+        repoName: function() {
+            var current = docMapInfo.getCurrent();
 
-						if (!current.src) {
-							return false;
-						}
+            if (!current.src) {
+                return false;
+            }
 
-						var nodeModulesFolderNameRegex = /^node_modules\/([\w-]+)\/.*/,
-							folderNameMatches = current.src.path.match(nodeModulesFolderNameRegex),
-							// find repoName by picking it out of the node_modules path, or we can assume this page is in the root canjs repo
-							// this assumes the npm module name matches the github repository name
-							repoName = folderNameMatches ? folderNameMatches[1] : 'canjs',
-							srcPath = current.src.path.replace('node_modules/' + repoName + '/', ''),
-							line = current.src.line ? '#L' + (current.src.line + 1) : '';
+            var nodeModulesFolderNameRegex = /^node_modules\/([\w-]+)\/.*/,
+              folderNameMatches = current.src.path.match(nodeModulesFolderNameRegex);
 
-						return '//github.com/canjs/' + repoName + '/edit/master/' + srcPath + line;
-				},
+            // find repoName by picking it out of the node_modules path, or we can assume this page is in the root canjs repo
+            // this assumes the npm module name matches the github repository name
+            return folderNameMatches ? folderNameMatches[1] : 'canjs';
+        },
+        sourceLink: function(repoName) {
+            var current = docMapInfo.getCurrent();
+
+            if (!current.src) {
+               return false;
+            }
+
+            var srcPath = current.src.path.replace('node_modules/' + repoName + '/', ''),
+              line = current.src.line ? '#L' + (current.src.line + 1) : '';
+
+            return '//github.com/canjs/' + repoName + '/edit/master/' + srcPath + line;
+        },
         customSort: function(children) {
             var ordered = [],
                 sorted = [];
