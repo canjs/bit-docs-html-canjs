@@ -402,14 +402,19 @@ DocMapInfo.prototype.getCurrentTree = function(){
     //
     var getChildren = this.getChildren.bind(this),
         getNestedDocObject = this.getNestedDocObject.bind(this);
-
+    
+    var self = this;
     var cur = this.getCurrent();
-
     var curChildren = this.getNestedChildren(cur);
-
     this.getParents(cur, function(docObject){
         curChildren = getChildren(docObject).map(function(docObject){
             if(docObject.name === cur.name) {
+                if(cur.subchildren){
+                    curChildren = curChildren.map(function(child){
+                        if(child.docObject) child.children = self.getNestedChildren(child.docObject);
+                        return child;
+                    });
+                }
                 return {docObject: docObject, children: curChildren};
             } else {
                 return getNestedDocObject(docObject);
