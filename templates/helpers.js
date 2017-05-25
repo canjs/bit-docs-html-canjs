@@ -410,8 +410,10 @@ DocMapInfo.prototype.getCurrentTree = function(){
         curChildren = getChildren(docObject).map(function(docObject){
             if(docObject.name === cur.name) {
                 if(cur.subchildren){
-                    curChildren.forEach(function(child, i){
-                        if(child.docObject) curChildren[i].children = self.getNestedChildren(child.docObject);
+                    curChildren.forEach(function(child){
+                        if(child.docObject){
+                            child.children = self.getNestedChildren(child.docObject);
+                        }
                     });
                 }
                 return {docObject: docObject, children: curChildren};
