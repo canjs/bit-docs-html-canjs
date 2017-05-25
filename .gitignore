@@ -2,3 +2,4 @@ node_modules/
 temp/
 index.html
 .vscode
+.DS_Store
