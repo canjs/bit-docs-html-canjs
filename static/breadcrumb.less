@@ -1,32 +1,32 @@
 .breadcrumb {
-  	display: none;
-  	@media screen and (min-width: @breakpoint) {
+	display: none;
+	@media screen and (min-width: @breakpoint) {
 		height: 48px;
-	    display: block;
-	    padding-left: @gutter*2;
-	    background: @code-color;
-	    cursor: pointer;
-	    color: lighten(@gray, 10%);
-	    .breadcrumb-dropdown {
+		display: block;
+		padding-left: @gutter*2;
+		background: @code-color;
+		cursor: pointer;
+		color: lighten(@gray, 10%);
+		.breadcrumb-dropdown {
 			display: none;
-	      	padding: @gutter @gutter/4;
+			padding: @gutter @gutter/4;
 			position: relative;
 			color: lighten(@gray, 10%);
 			a {
-				padding-left: @gutter/4;
 				cursor: pointer;
 				color: white;
 			}
 			&:hover {
-	        	.on-this-page {
-	          		display: flex;
-	          		li {
-	            		flex-grow: 1;
-	            		flex-basis: auto;
-	          		}
-	        	}
-	      	}
-      		&::after {
+				color: @link-color;
+				.on-this-page {
+					display: flex;
+					li {
+						flex-grow: 1;
+						flex-basis: auto;
+					}
+				}
+			}
+			&::after {
 				display: inline-block;
 				width: 16px;
 				height: 16px;
@@ -35,85 +35,78 @@
 				background-image: url(img/down_white.svg);
 				background-size: cover;
 				background-repeat: no-repeat;
-      		}
-    	}
-    	li {
+			}
+		}
+		li {
 			display: inline-block;
 			list-style: none;
-			color: @link-color;
-			padding: @gutter @gutter/4;
-	      	a {
-	        	color: white;
-	        	font-size: 14px;
-	        	code {
-	          		background: none;
-	          		line-height: 14px;
-	        	}
-	      	}
-    	}
-  	}
+			a {
+				color: white;
+				font-size: 14px;
+				padding: @gutter;
+				border-radius: 4px 4px 0 0;
+				code {
+					background: none;
+					line-height: 14px;
+				}
+			}
+			a:hover {
+				background-color: white;
+				color: @link-color !important;
+				text-decoration: none;
+			}
+			.on-this-page a {
+				padding: @gutter/4 0;
+			}
+		}
+	}
 }
 
 .on-this-page {
-  	width: 100%;
-  	font-size: 14px;
-  	margin-top:@gutter/2;
-  	margin-bottom: @gutter !important;
-  	background: #fff;
-  	list-style: none;
-  	line-height: 1.5em;
-  	a {
-    	color: @link-color !important;
-  	}
-  	@media screen and (min-width: @breakpoint) {
-    	padding: @gutter;
-    	margin: 0;
-    	position: fixed;
-    	.box-shadow;
-    	z-index: 15;
-    	cursor: pointer;
-    	display: none;
-    	margin-top: 15px;
-    	width: auto;
-    	flex-direction: column;
-    	flex-wrap: nowrap;
-    	li {
-      		padding: 0px;
-      		margin: 0px;
-      		code {
-        		background: none;
-        		font-weight: 600;
-        		padding: 0;
-      		}
-	      	a {
-	        	width: auto;
-	        	padding: 0px;
-	        	margin: 0px;
-	      	}
-    	}
-    	li:hover {
-      		text-decoration: underline;
-    	}
-    	li .current {
-      		text-decoration: underline;
-      		font-weight: bold;
-    	}
-    	&::before {
-      		content: '';
-      		width:10px;
-      		height: 10px;
-      		background: #fff;
-      		position: absolute;
-      		top:-4px;
-      		left: @gutter;
-      		-webkit-transform: rotate(-45deg);
-      		-moz-transform: rotate(-45deg);
-      		-o-transform: rotate(-45deg);
-      		-ms-transform: rotate(-45deg);
-      		transform: rotate(-45deg);
-      		z-index: 16;
-    	}
-  	}
+	width: 100%;
+	font-size: 14px;
+	margin-top:@gutter/2;
+	margin-bottom: @gutter !important;
+	background: #fff;
+	list-style: none;
+	line-height: 1.5em;
+	a {
+		color: @link-color !important;
+	}
+	@media screen and (min-width: @breakpoint) {
+		padding: @gutter;
+		margin: 0;
+		position: fixed;
+		.box-shadow;
+			z-index: 15;
+			cursor: pointer;
+			display: none;
+			margin-top: 15px;
+			width: auto;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		li {
+			padding: 0px;
+			margin: 0px;
+			code {
+				background: none;
+				font-weight: 600;
+				padding: 0;
+			}
+			a {
+				width: auto;
+				padding: 0px;
+				margin: 0px;
+			}
+		}
+		li:hover {
+			text-decoration: underline;
+		}
+		li .current {
+			text-decoration: underline;
+			font-weight: bold;
+		}
+	}
 }
 
 .nav-toggle {
@@ -137,5 +130,5 @@
 }
 
 .on-this-page:empty{
-  	visibility: hidden;
+	visibility: hidden;
 }
