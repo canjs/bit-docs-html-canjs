@@ -32,6 +32,14 @@ ul.title-links {
 .page-type{
 	h1{
 		display: inline-block;
+		float: left;
+	}
+	.title-social {
+		float: right;
+		margin-top: 15px;
+		li{
+			margin: 0 0 0 15px;
+		}
 	}
 	div{
 		display: inline-block;
@@ -50,8 +58,8 @@ ul.title-links {
 		  	display: block;
 		  	color: @link-color;
 		  	line-height: 1.7em;
-		  	cursor: pointer;
 		  	a:hover{
+		  		cursor: pointer;
 		  		text-decoration: underline;
 		  	}
 		}
@@ -64,4 +72,17 @@ ul.title-links {
 }
 .description{
   	margin: @gutter 0;
+}
+
+/* Homepage hero images*/
+.hero-images {
+    border: 1px solid #EEE;
+    padding: 30px;
+	.tortoise {
+		float: right;
+		padding-right: 40px;
+	}
+	.hare {
+		padding-left: 40px;
+	}
 }

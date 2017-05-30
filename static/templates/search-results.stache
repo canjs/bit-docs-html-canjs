@@ -1,0 +1,38 @@
+<div class="search-results">
+
+  <div class="search-results-heading">
+    <span class="description">
+      <span class="count">{{numResults}}</span>
+      <span class="count-label">
+        {{#eq numResults 1}}result{{else}}results{{/eq}} found for
+      </span>
+    </span>
+    <span class="key">
+      "<code>{{searchValue}}</code>"
+    </span>
+  </div>
+
+  {{#if numResults}}
+    <ul>
+      {{#each results as result}}
+        <li>
+          <a href="{{docUrl}}" title="{{result.name}}" class="result-name">
+            {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
+          </a>
+
+          {{#if result.title}}
+          <span class="name">
+						({{result.name}})
+          </span>	
+          {{/if}}
+
+          {{#if result.description}}
+            <div class="result-description" title="{{result.description}}">
+              {{{result.description}}}
+            </div>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>

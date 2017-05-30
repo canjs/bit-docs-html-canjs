@@ -3,3 +3,4 @@ temp/
 index.html
 .vscode
 *.log
+.DS_Store
