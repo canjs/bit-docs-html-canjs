@@ -1,8 +1,25 @@
 <section class="title">
 	<div class="page-type">
 		<h1>{{getTitle .}}</h1>
-		<div>{{type}}</div>
+		{{#if package}}
+			<ul class="title-social">
+				<li>
+					<a class="npm-button" href="https://www.npmjs.com/package/{{package.name}}">
+						<img src="{{badgeLink package.version}}" alt="npm package badge" />
+					</a>
+				</li>
+				<li>
+					<a class="github-button nav-social" href="https://github.com/canjs/{{repoName src.path}}">Star</a>
+				</li>
+				{{#if src.path}}
+				<li>
+					<a class="button-link" href="{{sourceLink src (repoName src.path)}}">Edit on GitHub</a>
+				</li>
+				{{/if}}
+			</ul>
+		{{/if}}
 	</div>
+	<div class="clear-both"></div>
 	{{#unless hideDescription}}
   {{#if description}}
 	{{> description.mustache}}
@@ -11,27 +28,4 @@
 </section>
 <section class="on-this-page-table">
 </section>
-<section class="title-footer">
-	{{#if package}}
-		<ul class="title-social">
-			<li>
-				<a class="npm-button" href="https://www.npmjs.com/package/{{package.name}}">
-					<img src="{{badgeLink package.version}}" alt="npm package badge" />
-				</a>
-			</li>
-			<li>
-				<a class="github-button nav-social" href="https://github.com/canjs/{{repoName src.path}}"
-				   data-count-href="/canjs/{{repoName src.path}}/stargazers"
-				   data-count-api="/repos/canjs/{{repoName src.path}}#stargazers_count">Star</a>
-			</li>
-		</ul>
-	{{/if}}
-	{{#if src.path}}
-		<ul class="title-links">
-			<!-- <li><a href="#">docco</a></li> -->
-			<li><a href="{{sourceLink src (repoName src.path)}}">Edit on GitHub</a></li>
-			<!-- <li><a href="#">download</a></li> -->
-			<!-- <li><a href="#">tests</a></li> -->
-		</ul>
-	{{/if}}
-</section>
+
