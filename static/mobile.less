@@ -64,7 +64,17 @@ label:hover{
 }
 
 @media screen and (max-width: @breakpoint){
-  .top-left > .brand{
+  .top-left > .brand {
+    display: none;
+  }
+  .on-this-page-table-container {
     display: none;
   }
 }
+
+@media screen and (min-width: @breakpoint){
+  .body {
+    margin-right: 330px;
+  }
+}
+
