@@ -6,6 +6,7 @@ var SearchControl = require('./search');
 // state
 var $articleContainer,
 	$onThisPage,
+	$onThisPageContainer,
 	$tableOfContents,
 	$onThisPageTitle,
 	$everything,
@@ -18,7 +19,8 @@ var $articleContainer,
 	scrollPositionInterval,
 	currentHref,
 	searchControl,
-	hasShownSearch;
+	hasShownSearch,
+	$right;
 
 (function() {
 	//flag that determines whether or not the search has already been shown
@@ -287,6 +289,7 @@ function setOnThisPageContent() {
 
 function setOnThisPageTitle(title) {
 	$onThisPageTitle.html(title || 'On this page');
+	$onThisPageContainer.find('#'+title.replace('-', '_')).addClass('active');
 }
 
 function setOnThisPageScroll() {
@@ -398,6 +401,9 @@ function buildTOC() {
 	if (!$tocHeaders.length || $tocHeaders.length < 2) {
 		return;
 	}
+
+	$onThisPageContainer.show();
+	$right.addClass('show-toc');
 
 	var level = 0,
 		baseLevel = $tocHeaders[0].nodeName.substr(1),
