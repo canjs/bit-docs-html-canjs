@@ -57,6 +57,9 @@ var Search = Control.extend({
 	//results navigation elements
 	$activeResult: null,
 
+	storageFallback: {},
+	useLocalStorage: false,
+
 	// ---- END PROPERTIES ---- //
 
 
@@ -72,11 +75,7 @@ var Search = Control.extend({
 		//hide the input until the search engine is ready
 		this.$inputWrap.hide();
 
-		if(localStorageIsAvailable()){
-			// Enable localStorage
-			this.getLocalStorageItem = getLocalStorageItem;
-			this.setLocalStorageItem = setLocalStorageItem;
-		}
+		this.useLocalStorage = this.localStorageIsAvailable();
 
 		this.checkSearchMapHash(this.options.pathPrefix + this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
 			self.getSearchMap(self.options.pathPrefix + self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
@@ -92,7 +91,7 @@ var Search = Control.extend({
 				//focus the search on init
 				//only do stuff if we have an input to work with
 				if(self.$input && self.$input.length){
-						self.$input.trigger("focus");
+					self.$input.trigger("focus");
 				}
 
 				self.bindResultsEvents();
@@ -132,17 +131,57 @@ var Search = Control.extend({
 
 	//  ---- LOCAL STORAGE ---- //
 	// Init with noop functions, then overwrite if localStorage is supported
-	getLocalStorageItem: function(){
+	getLocalStorageItem: function(key){
+		var storageItem;
+		if(!this.useLocalStorage){
+			storageItem = this.storageFallback[key];
+			if(storageItem){
+				return JSON.parse(storageItem);
+			}
+			return null;
+		}
+
+		storageItem = localStorage.getItem(key);
+
+		if(storageItem){
+			return JSON.parse(storageItem);	
+		}
+
+		return null;
 	},
-	setLocalStorageItem: function(){
+
+	setLocalStorageItem: function(key, data){
+		if(!this.useLocalStorage){
+			this.storageFallback[key] = JSON.stringify(data);
+			return true;
+		}
+		if(data){
+			localStorage.setItem(key, JSON.stringify(data));
+			return true;
+		}
+		return null;
 	},
+
+	localStorageIsAvailable: function(){
+		var t = this.formatLocalStorageKey('test');
+		try {
+			localStorage.setItem(t, '*');
+			if(localStorage.getItem(t) !== '*'){
+				return false;
+			}
+			localStorage.removeItem(t);
+			return true;
+		}catch(e){
+			return false;
+		}
+	},
+
 	// function formatLocalStorageKey
 	// prefixes a key based on options.localStorageKeyPrefix
 	formatLocalStorageKey: function(key){
 		return this.options.localStorageKeyPrefix + "-" + key;
 	},
 	//  ---- END LOCAL STORAGE ---- //
-
 
 	//  ---- END DATA RETRIEVAL ---- //
 	searchMapLocalStorageKey: "searchMap",
@@ -727,44 +766,5 @@ var Search = Control.extend({
 	// ---- END HELPERS ---- //
 
 });
-
-function getLocalStorageItem(key){
-	if(!window.localStorage){
-		return null;
-	}
-
-	var storageItem = localStorage.getItem(key);
-
-	if(storageItem){
-		return JSON.parse(storageItem);	
-	}
-
-	return null;
-}
-
-function setLocalStorageItem(key, data){
-	if(!window.localStorage){
-		return null;
-	}
-	if(data){
-		localStorage.setItem(key, JSON.stringify(data));
-		return true;
-	}
-	return null;
-}
-
-function localStorageIsAvailable(){
-	var t = new Date().getTime();
-	try {
-		localStorage.setItem(t, '*');
-		if(localStorage.getItem(t) !== '*'){
-			return false;
-		}
-		localStorage.removeItem(t);
-		return true;
-	}catch(e){
-		return false;
-	}
-}
 
 module.exports = Search;
