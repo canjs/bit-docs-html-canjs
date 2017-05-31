@@ -88,12 +88,6 @@ var Search = Control.extend({
 					self.$inputWrap.show();
 				}
 
-				//focus the search on init
-				//only do stuff if we have an input to work with
-				if(self.$input && self.$input.length){
-					self.$input.trigger("focus");
-				}
-
 				self.bindResultsEvents();
 			}, function(error){
 				console.error("getSearchMap error", error);
@@ -482,26 +476,6 @@ var Search = Control.extend({
 		}
 	},
 	// ---- END RESULTS EVENTS ---- //
-
-
-	// ---- WINDOW EVENTS ---- //
-
-	// [ctrl + k] focuses the search input
-	"{window} keyup": function(el, ev){
-		if(!ev.ctrlKey){
-			return true;
-		}
-
-		switch(ev.keyCode){
-			case 75: // 'k'
-				this.$input.trigger("focus");
-				break;
-		}
-	},
-
-	// ---- END WINDOW EVENTS ---- //
-
-
 
 	// ---- SEARCH VIEW ---- //
 
