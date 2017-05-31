@@ -5,7 +5,6 @@
 		display: block;
 		padding-left: @gutter*2;
 		background: @code-color;
-		cursor: pointer;
 		color: lighten(@gray, 10%);
 		.breadcrumb-dropdown {
 			display: none;
@@ -18,6 +17,10 @@
 			}
 			&:hover {
 				color: @link-color;
+				a {
+					background-color: white;
+					color: @link-color !important;
+				}
 				.on-this-page {
 					display: flex;
 					li {
