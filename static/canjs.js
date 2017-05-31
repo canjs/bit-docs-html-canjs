@@ -1,6 +1,8 @@
+require("./canjs.less!");
+var LoadingBar = require('./loading-bar.js');
 $ = require("jquery");
 var debounce = require("lodash/debounce");
-require("./canjs.less!");
+var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
 
 // state
@@ -169,9 +171,21 @@ function navigate(href) {
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
 
+	loader.start();
+	
 	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
+		xhr: function() {
+			var xhr = new window.XMLHttpRequest();
+			xhr.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = (evt.loaded / evt.total) * 100;
+					loader.update(Math.floor(percentComplete));
+				}
+			}, false);
+			return xhr;
+		},
 		success: function(content) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
@@ -209,6 +223,8 @@ function navigate(href) {
 			// Initialize github buttons
 			$.getScript('https://buttons.github.io/buttons.js');
 
+			loader.end();
+			
 			// go through every package and re-init
 			for (var packageName in window.PACKAGES) {
 				if (typeof window.PACKAGES[packageName] === "function") {
