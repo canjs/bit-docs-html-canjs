@@ -2,6 +2,7 @@ var $ = require("jquery");
 var Control = require("can-control");
 var searchResultsRenderer = require("./templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
+var highlightKeywords = require('./highlight-keywords');
 
 //https://lunrjs.com/guides/getting_started.html
 var searchEngine = require("lunr");
@@ -369,6 +370,7 @@ var Search = Control.extend({
 	//  esc exits search results
 	//  any other key triggers search
 	searchTerm: "",
+	currentSearch: "",
 	".search keyup": function(el, ev){
 		var value = ev.target.value;
 
@@ -390,6 +392,7 @@ var Search = Control.extend({
 			default:
 				if(value !== this.searchTerm){
 					this.searchTerm = value;
+					this.currentSearch = value;
 					this.search(value);
 					this.showResults();
 				}
@@ -493,7 +496,7 @@ var Search = Control.extend({
 
 	// function search
 	// replaces the content in the results element
-	//  with stache rendered data based on given falue
+	//  with stache rendered data based on given value
 	searchDebounceHandle: 0,
 	search: function(value){
 		clearTimeout(this.searchDebounceHandle);
@@ -522,7 +525,14 @@ var Search = Control.extend({
 					});
 
 			self.$resultsWrap.empty();
-			self.$resultsWrap[0].appendChild(resultsFrag);
+			
+			var resultsWrap = self.$resultsWrap[0].appendChild(resultsFrag);
+
+			// Inject highlighting spans for search keywords
+			var $searchResults = self.$resultsWrap.find('.search-results > ul');
+			$searchResults.html(
+				highlightKeywords($searchResults.html(), value.split(' '))
+			);
 
 			//refresh necessary dom
 			self.$resultsList = null;

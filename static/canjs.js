@@ -2,6 +2,7 @@ $ = require("jquery");
 var debounce = require("lodash/debounce");
 require("./canjs.less!");
 var SearchControl = require('./search');
+var highlightKeywords = require('./highlight-keywords');
 
 // state
 var $articleContainer,
@@ -176,8 +177,14 @@ function navigate(href) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
 
+			var body = content.match(/<body>(\r|\n|.)+<\/body>/g)[0];
+			
+			if(searchControl.currentSearch){
+				body = highlightKeywords(body, searchControl.currentSearch.split(' '));
+			}
+			
 			// set new content
-			var $content = $(content.match(/<body>(\r|\n|.)+<\/body>/g)[0]);
+			var $content = $(body);
 			if (!$content.length) {
 				window.location.reload();
 			}
