@@ -138,15 +138,13 @@ var Search = Control.extend({
 			if(storageItem){
 				return JSON.parse(storageItem);
 			}
-			return null;
+		}else{
+			storageItem = localStorage.getItem(key);
+
+			if(storageItem){
+				return JSON.parse(storageItem);	
+			}
 		}
-
-		storageItem = localStorage.getItem(key);
-
-		if(storageItem){
-			return JSON.parse(storageItem);	
-		}
-
 		return null;
 	},
 
@@ -154,10 +152,11 @@ var Search = Control.extend({
 		if(!this.useLocalStorage){
 			this.storageFallback[key] = JSON.stringify(data);
 			return true;
-		}
-		if(data){
-			localStorage.setItem(key, JSON.stringify(data));
-			return true;
+		}else{
+			if(data){
+				localStorage.setItem(key, JSON.stringify(data));
+				return true;
+			}
 		}
 		return null;
 	},
