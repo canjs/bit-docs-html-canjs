@@ -130,33 +130,23 @@ var Search = Control.extend({
 
 
 	//  ---- LOCAL STORAGE ---- //
-	// Init with noop functions, then overwrite if localStorage is supported
 	getLocalStorageItem: function(key){
-		var storageItem;
-		if(!this.useLocalStorage){
-			storageItem = this.storageFallback[key];
-			if(storageItem){
-				return JSON.parse(storageItem);
-			}
-		}else{
-			storageItem = localStorage.getItem(key);
-
-			if(storageItem){
-				return JSON.parse(storageItem);	
-			}
+		var storageItem = (this.useLocalStorage) ? localStorage.getItem(key) : this.storageFallback[key];
+		if (storageItem) {
+			return JSON.parse(storageItem);	
 		}
 		return null;
 	},
 
 	setLocalStorageItem: function(key, data){
-		if(!this.useLocalStorage){
-			this.storageFallback[key] = JSON.stringify(data);
-			return true;
-		}else{
-			if(data){
-				localStorage.setItem(key, JSON.stringify(data));
-				return true;
+		if (data) {
+			var storageItem = JSON.stringify(data);
+			if (this.useLocalStorage) {
+				this.storageFallback[key] = storageItem;
+			} else {
+				localStorage.setItem(key, storageItem);
 			}
+			return true;
 		}
 		return null;
 	},
@@ -165,11 +155,9 @@ var Search = Control.extend({
 		var t = this.formatLocalStorageKey('test');
 		try {
 			localStorage.setItem(t, '*');
-			if(localStorage.getItem(t) !== '*'){
-				return false;
-			}
+			var localStorageWorks = localStorage.getItem(t) === '*';
 			localStorage.removeItem(t);
-			return true;
+			return localStorageWorks;
 		}catch(e){
 			return false;
 		}
