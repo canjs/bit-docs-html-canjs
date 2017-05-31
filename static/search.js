@@ -85,9 +85,9 @@ var Search = Control.extend({
 
 				//focus the search on init
 				//only do stuff if we have an input to work with
-				if(self.$input && self.$input.length){
-						self.$input.trigger("focus");
-				}
+				// if(self.$input && self.$input.length){
+				// 		self.$input.trigger("focus");
+				// }
 
 				self.bindResultsEvents();
 			}, function(error){
