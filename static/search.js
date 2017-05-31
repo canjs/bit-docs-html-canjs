@@ -72,6 +72,12 @@ var Search = Control.extend({
 		//hide the input until the search engine is ready
 		this.$inputWrap.hide();
 
+		if(localStorageIsAvailable()){
+			// Enable localStorage
+			this.getLocalStorageItem = getLocalStorageItem;
+			this.setLocalStorageItem = setLocalStorageItem;
+		}
+
 		this.checkSearchMapHash(this.options.pathPrefix + this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
 			self.getSearchMap(self.options.pathPrefix + self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
 				self.initSearchEngine(searchMap);
@@ -124,29 +130,11 @@ var Search = Control.extend({
 	// ---- SETUP / TEARDOWN ---- //
 
 
-//  ---- LOCAL STORAGE ---- //
-	getLocalStorageItem: function(key){
-		if(!window.localStorage){
-			return null;
-		}
-
-		var storageItem = localStorage.getItem(key);
-
-		if(storageItem){
-			return JSON.parse(storageItem);	
-		}
-
-		return null;
+	//  ---- LOCAL STORAGE ---- //
+	// Init with noop functions, then overwrite if localStorage is supported
+	getLocalStorageItem: function(){
 	},
-	setLocalStorageItem: function(key, data){
-		if(!window.localStorage){
-			return null;
-		}
-		if(data){
-			localStorage.setItem(key, JSON.stringify(data));
-			return true;
-		}
-		return null;
+	setLocalStorageItem: function(){
 	},
 	// function formatLocalStorageKey
 	// prefixes a key based on options.localStorageKeyPrefix
@@ -740,5 +728,43 @@ var Search = Control.extend({
 
 });
 
+function getLocalStorageItem(key){
+	if(!window.localStorage){
+		return null;
+	}
+
+	var storageItem = localStorage.getItem(key);
+
+	if(storageItem){
+		return JSON.parse(storageItem);	
+	}
+
+	return null;
+}
+
+function setLocalStorageItem(key, data){
+	if(!window.localStorage){
+		return null;
+	}
+	if(data){
+		localStorage.setItem(key, JSON.stringify(data));
+		return true;
+	}
+	return null;
+}
+
+function localStorageIsAvailable(){
+	var t = new Date().getTime();
+	try {
+		localStorage.setItem(t, '*');
+		if(localStorage.getItem(t) !== '*'){
+			return false;
+		}
+		localStorage.removeItem(t);
+		return true;
+	}catch(e){
+		return false;
+	}
+}
 
 module.exports = Search;
