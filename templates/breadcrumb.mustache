@@ -6,8 +6,9 @@
 	{{#with (getCurrent)}}
 	<li><a href="{{urlTo name}}">{{getShortTitle .}}</a></li>
 	{{/with}}
-	<li> / </li>
-	<li class="breadcrumb-dropdown"><a> On this page</a>
+	<li class="breadcrumb-dropdown">
+		/
+		<a> On this page</a>
 		<ul class="on-this-page"></ul>
 	</li>
 	<div class="nav-toggle" title="Back to top"></div>
