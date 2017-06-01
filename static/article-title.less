@@ -7,8 +7,9 @@ section.title-footer{
 }
 ul.title-social{
 	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
 	padding-left: 0;
-	justify-content: flex-start;
 	margin: 0;
   	li{
 	    list-style: none;
@@ -37,8 +38,14 @@ ul.title-links {
 	.title-social {
 		float: right;
 		margin-top: @gutter;
+		@media screen and (max-width: (@breakpoint / 2)){
+			width: 100%;
+		}
 		li{
-			margin: 0 0 0 @gutter;
+			margin: 0 0 @gutter @gutter;
+			&:first-child {
+				margin-left: 0px;
+			}
 		}
 	}
 	div{
