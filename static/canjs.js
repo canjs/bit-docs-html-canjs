@@ -1,5 +1,9 @@
 require("./canjs.less!");
+var LoadingBar = require('./loading-bar.js');
 $ = require("jquery");
+var debounce = require("lodash/debounce");
+var loader = new LoadingBar('blue');
+var SearchControl = require('./search');
 
 // state
 var $articleContainer,
@@ -9,13 +13,19 @@ var $articleContainer,
 	$everything,
 	$headers,
 	$nav,
+	$pathPrefix,
 	headerHidden,
 	animating,
 	navigating,
 	scrollPositionInterval,
-	currentHref;
+	currentHref,
+	searchControl,
+	hasShownSearch;
 
 (function() {
+	//flag that determines whether or not the search has already been shown
+	//(used for fading in or not)
+	hasShownSearch = false;
 	init();
 
 	// prevent sidebar from changing width when header hides
@@ -23,8 +33,11 @@ var $articleContainer,
 
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
-		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey;
-		if (noModifierKeys && this.hostname === window.location.hostname) {
+		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
+				sameHostname = this.hostname === window.location.hostname,
+				sameProtocol = this.protocol === window.location.protocol;
+
+		if (noModifierKeys && sameHostname && sameProtocol) {
 			ev.preventDefault();
 			var href = this.href;
 			window.history.pushState(null, null, href);
@@ -38,13 +51,13 @@ var $articleContainer,
 		navigate(window.location.href);
 	});
 
-	$articleContainer.on("scroll", function(ev) {
+	$articleContainer.on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
 
 		// Update the "On This Page" placeholder with header text at scroll position
 		setOnThisPageScroll();
-	});
+	}, 50));
 
 	// toggle nav on interval instead of scroll to prevent queueing issues
 	setInterval(function() {
@@ -66,13 +79,35 @@ function init() {
 	$everything = $('#everything');
 	$headers = getHeaders();
 	$nav = $('.top-left > .brand, .top-right-top');
+	$pathPrefix = $("[path-prefix]").first();
 	headerHidden = undefined;
 	currentHref = window.location.href;
 
+	setPathPrefix();
 	setOnThisPageContent();
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
+	searchControl = new SearchControl(".search-bar", {
+		navigate: function(href){
+			window.history.pushState(null, null, href);
+			navigate(href);
+		},
+		pathPrefix: window.pathPrefix,
+		animateInOnStart: !hasShownSearch
+	});
+
+	hasShownSearch = true;
+}
+
+function setPathPrefix(){
+	var pathPrefix;
+	if($pathPrefix && $pathPrefix.length){
+		pathPrefix = $pathPrefix.attr("path-prefix");
+		if(pathPrefix && pathPrefix.length){
+			window.pathPrefix = pathPrefix;
+		}
+	}
 }
 
 function setDocTitle() {
@@ -136,26 +171,51 @@ function navigate(href) {
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
 
+	loader.start();
+	
 	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
+		xhr: function() {
+			var xhr = new window.XMLHttpRequest();
+			xhr.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = (evt.loaded / evt.total) * 100;
+					loader.update(Math.floor(percentComplete));
+				}
+			}, false);
+			return xhr;
+		},
 		success: function(content) {
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
 
 			// set new content
-			var $content = $(content.match(/<body>(\n|.)+<\/body>/g)[0]);
+			var $content = $(content.match(/<body>(\r|\n|.)+<\/body>/g)[0]);
 			if (!$content.length) {
 				window.location.reload();
 			}
-			var $nav = $content.find(".bottom-left > ul");
-			var $article = $content.find("article");
-			var $breadcrumb = $content.find(".breadcrumb");
-			var homeLink = $content.find(".logo > a").attr('href');
-			$(".bottom-left>ul").replaceWith($nav);
+			var $nav = $content.find(".bottom-left > ul"),
+					$article = $content.find("article"),
+					$breadcrumb = $content.find(".breadcrumb"),
+					homeLink = $content.find(".logo > a").attr('href'),
+					$navReplace = $(".bottom-left>ul"),
+
+					//root elements - use .filter; not .find
+					$pathPrefixDiv = $content.filter("[path-prefix]");
+
+
+			//if any page doesn't have a nav, replacing it won't work,
+			//and the nav will be gone for any subsequent page visits
+			if($navReplace && $navReplace.length){
+				$navReplace.replaceWith($nav);
+			}else{
+				$(".bottom-left").append($nav);
+			}
 			$("article").replaceWith($article);
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
+			$("[path-prefix]").replaceWith($pathPrefixDiv);
 
 			// Initialize jsbin scripts
 			delete window.jsbinified;
@@ -163,6 +223,8 @@ function navigate(href) {
 			// Initialize github buttons
 			$.getScript('https://buttons.github.io/buttons.js');
 
+			loader.end();
+			
 			// go through every package and re-init
 			for (var packageName in window.PACKAGES) {
 				if (typeof window.PACKAGES[packageName] === "function") {

@@ -7,8 +7,9 @@ section.title-footer{
 }
 ul.title-social{
 	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
 	padding-left: 0;
-	justify-content: flex-start;
 	margin: 0;
   	li{
 	    list-style: none;
@@ -32,6 +33,20 @@ ul.title-links {
 .page-type{
 	h1{
 		display: inline-block;
+		float: left;
+	}
+	.title-social {
+		float: right;
+		margin-top: @gutter;
+		@media screen and (max-width: (@breakpoint / 2)){
+			width: 100%;
+		}
+		li{
+			margin: 0 0 @gutter @gutter;
+			&:first-child {
+				margin-left: 0px;
+			}
+		}
 	}
 	div{
 		display: inline-block;
@@ -50,8 +65,8 @@ ul.title-links {
 		  	display: block;
 		  	color: @link-color;
 		  	line-height: 1.7em;
-		  	cursor: pointer;
 		  	a:hover{
+		  		cursor: pointer;
 		  		text-decoration: underline;
 		  	}
 		}
@@ -64,4 +79,17 @@ ul.title-links {
 }
 .description{
   	margin: @gutter 0;
+}
+
+/* Homepage hero images*/
+.hero-images {
+    border: 1px solid #EEE;
+    padding: 30px;
+	.tortoise {
+		float: right;
+		padding-right: 40px;
+	}
+	.hare {
+		padding-left: 40px;
+	}
 }

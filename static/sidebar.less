@@ -1,140 +1,138 @@
-
 .search-bar {
-	display:none;
-  	background: @code-color;
-  	padding: @gutter @gutter*2;
-  	height: 48px;
-  	p {
-    	border: none;
-    	margin: 0px;
-    	color: white;
-    	font-weight: 300;
-  	}
+	background: @code-color;
+	padding: @gutter @gutter*2;
+	height: 48px;
+	p {
+		border: none;
+		margin: 0px;
+		color: white;
+		font-weight: 300;
+	}
 	@media screen and (min-width: @breakpoint) {
-      	display: block;
-    }
+		display: block;
+	}
 }
 
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
 ul.social-side{
-  margin: 0;
-  list-style: none;
-  padding: 0;
-  display: flex ;
-  @media screen and (min-width: @breakpoint){
-    display: none;
-  }
-  > li{
-    display: inline-block;
-    margin: 0 @gutter/2 @gutter/2 0;
-    border-bottom: none;
-    text-align: center;
-    width: 79px;
-    > a.header-mobile{
-      font-weight: 700;
-      font-size: 12px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      text-transform: sentence-case;
-      .border-radius;
-      border: 1px solid lighten(@link-color, 40%);
-      text-decoration: none;
-      background: white;
-      &:hover {
-        border: 1px solid lighten(@link-color, 40%);
-        text-decoration: none;
-        background: @border-color;
-      }
-    }
-    > a.twitter{
-      background: @twitter-color;
-      border: 1px solid darken(@twitter-color, 5%);
-      color: white;
-      &:hover {
-        background: darken(@twitter-color, 10%);
-        border: 1px solid darken(@twitter-color, 15%);
-      }
-    }
-    > a.github{
-      background: @light-gray-color;
-      color: @gray;
-    }
-  }
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	display: flex ;
+	@media screen and (min-width: @breakpoint){
+		display: none;
+	}
+	> li{
+		display: inline-block;
+		margin: 0 @gutter/2 @gutter/2 0;
+		border-bottom: none;
+		text-align: center;
+		width: 79px;
+		> a.header-mobile{
+			font-weight: 700;
+			font-size: 12px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			text-transform: sentence-case;
+			.border-radius;
+			border: 1px solid lighten(@link-color, 40%);
+			text-decoration: none;
+			background: white;
+			&:hover {
+				border: 1px solid lighten(@link-color, 40%);
+				text-decoration: none;
+				background: @border-color;
+			}
+		}
+		> a.twitter{
+			background: @twitter-color;
+			border: 1px solid darken(@twitter-color, 5%);
+			color: white;
+			&:hover {
+				background: darken(@twitter-color, 10%);
+				border: 1px solid darken(@twitter-color, 15%);
+			}
+		}
+		> a.github{
+			background: @light-gray-color;
+			color: @gray;
+		}
+	}
 }
 img.social-icon-small{
-  width: 15px;
-  margin-right: 4px;
-  vertical-align: middle;
+	width: 15px;
+	margin-right: 4px;
+	vertical-align: middle;
 }
 
 // ----- SIDE NAVIGATION -----
 .bottom-left {
-  ul {
-    padding-left: @gutter/1.5;
-    margin: 0;
-    margin-bottom: @gutter;
-    list-style: none;
-    li {
-      position: relative;
-      a {
-        display: block;
-        padding-top: @gutter/5;
-        padding-bottom: @gutter/5;
-      }
-      span {
-        color: @gray;
-        font-size: 90%;
-      }
-    }
-  }
-  .current > a, .expanded > a {
-    font-weight: bold;
-    color: darken(@link-color,5%);
-  }
-  .current > a {
-    text-decoration: underline;
-    color: darken(@link-color,10%);
-  }
-  // Highest parent level
-  > ul {
-    padding-left: 0;
-    > li {
-      list-style: none;
-      list-style-type: none;
-      padding: 0;
-      .border-bottom;
-      > a {
-        font-size: 110%;
-        padding-bottom: @gutter;
-        padding-top: @gutter;
-      }
-      &.expanded > a {
-        padding-bottom: @gutter/3;
-      }
-      // Second level
-      > ul {
-        > li {
-          > a {
-            padding-bottom: @gutter/3;
-            padding-top: @gutter/3;
-          }
-          &.expanded {
-            > a {
-              padding-bottom: @gutter/2;
-              margin-left: -1px;
-            }
-          }
-           //Third level
-          > ul {
-            border-left: 1px solid @border-color;
-            li {
-              ul {
-                margin-top: @gutter/3;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	ul {
+		padding-left: @gutter/1.5;
+		margin: 0;
+		margin-bottom: @gutter;
+		list-style: none;
+		li {
+			position: relative;
+			a {
+				display: block;
+				padding-top: @gutter/5;
+				padding-bottom: @gutter/5;
+			}
+			span {
+				color: @gray;
+				font-size: 90%;
+			}
+		}
+	}
+	.current > a, .expanded > a {
+		font-weight: bold;
+		color: darken(@link-color,5%);
+	}
+	.current > a {
+		text-decoration: underline;
+		color: darken(@link-color,10%);
+	}
+	// Highest parent level
+	> ul {
+		padding-left: 0;
+		> li {
+			list-style: none;
+			list-style-type: none;
+			padding: 0;
+			.border-bottom;
+			> a {
+				font-size: 110%;
+				padding-bottom: @gutter;
+				padding-top: @gutter;
+			}
+			&.expanded > a {
+				padding-bottom: @gutter/3;
+			}
+			// Second level
+			> ul {
+				> li {
+					> a {
+						padding-bottom: @gutter/3;
+						padding-top: @gutter/3;
+					}
+					&.expanded {
+						> a {
+							padding-bottom: @gutter/2;
+							margin-left: -1px;
+						}
+					}
+					 //Third level
+					> ul {
+						border-left: 1px solid @border-color;
+						li {
+							ul {
+								margin-top: @gutter/3;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

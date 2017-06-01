@@ -1,7 +1,7 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "0.4.7",
-  "description": "prettify code plugin",
+  "version": "0.7.1",
+  "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
     "start": "node make-example.js -f",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bit-docs/bit-docs-prettify.git"
+    "url": "git+https://github.com/canjs/bit-docs-html-canjs.git"
   },
   "keywords": [
     "bit-docs"
@@ -22,21 +22,27 @@
   "author": "Bitovi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bit-docs/bit-docs-prettify/issues"
+    "url": "https://github.com/canjs/bit-docs-html-canjs/issues"
   },
-  "homepage": "https://github.com/bit-docs/bit-docs-prettify#readme",
+  "homepage": "https://github.com/canjs/bit-docs-html-canjs#readme",
   "system": {},
   "dependencies": {
+    "can-control": "^3.0.3",
+    "can-util": "^3.0.10",
     "escape-html": "^1.0.3",
-    "unescape-html": "^1.0.0",
     "jquery": "^3.1.1"
+    "lodash": "^4.17.4",
+    "lunr": "^2.0.3",
+    "steal-stache": "^3.0.1",
+    "unescape-html": "^1.0.0"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.3.0",
-    "q": "^1.4.1",
+    "bit-docs-generate-html": "^0.6.0",
+    "bit-docs-generate-searchmap": "^0.1.1",
+    "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
     "normalize.css": "^5.0.0",
-    "zombie": "^5.0.5",
-    "bit-docs-html-toc": "^0.5.0"
+    "q": "^1.4.1",
+    "zombie": "^5.0.5"
   }
 }

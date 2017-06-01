@@ -4,7 +4,6 @@ var escapeHTML = require("escape-html");
 var unescapeHTML = require("unescape-html");
 
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
-
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
     var docMapInfo = new DocMapInfo(docMap, getCurrent);
@@ -175,6 +174,20 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             if (current.package) {
                 return current;
             }
+
+            var splitName = current.name.split('/');
+            var hasSlash = splitName.length > 1;
+            /* Sometimes we give a different name for the parent because we want
+             the module to be placed differently on the page. This is to make
+             sure we retrieve the actual closest package to the current docObject
+            */
+            if (hasSlash && current.parent) {
+              var parentHasObjName = current.parent.includes(splitName[0]);
+              if (!parentHasObjName) {
+                return docMapInfo.docMap[splitName[0]];
+              }
+            }
+
             var parents = docMapInfo.getParents(current);
             for (var i = parents.length-1; i >= 0; i--) {
                 if (parents[i].package) {
@@ -221,16 +234,19 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             version = version.replace(/-/g, '--');
             return 'https://img.shields.io/badge/npm%20package-'+version+'-brightgreen.svg';
         },
-        sourceLink: function(packageObject) {
-            var current = docMapInfo.getCurrent();
-            if (!current.src) {
-                return false;
-            }
-            var name = packageObject.name,
-                version = 'v' + packageObject.package.version,
-                srcPath = current.src.path.replace('node_modules/' + name + '/', ''),
-                line = current.src.line ? '#L' + current.src.line : '';
-            return '//github.com/canjs/' + name + '/tree/' + version + '/' + srcPath + line;
+        repoName: function(path) {
+            var nodeModulesFolderNameRegex = /^node_modules\/([\w-]+)\/.*/,
+              folderNameMatches = path.match(nodeModulesFolderNameRegex);
+
+            // find repoName by picking it out of the node_modules path, or we can assume this page is in the root canjs repo
+            // this assumes the npm module name matches the github repository name
+            return folderNameMatches ? folderNameMatches[1] : 'canjs';
+        },
+        sourceLink: function(src, repoName) {
+            var srcPath = src.path.replace('node_modules/' + repoName + '/', ''),
+              line = src.line ? '#L' + (src.line + 1) : '';
+
+            return '//github.com/canjs/' + repoName + '/edit/master/' + srcPath + line;
         },
         customSort: function(children) {
             var ordered = [],
@@ -325,22 +341,55 @@ DocMapInfo.prototype.getParents = function(docObject, cb){
 DocMapInfo.prototype.getTitle = function(docObject) {
     return docObject.title || docObject.name;
 };
+
+function getShortTitle(name, parent){
+    if(parent && (parent.type === "module" || parent.type === "group")) {
+        var modeletName = path.dirname(parent.name),
+            moduleName = path.basename(parent.name);
+
+        if(name.indexOf( parent.name+"/" ) === 0 ) {
+            name = name.replace(parent.name+"/", "./");
+        }
+        // can-util/dom/events/attributes/attributes's parent is can-util/dom/events/events
+        else if( moduleName && modeletName.endsWith(moduleName) && name.indexOf( modeletName+"/" ) === 0  ) {
+            name = name.replace(modeletName+"/", "./");
+        }
+        else {
+            return;
+        }
+
+        var basename = path.basename(name);
+        if(name.endsWith("/"+basename+"/"+basename)) {
+            return path.dirname(name)+"/";
+        } else {
+            return name;
+        }
+    }
+}
 DocMapInfo.prototype.getShortTitle = function(docObject) {
 
     if(docObject.type === "module") {
-        var parents = this.getParents(docObject);
+        var parents = this.getParents(docObject).reverse();
+
         var parentModule = parents.find(function(docObject){
             return docObject.type === "module";
         });
-        var name = docObject.name;
-        if(parentModule) {
+        var parentGroup = parents[0] && parents[0].type === "group" && parents[0];
 
-            if(docObject.name.indexOf( parentModule.name+"/" ) === 0 ) {
-                name = docObject.name.replace(parentModule.name+"/", "./");
+        var name = docObject.name,
+            shortTitle;
+
+        if(parentGroup) {
+            shortTitle = getShortTitle(name, parentGroup);
+            if(shortTitle) {
+                return shortTitle;
             }
-            var basename = path.basename(name);
-            if(name.endsWith("/"+basename+"/"+basename)) {
-                return path.dirname(name)+"/";
+        }
+
+        if(parentModule) {
+            shortTitle = getShortTitle(name, parentModule);
+            if(shortTitle) {
+                return shortTitle;
             }
         }
         return name;
@@ -357,14 +406,20 @@ DocMapInfo.prototype.getCurrentTree = function(){
     //
     var getChildren = this.getChildren.bind(this),
         getNestedDocObject = this.getNestedDocObject.bind(this);
-
+    
+    var self = this;
     var cur = this.getCurrent();
-
     var curChildren = this.getNestedChildren(cur);
-
     this.getParents(cur, function(docObject){
         curChildren = getChildren(docObject).map(function(docObject){
             if(docObject.name === cur.name) {
+                if(cur.subchildren){
+                    curChildren.forEach(function(child){
+                        if(child.docObject){
+                            child.children = self.getNestedChildren(child.docObject);
+                        }
+                    });
+                }
                 return {docObject: docObject, children: curChildren};
             } else {
                 return getNestedDocObject(docObject);
