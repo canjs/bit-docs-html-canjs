@@ -30,19 +30,19 @@
     "can-control": "^3.0.3",
     "can-util": "^3.0.10",
     "escape-html": "^1.0.3",
-    "jquery": "^2.2.4",
+    "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "lunr": "^2.0.3",
     "steal-stache": "^3.0.1",
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.5.0",
-    "bit-docs-generate-searchmap": "^0.0.1-0",
+    "bit-docs-generate-html": "^0.6.0",
+    "bit-docs-generate-searchmap": "^0.1.1",
+    "bit-docs-html-toc": "^0.6.0",
+    "connect": "^3.5.0",
+    "normalize.css": "^5.0.0",
     "q": "^1.4.1",
-    "connect": "^2.14.4",
-    "normalize.css": "^4.1.1",
-    "zombie": "^4.2.1",
-    "bit-docs-html-toc": "^0.2.0"
+    "zombie": "^5.0.5"
   }
 }
