@@ -42,6 +42,15 @@ QUnit.test('Search for “can-component”', function(assert) {
   });
 });
 
+QUnit.test('Search for “can-connect”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('can-connect').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('can-connect', results), 0, 'first result is the can-connect page');
+    done();
+  });
+});
+
 QUnit.test('Search for “Live Binding”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('Live Binding').then(function(results) {
