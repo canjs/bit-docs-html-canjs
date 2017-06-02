@@ -334,7 +334,7 @@ var Search = Control.extend({
 			//run the search
 			.search(this.formatSearchTerm(value))
 			//convert the results into a searchMap subset
-			.map(function(result){ return self.searchMap[result.ref] });
+			.map(function(result){ return self.searchMap[result.ref] }).slice(0, 3);
 	},
 
 	//function formatSearchTerm
@@ -566,6 +566,7 @@ var Search = Control.extend({
 				}
 			});
 		}
+		$('#left').removeClass('search-showing');
 	},
 
 	// function showResults
@@ -592,6 +593,7 @@ var Search = Control.extend({
 			this.$resultsContainer.scrollTop(0);
 			$('#left').addClass('search-showing');
 		}
+		$('#left').addClass('search-showing');
 	},
 
 	// ---- END SHOW/HIDE ---- //
