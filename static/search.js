@@ -334,7 +334,7 @@ var Search = Control.extend({
 			//run the search
 			.search(this.formatSearchTerm(value))
 			//convert the results into a searchMap subset
-			.map(function(result){ return self.searchMap[result.ref] }).slice(0, 3);
+			.map(function(result){ return self.searchMap[result.ref] });
 	},
 
 	//function formatSearchTerm
