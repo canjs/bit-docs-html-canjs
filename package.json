@@ -5,8 +5,8 @@
   "main": "static/canjs",
   "scripts": {
     "start": "node make-example.js -f",
-    "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && node make-example.js -f",
-    "test": "npm run testee",
+    "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && npm start",
+    "test": "npm start && npm run testee",
     "testee": "testee test/browser.html --browsers firefox",
     "preversion": "npm test",
     "postversion": "git push --tags && git push",
