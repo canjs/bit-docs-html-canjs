@@ -41,3 +41,12 @@ QUnit.test('Search for “can-component”', function(assert) {
     done();
   });
 });
+
+QUnit.test('Search for “Live Binding”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('Live Binding').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('can-stache.Binding', results) < 2, true, 'first result is the can-stache Live Binding page');
+    done();
+  });
+});

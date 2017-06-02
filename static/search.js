@@ -349,8 +349,15 @@ var Search = Control.extend({
 			return searchEngine
 				//run the search
 				.query(function(q) {
+
 					// look for an exact match and apply a large positive boost
 					q.term(value, { usePipeline: true, boost: 100 });
+
+					// look for matches in any of the fields and apply a medium positive boost
+					var split = value.split(lunr.tokenizer.separator);
+					split.forEach(function(term) {
+						q.term(term.toLowerCase(), { usePipeline: false, fields: q.allFields, boost: 10 });
+					});
 				})
 				//convert the results into a searchMap subset
 				.map(function(result){ return self.searchMap[result.ref] });
