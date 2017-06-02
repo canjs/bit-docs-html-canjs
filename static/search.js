@@ -30,7 +30,6 @@ var Search = Control.extend({
 		keyboardActiveClass: "keyboard-active",
 
 		//search options
-		minSearchLength: 3,
 		searchTimeout: 400,
 
 		localStorageKeyPrefix: "bit-docs-search",
@@ -332,10 +331,10 @@ var Search = Control.extend({
 	searchEngineSearch: function(value){
 		var self = this;
 		return this.searchEngine
-					//run the search
-					.search(this.formatSearchTerm(value))
-					//convert the results into a searchMap subset
-					.map(function(result){ return self.searchMap[result.ref] });
+			//run the search
+			.search(this.formatSearchTerm(value))
+			//convert the results into a searchMap subset
+			.map(function(result){ return self.searchMap[result.ref] });
 	},
 
 	//function formatSearchTerm
@@ -381,7 +380,7 @@ var Search = Control.extend({
 		var value = ev.target.value;
 
 		//hide search if input is empty or less than min length
-		if(!value || !value.length || value.length < this.options.minSearchLength){
+		if(!value || !value.length){
 			this.unsetSearchState();
 			return;
 		}
@@ -396,6 +395,7 @@ var Search = Control.extend({
 				this.selectActiveResult();
 				break;
 			default:
+			
 				if(value !== this.searchTerm){
 					this.searchTerm = value;
 					this.search(value);
@@ -459,8 +459,6 @@ var Search = Control.extend({
 					self.navigate($a.attr("href"));
 					return;
 				}
-
-				self.clear();
 			});
 		}
 	},
@@ -549,6 +547,7 @@ var Search = Control.extend({
 				this.options.onResultsHide();
 			}
 			this.deactivateResult();
+			$('#left').removeClass('search-showing');
 			this.$resultsContainer.stop().addClass("is-hiding").fadeOut({
 				duration: 400,
 				complete: function(){
@@ -580,7 +579,7 @@ var Search = Control.extend({
 				duration: 400,
 				complete: function(){
 					if(!self.$resultsContainer.is(".is-hiding")){
-						self.$resultsContainer.removeClass("is-showing")
+						self.$resultsContainer.removeClass("is-showing");
 						if(self.options.onResultsShown){
 							self.options.onResultsShown();
 						}
@@ -589,6 +588,7 @@ var Search = Control.extend({
 			});
 
 			this.$resultsContainer.scrollTop(0);
+			$('#left').addClass('search-showing');
 		}
 	},
 
@@ -720,9 +720,6 @@ var Search = Control.extend({
 		}else{
 			window.location.href = href;
 		}
-
-		this.clear();
-
 	}
 	// ---- END HELPERS ---- //
 
