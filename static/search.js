@@ -16,7 +16,7 @@ var Search = Control.extend({
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
 		pathPrefix: window.pathPrefix,
-		searchMapHashUrl: '/searchMapHash.json', 
+		searchMapHashUrl: '/searchMapHash.json',
 		searchMapUrl: '/searchMap.json',
 
 		//callbacks
@@ -104,7 +104,7 @@ var Search = Control.extend({
 		this.$element = $(this.element);
 		this.$inputWrap = this.$element.find('.search-wrap');
 		this.$input = this.$inputWrap.find(".search");
-		this.$resultsContainer = $(this.options.searchResultsContainerSelector); 
+		this.$resultsContainer = $(this.options.searchResultsContainerSelector);
 		this.$resultsWrap = this.$resultsContainer.find(".search-results-wrap");
 		this.$resultsContainerParent = this.$resultsContainer.closest(this.options.searchResultsContainerParentSelector);
 		this.$resultsCancelLink = this.$resultsContainer.find(".search-cancel");
@@ -126,7 +126,7 @@ var Search = Control.extend({
 	getLocalStorageItem: function(key){
 		var storageItem = (this.useLocalStorage) ? localStorage.getItem(key) : this.storageFallback[key];
 		if (storageItem) {
-			return JSON.parse(storageItem);	
+			return JSON.parse(storageItem);
 		}
 		return null;
 	},
@@ -135,9 +135,9 @@ var Search = Control.extend({
 		if (data) {
 			var storageItem = JSON.stringify(data);
 			if (this.useLocalStorage) {
-				this.storageFallback[key] = storageItem;
-			} else {
 				localStorage.setItem(key, storageItem);
+			} else {
+				this.storageFallback[key] = storageItem;
 			}
 			return true;
 		}
@@ -432,7 +432,7 @@ var Search = Control.extend({
 		ev.stopPropagation();
 		this.clear();
 	},
-	
+
 	// ---- END EVENTS ---- //
 
 	// ---- RESULTS EVENTS ---- //
@@ -588,7 +588,7 @@ var Search = Control.extend({
 					}
 				}
 			});
-			
+
 			this.$resultsContainer.scrollTop(0);
 			$('#left').addClass('search-showing');
 		}
@@ -620,7 +620,7 @@ var Search = Control.extend({
 
 		$nextResult = this.$activeResult.next("li");
 
-		//if no next result, 
+		//if no next result,
 		//  activate the first one
 		if(!$nextResult || ($nextResult && !$nextResult.length)){
 			this.activateResult(this.$resultsList.find("li").first());
@@ -649,7 +649,7 @@ var Search = Control.extend({
 
 		$prevResult = this.$activeResult.prev("li");
 
-		//if no prev result, 
+		//if no prev result,
 		//  activate the last one
 		if(!$prevResult || ($prevResult && !$prevResult.length)){
 			this.activateResult(this.$resultsList.find("li").last());
@@ -661,7 +661,7 @@ var Search = Control.extend({
 	// function activateResult
 	// sets property and adds class to active result
 	activateResult: function($result){
-		this.deactivateResult(); 
+		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
@@ -696,7 +696,7 @@ var Search = Control.extend({
 	// if method provided, use the return value
 	// otherwise, use the position().top of the first list item
 	getActiveResultOffset: function(){
-		
+
 		if(this.options.getActiveResultOffset){
 			return this.options.getActiveResultOffset();
 		}
@@ -713,7 +713,7 @@ var Search = Control.extend({
 
 	// ---- HELPERS ---- //
 
-	// function navigate	
+	// function navigate
 	//if we've been given a navigate method, call it
 	//  otherwise, just navigate normally
 	navigate: function(href){
@@ -724,7 +724,7 @@ var Search = Control.extend({
 		}
 
 		this.clear();
-		
+
 	}
 	// ---- END HELPERS ---- //
 
