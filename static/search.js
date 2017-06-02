@@ -459,8 +459,6 @@ var Search = Control.extend({
 					self.navigate($a.attr("href"));
 					return;
 				}
-
-				self.clear();
 			});
 		}
 	},
@@ -720,9 +718,6 @@ var Search = Control.extend({
 		}else{
 			window.location.href = href;
 		}
-
-		this.clear();
-
 	}
 	// ---- END HELPERS ---- //
 
