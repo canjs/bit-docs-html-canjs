@@ -566,7 +566,6 @@ var Search = Control.extend({
 				}
 			});
 		}
-		$('#left').removeClass('search-showing');
 	},
 
 	// function showResults
@@ -593,7 +592,6 @@ var Search = Control.extend({
 			this.$resultsContainer.scrollTop(0);
 			$('#left').addClass('search-showing');
 		}
-		$('#left').addClass('search-showing');
 	},
 
 	// ---- END SHOW/HIDE ---- //
