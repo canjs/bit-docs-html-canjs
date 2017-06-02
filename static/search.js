@@ -330,14 +330,11 @@ var Search = Control.extend({
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch: function(value){
 		var self = this;
-		console.time('Search for ' + value);
-		var results = this.searchEngine
-					//run the search
-					.search(this.formatSearchTerm(value))
-					//convert the results into a searchMap subset
-					.map(function(result){ return self.searchMap[result.ref] });
-					console.timeEnd('Search for ' + value);
-					return results;
+		return this.searchEngine
+			//run the search
+			.search(this.formatSearchTerm(value))
+			//convert the results into a searchMap subset
+			.map(function(result){ return self.searchMap[result.ref] });
 	},
 
 	//function formatSearchTerm
