@@ -351,7 +351,10 @@ var Search = Control.extend({
 				.query(function(q) {
 
 					// look for an exact match and apply a large positive boost
-					q.term(value, { usePipeline: true, boost: 100 });
+					q.term(value, { usePipeline: true, boost: 120 });
+
+					// look for terns that match the beginning or end of this query
+					q.term('*' + value + '*', { usePipeline: false });
 
 					// look for matches in any of the fields and apply a medium positive boost
 					var split = value.split(lunr.tokenizer.separator);

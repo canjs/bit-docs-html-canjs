@@ -51,6 +51,14 @@ QUnit.test('Search for “can-connect”', function(assert) {
   });
 });
 
+QUnit.test('Search for “helpers/', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('helpers/').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    done();
+  });
+});
+
 QUnit.test('Search for “Live Binding”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('Live Binding').then(function(results) {
