@@ -8,6 +8,9 @@ var indexOfPageInResults = function(pageName, results) {
   });
 };
 
+/* Clear local storage */
+window.localStorage.clear();
+
 /* Create the search bar element */
 var searchBar = document.createElement('div');
 searchBar.id = 'search-bar';
@@ -26,6 +29,15 @@ QUnit.test('Search for “about”', function(assert) {
   search.searchEngineSearch('about').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
     assert.equal(indexOfPageInResults('about', results), 0, 'first result is the About page');
+    done();
+  });
+});
+
+QUnit.test('Search for “can-component”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('can-component').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('can-component', results), 0, 'first result is the can-component page');
     done();
   });
 });

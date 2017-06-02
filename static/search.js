@@ -318,9 +318,16 @@ var Search = Control.extend({
 			searchEngine = lunr.Index.load(index);
 		}else{
 			searchEngine = lunr(function(){
+				lunr.tokenizer.separator = /[\s]+/;
+
+				this.pipeline.remove(lunr.stemmer);
+				this.pipeline.remove(lunr.stopWordFilter);
+				this.searchPipeline.remove(lunr.stemmer);
+
 				this.ref('name');
 				this.field('title');
 				this.field('description');
+				this.field('name');
 				this.field('url');
 
 				for (var itemKey in searchMap) {
@@ -341,7 +348,10 @@ var Search = Control.extend({
 		return this.searchEnginePromise.then(function(searchEngine) {
 			return searchEngine
 				//run the search
-				.search(self.formatSearchTerm(value))
+				.query(function(q) {
+					// look for an exact match and apply a large positive boost
+					q.term(value, { usePipeline: true, boost: 100 });
+				})
 				//convert the results into a searchMap subset
 				.map(function(result){ return self.searchMap[result.ref] });
 		});
