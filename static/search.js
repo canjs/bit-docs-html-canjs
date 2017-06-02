@@ -4,7 +4,7 @@ var searchResultsRenderer = require("./templates/search-results.stache!steal-sta
 var joinURIs = require("can-util/js/join-uris/");
 
 //https://lunrjs.com/guides/getting_started.html
-var searchEngine = require("lunr");
+var lunr = require("lunr");
 
 var Search = Control.extend({
 
@@ -66,6 +66,7 @@ var Search = Control.extend({
 
 	init: function(){
 
+		var options = this.options;
 		var self = this;
 
 		//init elements
@@ -76,23 +77,28 @@ var Search = Control.extend({
 
 		this.useLocalStorage = this.localStorageIsAvailable();
 
-		this.checkSearchMapHash(this.options.pathPrefix + this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
-			self.getSearchMap(self.options.pathPrefix + self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
-				self.initSearchEngine(searchMap);
+		this.searchEnginePromise = new Promise(function(resolve, reject) {
+			self.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject){
+				self.getSearchMap(options.pathPrefix + options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
+					var searchEngine = self.initSearchEngine(searchMap);
+					resolve(searchEngine);
 
-				//show the search input when the search engine is ready
-				if(self.options.animateInOnStart){
-					self.$inputWrap.fadeIn(400);
-				}else{
-					self.$inputWrap.show();
-				}
+					//show the search input when the search engine is ready
+					if(self.options.animateInOnStart){
+						self.$inputWrap.fadeIn(400);
+					}else{
+						self.$inputWrap.show();
+					}
 
-				self.bindResultsEvents();
+					self.bindResultsEvents();
+				}, function(error){
+					console.error("getSearchMap error", error);
+					reject(error);
+				});
 			}, function(error){
-				console.error("getSearchMap error", error);
+				console.error("checkSearchMapHash error", error);
+				reject(error);
 			});
-		}, function(error){
-			console.error("checkSearchMapHash error", error);
 		});
 	},
 	destroy: function(){
@@ -305,12 +311,13 @@ var Search = Control.extend({
 	//   else
 	//     generates search engine from searchMap & saves index to local storage
 	initSearchEngine: function(searchMap){
-		var localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey),
-				index = this.getLocalStorageItem(localStorageKey);
+		var searchEngine;
+		var localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey);
+		var index = this.getLocalStorageItem(localStorageKey);
 		if(index){
-			this.searchEngine = searchEngine.Index.load(index);
+			searchEngine = lunr.Index.load(index);
 		}else{
-			this.searchEngine = searchEngine(function(){
+			searchEngine = lunr(function(){
 				this.ref('name');
 				this.field('title');
 				this.field('description');
@@ -322,19 +329,22 @@ var Search = Control.extend({
 				  }
 				}
 			});
-			this.setLocalStorageItem(localStorageKey, this.searchEngine);
+			this.setLocalStorageItem(localStorageKey, searchEngine);
 		}
+		return searchEngine;
 	},
 
 	// function searchEngineSearch
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch: function(value){
 		var self = this;
-		return this.searchEngine
-			//run the search
-			.search(this.formatSearchTerm(value))
-			//convert the results into a searchMap subset
-			.map(function(result){ return self.searchMap[result.ref] });
+		return this.searchEnginePromise.then(function(searchEngine) {
+			return searchEngine
+				//run the search
+				.search(self.formatSearchTerm(value))
+				//convert the results into a searchMap subset
+				.map(function(result){ return self.searchMap[result.ref] });
+		});
 	},
 
 	//function formatSearchTerm
@@ -395,7 +405,7 @@ var Search = Control.extend({
 				this.selectActiveResult();
 				break;
 			default:
-			
+
 				if(value !== this.searchTerm){
 					this.searchTerm = value;
 					this.search(value);
@@ -485,36 +495,37 @@ var Search = Control.extend({
 		clearTimeout(this.searchDebounceHandle);
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
-			var resultsMap = self.searchEngineSearch(value),
-					numResults = Object.keys(resultsMap).length,
-					resultsFrag = self.options.resultsRenderer({
-						results:resultsMap,
-						numResults:numResults,
-						searchValue:value,
-						pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
-					},{
-						docUrl: function(){
-							if(!self.options.pathPrefix){
-								return this.url;
-							}
-
-							var root = joinURIs(window.location.href, self.options.pathPrefix);
-							if(root.substr(-1) === "/"){
-								root = root.substr(0, root.length-1);
-							}
-
-							return root + "/" + this.url;
+			self.searchEngineSearch(value).then(function(resultsMap) {
+				var numResults = Object.keys(resultsMap).length;
+				var resultsFrag = self.options.resultsRenderer({
+					results:resultsMap,
+					numResults:numResults,
+					searchValue:value,
+					pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
+				},{
+					docUrl: function(){
+						if(!self.options.pathPrefix){
+							return this.url;
 						}
-					});
 
-			self.$resultsWrap.empty();
-			self.$resultsWrap[0].appendChild(resultsFrag);
+						var root = joinURIs(window.location.href, self.options.pathPrefix);
+						if(root.substr(-1) === "/"){
+							root = root.substr(0, root.length-1);
+						}
 
-			//refresh necessary dom
-			self.$resultsList = null;
-			if(numResults){
-				self.$resultsList = self.$resultsWrap.find(".search-results > ul");
-			}
+						return root + "/" + this.url;
+					}
+				});
+
+				self.$resultsWrap.empty();
+				self.$resultsWrap[0].appendChild(resultsFrag);
+
+				//refresh necessary dom
+				self.$resultsList = null;
+				if(numResults){
+					self.$resultsList = self.$resultsWrap.find(".search-results > ul");
+				}
+			});
 		}, this.options.searchTimeout);
 	},
 
