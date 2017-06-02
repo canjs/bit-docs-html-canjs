@@ -32,7 +32,7 @@ var Search = Control.extend({
 		//search options
 		searchTimeout: 400,
 
-		localStorageKeyPrefix: "bit-docs-search",
+		localStorageKeyPrefix: "search",
 
 		//whether or not to animate in upon initialization
 		animateInOnStart: true
@@ -170,7 +170,7 @@ var Search = Control.extend({
 	//  ---- END LOCAL STORAGE ---- //
 
 	//  ---- END DATA RETRIEVAL ---- //
-	searchMapLocalStorageKey: "searchMap",
+	searchMapLocalStorageKey: 'map',
 	searchMap: null,
 
 	// function getSearchMap
@@ -231,7 +231,7 @@ var Search = Control.extend({
 		return returnDeferred;
 	},
 
-	searchMapHashLocalStorageKey: "searchMapHash",
+	searchMapHashLocalStorageKey: 'map-hash',
 	// function checkSearchMapHash
 	// retrieves the searchMapHash localStorage (if present)
 	// and from the specified url
@@ -241,22 +241,18 @@ var Search = Control.extend({
 	//
 	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
 	checkSearchMapHash: function(dataUrl) {
-		var self = this,
-				returnDeferred = $.Deferred(),
-				localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey),
-				searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
-				lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
+		var returnDeferred = $.Deferred();
+		var self = this;
 
 		//no need to do anything if localStorage isn't present
-		if(!window.localStorage){
+		if (!this.useLocalStorage) {
 			returnDeferred.resolve(false);
 			return;
 		}
 
-
-		localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey);
-		searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey);
-		lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
+		var localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey);
+		var searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey);
+		var lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
 
 		$.ajax({
 			url: dataUrl,
@@ -302,7 +298,8 @@ var Search = Control.extend({
 
 	//  ---- SEARCHING / PARSING ---- //
 
-	searchIndexLocalStorageKey: "searchIndex",
+	searchIndexLocalStorageKey: 'index',
+	searchIndexVersionLocalStorageKey: 'index-version',
 	searchEngine: null,
 	// function initSearchEngine
 	// checks localStorage for an index
@@ -312,9 +309,13 @@ var Search = Control.extend({
 	//     generates search engine from searchMap & saves index to local storage
 	initSearchEngine: function(searchMap){
 		var searchEngine;
-		var localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey);
-		var index = this.getLocalStorageItem(localStorageKey);
-		if(index){
+		var searchIndexKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey);
+		var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
+		var index = this.getLocalStorageItem(searchIndexKey);
+		var indexVersion = this.getLocalStorageItem(searchIndexVersionKey);
+		var currentIndexVersion = 1;// Bump this whenever the index code is changed
+
+		if (index && currentIndexVersion === indexVersion) {
 			searchEngine = lunr.Index.load(index);
 		}else{
 			searchEngine = lunr(function(){
@@ -336,7 +337,8 @@ var Search = Control.extend({
 				  }
 				}
 			});
-			this.setLocalStorageItem(localStorageKey, searchEngine);
+			this.setLocalStorageItem(searchIndexKey, searchEngine);
+			this.setLocalStorageItem(searchIndexVersionKey, currentIndexVersion);
 		}
 		return searchEngine;
 	},
