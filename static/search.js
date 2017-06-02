@@ -4,7 +4,7 @@ var searchResultsRenderer = require("./templates/search-results.stache!steal-sta
 var joinURIs = require("can-util/js/join-uris/");
 
 //https://lunrjs.com/guides/getting_started.html
-var searchEngine = require("lunr");
+var lunr = require("lunr");
 
 var Search = Control.extend({
 
@@ -32,7 +32,7 @@ var Search = Control.extend({
 		//search options
 		searchTimeout: 400,
 
-		localStorageKeyPrefix: "bit-docs-search",
+		localStorageKeyPrefix: "search",
 
 		//whether or not to animate in upon initialization
 		animateInOnStart: true
@@ -66,6 +66,7 @@ var Search = Control.extend({
 
 	init: function(){
 
+		var options = this.options;
 		var self = this;
 
 		//init elements
@@ -76,23 +77,28 @@ var Search = Control.extend({
 
 		this.useLocalStorage = this.localStorageIsAvailable();
 
-		this.checkSearchMapHash(this.options.pathPrefix + this.options.searchMapHashUrl).then(function(searchMapHashChangedObject){
-			self.getSearchMap(self.options.pathPrefix + self.options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
-				self.initSearchEngine(searchMap);
+		this.searchEnginePromise = new Promise(function(resolve, reject) {
+			self.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject){
+				self.getSearchMap(options.pathPrefix + options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
+					var searchEngine = self.initSearchEngine(searchMap);
+					resolve(searchEngine);
 
-				//show the search input when the search engine is ready
-				if(self.options.animateInOnStart){
-					self.$inputWrap.fadeIn(400);
-				}else{
-					self.$inputWrap.show();
-				}
+					//show the search input when the search engine is ready
+					if(self.options.animateInOnStart){
+						self.$inputWrap.fadeIn(400);
+					}else{
+						self.$inputWrap.show();
+					}
 
-				self.bindResultsEvents();
+					self.bindResultsEvents();
+				}, function(error){
+					console.error("getSearchMap error", error);
+					reject(error);
+				});
 			}, function(error){
-				console.error("getSearchMap error", error);
+				console.error("checkSearchMapHash error", error);
+				reject(error);
 			});
-		}, function(error){
-			console.error("checkSearchMapHash error", error);
 		});
 	},
 	destroy: function(){
@@ -164,7 +170,7 @@ var Search = Control.extend({
 	//  ---- END LOCAL STORAGE ---- //
 
 	//  ---- END DATA RETRIEVAL ---- //
-	searchMapLocalStorageKey: "searchMap",
+	searchMapLocalStorageKey: 'map',
 	searchMap: null,
 
 	// function getSearchMap
@@ -225,7 +231,7 @@ var Search = Control.extend({
 		return returnDeferred;
 	},
 
-	searchMapHashLocalStorageKey: "searchMapHash",
+	searchMapHashLocalStorageKey: 'map-hash',
 	// function checkSearchMapHash
 	// retrieves the searchMapHash localStorage (if present)
 	// and from the specified url
@@ -235,22 +241,18 @@ var Search = Control.extend({
 	//
 	// @returns thenable that resolves to true if localStorage was cleared and false otherwise
 	checkSearchMapHash: function(dataUrl) {
-		var self = this,
-				returnDeferred = $.Deferred(),
-				localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey),
-				searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey),
-				lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
+		var returnDeferred = $.Deferred();
+		var self = this;
 
 		//no need to do anything if localStorage isn't present
-		if(!window.localStorage){
+		if (!this.useLocalStorage) {
 			returnDeferred.resolve(false);
 			return;
 		}
 
-
-		localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey);
-		searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey);
-		lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
+		var localStorageKey = self.formatLocalStorageKey(self.searchMapHashLocalStorageKey);
+		var searchMapHashLocalStorage = self.getLocalStorageItem(localStorageKey);
+		var lsHash = searchMapHashLocalStorage && searchMapHashLocalStorage.hash;
 
 		$.ajax({
 			url: dataUrl,
@@ -296,7 +298,8 @@ var Search = Control.extend({
 
 	//  ---- SEARCHING / PARSING ---- //
 
-	searchIndexLocalStorageKey: "searchIndex",
+	searchIndexLocalStorageKey: 'index',
+	searchIndexVersionLocalStorageKey: 'index-version',
 	searchEngine: null,
 	// function initSearchEngine
 	// checks localStorage for an index
@@ -305,15 +308,27 @@ var Search = Control.extend({
 	//   else
 	//     generates search engine from searchMap & saves index to local storage
 	initSearchEngine: function(searchMap){
-		var localStorageKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey),
-				index = this.getLocalStorageItem(localStorageKey);
-		if(index){
-			this.searchEngine = searchEngine.Index.load(index);
+		var searchEngine;
+		var searchIndexKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey);
+		var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
+		var index = this.getLocalStorageItem(searchIndexKey);
+		var indexVersion = this.getLocalStorageItem(searchIndexVersionKey);
+		var currentIndexVersion = 1;// Bump this whenever the index code is changed
+
+		if (index && currentIndexVersion === indexVersion) {
+			searchEngine = lunr.Index.load(index);
 		}else{
-			this.searchEngine = searchEngine(function(){
+			searchEngine = lunr(function(){
+				lunr.tokenizer.separator = /[\s]+/;
+
+				this.pipeline.remove(lunr.stemmer);
+				this.pipeline.remove(lunr.stopWordFilter);
+				this.searchPipeline.remove(lunr.stemmer);
+
 				this.ref('name');
 				this.field('title');
 				this.field('description');
+				this.field('name');
 				this.field('url');
 
 				for (var itemKey in searchMap) {
@@ -322,19 +337,46 @@ var Search = Control.extend({
 				  }
 				}
 			});
-			this.setLocalStorageItem(localStorageKey, this.searchEngine);
+			this.setLocalStorageItem(searchIndexKey, searchEngine);
+			this.setLocalStorageItem(searchIndexVersionKey, currentIndexVersion);
 		}
+		return searchEngine;
 	},
 
 	// function searchEngineSearch
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch: function(value){
+		var searchTerm = value.toLowerCase();
 		var self = this;
-		return this.searchEngine
-			//run the search
-			.search(this.formatSearchTerm(value))
-			//convert the results into a searchMap subset
-			.map(function(result){ return self.searchMap[result.ref] });
+		return this.searchEnginePromise.then(function(searchEngine) {
+			return searchEngine
+				//run the search
+				.query(function(q) {
+
+
+					if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
+
+						// look for an exact match and apply a large positive boost
+						q.term(searchTerm, { usePipeline: true, boost: 120 });
+
+					} else {
+						// add “can-”, look for an exact match in the title field, and apply a positive boost
+						q.term('can-' + searchTerm, { usePipeline: false, fields: ['title'], boost: 12 });
+					}
+
+					// look for terms that match the beginning or end of this query
+					q.term('*' + searchTerm + '*', { usePipeline: false });
+
+					// look for matches in any of the fields and apply a medium positive boost
+					var split = searchTerm.split(lunr.tokenizer.separator);
+					split.forEach(function(term) {
+						q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
+						q.term(term + '*', { usePipeline: false, fields: q.allFields });
+					});
+				})
+				//convert the results into a searchMap subset
+				.map(function(result){ return self.searchMap[result.ref] });
+		});
 	},
 
 	//function formatSearchTerm
@@ -395,7 +437,7 @@ var Search = Control.extend({
 				this.selectActiveResult();
 				break;
 			default:
-			
+
 				if(value !== this.searchTerm){
 					this.searchTerm = value;
 					this.search(value);
@@ -485,36 +527,37 @@ var Search = Control.extend({
 		clearTimeout(this.searchDebounceHandle);
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
-			var resultsMap = self.searchEngineSearch(value),
-					numResults = Object.keys(resultsMap).length,
-					resultsFrag = self.options.resultsRenderer({
-						results:resultsMap,
-						numResults:numResults,
-						searchValue:value,
-						pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
-					},{
-						docUrl: function(){
-							if(!self.options.pathPrefix){
-								return this.url;
-							}
-
-							var root = joinURIs(window.location.href, self.options.pathPrefix);
-							if(root.substr(-1) === "/"){
-								root = root.substr(0, root.length-1);
-							}
-
-							return root + "/" + this.url;
+			self.searchEngineSearch(value).then(function(resultsMap) {
+				var numResults = Object.keys(resultsMap).length;
+				var resultsFrag = self.options.resultsRenderer({
+					results:resultsMap,
+					numResults:numResults,
+					searchValue:value,
+					pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
+				},{
+					docUrl: function(){
+						if(!self.options.pathPrefix){
+							return this.url;
 						}
-					});
 
-			self.$resultsWrap.empty();
-			self.$resultsWrap[0].appendChild(resultsFrag);
+						var root = joinURIs(window.location.href, self.options.pathPrefix);
+						if(root.substr(-1) === "/"){
+							root = root.substr(0, root.length-1);
+						}
 
-			//refresh necessary dom
-			self.$resultsList = null;
-			if(numResults){
-				self.$resultsList = self.$resultsWrap.find(".search-results > ul");
-			}
+						return root + "/" + this.url;
+					}
+				});
+
+				self.$resultsWrap.empty();
+				self.$resultsWrap[0].appendChild(resultsFrag);
+
+				//refresh necessary dom
+				self.$resultsList = null;
+				if(numResults){
+					self.$resultsList = self.$resultsWrap.find(".search-results > ul");
+				}
+			});
 		}, this.options.searchTimeout);
 	},
 
