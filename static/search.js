@@ -582,7 +582,7 @@ var Search = Control.extend({
 				duration: 400,
 				complete: function(){
 					if(!self.$resultsContainer.is(".is-hiding")){
-						self.$resultsContainer.addClass("is-showing");
+						self.$resultsContainer.removeClass("is-showing");
 						if(self.options.onResultsShown){
 							self.options.onResultsShown();
 						}
