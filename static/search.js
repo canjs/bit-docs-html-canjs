@@ -541,7 +541,7 @@ var Search = Control.extend({
 
 	// function hideResults
 	// animate the results out
-	hideResults: function(collapse){
+	hideResults: function(){
 		var self = this;
 		if(this.$resultsContainer.is(":visible")){
 
