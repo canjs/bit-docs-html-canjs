@@ -36,14 +36,15 @@
 			background-repeat: no-repeat;
 			display:none;
 		}
-
-
+		
 		.search{
+			transition: width 0.4s ease;
 			background: @code-color;
 			color: #ffffff;
 			border: none;
 			padding: 0;
 			// text-indent: 1.5em;
+			width: 40px;
 			.placeholder(@gray);
 			&:focus{
 				outline:none;
@@ -58,6 +59,10 @@
 	@media screen and (min-width: @breakpoint) {
 				display: block;
 		}
+}
+
+#left.search-showing .search-bar .search-wrap .search {
+	width: 100%;
 }
 
 .bottom-left{

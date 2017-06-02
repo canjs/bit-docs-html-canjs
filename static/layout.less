@@ -11,12 +11,17 @@
 #left {
   position: fixed;
   width: @sidebar-width;
+  min-width: 0;
+  transition: min-width 0.4s ease;
   @media screen and (min-width: @breakpoint){
     flex-shrink: 0;
     padding: 0px;
     position: relative;
     width: auto;
   }
+}
+#left.search-showing {
+  min-width: 300px !important;
 }
 #right {
   height: 100%;

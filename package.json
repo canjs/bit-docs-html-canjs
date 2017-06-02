@@ -46,8 +46,8 @@
     "connect": "^3.5.0",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
-    "steal": "^1.5.2",
-    "steal-qunit": "^1.0.1",
+    "steal": "^0.16.44",
+    "steal-qunit": "^0.1.4",
     "testee": "^0.6.0",
     "zombie": "^5.0.5"
   }

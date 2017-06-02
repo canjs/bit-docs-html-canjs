@@ -28,7 +28,7 @@ var $articleContainer,
 	hasShownSearch = false;
 	init();
 
-	// prevent sidebar from changing width when header hides
+	// prevent sidebar from changing width when header hides		
 	$('#left').css('min-width', $('.top-left').width());
 
 	// Override link behavior
