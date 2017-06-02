@@ -28,9 +28,6 @@ var $articleContainer,
 	hasShownSearch = false;
 	init();
 
-	// prevent sidebar from changing width when header hides
-	$('#left').css('min-width', $('.top-left').width());
-
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
 		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
