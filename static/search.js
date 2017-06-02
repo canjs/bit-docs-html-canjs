@@ -357,6 +357,7 @@ var Search = Control.extend({
 					var split = value.split(lunr.tokenizer.separator);
 					split.forEach(function(term) {
 						q.term(term.toLowerCase(), { usePipeline: false, fields: q.allFields, boost: 10 });
+						q.term(term.toLowerCase() + '*', { usePipeline: false, fields: q.allFields, boost: 10 });
 					});
 				})
 				//convert the results into a searchMap subset

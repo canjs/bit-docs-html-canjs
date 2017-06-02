@@ -50,3 +50,12 @@ QUnit.test('Search for “Live Binding”', function(assert) {
     done();
   });
 });
+
+QUnit.test('Search for “Play”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('Play').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('guides/recipes/playlist-editor', results), 0, 'first result is the “Playlist Editor (Advanced)” guide');
+    done();
+  });
+});
