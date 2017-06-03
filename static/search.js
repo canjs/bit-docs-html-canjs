@@ -527,11 +527,15 @@ var Search = Control.extend({
 		clearTimeout(this.searchDebounceHandle);
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
-			self.searchEngineSearch(value).then(function(resultsMap) {
-				var numResults = Object.keys(resultsMap).length;
+			self.searchEngineSearch(value).then(function(results) {
+				var numResults = results.length;
+				if (numResults > 50) {
+					numResults = '50+';
+					results = results.slice(0, 50);
+				}
 				var resultsFrag = self.options.resultsRenderer({
-					results:resultsMap,
-					numResults:numResults,
+					results: results,
+					numResults: numResults,
 					searchValue:value,
 					pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
 				},{
