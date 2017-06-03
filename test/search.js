@@ -85,3 +85,12 @@ QUnit.test('Search for “stache”', function(assert) {
     done();
   });
 });
+
+QUnit.test('Search for “%special”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('%special').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('can-stache/keys/special', results), 0, 'first result is the can-stache/keys/special page');
+    done();
+  });
+});
