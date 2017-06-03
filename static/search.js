@@ -313,7 +313,7 @@ var Search = Control.extend({
 		var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
 		var index = this.getLocalStorageItem(searchIndexKey);
 		var indexVersion = this.getLocalStorageItem(searchIndexVersionKey);
-		var currentIndexVersion = 1;// Bump this whenever the index code is changed
+		var currentIndexVersion = 2;// Bump this whenever the index code is changed
 
 		if (index && currentIndexVersion === indexVersion) {
 			searchEngine = lunr.Index.load(index);
@@ -323,6 +323,7 @@ var Search = Control.extend({
 
 				this.pipeline.remove(lunr.stemmer);
 				this.pipeline.remove(lunr.stopWordFilter);
+				this.pipeline.remove(lunr.trimmer);
 				this.searchPipeline.remove(lunr.stemmer);
 
 				this.ref('name');
@@ -353,11 +354,10 @@ var Search = Control.extend({
 				//run the search
 				.query(function(q) {
 
-
 					if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
 
 						// look for an exact match and apply a large positive boost
-						q.term(searchTerm, { usePipeline: true, boost: 120 });
+						q.term(searchTerm, { usePipeline: true, boost: 375 });
 
 					} else {
 						// add “can-”, look for an exact match in the title field, and apply a positive boost
