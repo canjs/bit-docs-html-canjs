@@ -30,6 +30,7 @@ var Search = Control.extend({
 		keyboardActiveClass: "keyboard-active",
 
 		//search options
+		searchAnimation: 400,
 		searchTimeout: 400,
 
 		localStorageKeyPrefix: "search",
@@ -85,7 +86,7 @@ var Search = Control.extend({
 
 					//show the search input when the search engine is ready
 					if(self.options.animateInOnStart){
-						self.$inputWrap.fadeIn(400);
+						self.$inputWrap.fadeIn(self.options.searchAnimation);
 					}else{
 						self.$inputWrap.show();
 					}
@@ -599,7 +600,7 @@ var Search = Control.extend({
 			this.deactivateResult();
 			$('#left').removeClass('search-showing');
 			this.$resultsContainer.stop().addClass("is-hiding").fadeOut({
-				duration: 400,
+				duration: this.options.searchAnimation,
 				complete: function(){
 					self.$resultsContainer.removeClass("is-hiding");
 					if(!self.$resultsContainer.is(".is-showing")){
@@ -626,7 +627,7 @@ var Search = Control.extend({
 			}
 			this.$resultsContainerParent.stop().addClass("search-active");
 			this.$resultsContainer.addClass("is-showing").fadeIn({
-				duration: 400,
+				duration: this.options.searchAnimation,
 				complete: function(){
 					if(!self.$resultsContainer.is(".is-hiding")){
 						self.$resultsContainer.removeClass("is-showing");
