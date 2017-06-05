@@ -6,13 +6,10 @@
 	cursor:pointer;
 
 	.search-wrap{
-		position: relative;
-		padding: 0 1.5em;
+		display: flex;
+
 		.search-icon{
 			display: block;
-			position: absolute;
-			top: 1px;
-			left: 0;
 			height: 1em;
 			width: 1em;
 			font-size: 1em;
@@ -23,12 +20,11 @@
 		}
 		.search-icon-cancel{
 			display: block;
-			position: absolute;
-			right: 0;
+			position: relative;
 			height: 1em;
 			width: 1em;
 			font-size: .8em;
-			top: 0.25em;
+			top: 0.125em;
 			cursor: pointer;
 			background-color: @code-color;
 			background-image: url(img/icon-x-white.svg);
@@ -36,16 +32,16 @@
 			background-repeat: no-repeat;
 			display:none;
 		}
-		
+
 		.search{
 			transition: width 0.4s ease;
 			background: @code-color;
 			color: #ffffff;
 			border: none;
-			padding: 0;
+			padding: 0 .5em;
 			position: relative;
-			bottom: 2px;
-			width: 40px;
+			bottom: 0.125em;
+			flex: 1;
 			.placeholder(@gray);
 			&:focus{
 				outline:none;
@@ -55,19 +51,7 @@
 		&.has-value .search-icon-cancel{
 			display:block;
 		}
-		@media screen and (max-width: @breakpoint) {
-			&.has-value{
-				width: 200px;
-			}
-		}
 	}
-	@media screen and (min-width: @breakpoint) {
-		display: block;
-	}
-}
-
-#left.search-showing .search-bar .search-wrap .search {
-	width: 100%;
 }
 
 .bottom-left{
@@ -90,9 +74,6 @@
 			padding: .5em;
 			font-size: 1em;
 			line-height: 1;
-			position: absolute;
-			top: 0;
-			right: 0;
 		}
 
 		ul{
