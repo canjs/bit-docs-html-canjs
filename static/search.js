@@ -350,32 +350,35 @@ var Search = Control.extend({
 		var searchTerm = value.toLowerCase();
 		var self = this;
 		return this.searchEnginePromise.then(function(searchEngine) {
-			return searchEngine
-				//run the search
-				.query(function(q) {
 
-					if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
+			//run the search
+			var queryResults = searchEngine.query(function(q) {
 
-						// look for an exact match and apply a large positive boost
-						q.term(searchTerm, { usePipeline: true, boost: 375 });
+				if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
 
-					} else {
-						// add “can-”, look for an exact match in the title field, and apply a positive boost
-						q.term('can-' + searchTerm, { usePipeline: false, fields: ['title'], boost: 12 });
-					}
+					// look for an exact match and apply a large positive boost
+					q.term(searchTerm, { usePipeline: true, boost: 375 });
+
+				} else {
+					// add “can-”, look for an exact match in the title field, and apply a positive boost
+					q.term('can-' + searchTerm, { usePipeline: false, fields: ['title'], boost: 12 });
 
 					// look for terms that match the beginning or end of this query
 					q.term('*' + searchTerm + '*', { usePipeline: false });
+				}
 
-					// look for matches in any of the fields and apply a medium positive boost
-					var split = searchTerm.split(lunr.tokenizer.separator);
-					split.forEach(function(term) {
-						q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
-						q.term(term + '*', { usePipeline: false, fields: q.allFields });
-					});
-				})
-				//convert the results into a searchMap subset
-				.map(function(result){ return self.searchMap[result.ref] });
+				// look for matches in any of the fields and apply a medium positive boost
+				var split = searchTerm.split(lunr.tokenizer.separator);
+				split.forEach(function(term) {
+					q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
+					q.term(term + '*', { usePipeline: false, fields: q.allFields });
+				});
+			});
+
+			//convert the results into a searchMap subset
+			var mappedResults = queryResults.map(function(result){ return self.searchMap[result.ref] });
+
+			return mappedResults;
 		});
 	},
 

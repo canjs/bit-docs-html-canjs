@@ -94,3 +94,13 @@ QUnit.test('Search for “%special”', function(assert) {
     done();
   });
 });
+
+QUnit.test('Speed while searching for can-*', function(assert) {
+  var done = assert.async();
+  var startTime = new Date();
+  search.searchEngineSearch('can-zone').then(function() {
+    var totalTime = new Date() - startTime;
+    assert.equal(totalTime < 300, true, 'less than 300 milliseconds');
+    done();
+  });
+});
