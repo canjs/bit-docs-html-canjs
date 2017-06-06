@@ -473,11 +473,8 @@ var Search = Control.extend({
 	},
 
 	//cancel search on cancel click
-	".search-icon-cancel click": function(el, ev){
-		ev.preventDefault();
-		ev.stopPropagation();
-		this.clear();
-	},
+	".search-icon-cancel click": "clear",
+	".search-icon-cancel touchend": "clear",
 
 	// ---- END EVENTS ---- //
 
@@ -574,7 +571,11 @@ var Search = Control.extend({
 	// function clear
 	// - clears & focuses the input
 	// - unsets the search state
-	clear: function(){
+	clear: function(element, event) {
+		if (event) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
 		this.$input.val("").trigger("focus");
 		this.unsetSearchState();
 	},
