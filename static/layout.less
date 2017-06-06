@@ -12,16 +12,17 @@
   position: fixed;
   width: @sidebar-width;
   min-width: 0;
-  transition: min-width 0.4s ease;
+  transition: min-width @transition-speed ease;
   @media screen and (min-width: @breakpoint){
     flex-shrink: 0;
     padding: 0px;
     position: relative;
     width: auto;
+
+    &.search-showing {
+      min-width: 300px !important;
+    }
   }
-}
-#left.search-showing {
-  min-width: 300px !important;
 }
 #right {
   height: 100%;
