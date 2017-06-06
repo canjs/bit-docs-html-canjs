@@ -23,12 +23,12 @@
           {{#if result.title}}
           <span class="name">
 						({{result.name}})
-          </span>	
+          </span>
           {{/if}}
 
           {{#if result.description}}
             <div class="result-description" title="{{result.description}}">
-              {{{result.description}}}
+              {{result.description}}
             </div>
           {{/if}}
         </li>
