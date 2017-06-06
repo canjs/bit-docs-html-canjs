@@ -30,7 +30,7 @@ var Search = Control.extend({
 		keyboardActiveClass: "keyboard-active",
 
 		//search options
-		searchAnimation: 400,
+		searchAnimation: 250,// matches @transition-speed in variables.less
 		searchTimeout: 400,
 
 		localStorageKeyPrefix: "search",

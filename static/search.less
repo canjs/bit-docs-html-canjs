@@ -34,7 +34,7 @@
 		}
 
 		.search{
-			transition: width 0.4s ease;
+			transition: width @transition-speed ease;
 			background: @code-color;
 			color: #ffffff;
 			border: none;
@@ -66,6 +66,7 @@
 		left: 0;
 		overflow-y: auto;
 		padding: 2em 0;
+		transition: -webkit-backdrop-filter backdrop-filter background @transition-speed ease;
 		z-index: 1;
 		.search-cancel{
 			color: @code-color;
@@ -136,5 +137,13 @@
 	&.search-active{
 		overflow-y:hidden;
 		position:relative;
+	}
+}
+
+@supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
+	.bottom-left .search-results-container {
+		-webkit-backdrop-filter: @backdrop-blur;
+		backdrop-filter: @backdrop-blur;
+		background: rgba(100%, 100%, 100%, .65);
 	}
 }
