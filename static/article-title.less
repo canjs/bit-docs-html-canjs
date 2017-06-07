@@ -83,13 +83,29 @@ ul.title-links {
 
 /* Homepage hero images*/
 .hero-images {
-    border: 1px solid #EEE;
-    padding: 30px;
+	margin-bottom: @gutter;
+
+	@media screen and (min-width: @breakpoint) {
+		border: 1px solid #EEE;
+		padding: @gutter * 2;
+	}
+
 	.tortoise {
 		float: right;
-		padding-right: 40px;
+		width: 55%;
+
+		@media screen and (min-width: @breakpoint) {
+			padding-right: @gutter * 2;
+			width: auto;
+		}
 	}
+
 	.hare {
-		padding-left: 40px;
+		width: 45%;
+
+		@media screen and (min-width: @breakpoint) {
+			padding-left: @gutter * 2;
+			width: auto;
+		}
 	}
 }
