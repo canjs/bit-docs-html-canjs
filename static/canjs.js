@@ -282,9 +282,18 @@ function scrollToElement($element) {
 }
 
 function setOnThisPageContent() {
-	// don't bother with 1 header
+	var $breadcrumb = $(".breadcrumb");
 	var $h2 = $('h2');
-	if ($h2.length < 2) {
+	var showDropdown = $h2.length > 1;
+
+	if (showDropdown) {
+		$breadcrumb.addClass('dropdown-has-items');
+	} else {
+		$breadcrumb.removeClass('dropdown-has-items');
+	}
+
+	// don't bother with 1 header
+	if (!showDropdown) {
 		return;
 	}
 

@@ -12,6 +12,8 @@
 			color: lighten(@gray, 10%);
 			a {
 				cursor: pointer;
+			}
+			> a {
 				color: white;
 				font-weight: 700;
 			}
@@ -62,13 +64,19 @@
 				padding: @gutter/4 0;
 			}
 		}
+
+		.breadcrumb-dropdown-separator {
+			display: none;
+		}
+
+		&.dropdown-has-items .breadcrumb-dropdown-separator {
+			display: inline-block;
+		}
 	}
 }
 
 .on-this-page {
-	width: 100%;
 	font-size: 14px;
-	margin-top:@gutter/2;
 	margin-bottom: @gutter !important;
 	background: #fff;
 	list-style: none;
@@ -78,7 +86,6 @@
 	}
 	@media screen and (min-width: @breakpoint) {
 		padding: @gutter;
-		margin: 0;
 		position: fixed;
 		.box-shadow;
 			z-index: 15;
