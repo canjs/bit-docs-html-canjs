@@ -406,7 +406,7 @@ DocMapInfo.prototype.getCurrentTree = function(){
     //
     var getChildren = this.getChildren.bind(this),
         getNestedDocObject = this.getNestedDocObject.bind(this);
-    
+
     var self = this;
     var cur = this.getCurrent();
     var curChildren = this.getNestedChildren(cur);
@@ -415,7 +415,7 @@ DocMapInfo.prototype.getCurrentTree = function(){
             if(docObject.name === cur.name) {
                 if(cur.subchildren){
                     curChildren.forEach(function(child){
-                        if(child.docObject){
+                        if (child.docObject && !child.children) {
                             child.children = self.getNestedChildren(child.docObject);
                         }
                     });
