@@ -1,6 +1,6 @@
 var $ = require("jquery");
 var Control = require("can-control");
-var searchResultsRenderer = require("./templates/search-results.stache!steal-stache");
+var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
 
 //https://lunrjs.com/guides/getting_started.html

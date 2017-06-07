@@ -88,14 +88,17 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
-	// searchControl = new SearchControl(".search-bar", {
-	// 	navigate: function(href){
-	// 		window.history.pushState(null, null, href);
-	// 		navigate(href);
-	// 	},
-	// 	pathPrefix: window.pathPrefix,
-	// 	animateInOnStart: !hasShownSearch
-	// });
+
+	if (!searchControl) {
+		searchControl = new SearchControl(".search-bar", {
+			navigate: function(href){
+				window.history.pushState(null, null, href);
+				navigate(href);
+			},
+			pathPrefix: window.pathPrefix,
+			animateInOnStart: !hasShownSearch
+		});
+	}
 
 	hasShownSearch = true;
 }

@@ -3,7 +3,7 @@
 	background: @code-color;
 	padding: @gutter @gutter*2;
 	height: 48px;
-	// cursor:pointer;
+	cursor:pointer;
 
 	.search-wrap{
 		display: flex;
@@ -142,6 +142,7 @@
 @supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
 	.bottom-left .search-results-container {
 		-webkit-backdrop-filter: @backdrop-blur;
+		-webkit-font-smoothing: subpixel-antialiased;
 		backdrop-filter: @backdrop-blur;
 		background: rgba(100%, 100%, 100%, .65);
 	}
