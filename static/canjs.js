@@ -28,7 +28,7 @@ var $articleContainer,
 	hasShownSearch = false;
 	init();
 
-	// prevent sidebar from changing width when header hides		
+	// prevent sidebar from changing width when header hides
 	$('#left').css('min-width', $('.top-left').width());
 
 	// Override link behavior
@@ -88,14 +88,17 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
-	searchControl = new SearchControl(".search-bar", {
-		navigate: function(href){
-			window.history.pushState(null, null, href);
-			navigate(href);
-		},
-		pathPrefix: window.pathPrefix,
-		animateInOnStart: !hasShownSearch
-	});
+
+	if (!searchControl) {
+		searchControl = new SearchControl(".search-bar", {
+			navigate: function(href){
+				window.history.pushState(null, null, href);
+				navigate(href);
+			},
+			pathPrefix: window.pathPrefix,
+			animateInOnStart: !hasShownSearch
+		});
+	}
 
 	hasShownSearch = true;
 }
@@ -172,7 +175,7 @@ function navigate(href) {
 	clearInterval(scrollPositionInterval);
 
 	loader.start();
-	
+
 	navigating = true;
 	$.ajax(href, {
 		dataType: "text",
@@ -224,7 +227,7 @@ function navigate(href) {
 			$.getScript('https://buttons.github.io/buttons.js');
 
 			loader.end();
-			
+
 			// go through every package and re-init
 			for (var packageName in window.PACKAGES) {
 				if (typeof window.PACKAGES[packageName] === "function") {
