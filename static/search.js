@@ -335,7 +335,11 @@ var Search = Control.extend({
 
 				for (var itemKey in searchMap) {
 				  if (searchMap.hasOwnProperty(itemKey)) {
-				    this.add(searchMap[itemKey])
+					var item = searchMap[itemKey];
+					if(!item.title){
+						item.title = item.name;
+					}
+				    this.add(item);
 				  }
 				}
 			});
@@ -349,6 +353,7 @@ var Search = Control.extend({
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch: function(value){
 		var searchTerm = value.toLowerCase();
+		console.log('searchTerm:', searchTerm);
 		var self = this;
 		return this.searchEnginePromise.then(function(searchEngine) {
 
@@ -362,17 +367,17 @@ var Search = Control.extend({
 
 				} else {
 					// add “can-”, look for an exact match in the title field, and apply a positive boost
-					q.term('can-' + searchTerm, { usePipeline: false, fields: ['title'], boost: 12 });
+					q.term('can-' + searchTerm, { usePipeline: false, boost: 12 });
 
 					// look for terms that match the beginning or end of this query
-					q.term('*' + searchTerm + '*', { usePipeline: false });
+					q.term(searchTerm, { usePipeline: false, wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
 				}
 
 				// look for matches in any of the fields and apply a medium positive boost
 				var split = searchTerm.split(lunr.tokenizer.separator);
 				split.forEach(function(term) {
 					q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
-					q.term(term + '*', { usePipeline: false, fields: q.allFields });
+					q.term(term, { usePipeline: false, fields: q.allFields, wildcard: lunr.Query.wildcard.TRAILING });
 				});
 			});
 
@@ -382,37 +387,6 @@ var Search = Control.extend({
 			return mappedResults;
 		});
 	},
-
-	//function formatSearchTerm
-	// replace colons because they can confuse the search engine
-	// if they're not part of a field search
-	// @param term
-	formatSearchTerm: function(term){
-		var colonParts = term.split(":"),
-				wildcardChar = "*"
-
-		//go ahead and leave if no colons found
-		if(colonParts.length === 1){
-			return wildcardChar + term + wildcardChar;
-		}
-
-		var colonReplacement = "*",
-				fields = ["name", "title", "description", "url"],
-				hasFieldSearch = colonParts.length > 1,
-				fieldToSearch = hasFieldSearch ? colonParts.shift() : null,
-				isFieldToSearchInFields = fields.indexOf(fieldToSearch) >= 0;
-
-		term = colonParts.join(colonReplacement) + wildcardChar;
-
-		if(isFieldToSearchInFields){
-			term = fieldToSearch + ":" + term;
-		}else{
-			term = wildcardChar + term;
-		}
-
-		return term;
-	},
-
 	//  ---- END SEARCHING / PARSING ---- //
 
 
