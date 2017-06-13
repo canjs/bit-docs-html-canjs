@@ -353,7 +353,6 @@ var Search = Control.extend({
 	// takes a value and returns a map of all relevant search items
 	searchEngineSearch: function(value){
 		var searchTerm = value.toLowerCase();
-		console.log('searchTerm:', searchTerm);
 		var self = this;
 		return this.searchEnginePromise.then(function(searchEngine) {
 
