@@ -22,7 +22,7 @@ var siteConfig = {
 			"steal-stache": "^3.0.1"
         }
     },
-    dest: path.join(__dirname, "temp"),
+    dest: path.join(__dirname, "doc"),
     parent: "canjs",
     forceBuild: forceBuild,
 	minifyBuild: false,
