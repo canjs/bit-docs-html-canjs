@@ -95,6 +95,16 @@ QUnit.test('Search for “%special”', function(assert) {
   });
 });
 
+QUnit.test('Search for “define/map”', function(assert) {
+  var done = assert.async();
+  search.searchEngineSearch('define/map').then(function(results) {
+    assert.equal(results.length > 0, true, 'got results');
+    assert.equal(indexOfPageInResults('can-define/map/map', results), 0, 'first result is the can-define/map/map page');
+    done();
+  });
+});
+
+
 QUnit.test('Speed while searching for can-*', function(assert) {
   var done = assert.async();
   var startTime = new Date();
