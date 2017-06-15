@@ -95,7 +95,7 @@ function init() {
 				window.history.pushState(null, null, href);
 				navigate(href);
 			},
-			pathPrefix: window.pathPrefix,
+			pathPrefix: '/doc',
 			animateInOnStart: !hasShownSearch
 		});
 	}
