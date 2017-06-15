@@ -109,3 +109,43 @@ ul.title-links {
 		}
 	}
 }
+
+.getting-started-icons {
+	.icon-list
+}
+
+@media screen and (max-width: @breakpoint) {
+	.getting-started-icons {
+		.or-separator {
+			display: none;
+		}
+	}
+}
+
+@media screen and (min-width: @breakpoint) {
+	.getting-started-icons {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		& > li > a {
+			height: 170px;
+			width: 270px;
+			border: 1px solid #ccc;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		& > li > p {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		& > li > a > img {
+			max-height: 70%;
+		}
+		.or-separator {
+			display: block;
+		}
+	}
+}
