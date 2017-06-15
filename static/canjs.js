@@ -95,7 +95,7 @@ function init() {
 				window.history.pushState(null, null, href);
 				navigate(href);
 			},
-			pathPrefix: '/doc',
+			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
 		});
 	}
@@ -237,6 +237,11 @@ function navigate(href) {
 
 			init();
 			setDocTitle();
+
+			searchControl.options.pathPrefix = window.pathPrefix;
+			if(searchControl.searchResultsCache){
+				searchControl.renderSearchResults(searchControl.searchResultsCache);
+			}
 		},
 		error: function() {
 			// just reload the page if this fails
