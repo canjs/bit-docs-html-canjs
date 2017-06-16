@@ -152,6 +152,9 @@ function setScrollPosition() {
 	}, 250);
 }
 
+var $menuButton = $('[for="nav-trigger"]');
+var $navTrigger = $('#nav-trigger');
+
 function navigate(href) {
 	// make sure we're in the right spot
 	if (href === "javascript://") { // jshint ignore:line
@@ -175,6 +178,10 @@ function navigate(href) {
 	clearInterval(scrollPositionInterval);
 
 	loader.start();
+
+	if($menuButton.is(':visible')){
+		$navTrigger.prop('checked', false);
+	}
 
 	navigating = true;
 	$.ajax(href, {
