@@ -689,7 +689,10 @@ var Search = Control.extend({
 
 		var activeResultOffset = this.getActiveResultOffset();
 
-		this.$resultsContainer.scrollTop(this.$activeResult.position().top - activeResultOffset);
+		this.$resultsContainer.scrollTop(
+			(this.$activeResult.position().top + this.$activeResult.outerHeight()) - 
+			(activeResultOffset + this.$resultsContainer.height())
+		);
 	},
 
 	// function deactivateResult
