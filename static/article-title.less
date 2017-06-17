@@ -156,21 +156,15 @@ ul.title-links {
 			float: left;
 			& > h3 {
 				border-bottom: none;
-				float: left;
 			}
 			& > ul {
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				flex-wrap: wrap;
 				list-style: none;
 				padding-left: 0;
 				& > li {
 					text-align: center;
-					margin-right: 35px;
-					&:last-child{
-						margin-right: 0;
-					}
 					& > a {
 						color: #000;
 						& > div {
@@ -195,5 +189,11 @@ ul.title-links {
 @media screen and (min-width: 1300px) {
 	.getting-started-icons > .titled-list > ul {
 		flex-direction: row;
+		& > li {
+			margin-right: 35px;
+			&:last-child{
+				margin-right: 0;
+			}
+		}
 	}
 }
