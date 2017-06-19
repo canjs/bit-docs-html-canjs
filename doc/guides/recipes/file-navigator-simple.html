@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@page guides/recipes/file-navigator-simple
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - File Navigator Guide (Simple)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="../../static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../../../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../../../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../../../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../../../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../../../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../../../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../../../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../../../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../../guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>experiment</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../chat.html"
+							title="This guide will walk you through building a real-time chat application with CanJS’s Core libraries.  It takes about 30 minutes to complete.">
+							Chat Guide
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../todomvc.html"
+							title="This guide will walk you through building a slightly modified version of TodoMVC with CanJS’s Core libraries and can-fixture. It takes about 1 hour to complete.">
+							TodoMVC Guide
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../atm.html"
+							title="This guide will walk you through building and testing an Automated Teller Machine (ATM) application with CanJS’s
+Core libraries.  You’ll learn how to do test driven development (TDD)
+and manage complex state.  It takes about 2 hours to complete.">
+							ATM Guide
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../setup.html"
+							title="Get started with CanJS by installing it with npm, using a JS&amp;nbsp;Bin, or just adding it to an HTML page with a &lt;script&gt; tag.">
+							Setting up CanJS
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>commitment</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../api.html"
+							title="This page walks through how to use and understand CanJS’s API documentation.">
+							API Guide
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../migrate-3.html"
+							title="This guide walks you through the step-by-step process to upgrade a 2.x app to CanJS 3.">
+							Migrating to CanJS 3
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../recipes.html"
+							title="A listing of small examples that are useful for learning CanJS.">
+							Recipes
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="file-navigator-advanced.html"
+							title="This guide walks you through building a file navigation widget.  It takes about 45 minutes to complete.  It was written with
+CanJS 3.4. Checkout the file-navigator-simple
+for an easier example that produces similar functionality.">
+							File Navigator Guide (Advanced)
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="page"
+							href="file-navigator-simple.html"
+							title="This guide walks you through building a simple file navigation widget.  It takes about 25 minutes to complete.  It was written with
+CanJS 3.4. Checkout the file-navigator-advanced
+for an example that makes AJAX requests for its data and uses can-component.">
+							File Navigator Guide (Simple)
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="playlist-editor.html"
+							title="Learn how to use YouTube&#x27;s API to search for videos and make a playlist.  This makes authenticated requests with OAuth2. It uses jQuery++ for
+drag/drop events. It shows using custom attributes and custom events.  This guide takes
+an hour to complete.">
+							Playlist Editor (Advanced)
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="todomvc-with-steal.html"
+							title="This guide walks through building TodoMVC with StealJS.">
+							TodoMVC with StealJS
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="weather-report-advanced.html"
+							title="This guides you through extending the Simple Weather Report Guide to remove imperative code and automatically look up the user’s location using the
+browser’s geolocation API.  Both of these will be done with event streams.
+This guide continues where the Simple Weather Report Guide left off.  It takes about 25 minutes to complete.  It was written with CanJS 3.8.">
+							Weather Report Guide (Advanced)
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="weather-report-simple.html"
+							title="This guide walks you through building a simple weather report widget.  It takes about 25 minutes to complete.  It was written with
+CanJS 3.5.">
+							Weather Report Guide (Simple)
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>contribute</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/adding-ecosystem-modules.html"
+							title="Learn how to add your module to this site.">
+							New Package
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/bug-report.html"
+							title="Learn how to submit a bug report.">
+							Bug Report
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/code.html"
+							title="Learn how contribute a code change to CanJS.">
+							Code
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/documentation.html"
+							title="Learn how to improve CanJS’s site and documentation.">
+							Documentation
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/evangelism.html"
+							title="Learn about resources that can help you spread the word about CanJS.">
+							Evangelism
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/feature-suggestion.html"
+							title="Learn how to suggest a feature.">
+							Feature Suggestion
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../contributing/releases.html"
+							title="Release and hosting information for CanJS maintainers.">
+							Releases
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../../../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../../../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="../../guides.html">Guides</a></li>
+		<li> / </li>
+	
+		<li><a href="../recipes.html">Recipes</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="file-navigator-simple.html">File Navigator Guide (Simple)</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>File Navigator Guide (Simple)</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/canjs/edit/master/docs/can-guides/commitment/recipes/file-navigator-simple.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>This guide walks you through building a simple file navigation widget.  It takes about 25 minutes to complete.  It was written with
+CanJS 3.4. Checkout the <a href="file-navigator-advanced.html" title="This guide walks you through building a file navigation widget.  It takes about 45 minutes to complete.  It was written with
+CanJS 3.4. Checkout the file-navigator-simple
+for an easier example that produces similar functionality.">File Navigator Guide (Advanced)</a>
+for an example that makes AJAX requests for its data and uses <a href="../../can-component.html" title="Create a custom element that can be used to manage widgets or application logic.">can-component</a>.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <section class="body">
+    <p>The final widget looks like:</p>
+<p><a class="jsbin-embed" href="//jsbin.com/sodida/embed?js,output">JS Bin on jsbin.com</a></p>
+<p>Click <code>ROOT/</code> to see its files and folders.</p>
+<blockquote>
+<p>Note: If you don't see any files show up, run the JSBin again. This
+JSBin uses randomly generated files so it's possible nothing shows up.</p>
+</blockquote>
+<p><strong>Start this tutorial by cloning the following JSBin</strong>:</p>
+<p><a class="jsbin-embed" href="//jsbin.com/caquxa/embed?html,output">JS Bin on jsbin.com</a></p>
+<p>This JSBin has initial prototype HTML and CSS which is useful for
+getting the application to look right.</p>
+<p>The following sections are broken down into:</p>
+<ul>
+<li>Problem - A description of what the section is trying to accomplish.</li>
+<li>Things to know - Information about CanJS that is useful for solving the problem.</li>
+<li>Solution - The solution to the problem.</li>
+<li>Test it (uncommon) - How to make sure the solution works.</li>
+</ul>
+<h2>Understand the data</h2>
+<p>There is a randomly generated <code>rootEntityData</code> variable that contains a nested structure of
+folders and files.  It looks like:</p>
+<pre><code class="language-js">{
+  &quot;id&quot;: &quot;0&quot;,
+  &quot;name&quot;: &quot;ROOT/&quot;,
+  &quot;hasChildren&quot;: true,
+  &quot;type&quot;: &quot;folder&quot;,
+  &quot;children&quot;: [
+    {
+      &quot;id&quot;: &quot;1&quot;, &quot;name&quot;: &quot;File 1&quot;,
+      &quot;parentId&quot;: &quot;0&quot;,
+      &quot;type&quot;: &quot;file&quot;,
+      &quot;hasChildren&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;2&quot;, &quot;name&quot;: &quot;File 2&quot;,
+      &quot;parentId&quot;: &quot;0&quot;,
+      &quot;type&quot;: &quot;file&quot;,
+      &quot;hasChildren&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;3&quot;, &quot;name&quot;: &quot;Folder 3&quot;,
+      &quot;parentId&quot;: &quot;0&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;hasChildren&quot;: true,
+      &quot;children&quot;: [
+        {
+          &quot;id&quot;: &quot;4&quot;, &quot;name&quot;: &quot;File 4&quot;,
+          &quot;parentId&quot;: &quot;3&quot;,
+          &quot;type&quot;: &quot;file&quot;,
+          &quot;hasChildren&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;5&quot;, &quot;name&quot;: &quot;File 5&quot;,
+          &quot;parentId&quot;: &quot;3&quot;,
+          &quot;type&quot;: &quot;file&quot;,
+          &quot;hasChildren&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;6&quot;, &quot;name&quot;: &quot;File 6&quot;,
+          &quot;parentId&quot;: &quot;3&quot;,
+          &quot;type&quot;: &quot;file&quot;,
+          &quot;hasChildren&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;7&quot;, &quot;name&quot;: &quot;File 7&quot;,
+          &quot;parentId&quot;: &quot;3&quot;,
+          &quot;type&quot;: &quot;file&quot;,
+          &quot;hasChildren&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;8&quot;, &quot;name&quot;: &quot;Folder 8&quot;,
+          &quot;parentId&quot;: &quot;3&quot;,
+          &quot;type&quot;: &quot;folder&quot;,
+          &quot;hasChildren&quot;: false,
+          &quot;children&quot;: []
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;9&quot;, &quot;name&quot;: &quot;File 9&quot;,
+      &quot;parentId&quot;: &quot;0&quot;,
+      &quot;type&quot;: &quot;file&quot;,
+      &quot;hasChildren&quot;: false
+    }
+  ]
+}
+</code></pre>
+<p>Notice that entities have the following properties:</p>
+<ul>
+<li><strong>id</strong> - a unique id</li>
+<li><strong>name</strong> - the name of the file or folder</li>
+<li><strong>type</strong> - if this entity a &quot;file&quot; or &quot;folder&quot;</li>
+<li><strong>hasChildren</strong> - if this entity has children</li>
+<li><strong>children</strong> - An array of the child file and folder entities for this folder</li>
+</ul>
+<h2>Render the root folder and its contents</h2>
+<h3>The problem</h3>
+<p>Lets render <code>rootEntityData</code> in the page with its immediate children.</p>
+<h3>What you need to know</h3>
+<ul>
+<li><p>CanJS uses <a href="../../can-stache.html" title="Live binding Mustache and Handlebars-compatible templates.">can-stache</a> to render data in a template
+and keep it live.  Templates can be authored in <code>&lt;script&gt;</code> tags like:</p>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; id=&quot;app-template&quot;&gt;
+  TEMPLATE CONTENT
+&lt;/script&gt;
+</code></pre>
+<p>A <a href="../../can-stache.html" title="Live binding Mustache and Handlebars-compatible templates.">can-stache</a> template uses
+<a href="../../can-stache.tags.escaped.html" title="Insert the value of the expression into the output of the template.">{{key}}</a> magic tags to insert data into
+the HTML output like:</p>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; id=&quot;app-template&quot;&gt;
+  {{something.name}}
+&lt;/script&gt;
+</code></pre></li>
+<li><p>Load a template from a <code>&lt;script&gt;</code> tag with <a href="../../can-stache.from.html" title="Return a template loaded from an element.">can.stache.from</a> like:</p>
+<pre><code class="language-js">var template = can.stache.from(SCRIPT_ID);
+</code></pre></li>
+<li><p>Render the template with data into a documentFragment like:</p>
+<pre><code class="language-js">var frag = template({
+  something: {name: &quot;Derek Brunson&quot;}
+});
+</code></pre></li>
+<li><p>Insert a fragment into the page with:</p>
+<pre><code>document.body.appendChild(frag);
+</code></pre></li>
+<li><p>Use <a href="../../can-stache.helpers.if.html" title="can-stache.helpers.if">{{#if value}}</a> to do <code>if/else</code> branching in <code>can-stache</code>.</p></li>
+<li><p>Use <a href="../../can-stache.helpers.each.html" title="">{{#each value}}</a> to do looping in <code>can-stache</code>.</p></li>
+<li><p>Use <a href="../../can-stache.helpers.is.html" title="Render something if two values are equal.">{{#eq value1 value2}}</a> to test equality in <code>can-stache</code>.</p></li>
+<li><p><a href="../../can-stache/keys/current.html" title="Lookup a value in only the current context.">{{./key}}</a> only returns the value in the current scope.</p></li>
+<li><p>Write a <code>&lt;ul&gt;</code> to contain all the files.  Within the <code>&lt;ul&gt;</code> there should be:</p>
+<ul>
+<li>An <code>&lt;li&gt;</code> with a className that includes <code>file</code> or <code>folder</code> and <code>hasChildren</code> if the folder has children.</li>
+<li>The <code>&lt;li&gt;</code> should have <code>📝 &lt;span&gt;{{FILE_NAME}}&lt;/span&gt;</code> if a file and <code>📁 &lt;span&gt;{{FOLDER_NAME}}&lt;/span&gt;</code> if a folder.</li>
+</ul></li>
+</ul>
+<h3>The solution</h3>
+<p>Update the <code>HTML</code> tab to:</p>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; id=&quot;entities-template&quot;&gt;
+  &lt;span&gt;{{name}}&lt;/span&gt;
+  &lt;ul&gt;
+    {{#each ./children}}
+      &lt;li class=&quot;{{type}} {{#if hasChildren}}hasChildren{{/if}}&quot;&gt;
+        {{#eq type 'file'}}
+          📝 &lt;span&gt;{{name}}&lt;/span&gt;
+        {{else}}
+          📁 &lt;span&gt;{{name}}&lt;/span&gt;
+        {{/eq}}
+      &lt;/li&gt;
+    {{/each}}
+  &lt;/ul&gt;
+&lt;/script&gt;
+</code></pre>
+<p>Update the <code>JS</code> tab to:</p>
+<pre><code class="language-js">var template = can.stache.from(&quot;entities-template&quot;);
+
+var frag = template( rootEntityData );  
+
+document.body.appendChild( frag );
+</code></pre>
+<h2>Render all the files and folders</h2>
+<h3>The Problem</h3>
+<p>Now lets render all of the files and folders!  This means we want to render the files and folders recursively.  Every time we
+find a folder, we need to render its contents.</p>
+<h3>Things to know</h3>
+<ul>
+<li><p>A template can call out to another registered <em>partial</em> template with with <a href="../../can-stache.tags.partial.html" title="Render another template within the current template.">{{&gt;PARTIAL_NAME}}</a> like the following:</p>
+<pre><code class="language-html">{{&gt;PARTIAL_NAME}}
+</code></pre></li>
+<li><p>You can register partial templates with <a href="../../can-stache.registerPartial.html" title="Register a partial template that can be rendered with can-stache.tags.partial.">can.stache.registerPartial</a> like the following:</p>
+<pre><code class="language-js">var template = can.stache.from(&quot;TEMPLATE_ID&quot;);
+can.stache.registerPartial( &quot;PARTIAL_NAME&quot;, template );
+</code></pre></li>
+</ul>
+<h3>The Solution</h3>
+<p>Update the <code>HTML</code> tab to:</p>
+<ul>
+<li>Call to an <code>{{&gt;entities}}</code> partial.</li>
+</ul>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; id=&quot;entities-template&quot;&gt;
+  &lt;span&gt;{{name}}&lt;/span&gt;
+  &lt;ul&gt;
+    {{#each ./children}}
+      &lt;li class=&quot;{{type}} {{#if hasChildren}}hasChildren{{/if}}&quot;&gt;
+        {{#eq type 'file'}}
+          📝 &lt;span&gt;{{name}}&lt;/span&gt;
+        {{else}}
+          📁 {{&gt;entities}}
+        {{/eq}}
+      &lt;/li&gt;
+    {{/each}}
+  &lt;/ul&gt;
+&lt;/script&gt;
+</code></pre>
+<p><span line-highlight='9'></span>
+Update the <code>JS</code> tab to:</p>
+<ul>
+<li>Register the <code>entities-template</code> as a partial:</li>
+</ul>
+<pre><code class="language-js">var template = can.stache.from(&quot;entities-template&quot;);
+can.stache.registerPartial(&quot;entities&quot;, template );
+
+var frag = template(rootEntityData);
+
+document.body.appendChild( frag );
+</code></pre>
+<p><span line-highlight='2'></span></p>
+<h2>Make the data observable</h2>
+<h3>The problem</h3>
+<p>For rich behavior, we need to convert the raw JS data into typed observable data.  When
+we change the data, the UI will automatically change.</p>
+<h3>Things to know</h3>
+<ul>
+<li><p><a href="../../can-define/map/map.extend.html" title="Define a custom map type.">DefineMap.extend</a> allows you to define a type by defining the type's
+properties and the properties' types like:</p>
+<pre><code class="language-js">Person = can.DefineMap.extend(&quot;Person&quot;,{
+  name: &quot;string&quot;,
+  age: &quot;number&quot;
+})
+</code></pre>
+<p>This lets you create instances of that type and listen to changes like:</p>
+<pre><code class="language-js">var person = new Person({
+  name: &quot;Justin&quot;,
+  age: 34
+});
+
+person.on(&quot;name&quot;, function(ev, newName){
+  console.log(&quot;person name changed to &quot;, newName);
+});
+
+person.name = &quot;Kevin&quot; //-&gt; logs &quot;entity name changed to Kevin&quot;
+</code></pre></li>
+<li><p><code>can.DefineMap</code> supports an <a href="../../can-define.types.propDefinition.html#Array" title="Defines the type, initial value, and get, set, and serialize behavior for an
+observable property.  These behaviors can be specified with as an Object, String,
+Constructor function, Array, a getter expression, or setter expression.">Array shorthand</a> that allows one to specify a <a href="../../can-define/list/list.html" title="Create observable lists.">can.DefineList</a> of typed instances like:</p>
+<pre><code class="language-js">Person = can.DefineMap.extend(&quot;Person&quot;,{
+  name: &quot;string&quot;,
+  age: &quot;number&quot;,
+  addresses: [Address]
+});
+</code></pre>
+<p>However, if <code>Address</code> wasn't immediately available, you could do the same thing like:</p>
+<pre><code class="language-js">Person = can.DefineMap.extend(&quot;Person&quot;,{
+  name: &quot;string&quot;,
+  age: &quot;number&quot;,
+  addresses: [{
+    type: function(rawData){
+      return new Address(rawData);
+    }
+  }]
+});
+</code></pre></li>
+</ul>
+<h3>The solution</h3>
+<p>Update the <code>JS</code> tab to:</p>
+<ul>
+<li>Define an <code>Entity</code> type and the type of its properties.</li>
+<li>Create an instance of the <code>Entity</code> type called <code>rootEntity</code></li>
+<li>Use <code>rootEntity</code> to render the template</li>
+</ul>
+<pre><code class="language-js">var Entity = can.DefineMap.extend(&quot;Entity&quot;,{  
+  id: &quot;string&quot;,
+  name: &quot;string&quot;,
+  parentId: &quot;string&quot;,
+  hasChildren: &quot;boolean&quot;,
+  type: &quot;string&quot;,
+  children: [{
+    type: function(entity){
+      return new Entity(entity)
+    }
+  }]
+});
+
+var rootEntity = new Entity(rootEntityData);
+
+
+var template = can.stache.from(&quot;entities-template&quot;);
+can.stache.registerPartial(&quot;entities&quot;, template );
+
+var frag = template(rootEntity);
+
+document.body.appendChild( frag );
+</code></pre>
+<p><span line-highlight='1-14,18'></span></p>
+<h3>Test it</h3>
+<p>Run the following the <code>console</code> tab:</p>
+<pre><code class="language-js">rootEntity.name= &quot;Something New&quot;;
+rootEntity.children.pop();
+</code></pre>
+<p>You should see the page change automatically.</p>
+<h2>Make the folders open and close</h2>
+<h3>The problem</h3>
+<p>We want to be able to toggle if a folder is open or closed.</p>
+<h3>Things to know</h3>
+<ul>
+<li><p><code>can.DefineMap</code> can specify a default value and a type:</p>
+<pre><code class="language-js">var Person = can.DefineMap.extend({
+  address: Address,
+  age: {value: 33, type: &quot;number&quot;}
+});
+</code></pre></li>
+<li><p><code>can.DefineMap</code> can also have methods:</p>
+<pre><code class="language-js">var Person = can.DefineMap.extend({
+  address: Address,
+  age: {value: 33, type: &quot;number&quot;},
+  birthday: function(){
+    this.age++;
+  }
+});
+</code></pre></li>
+<li><p>Use <a href="../../can-stache.helpers.if.html" title="can-stache.helpers.if">{{#if value}}</a> to do <code>if/else</code> branching in <code>can-stache</code>.</p></li>
+<li><p>Use <a href="../../can-stache-bindings.event.html" title="Respond to events on elements or component ViewModels.">($EVENT)</a> to listen to an event on an element and call a method in <code>can-stache</code>.  For example, the following calls <code>doSomething()</code> when the <code>&lt;div&gt;</code> is clicked.</p>
+<pre><code class="language-html">&lt;div ($click)=&quot;doSomething()&quot;&gt; ... &lt;/div&gt;
+</code></pre></li>
+</ul>
+<h3>The solution</h3>
+<p>Update the <code>JS</code> tab to:</p>
+<ul>
+<li>Add an <code>isOpen</code> property to <code>Entity</code>.</li>
+<li>Add a <code>toggleOpen</code> method to <code>Entity</code>.</li>
+</ul>
+<pre><code class="language-js">var Entity = can.DefineMap.extend(&quot;Entity&quot;,{
+  id: &quot;string&quot;,
+  name: &quot;string&quot;,
+  parentId: &quot;string&quot;,
+  hasChildren: &quot;boolean&quot;,
+  type: &quot;string&quot;,
+  children: [{
+    type: function(entity){
+      return new Entity(entity)
+    }
+  }],
+  isOpen: {type: &quot;boolean&quot;, value: false},
+  toggleOpen: function(){      
+    this.isOpen = !this.isOpen;
+  }
+});
+
+var rootEntity = new Entity(rootEntityData);
+
+var template = can.stache.from(&quot;entities-template&quot;);
+can.stache.registerPartial(&quot;entities&quot;, template );
+
+var frag = template(rootEntity);              
+
+document.body.appendChild( frag );
+</code></pre>
+<p><span line-highlight='12-15'></span>
+Update the <code>HTML</code> tab to:</p>
+<ul>
+<li>Call <code>toggleOpen()</code> when clicked.</li>
+<li>Only show the children <code>{{#if isOpen}}</code> is true.</li>
+</ul>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; id=&quot;entities-template&quot;&gt;
+&lt;span ($click)=&quot;toggleOpen()&quot;&gt;{{name}}&lt;/span&gt;
+{{#if isOpen}}              
+  &lt;ul&gt;
+    {{#each ./children}}
+      &lt;li class=&quot;{{type}} {{#if hasChildren}}hasChildren{{/if}}&quot;&gt;
+        {{#eq type 'file'}}
+          📝 &lt;span&gt;{{name}}&lt;/span&gt;
+        {{else}}
+          📁 {{&gt;entities}}      
+        {{/eq}}
+      &lt;/li&gt;
+    {{/each}}
+  &lt;/ul&gt;
+{{/if}}                        
+&lt;/script&gt;
+</code></pre>
+<p><span line-highlight='2,3,15'></span>
+When complete, you should have a working file-navigation widget
+like the completed JSBin above.</p>
+<script src="//static.jsbin.com/js/embed.min.js?3.39.18"></script>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"docs/can-guides/commitment/recipes/file-navigator-simple.md"},"description":"This guide walks you through building a simple file navigation widget.  It takes about 25 minutes to complete.  It was written with\nCanJS 3.4. Checkout the [guides/recipes/file-navigator-advanced]\nfor an example that makes AJAX requests for its data and uses [can-component].\n\n\n","name":"guides/recipes/file-navigator-simple","title":"File Navigator Guide (Simple)","type":"page","parent":"guides/recipes","comment":" ","pathToRoot":"../.."};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="../../static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="../.." />
+		
+	</body>
+</html>

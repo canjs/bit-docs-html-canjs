@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@function can-stache-converters.string-to-any
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - string-to-any</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect-cloneable.html"
+							title="Makes mutable clones of can-connected maps. Changes to the clone save back to the original, and changes to the original propogate to the clone.">
+							can-connect-cloneable
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect-feathers.html"
+							title="Integrate can-connect with the FeathersJS Client">
+							can-connect-feathers
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect-signalr.html"
+							title="Connect to a Hub on a
+SignalR server.">
+							can-connect-signalr
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-construct-super.html"
+							title="can.Construct.super is a plugin that makes it easier to call base
+functions from inside inheriting functions.">
+							can-construct-super
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-stream.html"
+							title="Add useful stream conversion methods to a supplied map or list constructor using a stream interface such as can-stream-kefir.">
+							can-define-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-stream-kefir.html"
+							title="Exports a function that takes a Type map or list and uses can-stream-kefir to create a streaming object">
+							can-define-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-validate-validatejs.html"
+							title="Adds validation methods and observables to a map using validate.js.">
+							can-define-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-fixture.html"
+							title="can-fixture intercepts an AJAX request and simulates the response with a file or function.">
+							can-fixture
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-fixture-socket.html"
+							title="Simulate socket.io services.">
+							can-fixture-socket
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-jquery.html"
+							title="Extensions to the event system so that can events and jQuery events are cross-bound.">
+							can-jquery
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="module"
+							href="can-stache-converters.html"
+							title="Provides a set of converters useful for two-way binding with form elements such as &lt;input&gt; and &lt;select&gt;.">
+							can-stache-converters
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>Pages</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.pages-select-multiple.html"
+							title="Cross bind a value to a &lt;select&gt; element with multiple selections permitted.">
+							select[multiple]
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-stache-converters.pages.input-checkbox.html"
+							title="Cross bind a value to a checkbox.">
+							input[type=checkbox]
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-stache-converters.pages.input-radio.html"
+							title="Cross bind a value to a radio input.">
+							input[type=radio]
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.pages.select.html"
+							title="Cross bind a value to a &lt;select&gt; element.">
+							select 
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>Converters</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.boolean-to-inList.html"
+							title="A converter that binds a boolean attribute, such as an &lt;input&gt; value, to whether or not an item is in a list.">
+							boolean-to-inList
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.either-or.html"
+							title="A converter that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision that your user will implicitly understand.">
+							either-or
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.equal.html"
+							title="A converter that is usually for binding to a &lt;input type=&quot;radio&quot;&gt; group, so that a scope value can be set the radio group’s selected value.">
+							equal
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.index-to-selected.html"
+							title="A converter that binds to a &lt;select&gt; value in order to two-way bind a selected item from a list using the index as the key.">
+							index-to-selected
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-stache-converters.not.html"
+							title="A converter that two-way binds the negation of a value.">
+							not
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="function"
+							href="can-stache-converters.string-to-any.html"
+							title="A converter that binds a value to a primitive value, two-way converted back to that primitive value when the attribute changes.">
+							string-to-any
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stream.html"
+							title="Create useful stream methods from a minimal stream wrapper implementation.">
+							can-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stream-kefir.html"
+							title="Convert observable values into streams. Kefir is used to provide the stream functionality.">
+							can-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-validate.html"
+							title="Shared utilities and type definitions to process validation errors.">
+							can-validate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-validate-validatejs.html"
+							title="Create can-validate.validator functions using validate.js.">
+							can-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-vdom.html"
+							title="A browser-lite environment for Node.js or a worker thread.">
+							can-vdom
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-autorender.html"
+							title="A module that automatically renders script and other elements with
+the can-autorender attribute. This function is useful to know when the templates have finished rendering.">
+							can-view-autorender
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-import.html"
+							title="">
+							can-view-import
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-zone.html"
+							title="">
+							can-zone
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-zone-storage.html"
+							title="Implement Zone-safe memory-based storage">
+							can-zone-storage
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="steal-stache.html"
+							title="A StealJS extension that allows stache templates as dependencies.">
+							steal-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="can-ecosystem.html">Ecosystem</a></li>
+		<li> / </li>
+	
+		<li><a href="can-stache-converters.html">can-stache-converters</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="can-stache-converters.string-to-any.html">string-to-any</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>string-to-any</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-stache-converters/edit/master/docs/string-to-any.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>A <a href="can-stache.registerConverter.html" title="Register a helper for bidirectional value conversion.">converter</a> that binds a value to a primitive value, two-way converted back to that primitive value when the attribute changes.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>string-to-any(~item)</code>
+  </h2>
+  <p>When the getter is called, gets the value of the compute and calls <code>.toString()</code> on that value.</p>
+<p>When the setter is called, takes the new value and converts it to the primitive value using <a href="can-util/js/string-to-any/string-to-any.html" title="Turns a string representation of a primitive type back into the associated primitive.">string-to-any</a> and sets the compute using that converted value.</p>
+<pre><code class="language-handlebars">&lt;select {($value)}=&quot;string-to-any(~favePlayer)&quot;&gt;
+  &lt;option value=&quot;23&quot;&gt;Michael Jordan&lt;/option&gt;
+    &lt;option value=&quot;32&quot;&gt;Magic Johnson&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>item</b> <code>{<a href="can-compute.html" title="Create an observable value.">can-compute</a>}</code>: <p>A compute holding a primitive value.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  <div class="returns">
+    <h3 class="returns-title">Returns</h3>
+     <p> <code>{<a href="can-compute.html" title="Create an observable value.">can-compute</a>}</code>: <p>A compute that will be used by <a href="can-stache-bindings.html" title="Provides template event, one-way bindings, and two-way bindings.">can-stache-bindings</a> as a getter/setter when the element’s value changes.</p>
+</p>
+  </div>
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p>This is usually used with <code>&lt;select&gt;</code>s where you would like to two-way bind a string to a primitive value.</p>
+<pre><code class="language-handlebars">&lt;select {($value)}=&quot;string-to-any(~someValue)&quot;&gt;
+  &lt;option value=&quot;2&quot;&gt;Number&lt;/option&gt;
+  &lt;option value=&quot;null&quot;&gt;Null&lt;/option&gt;
+  &lt;option value=&quot;foo&quot;&gt;String&lt;/option&gt;
+  &lt;option value=&quot;true&quot;&gt;Boolean&lt;/option&gt;
+  &lt;option value=&quot;NaN&quot;&gt;NaN&lt;/option&gt;
+  &lt;option value=&quot;Infinity&quot;&gt;Infinity&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+<pre><code class="language-js">var str = document.getElementById('select-template').innerHTML;
+var template = stache(str);
+
+var map = new DefineMap({
+    someValue: &quot;foo&quot;
+});
+
+document.body.appendChild(template(map));
+
+map.item = NaN; // select.value becomes &quot;NaN&quot;
+
+// Click the select box and choose Boolean
+map.item === true; // -&gt; true
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-stache-converters/docs/string-to-any.md"},"description":"A [can-stache.registerConverter converter] that binds a value to a primitive value, two-way converted back to that primitive value when the attribute changes. \n","title":"string-to-any","name":"can-stache-converters.string-to-any","type":"function","parent":"can-stache-converters.converters","signatures":[{"code":"string-to-any(~item)","description":"\n\nWhen the getter is called, gets the value of the compute and calls `.toString()` on that value.\n\nWhen the setter is called, takes the new value and converts it to the primitive value using [can-util/js/string-to-any/string-to-any] and sets the compute using that converted value.\n\n```handlebars\n<select {($value)}=\"string-to-any(~favePlayer)\">\n  <option value=\"23\">Michael Jordan</option>\n\t<option value=\"32\">Magic Johnson</option>\n</select>\n```\n","params":[{"types":[{"type":"can-compute"}],"name":"item","description":"A compute holding a primitive value."}],"returns":{"types":[{"type":"can-compute"}],"description":"A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.\n"}}],"_curParam":{"types":[{"type":"can-compute"}],"name":"item","description":"A compute holding a primitive value."},"_curReturn":{"types":[{"type":"can-compute"}],"description":"A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.\n"},"comment":" ","pathToRoot":""};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="./static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="." />
+		
+	</body>
+</html>

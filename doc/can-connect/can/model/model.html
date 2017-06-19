@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@module can-connect/can/model/model
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - can-connect/can/model/model</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="../../../static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../../../../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../../../../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../../../../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../../../../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../../../../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../../../../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../../../../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../../../../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../../../api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../../../can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-component.html"
+							title="Create a custom element that can be used to manage widgets or application logic.">
+							can-component
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-compute.html"
+							title="Create an observable value.">
+							can-compute
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="module"
+							href="../../../can-connect.html"
+							title="can-connect provides persisted data middleware. Use it to assemble powerful model layers for any JavaScript project.">
+							can-connect
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>behaviors</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../base/base.html"
+							title="The base behavior added to every connect behavior.">
+							./base/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../cache-requests/cache-requests.html"
+							title="Caches reponse data and uses it to prevent future requests or make future requests smaller.">
+							./cache-requests/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../constructor-hydrate/constructor-hydrate.html"
+							title="Always check the store.instanceStore when creating new instances of the connected map._Map type.">
+							./can/constructor-hydrate/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../map/map.html"
+							title="Make a connection use a map type.">
+							./can/map/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../merge/merge.html"
+							title="Update nested data structures correctly with the response from the server.">
+							./can/merge/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../ref/ref.html"
+							title="Handle references to instances in the raw data returned by the server.">
+							./can/ref/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../constructor/callbacks-once/callbacks-once.html"
+							title="Prevents unecessary calls to the instance callback methods.">
+							./constructor/callbacks-once/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../constructor/constructor.html"
+							title="Adds the ability to operate on special types instead of plain JavaScript Objects
+and Arrays.">
+							./constructor/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../constructor/store/store.html"
+							title="Supports saving and retrieving lists and instances in a store.">
+							./constructor/store/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/callbacks/callbacks.html"
+							title="Calls callback methods as a result of raw DataInterface requests.">
+							./data/callbacks/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/callbacks-cache/callbacks-cache.html"
+							title="Callback base.cacheConnection methods when data interface callbacks
+are called.">
+							./data/callbacks-cache/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/combine-requests/combine-requests.html"
+							title="Combines multiple incoming requests into one if possible.">
+							./data/combine-requests/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/localstorage-cache/localstorage-cache.html"
+							title="Saves raw data in localStorage.">
+							./data/localstorage-cache/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/memory-cache/memory-cache.html"
+							title="Saves raw data in JavaScript memory that disappears when the page refreshes.">
+							./data/memory-cache/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/parse/parse.html"
+							title="Extract response data into a format needed for other extensions.">
+							./data/parse/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/url/url.html"
+							title="">
+							./data/url/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../data/worker/worker.html"
+							title="Connects a connection to another connection in a worker thread.">
+							./data/worker/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../fall-through-cache/fall-through-cache.html"
+							title="A fall through cache that checks another cacheConnection.">
+							./fall-through-cache/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../real-time/real-time.html"
+							title="Update lists to include or exclude instances based
+on set logic.">
+							./real-time/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>modules</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../base-map/base-map.html"
+							title="Create connection with many of the best behaviors in can-connect and hook it up to
+a map.">
+							./can/base-map/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="module"
+							href="model.html"
+							title="Exports a constructor that works very similar to can.Model.">
+							./can/model/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../super-map/super-map.html"
+							title="Create connection with many of the best behaviors in can-connect and hook it up to
+a map.">
+							./can/super-map/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../tag/tag.html"
+							title="Makes either getList or getInstance">
+							./can/tag/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../helpers/map-deep-merge.html"
+							title="Perform a smart merge of deeply nested maps and lists.">
+							./helpers/map-deep-merge
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../helpers/weak-reference-map.html"
+							title="Provides a map that only contains keys that are referenced.">
+							./helpers/weak-reference-map
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>data types</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../../DataInterface.html"
+							title="The most common raw data methods.">
+							DataInterface
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../../Instance.html"
+							title="An instance of some JavaScript type.">
+							Instance
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../../InstanceInterface.html"
+							title="The methods used to create, retrieve, update and destroy typed instances with a connection.">
+							InstanceInterface
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../../../can-connect.List.html"
+							title="A list type.">
+							List
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../../../can-connect.listData.html"
+							title="The data format used to create typed lists.">
+							ListData
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-define.html"
+							title="Exports the define method that defines observable properties and their behavior on a prototype object.">
+							can-define
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-define/list/list.html"
+							title="Create observable lists.">
+							can-define/list/list
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-define/map/map.html"
+							title="Create observable objects.">
+							can-define/map/map
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../../../can-route.html"
+							title="Manage browser history and client state by synchronizing the window.location.hash with a map.">
+							can-route
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-route-pushstate.html"
+							title="Changes can-route to use pushstate
+to change the window&#x27;s pathname instead
+of the hash.
+var route = require(&quot;can-route-pushstate&quot;);
+
+route(&quot;{page}&quot;, { page: &quot;home&quot; });
+route.ready();
+
+route.attr(&quot;page&quot;, &quot;user&quot;);
+
+location.pathname; // -&gt; &quot;/user&quot;">
+							can-route-pushstate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-set.html"
+							title="can-set is a utility for comparing sets that are represented by the parameters commonly passed to service requests.">
+							can-set
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-stache.html"
+							title="Live binding Mustache and Handlebars-compatible templates.">
+							can-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-stache/helpers/route.html"
+							title="Adds stache helpers that use can-route.">
+							can-stache/helpers/route
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-stache-bindings.html"
+							title="Provides template event, one-way bindings, and two-way bindings.">
+							can-stache-bindings
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../../../../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../../../../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../can-core.html">Core</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../can-connect.html">can-connect</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="model.html">./can/model/</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>can-connect/can/model/model</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-connect/edit/master/can/model/model.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>Exports a constructor that works very similar to <a href="http://canjs.com/docs/can.Model.html">can.Model</a>.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>Model.extend( static, prototype )</code>
+  </h2>
+  <p>Defines a <a href="../../../can-map.html" title="Create observable objects.">can-map</a> that has almost all of the functionality of
+<code>can.Model</code>.</p>
+
+  
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p><code>can-connect/can/model</code> is for backwards compatibility
+with <code>can.Model</code> so that developers can migrate
+to <code>can-connect</code> without having to rewrite their models immediately.</p>
+<p>However, use of <code>can.Model</code> will be deprecated in CanJS 3.0. Instead of extending <code>can.Model</code>,
+extend <a href="../../../can-map.html" title="Create observable objects.">can-map</a> and <a href="../../../can-list.html" title="">can-list</a> and use the <a href="../map/map.html" title="Make a connection use a map type.">can-connect/can/map/map</a> behavior to connect your Map and List to a connection:</p>
+<pre><code class="language-js">var CanMap = require(&quot;can-map&quot;);
+var CanList = require(&quot;can-list&quot;);
+
+var Todo = CanMap.extend({ ... });
+
+var TodoList = CanList.extend({
+  Map: Todo
+},{ ... });
+
+var todoConnection = connect([&quot;data-url&quot;,&quot;constructor&quot;,&quot;can/map&quot;],{
+  Map: Todo,
+  List: TodoList,
+  url: &quot;/services/todos&quot;
+});
+</code></pre>
+<p>Or, use the <a href="../super-map/super-map.html" title="Create connection with many of the best behaviors in can-connect and hook it up to
+a map.">can-connect/can/super-map/super-map</a> function to create a connection with the &quot;super&quot; behaviors:</p>
+<pre><code>var todoConnection = superMap({
+  idProp: &quot;_id&quot;,
+  Map: Todo,
+  List: TodoList,
+  url: &quot;/services/todos&quot;,
+  name: &quot;todo&quot;
+});
+</code></pre>
+<p>For your legacy code, you should just need to import &quot;can-connect/can/model/&quot; instead of &quot;can/model/&quot; like:</p>
+<pre><code class="language-js">import Model from &quot;can-connect/can/model/&quot;;
+
+Todo = Model.extend({
+  findAll: &quot;/todos&quot;
+},{});
+
+Todo.findAll({}).then(function(todos){
+
+});
+</code></pre>
+<h2>Upgrading can.Models to can-connect</h2>
+<p>This section walks through making the necessary changes to upgrade a legacy can.Model to use <code>can-connect</code> and its
+behaviors.  We'll convert a <code>can.Model</code> and <code>can.Model.List</code> that looks like:</p>
+<pre><code>Todo = can.Model.extend({
+  resource: &quot;/&quot;,
+  destroy: &quot;POST /todos/{id}/delete&quot;,
+  findOne: function(params){
+    return $.get(&quot;/todos/&quot;+params._id);
+  },
+
+  parseModels: function(data){
+    return data.todos;
+  },
+  parseModel: &quot;todo&quot;,
+
+  id: &quot;_id&quot;,
+},{
+  method: function(){ ... },
+  define: { ... }
+});
+
+Todo.List = Todo.List.extend({ ... });
+</code></pre>
+<p>Converting this to use <code>can-connect</code> looks like:</p>
+<pre><code class="language-js">var CanMap = require(&quot;can-map&quot;),
+    CanList = require(&quot;can-list&quot;);
+
+Todo = CanMap.extend({
+  method: function(){ ... },
+  define: { ... }
+});
+Todo.List = CanList.extend({
+  Map: Todo
+},{ ... })
+
+connect([
+    require(&quot;can-connect/data/url/url&quot;),
+    require(&quot;can-connect/data/parse/parse&quot;),
+    require(&quot;can-connect/constructor/constructor&quot;),
+    require(&quot;can-connect/constructor/store/store&quot;),
+    require(&quot;can-connect/can/map/map&quot;)
+  ],
+  {
+    Map: Todo,
+    List: Todo.List,
+
+    url: {
+      resource: &quot;/&quot;,
+      destroyData: &quot;POST /todos/{id}/delete&quot;,
+      getData: function(params){
+        return $.get(&quot;/todos/&quot;+params._id);
+      }
+    },
+
+    parseListData: function(data){
+      return data.todos;
+    },
+    parseInstanceProp: &quot;todo&quot;,
+
+    idProp: &quot;_id&quot;
+  });
+</code></pre>
+<p>Instead of <code>Todo.findAll</code> and <code>Todo.findOne</code>, use <code>Todo.getList</code> and <code>Todo.get</code>.</p>
+<p>Lets break this down in the following sections.</p>
+<h3>Defining the Map and List</h3>
+<p>The first step is to pull out the parts of the Model and Model.List that define the
+observable Map and List's behavior into a <a href="../../../can-map.html" title="Create observable objects.">can-map</a> and <a href="../../../can-list.html" title="">can-list</a>:</p>
+<pre><code class="language-js">var CanMap = require(&quot;can-map&quot;),
+    CanList = require(&quot;can-list&quot;);
+
+Todo = CanMap.extend({
+  method: function(){ ... },
+  define: { ... }
+});
+Todo.List = CanList.extend({
+  Map: Todo
+},{ ... })
+</code></pre>
+<p>One of the main advantageous of <code>can-connect</code> is that it lets separate persistence behavior
+from property behavior.</p>
+<h3>Connecting the Map and List to behaviors</h3>
+<p>The next step is to connect the Map and List to the right behaviors.  The following
+adds behaviors with similar functionality to legacy <code>can.Map</code> and uses the <a href="../map/map.html" title="Make a connection use a map type.">can-connect/can/map/map</a> behavior
+(which makes use of <a href="../../constructor/constructor.html" title="Adds the ability to operate on special types instead of plain JavaScript Objects
+and Arrays.">can-connect/constructor/constructor</a>) to connect the connection to the provided Map and List types:</p>
+<pre><code>connect([
+    require(&quot;can-connect/data/url/url&quot;),
+    require(&quot;can-connect/data/parse/parse&quot;),
+    require(&quot;can-connect/constructor/constructor&quot;),
+    require(&quot;can-connect/constructor/store/store&quot;),
+    require(&quot;can-connect/can/map/map&quot;)
+  ],
+  {
+    Map: Todo,
+    List: Todo.List,
+    ...
+  })
+</code></pre>
+<h3>Connecting to urls</h3>
+<p>The <a href="../../data/url/url.html" title="">can-connect/data/url/url</a> behavior supports CRUDing data from urls.  It can be configured like:</p>
+<pre><code>connect([&quot;data-url&quot;, ...],
+  {
+    ...
+    url: {
+      resource: &quot;/&quot;,
+      destroyData: &quot;POST /todos/{id}/delete&quot;,
+      getData: function(params){
+        return $.get(&quot;/todos/&quot;+params._id);
+      }
+    },
+    ...
+  });
+</code></pre>
+<h3>Correcting response data</h3>
+<p>The <a href="../../data/parse/parse.html" title="Extract response data into a format needed for other extensions.">can-connect/data/parse/parse</a> behavior supports correcting response data.  It can be configured like:</p>
+<pre><code>connect([..., &quot;data-parse&quot;, ...],
+  {
+    ...
+    parseListData: function(data){
+      return data.todos;
+    },
+    parseInstanceProp: &quot;todo&quot;,
+    ...
+  });
+</code></pre>
+<h3>Specifying the id</h3>
+<p>The id of a model is used in a variety of ways.  It's part of the <a href="../../base/base.html" title="The base behavior added to every connect behavior.">can-connect/base/base</a> behavior
+added to every connection.  You can customize which property represents the id with <a href="../../base/base.idProp.html" title="">idProp</a>.</p>
+<pre><code>connect([...],
+  {
+    idProp: &quot;_id&quot;
+  });
+</code></pre>
+<h3>Retrieving data</h3>
+<p>The <a href="../map/map.html" title="Make a connection use a map type.">can-connect/can/map/map</a> behavior adds a <code>getList</code> and <code>get</code> method to the <code>Map</code> option.  Use them in
+place of <code>findAll</code> and <code>findOne</code>:</p>
+<pre><code>Todo.findAll({}).then(function(todosList){ ... });
+Todo.findOne({id: 5}).then(function(todo){ ... });
+</code></pre>
+<h2>Differences from can.Model</h2>
+<p>Model's produced from <code>can-connect/can/model</code>:</p>
+<ul>
+<li>Do not support <code>makeFindAll</code> or <code>makeFindOne</code>.  If your legacy code did this, you can probably add it as a custom behavior.</li>
+<li>Has the instance store at <code>Model.store</code>, but items should be retrieved like <code>Model.store.get(id)</code>.</li>
+<li>Should not use <code>Model.models</code> or <code>Model.model</code> to correct Ajax data and should instead use <code>Models.parseModel</code> and <code>Model.parseModels</code>.</li>
+<li>Uses a Promise polyfill, not jQuery's promises.</li>
+</ul>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-connect/can/model/model.md"},"description":"Exports a constructor that works very similar to [can.Model](http://canjs.com/docs/can.Model.html). \n","type":"module","title":"","name":"can-connect/can/model/model","parent":"can-connect.modules","signatures":[{"code":"Model.extend( static, prototype )","description":"\n\n  Defines a [can-map] that has almost all of the functionality of\n  `can.Model`.\n","params":[]}],"comment":" ","pathToRoot":"../../.."};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="../../../static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="../../.." />
+		
+	</body>
+</html>

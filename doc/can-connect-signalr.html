@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@module can-connect-signalr
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - can-connect-signalr</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect-cloneable.html"
+							title="Makes mutable clones of can-connected maps. Changes to the clone save back to the original, and changes to the original propogate to the clone.">
+							can-connect-cloneable
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect-feathers.html"
+							title="Integrate can-connect with the FeathersJS Client">
+							can-connect-feathers
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="module"
+							href="can-connect-signalr.html"
+							title="Connect to a Hub on a
+SignalR server.">
+							can-connect-signalr
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>options</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-connect-signalr.signalR.html"
+							title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">
+							signalR
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>methods</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr.init.html"
+							title="Establishes a connection to the SignalR hub, sets up proxy methods and RPC listeners.
+The init method establishes a connection to the SignalR hub, and creates a hub proxy. For each CRUD method,
+a corresponding RPC listener is registered on the proxy. For example, can-connect-signalr implements a createData
+method. The listener corresponding to that method, by default called createdData, is registered on the proxy.
+The init method is called automatically.">
+							init
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>data interface</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr/createData.html"
+							title="Creates an instance on the server.  This is invoked on a new instance by calling save.">
+							createData
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr/destroyData.html"
+							title="Destroys an instance on the server.  This is invoked on an instance by calling destroy.">
+							destroyData
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr/getData.html"
+							title="Gets an instance from the server. This is invoked on a constructor function by calling getData.">
+							getData
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr/getListData.html"
+							title="Gets an list of data from the server. This is invoked on a constructor function by calling getListData.">
+							getListData
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-connect-signalr/updateData.html"
+							title="Updates an instance on the server.  This is invoked on an existing instance by calling save.">
+							updateData
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-construct-super.html"
+							title="can.Construct.super is a plugin that makes it easier to call base
+functions from inside inheriting functions.">
+							can-construct-super
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-stream.html"
+							title="Add useful stream conversion methods to a supplied map or list constructor using a stream interface such as can-stream-kefir.">
+							can-define-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-stream-kefir.html"
+							title="Exports a function that takes a Type map or list and uses can-stream-kefir to create a streaming object">
+							can-define-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define-validate-validatejs.html"
+							title="Adds validation methods and observables to a map using validate.js.">
+							can-define-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-fixture.html"
+							title="can-fixture intercepts an AJAX request and simulates the response with a file or function.">
+							can-fixture
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-fixture-socket.html"
+							title="Simulate socket.io services.">
+							can-fixture-socket
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-jquery.html"
+							title="Extensions to the event system so that can events and jQuery events are cross-bound.">
+							can-jquery
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache-converters.html"
+							title="Provides a set of converters useful for two-way binding with form elements such as &lt;input&gt; and &lt;select&gt;.">
+							can-stache-converters
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stream.html"
+							title="Create useful stream methods from a minimal stream wrapper implementation.">
+							can-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stream-kefir.html"
+							title="Convert observable values into streams. Kefir is used to provide the stream functionality.">
+							can-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-validate.html"
+							title="Shared utilities and type definitions to process validation errors.">
+							can-validate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-validate-validatejs.html"
+							title="Create can-validate.validator functions using validate.js.">
+							can-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-vdom.html"
+							title="A browser-lite environment for Node.js or a worker thread.">
+							can-vdom
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-autorender.html"
+							title="A module that automatically renders script and other elements with
+the can-autorender attribute. This function is useful to know when the templates have finished rendering.">
+							can-view-autorender
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-import.html"
+							title="">
+							can-view-import
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-zone.html"
+							title="">
+							can-zone
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-zone-storage.html"
+							title="Implement Zone-safe memory-based storage">
+							can-zone-storage
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="steal-stache.html"
+							title="A StealJS extension that allows stache templates as dependencies.">
+							steal-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="can-ecosystem.html">Ecosystem</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="can-connect-signalr.html">can-connect-signalr</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>can-connect-signalr</h1>
+			<ul class="title-social">
+				
+				<li>
+					<a class="npm-button" href="https://www.npmjs.com/package/can-connect-signalr">
+						<img src="https://img.shields.io/badge/npm%20package-0.1.0-brightgreen.svg" alt="npm package badge" />
+					</a>
+				</li>
+				<li>
+					<a class="github-button nav-social" href="https://github.com/canjs/can-connect-signalr">Star</a>
+				</li>
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-connect-signalr/edit/master/docs/can-connect-signalr.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>Connect to a <a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server">Hub</a> on a
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/">SignalR</a> server.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>connectSignalR( baseBehavior )</code>
+  </h2>
+  <p>Encapsulates connecting to a <code>SignalR</code> hub, by:</p>
+<ul>
+<li><p>implementing the: <a href="can-connect-signalr/createData.html" title="Creates an instance on the server.  This is invoked on a new instance by calling save.">createData</a>,  <a href="can-connect-signalr/updateData.html" title="Updates an instance on the server.  This is invoked on an existing instance by calling save.">updateData</a>, <a href="can-connect-signalr/getData.html" title="Gets an instance from the server. This is invoked on a constructor function by calling getData.">getData</a>, <a href="can-connect-signalr/getListData.html" title="Gets an list of data from the server. This is invoked on a constructor function by calling getListData.">getListData</a>, and <a href="can-connect-signalr/destroyData.html" title="Destroys an instance on the server.  This is invoked on an instance by calling destroy.">destroyData</a> <a href="can-connect/DataInterface.html" title="The most common raw data methods.">DataInterface</a> methods to make RPC calls to the server.</p></li>
+<li><p>listening for the following messages pushed from the server to the browser:</p>
+<ul>
+<li><a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a><code>.createdName</code>,</li>
+<li><a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a><code>.updatedName</code>,</li>
+<li><a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a><code>.destroyedName</code></li>
+</ul>
+<p>and calling: <a href="can-connect/real-time/real-time.createInstance.html" title="Programatically indicate a new instance has been created.">createInstance</a>, <a href="can-connect/real-time/real-time.updateInstance.html" title="Programatically indicate a new instance has been updated.">updateInstance</a>, or <a href="can-connect/real-time/real-time.destroyInstance.html" title="Programatically indicate a new instance has been destroyed.">destroyInstance</a>.</p></li>
+</ul>
+
+  
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p><code>can-connect-signalr</code> is a <a href="can-connect.html" title="can-connect provides persisted data middleware. Use it to assemble powerful model layers for any JavaScript project.">can-connect</a> behavior that makes a connection that can communicate with a
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server">Hub</a> on a
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/">SignalR</a> server.</p>
+<p>The following walks through an example setup that allows a <code>Message</code>
+type to be created, retrieved, updated and deleted by the client AND
+to be notified when messages are created, updated, or deleted by the
+server.</p>
+<p>Specifically, we will detail the:</p>
+<ul>
+<li><code>can-connect</code> Client setup</li>
+<li>Hub Interface Requirements</li>
+</ul>
+<h3><code>can-connect</code> Client setup</h3>
+<p>Below is a complete example of connecting a <code>DefineMap</code> model type to
+a SignalR hub:</p>
+<pre><code class="language-js">var DefineMap = require('can-define/map/map');
+var DefineList = require('can-define/list/list');
+var connect = require(&quot;can-connect&quot;);
+
+// Defines the Type that will be used on the client.
+var Message = DefineMap.extend({
+    body: 'string',
+    id: 'number'
+});
+
+// Defines a List type that contains instances of the
+// Type.
+Message.List = DefineList.extend({
+    '#': Message
+});
+
+// The minimal behaviors used to create the connection
+var behaviors = [
+    require('can-connect/constructor/constructor'),
+    require('can-connect/constructor/store/store'),
+    require('can-connect/can/map/map'),
+    require('can-connect/data/callbacks/callbacks'),
+    require('can-connect/real-time/real-time'),
+    require('can-connect/constructor/callbacks-once/callbacks-once'),
+    require('can-connect-signalr') // Import the signalR Behavior
+];
+
+// Connects the types to the SignalR server
+Message.connection = connect(behaviors, {
+    Map: Message,
+    List: Message.List,
+    signalR: {
+        url: 'http://test.com',
+        name: 'MessageHub'
+    }
+});
+</code></pre>
+<p>This example creates a <code>Message</code> <a href="can-define/map/map.html" title="Create observable objects.">can-define/map/map</a> type and
+<code>Message.List</code> <a href="can-define/list/list.html" title="Create observable lists.">can-define/list/list</a> type and connects them
+to <code>MessageHub</code> at <code>http://test.com</code>.</p>
+<p>This sets up <code>Message</code> so it can retrieve, create, update and delete <code>Message</code>s as follows:</p>
+<style>
+.table {
+ width: 100%;
+ border: 1px solid #ccc;
+}
+.table td, .table th {
+ border: 1px solid #ccc;
+ padding: 5px;
+}
+.table td:nth-child(1), .table th:nth-child(1) {
+ max-width: 350px;
+}
+.table td:nth-child(2), .table th:nth-child(2) {
+ max-width: 350px;
+ min-width: 220px;
+}
+.table td pre {
+ border: 0;
+}
+</style>
+<table class="table">
+   <thead>
+      <tr>
+         <th>Method</th>
+         <th>
+            Description
+            </th>
+         <th>
+            Details
+         </th>
+      </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+        <pre><code>Message.getList({due: "today"});</code></pre>
+     </td>
+     <td>
+        retrieves a list of messages
+     </td>
+     <td>
+        This calls <code>MessageHub</code>'s <code>public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)</code> method which is expected to return a list of matched messages.
+     </td>
+    </tr>
+    <tr>
+       <td>
+          <pre><code>Message.get({id: 5});</code></pre>
+       </td>
+       <td>
+          gets a single message
+       </td>
+       <td>
+          This calls <code>MessageHub</code>'s <code>public MessageModel messageHubGetData( int id )</code> method which is expected to return a single message.
+       </td>
+    </tr>
+    <tr>
+       <td>
+          <pre><code>var message = new Message({
+  body: "Hello World!"
+}).save();</code></pre>
+       </td>
+       <td>
+          creates messages
+       </td>
+       <td>
+          This calls <code>MessageHub</code>'s <code>public MessageModel messageHubCreate( MessageModel message )</code> method with the <a href="can-define.types.serialize.html" title="Defines custom serialization behavior for a property.">serialized</a> properties of the client message.  <code>MessageHubCreate</code> is expected to persist the message, add a unique
+            <a href="can-connect/base/base.id.html" title="Uniquely identify an instance or raw instance data.">id</a> property and value, and return the <code>Message</code>'s new data. It should also notify clients that a message was created.
+       </td>
+    </tr>
+    <tr>
+       <td>
+          <pre><code>message.body = "Hi there."; 
+message.save();</code></pre>
+       </td>
+       <td>
+          updates a message
+       </td>
+       <td>
+          This calls <code>MessageHub</code>'s <code>public MessageModel messageHubUpdate( MessageModel message )</code> method which is expected to update the persisted representation of the message
+            and return the <code>Message</code>'s new data. It should also notify clients that a
+            message was updated.
+       </td>
+    </tr>   
+    <tr>
+       <td>
+          <pre><code>message.destroy();</code></pre>
+       </td>
+       <td>
+          deletes a message
+       </td>
+       <td>
+          This calls <code>MessageHub</code>'s <code>public MessageModel messageHubDestroy( MessageModel message )</code> method which is expected to delete the persisted representation of the message
+            and return the <code>Message</code>'s updated data. It should also notify clients that a
+            message was destroyed.
+       </td>
+    </tr>       
+   </tbody>
+</table>
+<h3>Hub Server Setup</h3>
+<p>The following code outlines a <code>MessageHub</code> that would work with with
+the above client setup:</p>
+<pre><code class="language-c-sharp">public class MessageHub : Hub
+    {
+
+        public MessageHub(MyRepository repository)
+        {
+        }
+
+        // Method should take whatever data is required to create an instance
+        public MessageModel MessageHubCreate( MessageModel message )
+        {
+            PERSIST_TO_DATABASE( message );
+
+            message.id // type must have a unique id property
+
+            // Any RPC calls to the client related to creation go here
+            Clients.All.messageHubCreated(message);
+            return message;
+        }
+
+        // Method should take whatever data is required to update an instance
+        public MessageModel MessageHubUpdate( MessageModel message )
+        {
+            UPDATE_DATABASE( message );
+
+            // Any RPC calls to the client related to update go here
+            Clients.All.messageHubUpdated(message);
+            return message;
+        }
+
+        // Method should take whatever data is required to destroy an instance (usually an id)
+        public MessageModel MessageDestroy( MessageModel model )
+        {
+            DELETE_FROM_DATABASE( model );
+
+            // Any RPC calls to the client related to destroy go here
+            Clients.All.messageDestroyed(model);
+        }
+
+        // Method should take whatever data is required to obtain a list (if any)
+        public List&lt;MessageModel&gt; MessageGetList( MessageQueryParams queryParams )
+        {
+            List&lt;MessageModel&gt; messages = GET_DATA_FROM_DATABASE( queryParams );
+            return messages;
+        }
+
+        // Method should take whatever data is required to obtain a specific item
+        public MessageModel MessageGet( int id )
+        {
+            MessageModel message = GET_RECORD_FROM_DATABASE( id );
+
+            return message;
+        }
+
+        ...
+    }
+</code></pre>
+<h2>Configuration</h2>
+<p>The name of the Hub is specified by <a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a><code>.name</code>.
+This is used to create default method and event names.</p>
+<p>For example, if the <a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a><code>.name</code> is <code>&quot;TaskHub&quot;</code>, it
+will make RPC calls for the following methods (<a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a> configuration name in parenthesis):</p>
+<ul>
+<li><code>taskHubGetData</code> (<code>signalR.getListName</code>)</li>
+<li><code>taskHubGetListData</code> (<code>signalR.getListName</code>)</li>
+<li><code>taskHubCreateData</code> (<code>signalR.createName</code>)</li>
+<li><code>taskHubUpdateData</code> (<code>signalR.updateName</code>)</li>
+<li><code>taskHubDestroyData</code> (<code>signalR.destroyName</code>)</li>
+</ul>
+<p>It will listen to the following events (<a href="can-connect-signalr.signalR.html" title="The options object passed to the can-connect factory function that generates the  can-connect-signalr connection.">signalR</a> configuration name in parenthesis):</p>
+<ul>
+<li><code>taskHubCreatedData</code> (<code>signalR.createdData</code>)</li>
+<li><code>taskHubUpdatedData</code> (<code>signalR.updatedData</code>)</li>
+<li><code>taskHubDestroyedData</code> (<code>signalR.destroyedData</code>)</li>
+</ul>
+<p>For example, you can overwrite these defaults like:</p>
+<pre><code>connect(behaviors,{
+    Map: Task,
+    signalR: {
+        url: &quot;/hubs&quot;,
+        name: &quot;TaskHub&quot;,
+
+        // Calls TaskHub.getList() instead of TaskHub.taskHubGetListData().
+        getListName: &quot;getList&quot;,
+    }
+});
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-connect-signalr/docs/can-connect-signalr.md"},"description":"Connect to a [Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a\n[SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.\n\n","type":"module","title":"","types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"name":"can-connect-signalr","parent":"can-ecosystem","package":{"author":{"name":"Bitovi, Joe Crick","email":"joe@josephcrick.com","url":"http://josephcrick.com"},"bugs":{"url":"https://github.com/canjs/can-connect-signalr/issues"},"dependencies":{"can-connect":"^1.0.12","jquery":"2.x - 3.x","ms-signalr-client":"^2.2.5"},"description":"can-connect-signalr is a set of behaviors for integrating can-connect with Microsoft's signalR","devDependencies":{"can-define":"^1.0.4","jshint":"^2.9.1","steal":"^0.16.0","steal-qunit":"^0.1.1","steal-tools":"^1.0.0","testee":"^0.3.0"},"homepage":"https://github.com/canjs/can-connect-signalr#readme","keywords":[],"license":"MIT","main":"can-connect-signalr","name":"can-connect-signalr","repository":{"type":"git","url":"git+https://github.com/canjs/can-connect-signalr.git"},"scripts":{"develop":"done-serve --static --develop --port 8080","document":"bit-docs","jshint":"jshint ./*.js --config","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"system":{"transpiler":"babel"},"version":"0.1.0"},"signatures":[{"code":"connectSignalR( baseBehavior )","description":"\n\nEncapsulates connecting to a `SignalR` hub, by:\n\n- implementing the: [can-connect-signalr/createData],  [can-connect-signalr/updateData], [can-connect-signalr/getData], [can-connect-signalr/getListData], and [can-connect-signalr/destroyData] [can-connect/DataInterface] methods to make RPC calls to the server.\n- listening for the following messages pushed from the server to the browser:\n  - [can-connect-signalr.signalR]`.createdName`,\n  - [can-connect-signalr.signalR]`.updatedName`,\n  - [can-connect-signalr.signalR]`.destroyedName`\n\n  and calling: [can-connect/real-time/real-time.createInstance], [can-connect/real-time/real-time.updateInstance], or [can-connect/real-time/real-time.destroyInstance].\n","params":[]}],"comment":" ","pathToRoot":""};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="./static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="." />
+		
+	</body>
+</html>

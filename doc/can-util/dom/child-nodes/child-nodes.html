@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@module can-util/dom/child-nodes/child-nodes
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - child-nodes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="../../../static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../../../../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../../../../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../../../../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../../../../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../../../../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../../../../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../../../../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../../../../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../../../api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../../../can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-cid.html"
+							title="can-cid">
+							can-cid
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-construct.html"
+							title="Provides a way to easily use the power of prototypal inheritance
+without worrying about hooking up all the particulars yourself. Use
+can-construct.extend to create an inheritable
+constructor function of your own.">
+							can-construct
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-control.html"
+							title="Create organized, memory-leak free, rapidly performing, stateful controls with declarative event binding. Use Control to create UI
+controls like tabs, grids, and context menus,
+and organize them into higher-order business rules with
+can.route. It can serve as both a traditional view and a traditional controller.">
+							can-control
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-deparam.html"
+							title="can-deparam">
+							can-deparam
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-event.html"
+							title="Add event functionality into your objects.
+The canEvent object provides a number of methods for handling events in objects. This functionality is best used by mixing the canEvent object into an object or prototype. However, event listeners can still be used even on objects that don&#x27;t include canEvent.
+All methods provided by canEvent assume that they are mixed into an object -- this should be the object dispatching the events.">
+							can-event
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-event/async/async.html"
+							title="Makes the event system asynchronous. WARNING: This is experimental technology.">
+							can-event/async/async
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-event/batch/batch.html"
+							title="Adds task batching abilities to event dispatching.">
+							can-event/batch/batch
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-event/lifecycle/lifecycle.html"
+							title="Mixin lifecycle events onto a prototype.">
+							can-event/lifecycle/lifecycle
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-event-radiochange.html"
+							title="can-event-radiochange">
+							can-event-radiochange
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-namespace.html"
+							title="Namespace where can-* packages are registered">
+							can-namespace
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-observation.html"
+							title="Provides a mechanism to notify when an observable has been read and a
+way to observe those reads called within a given function.">
+							can-observation
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-param.html"
+							title="Serialize an object or array into a query string.">
+							can-param
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-simple-map.html"
+							title="A performant live-bound map.">
+							can-simple-map
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-types.html"
+							title="A stateful container for CanJS type information.">
+							can-types
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="module"
+							href="../../../can-util.html"
+							title="Common JavaScript utilities for the rest of CanJS.">
+							can-util
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>can-util/js</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/assign/assign.html"
+							title="can-util/js/assign/assign">
+							./assign/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/base-url/base-url.html"
+							title="can-util/js/base-url/base-url">
+							./base-url/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/cid/cid.html"
+							title="Deprecated. Use can-cid instead.">
+							./cid/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/cid-map/cid-map.html"
+							title="Exports the native Map
+or a polyfill.">
+							./cid-map/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/cid-set/cid-set.html"
+							title="Exports the native Set
+or a polyfill.">
+							./cid-set/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/deep-assign/deep-assign.html"
+							title="can-util/js/deep-assign/deep-assign">
+							./deep-assign/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/defaults/defaults.html"
+							title="can-util/js/defaults/defaults">
+							./defaults/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/deparam/deparam.html"
+							title="Deprecated. Use can-deparam instead.">
+							./deparam/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/dev/dev.html"
+							title="Utilities for logging development-mode messages. Use this module for
+anything that should be shown to the user during development but isn&#x27;t
+needed in production. In production these functions become noops.">
+							./dev/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/diff/diff.html"
+							title="can-util/js/diff/diff">
+							./diff/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/diff-object/diff-object.html"
+							title="can-util/js/diff-object/diff-object">
+							./diff-object/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/each/each.html"
+							title="">
+							./each/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/get/get.html"
+							title="">
+							./get/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/global/global.html"
+							title="can-util/js/global/global">
+							./global/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/import/import.html"
+							title="can-util/js/import/import">
+							./import/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-array-like/is-array-like.html"
+							title="can-util/js/is-array-like/is-array-like">
+							./is-array-like/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-browser-window/is-browser-window.html"
+							title="can-util/js/is-browser-window/is-browser-window">
+							./is-browser-window/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-empty-object/is-empty-object.html"
+							title="can-util/js/is-empty-object/is-empty-object">
+							./is-empty-object/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-function.html"
+							title="">
+							./is-function
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-node/is-node.html"
+							title="Determines if your code is running in Node.js.">
+							./is-node/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-plain-object/is-plain-object.html"
+							title="can-util/js/is-plain-object/is-plain-object">
+							./is-plain-object/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-promise/is-promise.html"
+							title="can-util/js/is-promise/is-promise">
+							./is-promise/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-promise-like/is-promise-like.html"
+							title="can-util/js/is-promise-like/is-promise-like">
+							./is-promise-like/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-string/is-string.html"
+							title="Determines if the provided argument is a string.">
+							./is-string/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/is-web-worker/is-web-worker.html"
+							title="Determines if the code is running with a Web Worker.">
+							./is-web-worker/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/join-uris/join-uris.html"
+							title="Join together a URI path to a base.">
+							./join-uris/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/log/log.html"
+							title="Utilities for logging to the console.">
+							./log/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/make-array/make-array.html"
+							title="can-util/js/make-array/make-array">
+							./make-array/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/make-map/make-map.html"
+							title="can-util/js/make-map/make-map">
+							./make-map/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/make-promise/make-promise.html"
+							title="can-util/js/make-promise/make-promise">
+							./make-promise/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/omit/omit.html"
+							title="can-util/js/omit/omit">
+							./omit/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/param/param.html"
+							title="Deprecated. Use can-param instead.">
+							./param/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/set-immediate/set-immediate.html"
+							title="can-util/js/set-immediate/set-immediate">
+							./set-immediate/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/string/string.html"
+							title="String utilities used by CanJS libraries">
+							./string/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/string-to-any/string-to-any.html"
+							title="Turns a string representation of a primitive type back into the associated primitive.">
+							./string-to-any/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../js/types/types.html"
+							title="Deprecated. Use can-types instead.">
+							./types/
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>can-util/dom</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../ajax/ajax.html"
+							title="Make an asynchronous HTTP (AJAX) request.">
+							./ajax/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../attr/attr.html"
+							title="A module that makes it easy to access attributes and properties of elements.">
+							./attr/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="module"
+							href="child-nodes.html"
+							title="can-util/dom/child-nodes/child-nodes">
+							./child-nodes/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../class-name/class-name.html"
+							title="Allows querying and manipulation of classes on HTML elements
+var className = require(&quot;can-util/dom/class-name/class-name&quot;);
+
+var fooDiv = document.createElement(&quot;div&quot;);
+className.add(fooDiv, &quot;foo&quot;);
+fooDiv.outerHTML; //-&gt; &#x27;&lt;div class=&quot;foo&quot;&gt;&lt;/div&gt;&#x27;">
+							./class-name/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../data/data.html"
+							title="Allows associating data as a key/value pair for a particular DOM Node.
+var domData = require(&quot;can-util/dom/data/data&quot;);">
+							./data/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../dispatch/dispatch.html"
+							title="can-util/dom/dispatch/dispatch">
+							./dispatch/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../document/document.html"
+							title="can-util/dom/document/document">
+							./document/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../events/events.html"
+							title="Allows you to listen to a domEvent and special domEvents as well as dispatch domEvents.
+var domEvents = require(&quot;can-util/dom/events/events&quot;);">
+							./events/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../frag/frag.html"
+							title="Convert a String, HTMLElement, documentFragment, or contentArray into a documentFragment.">
+							./frag/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../location/location.html"
+							title="can-util/dom/location/location">
+							./location/
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../mutate/mutate.html"
+							title="Mutate an element by appending, inserting, and removing DOM nodes. Use this so that on the server &quot;inserted&quot; will be fired.
+var mutate = require(&quot;can-util/dom/mutate/mutate&quot;);
+
+var el = document.createElement(&quot;div&quot;);
+
+el.addEventListener(&quot;inserted&quot;, function(){
+  console.log(&quot;Inserted was fired!&quot;);
+});
+
+mutate.appendChild.call(document.body, el);">
+							./mutate/
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-callbacks.html"
+							title="Registered callbacks for behaviors">
+							can-view-callbacks
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-live.html"
+							title="Setup live-binding between the DOM and a compute manually.">
+							can-view-live
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-model.html"
+							title="Gets the ViewModel of an element.">
+							can-view-model
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-nodelist.html"
+							title="Adds nesting of text nodes
+can.view.nodeLists are used to make sure &quot;directly nested&quot; live-binding
+sections update content correctly.
+Consider the following template:
+&lt;div&gt;
+{{#if items.length}}
+    Items:
+        {{#items}}
+            &lt;label&gt;&lt;/label&gt;
+        {{/items}}
+{{/if}}
+&lt;/div&gt;
+
+The {{#if}} and {{#items}} seconds are &quot;directly nested&quot; because
+they share the same &lt;div&gt; parent element.
+If {{#items}} changes the DOM by adding more &lt;labels&gt;,
+{{#if}} needs to know about the &lt;labels&gt; to remove them
+if {{#if}} is re-rendered.  {{#if}} would be re-rendered, for example, if
+all items were removed.">
+							can-view-nodelist
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-parser.html"
+							title="Parse HTML and mustache tokens.">
+							can-view-parser
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-scope.html"
+							title="Create a lookup node for keys.">
+							can-view-scope
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../../../can-view-target.html"
+							title="">
+							can-view-target
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../../../community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../../../../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../../../../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../can-infrastructure.html">Infrastructure</a></li>
+		<li> / </li>
+	
+		<li><a href="../../../can-util.html">can-util</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="child-nodes.html">./child-nodes/</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>child-nodes</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-util/edit/master/dom/child-nodes/child-nodes.js#L3">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>childNodes(node)</code>
+  </h2>
+  <p>Get all of the childNodes of a given node.</p>
+<pre><code class="language-js">var stache = require(&quot;can-stache&quot;);
+var childNodes = require(&quot;can-util/child-nodes/child-nodes&quot;);
+
+var html = &quot;&lt;div&gt;&lt;h1&gt;&lt;span&gt;&lt;/span&gt;&lt;/h1&gt;&lt;/div&gt;&quot;;
+var frag = stache(html)();
+
+console.log(childNodes(frag)[0].nodeName); // -&gt; DIV
+</code></pre>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>node</b> <code>{Object}</code>: <p>The Node that you want child nodes for.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  
+</div>
+
+
+
+
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"type":"module","name":"can-util/dom/child-nodes/child-nodes","parent":"can-util/dom","src":{"line":2,"codeLine":22,"path":"node_modules/can-util/dom/child-nodes/child-nodes.js"},"description":"","title":"child-nodes","types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"signatures":[{"code":"childNodes(node)","description":"\n\nGet all of the childNodes of a given node.\n\n```js\nvar stache = require(\"can-stache\");\nvar childNodes = require(\"can-util/child-nodes/child-nodes\");\n\nvar html = \"<div><h1><span></span></h1></div>\";\nvar frag = stache(html)();\n\nconsole.log(childNodes(frag)[0].nodeName); // -> DIV\n```\n","params":[{"types":[{"type":"Object","options":[]}],"name":"node","description":"The Node that you want child nodes for.\n"}]}],"_curParam":{"types":[{"type":"Object","options":[]}],"name":"node","description":"The Node that you want child nodes for.\n"},"pathToRoot":"../../.."};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="../../../static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="../../.." />
+		
+	</body>
+</html>

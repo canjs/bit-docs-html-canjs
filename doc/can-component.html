@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@module can-component
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - can-component</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="module"
+							href="can-component.html"
+							title="Create a custom element that can be used to manage widgets or application logic.">
+							can-component
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>static</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-component.extend.html"
+							title="Define the behavior of a custom element.">
+							extend
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>prototype</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.ViewModel.html"
+							title="Provides or describes a constructor function that provides values and methods
+to the component’s template. The constructor function
+is initialized with values specified by the component element’s data bindings.">
+							ViewModel
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.events.html"
+							title="Listen to events on elements and observables.">
+							events
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.helpers.html"
+							title="Helper functions used with the component’s template.">
+							helpers
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.leakScope.html"
+							title="Allow reading the outer scope values from a component’s template and a component’s viewModel values in the user content.">
+							leakScope
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.tag.html"
+							title="Specifies the HTML tag (or node-name) the can-component will be created on.">
+							tag
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="can-component.prototype.view.html"
+							title="Provides a template to render directly within the component’s element. The template is rendered with the
+component’s can-component::ViewModel instance.  &lt;content/&gt; elements within the template are replaced by the source elements within the component’s tag.">
+							view
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-component.prototype.view-model.html"
+							title="Return the view model instance or type with which the component’s can-component.prototype.view
+is rendered.  This is used when more fine grained control is needed over can-component::ViewModel.">
+							viewModel
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>elements</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="can-component/content.html"
+							title="Positions the LIGHT_DOM within a component’s can-component.prototype.view.">
+							&lt;content&gt;
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>special events</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="can-component/beforeremove.html"
+							title="An event called only on component’s elements before they are removed from the
+document if live binding is performing the removal. It can be listened to
+within a component’s can-component.prototype.events object or on a component
+element with can-stache-bindings.event bindings.  This is an additional
+special event only on component elements.  inserted
+and removed events are available on all elements.">
+							beforeremove
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-compute.html"
+							title="Create an observable value.">
+							can-compute
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect.html"
+							title="can-connect provides persisted data middleware. Use it to assemble powerful model layers for any JavaScript project.">
+							can-connect
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define.html"
+							title="Exports the define method that defines observable properties and their behavior on a prototype object.">
+							can-define
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define/list/list.html"
+							title="Create observable lists.">
+							can-define/list/list
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define/map/map.html"
+							title="Create observable objects.">
+							can-define/map/map
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.html"
+							title="Manage browser history and client state by synchronizing the window.location.hash with a map.">
+							can-route
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-route-pushstate.html"
+							title="Changes can-route to use pushstate
+to change the window&#x27;s pathname instead
+of the hash.
+var route = require(&quot;can-route-pushstate&quot;);
+
+route(&quot;{page}&quot;, { page: &quot;home&quot; });
+route.ready();
+
+route.attr(&quot;page&quot;, &quot;user&quot;);
+
+location.pathname; // -&gt; &quot;/user&quot;">
+							can-route-pushstate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-set.html"
+							title="can-set is a utility for comparing sets that are represented by the parameters commonly passed to service requests.">
+							can-set
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache.html"
+							title="Live binding Mustache and Handlebars-compatible templates.">
+							can-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache/helpers/route.html"
+							title="Adds stache helpers that use can-route.">
+							can-stache/helpers/route
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache-bindings.html"
+							title="Provides template event, one-way bindings, and two-way bindings.">
+							can-stache-bindings
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="can-core.html">Core</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="can-component.html">can-component</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>can-component</h1>
+			<ul class="title-social">
+				
+				<li>
+					<a class="npm-button" href="https://www.npmjs.com/package/can-component">
+						<img src="https://img.shields.io/badge/npm%20package-3.0.7-brightgreen.svg" alt="npm package badge" />
+					</a>
+				</li>
+				<li>
+					<a class="github-button nav-social" href="https://github.com/canjs/can-component">Star</a>
+				</li>
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-component/edit/master/docs/component.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>Create a custom element that can be used to manage widgets or application logic.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>&lt;TAG BINDINGS...&gt;[LIGHT_DOM]&lt;/TAG&gt;</code>
+  </h2>
+  <p>Create an instance of a component on a particular tag in a <a href="can-stache.html" title="Live binding Mustache and Handlebars-compatible templates.">can-stache</a> template.
+In 2.3, use the <a href="can-stache-bindings.html" title="Provides template event, one-way bindings, and two-way bindings.">bindings</a> syntaxes to set up bindings.</p>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>TAG</b> <code>{String}</code>: <p>An HTML tag name that matches the <a href="can-component.prototype.tag.html" title="Specifies the HTML tag (or node-name) the can-component will be created on.">tag</a>
+property of the component. Tag names should include a hypen (<code>-</code>) or a colon (<code>:</code>) like:
+<code>acme-tabs</code> or <code>acme:tabs</code>.</p>
+</li>
+        
+          <li><b>BINDINGS</b> <code>{<a href="can-stache-bindings.html" title="Provides template event, one-way bindings, and two-way bindings.">can-stache-bindings</a>}</code>: <p>Use the following binding syntaxes
+to connect the component’s <a href="can-component.prototype.ViewModel.html" title="Provides or describes a constructor function that provides values and methods
+to the component’s template. The constructor function
+is initialized with values specified by the component element’s data bindings.">ViewModel</a> to the template’s <a href="can-view-scope.html" title="Create a lookup node for keys.">scope</a>:</p>
+<ul>
+<li><a href="can-stache-bindings.toChild.html" title="One-way bind a value in the parent scope to the ViewModel.">{to-child}</a>=<a href="can-stache.expressions.html" title="In addition to different magic tag types, stache supports different expression
+types.  These can be used in various combinations to call helper methods
+or viewModel methods.  The following is an example of all the expressions
+combined:">expression</a> — one-way data binding to child</li>
+<li><a href="can-stache-bindings.toParent.html" title="One-way bind a value in the current viewModel to the parent scope.">{^to-parent}</a>=<a href="can-stache.expressions.html" title="In addition to different magic tag types, stache supports different expression
+types.  These can be used in various combinations to call helper methods
+or viewModel methods.  The following is an example of all the expressions
+combined:">expression</a> — one-way data binding to parent</li>
+<li><a href="can-stache-bindings.twoWay.html" title="Two-way bind a value in the viewModel or the element to the parent scope.">{(two-way)}</a>=<a href="can-stache.expressions.html" title="In addition to different magic tag types, stache supports different expression
+types.  These can be used in various combinations to call helper methods
+or viewModel methods.  The following is an example of all the expressions
+combined:">expression</a> — two-way data binding child to parent</li>
+<li><a href="can-stache-bindings.event.html" title="Respond to events on elements or component ViewModels.">(event)</a>=<a href="can-stache/expressions/call.html" title="">expression</a> — event binding on the view model</li>
+</ul>
+<p>Note that because DOM attribute names are case-insensitive, use hypens (<code>-</code>) to
+in the attribute name to setup for <code>camelCase</code> properties.</p>
+<p>Example:</p>
+<pre><code>&lt;my-tag {to-child}=&quot;expression&quot;
+        {^to-parent}=&quot;expression&quot;
+        {(two-way)}=&quot;expression&quot;
+        (event)=&quot;callExpression()&quot;&gt;&lt;/my-tag&gt;
+</code></pre>
+</li>
+        
+          <li><b>LIGHT_DOM</b> <code>{<a href="can-stache.sectionRenderer.html" title="Renders a section. These functions are usually provided as .fn and .inverse on a stache helper's options.">sectionRenderer</a>(context, helpers)}</code>: <p>The content between the starting and ending
+tag. For example, <code>Hello &lt;b&gt;World&lt;/b&gt;</code> is the <code>LIGHT_DOM</code> in the following:</p>
+<pre><code>&lt;my-tag&gt;Hello &lt;b&gt;World&lt;/b&gt;&lt;/my-tag&gt;
+</code></pre>
+<p>The <code>LIGHT_DOM</code> can be positioned with a component’s <a href="can-component.prototype.view.html" title="Provides a template to render directly within the component’s element. The template is rendered with the
+component’s can-component::ViewModel instance.  &lt;content/&gt; elements within the template are replaced by the source elements within the component’s tag.">view</a> with
+the <a href="can-component/content.html" title="Positions the LIGHT_DOM within a component’s can-component.prototype.view."><content></a> element.  The data accessible to the <code>LIGHT_DOM</code> can be controlled
+with <a href="can-component.prototype.leakScope.html" title="Allow reading the outer scope values from a component’s template and a component’s viewModel values in the user content.">leakScope</a>.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p>To create a Component, you must first <a href="can-component.extend.html" title="Define the behavior of a custom element.">extend</a> <code>Component</code>
+with the methods and properties of how your component behaves:</p>
+<pre><code class="language-js">var Component = require(&quot;can-component&quot;);
+var DefineMap = require(&quot;can-define/map/map&quot;);
+var stache = require(&quot;can-stache&quot;);
+
+var HelloWorldVM = DefineMap.extend({
+    visible: {value: false},
+    message: {value: &quot;Hello There!&quot;}
+});
+
+Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;{{#if visible}}{{message}}{{else}}Click me{{/if}}&quot;),
+  ViewModel: HelloWorldVM,
+  events: {
+    click: function(){
+        this.viewModel.visible = !this.viewModel.visible;
+    }
+  }
+});
+</code></pre>
+<p>This element says “Click me” until a user clicks it and then
+says “Hello There!”.  To create a a instance of this component on the page,
+add <code>&lt;hello-world/&gt;</code> to a <a href="can-stache.html" title="Live binding Mustache and Handlebars-compatible templates.">can-stache</a> template, render
+the template and insert the result in the page like:</p>
+<pre><code>var template = stache(&quot;&lt;hello-world/&gt;&quot;);
+document.body.appendChild(template({}));
+</code></pre>
+<p>Check this out here:</p>
+<div class='demo_wrapper' data-demo-src='demos/can-component/click_me.html'></div>
+<p>Typically, you do not append a single component at a time.  Instead,
+you'll render a template with many custom tags like:</p>
+<pre><code>&lt;srchr-app&gt;
+  &lt;srchr-search {models}=&quot;models&quot;&gt;
+    &lt;input name=&quot;search&quot;/&gt;
+  &lt;/srchr-search&gt;
+  &lt;ui-panel&gt;
+    &lt;srchr-history/&gt;
+    &lt;srchr-results {models}=&quot;models&quot;/&gt;
+  &lt;/ui-panel&gt;
+&lt;/srchr-app&gt;
+</code></pre>
+<h3>Defining a Component</h3>
+<p>Use <a href="can-component.extend.html" title="Define the behavior of a custom element.">extend</a> to define a <code>Component</code> constructor function
+that automatically gets initialized whenever the component’s tag is
+found.</p>
+<p>Note that inheriting from components works differently than other CanJS APIs. You
+can’t call <code>.extend</code> on a particular component to create a “subclass” of that component.</p>
+<p>Instead, components work more like HTML elements. To reuse functionality from a base component, build on top of it with parent
+components that wrap other components in their template and pass any needed viewModel properties via attributes.</p>
+<h3>Tag</h3>
+<p>A component’s <a href="can-component.prototype.tag.html" title="Specifies the HTML tag (or node-name) the can-component will be created on.">tag</a> is the element node name that
+the component will be created on.</p>
+<p>The following matches <code>&lt;hello-world&gt;</code> elements.</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;
+});
+</code></pre>
+<h3>View</h3>
+<p>A component’s <a href="can-component.prototype.view.html" title="Provides a template to render directly within the component’s element. The template is rendered with the
+component’s can-component::ViewModel instance.  &lt;content/&gt; elements within the template are replaced by the source elements within the component’s tag.">view</a> is a template that is rendered as
+the element’s innerHTML.</p>
+<p>The following component:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;&lt;h1&gt;Hello World&lt;/h1&gt;&quot;)
+});
+</code></pre>
+<p>Changes <code>&lt;hello-world/&gt;</code> elements into:</p>
+<pre><code>&lt;hello-world&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;/hello-world&gt;
+</code></pre>
+<p>Use the <a href="can-component/content.html" title="Positions the LIGHT_DOM within a component’s can-component.prototype.view."><content></a> tag to position the custom element’s source HTML.</p>
+<p>The following component:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;&lt;h1&gt;&lt;content/&gt;&lt;/h1&gt;&quot;)
+});
+</code></pre>
+<p>Changes <code>&lt;hello-world&gt;Hi There&lt;/hello-world&gt;</code> into:</p>
+<pre><code>&lt;hello-world&gt;&lt;h1&gt;Hi There&lt;/h1&gt;&lt;/hello-world&gt;
+</code></pre>
+<h3>ViewModel</h3>
+<p>A component’s <a href="can-component.prototype.ViewModel.html" title="Provides or describes a constructor function that provides values and methods
+to the component’s template. The constructor function
+is initialized with values specified by the component element’s data bindings.">ViewModel</a> defines a constructor that creates
+instances used to render the component’s template. The instance’s properties
+are typically set by attribute <a href="can-stache-bindings.html" title="Provides template event, one-way bindings, and two-way bindings.">data bindings</a> on the custom element.
+By default, every data binding’s value is looked up in the parent <a href="can-view-scope.html" title="Create a lookup node for keys.">can-view-scope</a>
+of the custom element and added to the viewModel object.</p>
+<p>The following component:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;&lt;h1&gt;{{message}}&lt;/h1&gt;&quot;)
+});
+</code></pre>
+<p>Changes the following rendered template:</p>
+<pre><code>var template = stache(&quot;&lt;hello-world {message}='greeting'/&gt;&quot;);
+template({
+  greeting: &quot;Salutations&quot;
+})
+</code></pre>
+<p>Into:</p>
+<pre><code>&lt;hello-world&gt;&lt;h1&gt;Salutations&lt;/h1&gt;&lt;/hello-world&gt;
+</code></pre>
+<p>Default values can be provided. The following component:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;&lt;h1&gt;{{message}}&lt;/h1&gt;&quot;),
+  viewModel: {
+    message: &quot;Hi&quot;
+  }
+});
+</code></pre>
+<p>Changes the following rendered template:</p>
+<pre><code>var template = stache(&quot;&lt;hello-world/&gt;&quot;);
+template({})
+</code></pre>
+<p>Into:</p>
+<pre><code>&lt;hello-world&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;/hello-world&gt;
+</code></pre>
+<p>If you want to set the string value of the attribute on the ViewModel,
+set an attribute without any binding syntax.</p>
+<p>The following template, with the previous <code>hello-world</code> component:</p>
+<pre><code>var template = stache(&quot;&lt;hello-world message='Howdy'/&gt;&quot;);
+template({})
+</code></pre>
+<p>Renders to:</p>
+<pre><code>&lt;hello-world&gt;&lt;h1&gt;Howdy&lt;/h1&gt;&lt;/hello-world&gt;
+</code></pre>
+<h3>Events</h3>
+<p>A component’s <a href="can-component.prototype.events.html" title="Listen to events on elements and observables.">events</a> object is used to listen to events (that are not
+listened to with <a href="can-stache-bindings.html" title="Provides template event, one-way bindings, and two-way bindings.">view bindings</a>). The following component
+adds “!” to the message every time <code>&lt;hello-world&gt;</code> is clicked:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;&lt;h1&gt;{{message}}&lt;/h1&gt;&quot;),
+  events: {
+    &quot;click&quot; : function(){
+      var currentMessage = this.viewModel.message;
+      this.viewModel.message = currentMessage+ &quot;!&quot;;
+    }
+  }
+});
+</code></pre>
+<p>Components have the ability to bind to special <a href="can-util/dom/events/inserted/inserted.html" title="This event fires when the bound element is added to the DOM.">inserted</a>,
+<a href="can-component/beforeremove.html" title="An event called only on component’s elements before they are removed from the
+document if live binding is performing the removal. It can be listened to
+within a component’s can-component.prototype.events object or on a component
+element with can-stache-bindings.event bindings.  This is an additional
+special event only on component elements.  inserted
+and removed events are available on all elements.">beforeremove</a> and <a href="can-util/dom/events/removed/removed.html" title="This event fires when the bound element is detached or destroyed.">removed</a> events
+that are called when a component’s tag has been inserted into,
+is about to removed, or was removed from the page.</p>
+<h3>Helpers</h3>
+<p>A component’s <a href="can-component.prototype.helpers.html" title="Helper functions used with the component’s template.">helpers</a> object provides <a href="can-stache.helper.html" title="A helper function passed to can-stache.registerHelper.
+Given the arguments, returns the content that should be shown in the DOM
+or a function that will be called on the DOM element the helper was
+called on.">stache helper</a> functions
+that are available within the component’s template.  The following component
+only renders friendly messages:</p>
+<pre><code>Component.extend({
+  tag: &quot;hello-world&quot;,
+  view: stache(&quot;{{#isFriendly message}}&quot;+
+              &quot;&lt;h1&gt;{{message}}&lt;/h1&gt;&quot;+
+            &quot;{{/isFriendly}}&quot;),
+  helpers: {
+    isFriendly: function(message, options){
+      if( /hi|hello|howdy/.test(message) ) {
+        return options.fn();
+      } else {
+        return options.inverse();
+      }
+    }
+  }
+});
+</code></pre>
+<p>Generally speaking, helpers should only be used for view related functionality, like
+formatting a date.  Data related methods should be in the view model or models.</p>
+<h2>Examples</h2>
+<p>Check out the following examples built with <code>Component</code>.</p>
+<h3>Tabs</h3>
+<p>The following demos a tabs widget.  Click “Add Vegetables”
+to add a new tab.</p>
+<div class='demo_wrapper' data-demo-src='demos/can-component/tabs.html'></div>
+<p>An instance of the tabs widget is created by creating <code>&lt;my-tabs&gt;</code> and <code>&lt;my-panel&gt;</code>
+elements like:</p>
+<pre><code>&lt;my-tabs&gt;
+  {{#each foodTypes}}
+    &lt;my-panel title='title'&gt;{{content}}&lt;/my-panel&gt;
+  {{/each}}
+&lt;/my-tabs&gt;
+</code></pre>
+<p>To add another panel, all we have to do is add data to <code>foodTypes</code> like:</p>
+<pre><code>foodTypes.push({
+  title: &quot;Vegetables&quot;,
+  content: &quot;Carrots, peas, kale&quot;
+})
+</code></pre>
+<p>The secret is that the <code>&lt;my-panel&gt;</code> element listens to when it is inserted
+and adds its data to the tabs' list of panels with:</p>
+<pre><code>var vm = this.parentViewModel = canViewModel(this.element.parentNode);
+vm.addPanel(this.viewModel);
+</code></pre>
+<h3>TreeCombo</h3>
+<p>The following tree combo lets people walk through a hierarchy and select locations.</p>
+<div class='demo_wrapper' data-demo-src='demos/can-component/treecombo.html'></div>
+<p>The secret to this widget is the viewModel’s <code>breadcrumb</code> property, which is an array
+of items the user has navigated through, and <code>selectableItems</code>, which represents the children of the
+last item in the breadcrub.  These are defined on the viewModel like:</p>
+<pre><code>breadcrumb: [],
+selectableItems: function(){
+  var breadcrumb = this.attr(&quot;breadcrumb&quot;);
+
+  // if there’s an item in the breadcrumb
+  if(breadcrumb.attr('length')){
+
+    // return the last item’s children
+    return breadcrumb.attr(&quot;&quot;+(breadcrumb.length-1)+'.children');
+  } else{
+
+    // return the top list of items
+    return this.attr('items');
+  }
+}
+</code></pre>
+<p>When the “+” icon is clicked next to each item, the viewModel’s <code>showChildren</code> method is called, which
+adds that item to the breadcrumb like:</p>
+<pre><code>showChildren: function(item, ev) {
+  ev.stopPropagation();
+  this.attr('breadcrumb').push(item)
+},
+</code></pre>
+<h3>Paginate</h3>
+<p>The following example shows 3
+widget-like components: a grid, next / prev buttons, and a page count indicator. And, it shows an application component that puts them all together.</p>
+<div class='demo_wrapper' data-demo-src='demos/can-component/paginate.html'></div>
+<p>This demo uses a <code>Paginate</code> <a href="can-define/map/map.html" title="Create observable objects.">can-define/map/map</a> to assist with maintaining a paginated state:</p>
+<pre><code>var Paginate = DefineMap.extend({
+...
+});
+</code></pre>
+<p>The <code>app</code> component, using <a href="can-define/map/map.html" title="Create observable objects.">can-define/map/map</a>, creates an instance of the <code>Paginate</code> model
+and a <code>websitesPromise</code> that represents a request for the Websites
+that should be displayed.  Notice how the paginate’s <code>count</code> value is tied to the
+value of the <code>websitesPromise</code>’s resolved <code>value</code>’s <code>count</code>.</p>
+<pre><code class="language-js">var AppViewModel = DefineMap.extend({
+    paginate: {
+        value: function() {
+            return new Paginate({
+                limit: 5,
+                count: compute(this, &quot;websitesPromise.value.count&quot;)
+            });
+        }
+    },
+    websitesPromise: {
+        get: function() {
+            var params = {
+                    limit: this.paginate.limit,
+                    offset: this.paginate.offset
+                },
+                websitesPromise = Website.getList(params),
+                self = this;
+
+            websitesPromise.then(function(websites) {
+                self.paginate.count = websites.length;
+            });
+
+            return websitesPromise;
+        }
+    }
+});
+</code></pre>
+<p>The <code>my-app</code> component passes paginate, paginate’s values, and websitesPromise to
+its sub-components:</p>
+<pre><code>&lt;my-app&gt;
+  &lt;my-grid {promise-data}='websitesPromise'&gt;
+    {{#each items}}
+      &lt;tr&gt;
+        &lt;td width='40%'&gt;{{name}}&lt;/td&gt;
+        &lt;td width='70%'&gt;{{url}}&lt;/td&gt;
+      &lt;/tr&gt;
+    {{/each}}
+  &lt;/my-grid&gt;
+  &lt;next-prev {paginate}='paginate'&gt;&lt;/next-prev&gt;
+  &lt;page-count {page}='paginate.page' {count}='paginate.pageCount'/&gt;
+&lt;/my-app&gt;
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-component/docs/component.md"},"description":"Create a custom element that can be used to manage widgets or application logic.\n\n","name":"can-component","type":"module","title":"can-component","types":[{"type":"constructor"}],"download":"can/component","test":"can/component/test.html","parent":"can-core","release":"2.0","link":"../docco/component/component.html docco","package":{"author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bit-docs":{"dependencies":{"bit-docs-glob-finder":"^0.0.5","bit-docs-dev":"^0.0.3","bit-docs-js":"^0.0.3","bit-docs-generate-readme":"^0.0.8"},"glob":{"pattern":"**/*.{js,md}","ignore":"node_modules/**/*"},"readme":{"apis":"./docs/apis.json"},"parent":"can-component"},"bugs":{"url":"https://github.com/canjs/can-component/issues"},"dependencies":{"can-compute":"^3.0.4","can-construct":"^3.0.6","can-control":"^3.0.4","can-namespace":"1.0.0","can-observation":"^3.0.4","can-stache-bindings":"^3.0.5","can-types":"^1.0.1","can-util":"^3.2.1","can-view-callbacks":"^3.0.3","can-view-model":"^3.1.2","can-view-nodelist":"^3.0.2","can-view-scope":"^3.1.1"},"description":"Custom elements for CanJS","devDependencies":{"bit-docs":"0.0.7","can-define":"^1.0.5","can-event":"^3.0.1","can-list":"^3.0.1","can-map":"^3.0.3","can-stache":"^3.0.14","can-vdom":"^3.0.0","done-serve":"^0.2.5","donejs-cli":"^0.9.5","generator-donejs":"^0.9.0","jshint":"^2.9.1","steal":"^1.0.0","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.3.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-component","name":"can-component","repository":{"type":"git","url":"git://github.com/canjs/can-component.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","document":"bit-docs","jshint":"jshint ./*.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"system":{"configDependencies":["live-reload"],"npmAlgorithm":"flat"},"version":"3.0.7"},"signatures":[{"code":"<TAG BINDINGS...>[LIGHT_DOM]</TAG>","description":"\n\n  Create an instance of a component on a particular tag in a [can-stache] template.\n  In 2.3, use the [can-stache-bindings bindings] syntaxes to set up bindings.\n\n","params":[{"types":[{"type":"String"}],"name":"TAG","description":"An HTML tag name that matches the [can-component::tag tag]\nproperty of the component. Tag names should include a hypen (`-`) or a colon (`:`) like:\n`acme-tabs` or `acme:tabs`.\n"},{"types":[{"type":"can-stache-bindings"}],"optional":true,"name":"BINDINGS","description":"Use the following binding syntaxes\nto connect the component’s [can-component::ViewModel] to the template’s [can-view-scope scope]:\n\n - [can-stache-bindings.toChild]=[can-stache.expressions expression] — one-way data binding to child\n - [can-stache-bindings.toParent]=[can-stache.expressions expression] — one-way data binding to parent\n - [can-stache-bindings.twoWay]=[can-stache.expressions expression] — two-way data binding child to parent\n - [can-stache-bindings.event]=[can-stache/expressions/call expression] — event binding on the view model\n\n Note that because DOM attribute names are case-insensitive, use hypens (`-`) to\n in the attribute name to setup for `camelCase` properties.\n\n Example:\n\n ```\n <my-tag {to-child}=\"expression\"\n         {^to-parent}=\"expression\"\n         {(two-way)}=\"expression\"\n         (event)=\"callExpression()\"></my-tag>\n ```\n"},{"types":[{"type":"can-stache.sectionRenderer"}],"optional":true,"name":"LIGHT_DOM","description":"The content between the starting and ending\ntag. For example, `Hello <b>World</b>` is the `LIGHT_DOM` in the following:\n\n```\n<my-tag>Hello <b>World</b></my-tag>\n```\n\nThe `LIGHT_DOM` can be positioned with a component’s [can-component.prototype.view] with\nthe [can-component/content] element.  The data accessible to the `LIGHT_DOM` can be controlled\nwith [can-component.prototype.leakScope].\n\n"}],"release":"2.3"}],"_curParam":{"types":[{"type":"can-stache.sectionRenderer"}],"optional":true,"name":"LIGHT_DOM","description":"The content between the starting and ending\ntag. For example, `Hello <b>World</b>` is the `LIGHT_DOM` in the following:\n\n```\n<my-tag>Hello <b>World</b></my-tag>\n```\n\nThe `LIGHT_DOM` can be positioned with a component’s [can-component.prototype.view] with\nthe [can-component/content] element.  The data accessible to the `LIGHT_DOM` can be controlled\nwith [can-component.prototype.leakScope].\n\n"},"comment":" ","pathToRoot":""};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="./static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="." />
+		
+	</body>
+</html>

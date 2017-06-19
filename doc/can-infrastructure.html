@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@page can-infrastructure
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - Infrastructure</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="page"
+							href="can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-cid.html"
+							title="can-cid">
+							can-cid
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-construct.html"
+							title="Provides a way to easily use the power of prototypal inheritance
+without worrying about hooking up all the particulars yourself. Use
+can-construct.extend to create an inheritable
+constructor function of your own.">
+							can-construct
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-control.html"
+							title="Create organized, memory-leak free, rapidly performing, stateful controls with declarative event binding. Use Control to create UI
+controls like tabs, grids, and context menus,
+and organize them into higher-order business rules with
+can.route. It can serve as both a traditional view and a traditional controller.">
+							can-control
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-deparam.html"
+							title="can-deparam">
+							can-deparam
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-event.html"
+							title="Add event functionality into your objects.
+The canEvent object provides a number of methods for handling events in objects. This functionality is best used by mixing the canEvent object into an object or prototype. However, event listeners can still be used even on objects that don&#x27;t include canEvent.
+All methods provided by canEvent assume that they are mixed into an object -- this should be the object dispatching the events.">
+							can-event
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-event/async/async.html"
+							title="Makes the event system asynchronous. WARNING: This is experimental technology.">
+							can-event/async/async
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-event/batch/batch.html"
+							title="Adds task batching abilities to event dispatching.">
+							can-event/batch/batch
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-event/lifecycle/lifecycle.html"
+							title="Mixin lifecycle events onto a prototype.">
+							can-event/lifecycle/lifecycle
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-event-radiochange.html"
+							title="can-event-radiochange">
+							can-event-radiochange
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-namespace.html"
+							title="Namespace where can-* packages are registered">
+							can-namespace
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-observation.html"
+							title="Provides a mechanism to notify when an observable has been read and a
+way to observe those reads called within a given function.">
+							can-observation
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-param.html"
+							title="Serialize an object or array into a query string.">
+							can-param
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-simple-map.html"
+							title="A performant live-bound map.">
+							can-simple-map
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-types.html"
+							title="A stateful container for CanJS type information.">
+							can-types
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-util.html"
+							title="Common JavaScript utilities for the rest of CanJS.">
+							can-util
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-callbacks.html"
+							title="Registered callbacks for behaviors">
+							can-view-callbacks
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-live.html"
+							title="Setup live-binding between the DOM and a compute manually.">
+							can-view-live
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-model.html"
+							title="Gets the ViewModel of an element.">
+							can-view-model
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-nodelist.html"
+							title="Adds nesting of text nodes
+can.view.nodeLists are used to make sure &quot;directly nested&quot; live-binding
+sections update content correctly.
+Consider the following template:
+&lt;div&gt;
+{{#if items.length}}
+    Items:
+        {{#items}}
+            &lt;label&gt;&lt;/label&gt;
+        {{/items}}
+{{/if}}
+&lt;/div&gt;
+
+The {{#if}} and {{#items}} seconds are &quot;directly nested&quot; because
+they share the same &lt;div&gt; parent element.
+If {{#items}} changes the DOM by adding more &lt;labels&gt;,
+{{#if}} needs to know about the &lt;labels&gt; to remove them
+if {{#if}} is re-rendered.  {{#if}} would be re-rendered, for example, if
+all items were removed.">
+							can-view-nodelist
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-parser.html"
+							title="Parse HTML and mustache tokens.">
+							can-view-parser
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-scope.html"
+							title="Create a lookup node for keys.">
+							can-view-scope
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-view-target.html"
+							title="">
+							can-view-target
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="api.html">API Docs</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="can-infrastructure.html">Infrastructure</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>Infrastructure</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/canjs/edit/master/docs/can-canjs/can-infrastructure.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>Utility libraries that power the core and ecosystem collection.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p>The infrastructure collection of libraries are lower-level utility libraries that
+are used by the <a href="can-core.html" title="The best, most hardened and generally useful libraries in CanJS.">Core</a> and <a href="can-ecosystem.html" title="Useful libraries that extend or add important features to the core collection.">Ecosystem</a> collections.  They can also
+be used by applications directly.</p>
+<p>Let’s explore what’s available.</p>
+<h2>can-event</h2>
+<p><a href="can-event.html" title="Add event functionality into your objects.
+The canEvent object provides a number of methods for handling events in objects. This functionality is best used by mixing the canEvent object into an object or prototype. However, event listeners can still be used even on objects that don't include canEvent.
+All methods provided by canEvent assume that they are mixed into an object -- this should be the object dispatching the events.">can-event</a> is a mixin that adds event dispatching and listening functionality
+on your objects. The following shows creating a <code>Person</code> constructor function
+whose instances can produce events that can be listened to.</p>
+<pre><code class="language-js">var canEvent = require(&quot;can-event&quot;);
+var assign = require(&quot;can-util/js/assign/assign&quot;);
+
+// Create the Person type
+function Person(){ ... };
+Person.prototype.method = function(){ ... };
+
+// Add event mixin:
+assign(Person.prototype, canEvent);
+
+// Create an instance
+var me = new Person();
+
+// Now listen and dispatch events!
+me.addEventListener(&quot;name&quot;, function(){ ... });
+
+me.dispatch(&quot;name&quot;);
+</code></pre>
+<p><a href="can-event/batch/batch.html" title="Adds task batching abilities to event dispatching.">can-event/batch/batch</a> adds event batching abilities to the <a href="can-event.html" title="Add event functionality into your objects.
+The canEvent object provides a number of methods for handling events in objects. This functionality is best used by mixing the canEvent object into an object or prototype. However, event listeners can still be used even on objects that don't include canEvent.
+All methods provided by canEvent assume that they are mixed into an object -- this should be the object dispatching the events.">can-event</a> event system.
+<a href="can-event/async/async.html" title="Makes the event system asynchronous. WARNING: This is experimental technology.">can-event/async/async</a> adds asynchronous batched event dispatching to the <a href="can-event.html" title="Add event functionality into your objects.
+The canEvent object provides a number of methods for handling events in objects. This functionality is best used by mixing the canEvent object into an object or prototype. However, event listeners can still be used even on objects that don't include canEvent.
+All methods provided by canEvent assume that they are mixed into an object -- this should be the object dispatching the events.">can-event</a> event system.</p>
+<h2>can-observation</h2>
+<p><a href="can-observation.html" title="Provides a mechanism to notify when an observable has been read and a
+way to observe those reads called within a given function.">can-observation</a> provides a mechanism to notify when an observable has been read and a way to observe those reads called within a given function.  <a href="can-observation.html" title="Provides a mechanism to notify when an observable has been read and a
+way to observe those reads called within a given function.">can-observation</a> provides the foundation for <a href="can-compute.html" title="Create an observable value.">can-compute</a>’s abilities.</p>
+<p>Use <a href="can-observation.add.html" title="Signals that an object's property is being observed, so that any functions
+that are recording observations will see that this object is a dependency.">Observation.add</a> to signal when an an observable value has been read.
+The following makes the <code>Person</code> type’s <code>getName()</code> observable:</p>
+<pre><code class="language-js">var Observation = require(&quot;can-observation&quot;);
+var canEvent = require(&quot;can-event&quot;);
+var assign = require(&quot;can-util/js/assign/assign&quot;);
+
+// Create the Person type
+function Person(){};
+Person.prototype.setName = function(newName){
+    var oldName = this.name;
+    this.name = newName;
+    this.dispatch(&quot;name&quot;, [newName, oldName]);
+};
+Person.prototype.getName = function(){
+    Observation.add(this, &quot;name&quot;);
+    return this.name;
+};
+</code></pre>
+<p>The <code>Observation</code> constructor can be used, similar to a <a href="can-compute.html" title="Create an observable value.">can-compute</a> to observe
+a function’s return value by tracking calls to <code>Observation.add</code></p>
+<pre><code class="language-js">var person = new Person();
+person.setName(&quot;Justin&quot;);
+
+
+var greetingObservation = new Observation(function(){
+    return person.getName() + &quot; says hi!&quot;;
+}, null, function(newValue){
+    console.log(newValue);
+});
+greetingObservation.start();
+
+greetingObservation.value //-&gt; &quot;Justin says hi!&quot;
+
+person.setName(&quot;Matt&quot;) //-&gt; console.logs &quot;Matt says hi!&quot;;
+</code></pre>
+<h2>can-util</h2>
+<p><a href="can-util.html" title="Common JavaScript utilities for the rest of CanJS.">can-util</a> is a collection of many different modules that provide various JavaScript
+and DOM related utilities.</p>
+<h3>DOM Utilities</h3>
+<p>The DOM utilities consist of:</p>
+<ul>
+<li>Node and Element helpers: <a href="can-util/dom/child-nodes/child-nodes.html" title="can-util/dom/child-nodes/child-nodes">child-nodes</a>, <a href="can-util/dom/class-name/class-name.html" title="Allows querying and manipulation of classes on HTML elements
+var className = require(&quot;can-util/dom/class-name/class-name&quot;);
+
+var fooDiv = document.createElement(&quot;div&quot;);
+className.add(fooDiv, &quot;foo&quot;);
+fooDiv.outerHTML; //-&gt; '&lt;div class=&quot;foo&quot;&gt;&lt;/div&gt;'">class-name</a>, <a href="can-util/dom/data/data.html" title="Allows associating data as a key/value pair for a particular DOM Node.
+var domData = require(&quot;can-util/dom/data/data&quot;);">data</a>, <a href="can-util/dom/frag/frag.html" title="Convert a String, HTMLElement, documentFragment, or contentArray into a documentFragment.">frag</a>.</li>
+<li>Event helpers: <a href="can-util/dom/dispatch/dispatch.html" title="can-util/dom/dispatch/dispatch">dispatch</a>, <a href="can-util/dom/events/delegate/delegate.html" title="Add delegate listeners to DOM events.  Delegated listeners use a selector on an
+ancestor element to determine when to fire the event for an item.  This can help
+cases where large numbers of similar DOM nodes are added into a DOM subtree, since
+event handlers do not have to be attached to each new node.">delegateEvents</a>, <a href="can-util/dom/events/attributes/attributes.html" title="Adds a listenable &quot;attributes&quot; event to DOM nodes, which fires when
+the node's attributes change.">attributes</a>, <a href="can-util/dom/events/inserted/inserted.html" title="This event fires when the bound element is added to the DOM.">inserted</a>, <a href="can-util/dom/events/removed/removed.html" title="This event fires when the bound element is detached or destroyed.">removed</a>.</li>
+<li>Ajax helpers: <a href="can-util/dom/ajax/ajax.html" title="Make an asynchronous HTTP (AJAX) request.">ajax</a>.</li>
+<li>Environment identification helpers: <a href="can-util/dom/document/document.html" title="can-util/dom/document/document">document</a>.</li>
+</ul>
+<p>And the <a href="can-util/dom/mutate/mutate.html" title="Mutate an element by appending, inserting, and removing DOM nodes. Use this so that on the server &quot;inserted&quot; will be fired.
+var mutate = require(&quot;can-util/dom/mutate/mutate&quot;);
+
+var el = document.createElement(&quot;div&quot;);
+
+el.addEventListener(&quot;inserted&quot;, function(){
+  console.log(&quot;Inserted was fired!&quot;);
+});
+
+mutate.appendChild.call(document.body, el);">mutate</a> helper which should be used to manipulate DOM
+nodes in elements that do not support <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MutationObservers</a>.</p>
+<h3>JS Utilities</h3>
+<p>The JS utilities consist of:</p>
+<ul>
+<li>Functional helpers: <a href="can-util/js/each/each.html" title="">each</a>, <a href="can-util/js/assign/assign.html" title="can-util/js/assign/assign">assign</a>, <a href="can-util/js/deep-assign/deep-assign.html" title="can-util/js/deep-assign/deep-assign">deep-assign</a>, <a href="can-util/js/make-array/make-array.html" title="can-util/js/make-array/make-array">make-array</a>.</li>
+<li>Type detection helpers: <a href="can-util/js/is-array-like/is-array-like.html" title="can-util/js/is-array-like/is-array-like">is-array-like</a>,  <a href="can-util/js/is-empty-object/is-empty-object.html" title="can-util/js/is-empty-object/is-empty-object">is-empty-object</a>, <a href="can-util/js/is-function.html" title="">/is-function is-function</a>, <a href="can-util/js/is-plain-object/is-plain-object.html" title="can-util/js/is-plain-object/is-plain-object">is-plain-object</a>, <a href="can-util/js/is-promise/is-promise.html" title="can-util/js/is-promise/is-promise">is-promise</a>, <a href="can-util/js/is-string/is-string.html" title="Determines if the provided argument is a string.">is-string</a>, <a href="can-util/js/types/types.html" title="Deprecated. Use can-types instead.">types</a>.</li>
+<li>Environment detection helpers: <a href="can-util/js/is-browser-window/is-browser-window.html" title="can-util/js/is-browser-window/is-browser-window">is-browser-window</a>, <a href="can-util/js/is-node/is-node.html" title="Determines if your code is running in Node.js.">is-node</a>, <a href="can-util/js/is-web-worker/is-web-worker.html" title="Determines if the code is running with a Web Worker.">is-web-worker</a>.</li>
+<li>Environment identification helpers: <a href="can-util/js/global/global.html" title="can-util/js/global/global">global</a>, <a href="can-util/js/import/import.html" title="can-util/js/import/import">import</a>, <a href="can-util/js/base-url/base-url.html" title="can-util/js/base-url/base-url">base-url</a>.</li>
+<li>Polyfills - <a href="can-util/js/set-immediate/set-immediate.html" title="can-util/js/set-immediate/set-immediate">set-immediate</a>.</li>
+<li>URL helpers: <a href="can-param.html" title="Serialize an object or array into a query string.">can-param</a>, <a href="can-deparam.html" title="can-deparam">can-deparam</a>, <a href="can-util/js/join-uris/join-uris.html" title="Join together a URI path to a base.">join-uris</a>.</li>
+<li>Diffing helpers: <a href="can-util/js/diff/diff.html" title="can-util/js/diff/diff">diff</a>, <a href="can-util/js/diff-object/diff-object.html" title="can-util/js/diff-object/diff-object">diff-object</a>.</li>
+<li>String helpers: <a href="can-util/js/string/string.html" title="String utilities used by CanJS libraries">string</a>, <a href="can-util/js/string-to-any/string-to-any.html" title="Turns a string representation of a primitive type back into the associated primitive.">string-to-any</a>.</li>
+<li>Object identification helpers: <a href="can-util/js/cid/cid.html" title="Deprecated. Use can-cid instead.">cid</a>.</li>
+</ul>
+<h2>can-view-callbacks</h2>
+<p><a href="can-view-callbacks.html" title="Registered callbacks for behaviors">can-view-callbacks</a> lets you register callbacks for specific elements or attributes found in
+templates.</p>
+<pre><code class="language-js">var callbacks = require(&quot;can-view-callbacks&quot;);
+
+callbacks.tag(&quot;blue-el&quot;, function(el){
+    el.style.background = &quot;blue&quot;;
+});
+</code></pre>
+<h2>can-view-live</h2>
+<p>Sets up a live-binding between the DOM and a compute.</p>
+<pre><code class="language-js">var live = require(&quot;can-view-live&quot;);
+var compute = require(&quot;can-compute&quot;);
+var frag = require(&quot;can-util/dom/frag/frag&quot;);
+
+var message = compute(&quot;World&quot;);
+
+var content = frag(&quot;Hello&quot;,&quot;&quot;,&quot;!&quot;);
+
+live.text(content.childNodes[1], message);
+
+document.body.appendChild(content);
+
+message(&quot;Earth&quot;);
+
+document.body.innerHTML //-&gt; Hello Earth!
+</code></pre>
+<h2>can-view-nodelist</h2>
+<p><a href="can-view-nodelist.html" title="Adds nesting of text nodes
+can.view.nodeLists are used to make sure &quot;directly nested&quot; live-binding
+sections update content correctly.
+Consider the following template:
+&lt;div&gt;
+{{#if items.length}}
+    Items:
+        {{#items}}
+            &lt;label&gt;&lt;/label&gt;
+        {{/items}}
+{{/if}}
+&lt;/div&gt;
+
+The {{#if}} and {{#items}} seconds are &quot;directly nested&quot; because
+they share the same &lt;div&gt; parent element.
+If {{#items}} changes the DOM by adding more &lt;labels&gt;,
+{{#if}} needs to know about the &lt;labels&gt; to remove them
+if {{#if}} is re-rendered.  {{#if}} would be re-rendered, for example, if
+all items were removed.">can-view-nodelist</a> is used to maintain the structure of HTML nodes produced by a
+template. For example, a <a href="can-stache.html" title="Live binding Mustache and Handlebars-compatible templates.">can-stache</a> template like:</p>
+<pre><code>{{#if over21}}name:{{{highlight name}}}.{{/if}}
+</code></pre>
+<p>Might result in a nodeList structure that looks like:</p>
+<pre><code>if[
+    TextNode(&quot;name:&quot;),
+    highlight[&lt;b&gt;Justin&lt;/b&gt;]
+]
+</code></pre>
+<p>This is to say that the <code>#if over21</code> nodeList will contain a text node for <code>&quot;name:&quot;</code>
+and the <code>highlight name</code> nodeList.  The <code>highlight name</code> nodeList will contain the
+html content resulting from that helper (<code>&lt;b&gt;Justin&lt;/b&gt;</code>).</p>
+<h2>can-view-parser</h2>
+<p><a href="can-view-parser.html" title="Parse HTML and mustache tokens.">can-view-parser</a> parses HTML and handlebars/mustache tokens.</p>
+<pre><code class="language-js">var parser = require(&quot;can-view-parser&quot;);
+
+var html = '&lt;h1&gt;&lt;span first=&quot;foo&quot;&gt;&lt;/span&gt;&lt;span second=&quot;bar&quot;&gt;&lt;/span&gt;&lt;/h1&gt;';
+
+var attrs = [];
+
+parser(html, {
+    attrStart: function(attrName){
+        attrs.push(attrName)
+    }
+});
+
+attrs //-&gt; [&quot;first&quot;, &quot;second&quot;]
+</code></pre>
+<h2>can-view-scope</h2>
+<p><a href="can-view-scope.html" title="Create a lookup node for keys.">can-view-scope</a> provides a lookup node within a contextual lookup. This is similar
+to a call object in closure in JavaScript.  Consider how <code>message</code>, <code>first</code>, and <code>last</code> are looked up in the following JavaScript:</p>
+<pre><code class="language-js">var message = &quot;Hello&quot;
+function outer(){
+    var last = &quot;Abril&quot;;
+
+    function inner(){
+        var first = &quot;Alexis&quot;;
+        console.log(message + &quot; &quot;+ first + &quot; &quot; + last);
+    }
+    inner();
+}
+outer();
+</code></pre>
+<p><a href="can-view-scope.html" title="Create a lookup node for keys.">can-view-scope</a> can be used to create a similar lookup path:</p>
+<pre><code class="language-js">var globalScope = new Scope({message: &quot;Hello&quot;});
+var outerScope = globalScope.add({last: &quot;Abril&quot;});
+var innerScope = outerScope.add({first: &quot;Alexis&quot;});
+innerScope.get(&quot;message&quot;) //-&gt; Hello
+innerScope.get(&quot;first&quot;)   //-&gt; Alexis
+innerScope.get(&quot;last&quot;)    //-&gt; Abril
+</code></pre>
+<h2>can-view-target</h2>
+<p><a href="can-view-target.html" title="">can-view-target</a> is used to create a document fragment that can be quickly cloned but
+have callbacks called quickly on specific elements within the cloned fragment.</p>
+<pre><code class="language-js">var viewTarget = require(&quot;can-view-target&quot;);
+
+var target = viewTarget([
+    {
+        tag: &quot;h1&quot;,
+        callbacks: [function(data){
+            this.className = data.className
+        }],
+        children: [
+            &quot;Hello &quot;,
+            function(){
+                this.nodeValue = data.message
+            }
+        ]
+    },
+]);
+
+// target.clone -&gt; &lt;h1&gt;|Hello||&lt;/h1&gt;
+// target.paths -&gt; path: [0], callbacks: [], children: {paths: [1], callbacks:[function(){}]}
+
+var frag = target.hydrate({className: &quot;title&quot;, message: &quot;World&quot;});
+
+frag //-&gt; &lt;h1 class='title'&gt;Hello World&lt;/h1&gt;
+</code></pre>
+<h2>can-cid</h2>
+<p><a href="can-cid.html" title="can-cid">can-cid</a> is used to get a unique identifier for an object, optionally prefixed by a type name. Once set, the unique identifier does not change, even if the type name changes on subsequent calls.</p>
+<pre><code class="language-js">var cid = require(&quot;can-cid&quot;);
+var x = {};
+var y = {};
+
+console.log(cid(x, &quot;demo&quot;)); // -&gt; &quot;demo1&quot;
+console.log(cid(x, &quot;prod&quot;)); // -&gt; &quot;demo1&quot;
+console.log(cid(y));         // -&gt; &quot;2&quot;
+</code></pre>
+<h2>can-types</h2>
+<p><a href="can-types.html" title="A stateful container for CanJS type information.">can-types</a> is used to provide default types or test if something is of a certain type.</p>
+<pre><code class="language-js">var types = require(&quot;can-types&quot;);
+var oldIsMapLike = types.isMapLike;
+types.isMapLike = function(obj){
+  return obj instanceof DefineMap || oldIsMapLike.apply(this, arguments);
+};
+types.DefaultMap = DefineMap;
+</code></pre>
+<h2>can-namespace</h2>
+<p><a href="can-namespace.html" title="Namespace where can-* packages are registered">can-namespace</a> is a namespace where can-* packages can be registered.</p>
+<pre><code class="language-js">var namespace = require('can-namespace');
+
+var unicorn = {
+    // ...
+};
+
+if (namespace.unicorn) {
+    throw new Error(&quot;You can't have two versions of can-unicorn, check your dependencies&quot;);
+} else {
+    module.exports = namespace.unicorn = unicorn;
+}
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"docs/can-canjs/can-infrastructure.md"},"description":"Utility libraries that power the core and ecosystem collection. \n","name":"can-infrastructure","title":"Infrastructure","type":"page","parent":"api","order":1,"comment":" ","pathToRoot":""};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="./static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="." />
+		
+	</body>
+</html>

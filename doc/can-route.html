@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@function can-route
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - can-route</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-component.html"
+							title="Create a custom element that can be used to manage widgets or application logic.">
+							can-component
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-compute.html"
+							title="Create an observable value.">
+							can-compute
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-connect.html"
+							title="can-connect provides persisted data middleware. Use it to assemble powerful model layers for any JavaScript project.">
+							can-connect
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define.html"
+							title="Exports the define method that defines observable properties and their behavior on a prototype object.">
+							can-define
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define/list/list.html"
+							title="Create observable lists.">
+							can-define/list/list
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-define/map/map.html"
+							title="Create observable objects.">
+							can-define/map/map
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="function"
+							href="can-route.html"
+							title="Manage browser history and client state by synchronizing the window.location.hash with a map.">
+							can-route
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>static</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.current.html"
+							title="Check if data represents the current route.">
+							current
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.data.html"
+							title="This is the internal map underlying can-route. It can be set in order to cross-bind a top level state object (Application ViewModel) to can-route.">
+							data
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.deparam.html"
+							title="Extract data from a route path.">
+							deparam
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.link.html"
+							title="Creates a string representation of an anchor link using data and the registered routes.">
+							link
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.matched.html"
+							title="A compute representing the currently matched route.">
+							matched
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.param.html"
+							title="Get a route path from given data.">
+							param
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.ready.html"
+							title="Initializes can-route.">
+							ready
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="can-route.url.html"
+							title="Creates a URL fragment based on registered routes given a set of data.">
+							url
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-route-pushstate.html"
+							title="Changes can-route to use pushstate
+to change the window&#x27;s pathname instead
+of the hash.
+var route = require(&quot;can-route-pushstate&quot;);
+
+route(&quot;{page}&quot;, { page: &quot;home&quot; });
+route.ready();
+
+route.attr(&quot;page&quot;, &quot;user&quot;);
+
+location.pathname; // -&gt; &quot;/user&quot;">
+							can-route-pushstate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-set.html"
+							title="can-set is a utility for comparing sets that are represented by the parameters commonly passed to service requests.">
+							can-set
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache.html"
+							title="Live binding Mustache and Handlebars-compatible templates.">
+							can-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache/helpers/route.html"
+							title="Adds stache helpers that use can-route.">
+							can-stache/helpers/route
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="can-stache-bindings.html"
+							title="Provides template event, one-way bindings, and two-way bindings.">
+							can-stache-bindings
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="can-core.html">Core</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="can-route.html">can-route</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>can-route</h1>
+			<ul class="title-social">
+				
+				<li>
+					<a class="npm-button" href="https://www.npmjs.com/package/can-route">
+						<img src="https://img.shields.io/badge/npm%20package-3.0.11-brightgreen.svg" alt="npm package badge" />
+					</a>
+				</li>
+				<li>
+					<a class="github-button nav-social" href="https://github.com/canjs/can-route">Star</a>
+				</li>
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-route/edit/master/can-route.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    <p>Manage browser history and client state by synchronizing the <code>window.location.hash</code> with a map.</p>
+
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>route(template [, defaults])</code>
+  </h2>
+  <p>Create a route matching rule. Optionally provide defaults that will be applied to the underlying map when the route matches.</p>
+<pre><code class="language-js">route(&quot;{page}&quot;, { page: &quot;home&quot; });
+</code></pre>
+<p>Will apply <strong>cart</strong> when the url is <code>#cart</code> and <strong>home</strong> when the url is <code>#</code>.</p>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>template</b> <code>{String}</code>: <p>the fragment identifier to match.  The fragment identifier should contain characters (a-Z), optionally wrapped in braces ( { } ). Identifiers wrapped in braces are interpreted as being properties on can-route's map. Examples:</p>
+<pre><code class="language-js">route(&quot;{foo}&quot;)
+route(&quot;foo/{bar}&quot;)
+</code></pre>
+</li>
+        
+          <li><b>defaults</b> <code>{Object}</code>: <p>An object of default values. These defaults are applied to can-route's map when the route is matched.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  <div class="returns">
+    <h3 class="returns-title">Returns</h3>
+     <p> <code>{<a href="can-route.html" title="Manage browser history and client state by synchronizing the window.location.hash with a map.">can-route</a>(template, defaults)}</code>: </p>
+  </div>
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<h2>Background information</h2>
+<p>To support the browser's back button and bookmarking in a JavaScript
+application, most applications use
+the <code>window.location.hash</code>.  By
+changing the hash (via a link or JavaScript),
+one is able to add to the browser's history
+without changing the page.</p>
+<p>This provides the basics needed to
+create history enabled single-page apps.  However,
+<code>route</code> addresses several other needs such as:</p>
+<ul>
+<li>Pretty urls.</li>
+<li>Keeping routes independent of application code.</li>
+<li>Listening to specific parts of the history changing.</li>
+<li>Setup / Teardown of widgets.</li>
+</ul>
+<h2>How it works</h2>
+<p>can-route is a map that represents the
+<code>window.location.hash</code> as an
+object.  For example, if the hash looks like:</p>
+<pre><code>#!type=videos&amp;id=5
+</code></pre>
+<p>the data in can-route looks like:</p>
+<pre><code>{ type: 'videos', id: 5 }
+</code></pre>
+<p>can-route keeps the state of the hash in-sync with the <code>data</code> contained within it.</p>
+<h2>data</h2>
+<p>Underlying can-route is an observable map: <code>route.data</code>. Depending on what type of map your application uses this could be a <a href="can-map.html" title="Create observable objects.">can-map</a>, a <a href="can-define/map/map.html" title="Create observable objects.">can-define/map/map</a>, or maybe even a <a href="can-simple-map.html" title="A performant live-bound map.">can-simple-map</a>.</p>
+<p>Understanding how maps work is essential to understanding can-route.</p>
+<p>You can listen to changes in a map with <code>on(eventName, handler(ev, args...))</code> and change can-route's properties by modifying <code>route.data</code>.</p>
+<h3>Listening to changes in can-route</h3>
+<p>Listen to changes in history by <a href="can-event.addEventListener.html" title="can-event.addEventListener">listening</a> to
+changes in can-route like:</p>
+<pre><code class="language-js">route.on('foo', function(ev, attr, how, newVal, oldVal) {
+    // Foo changed!
+})
+</code></pre>
+<ul>
+<li><code>attr</code> - the name of the changed attribute</li>
+<li><code>how</code> - the type of Observe change event (add, set or remove)</li>
+<li><code>newVal</code>/<code>oldVal</code> - the new and old values of the attribute</li>
+</ul>
+<h3>Updating can-route</h3>
+<p>When using a <a href="can-define/map/map.html" title="Create observable objects.">DefineMap</a> to back can-route, create changes in the route data by modifying it directly:</p>
+<pre><code class="language-js">route.data.type = 'image';
+</code></pre>
+<p>Or change multiple properties at once like:</p>
+<pre><code class="language-js">route.data.set({type: 'page', id: 5}, true);
+</code></pre>
+<p>When you make changes to can-route, they will automatically
+change the <code>hash</code>.</p>
+<p>If using <a href="can-map.html" title="Create observable objects.">can-map</a> or <a href="can-simple-map.html" title="A performant live-bound map.">can-simple-map</a> to back your route, update <code>route.data</code> using <code>attr</code>.</p>
+<h3>Encoded <code>/</code></h3>
+<p>If the change in your route data includes a <code>/</code>, the <code>/</code> will be encoded into <code>%2F</code>.
+You will see this result in the URL and <code>location.hash</code>.</p>
+<pre><code class="language-js">route.data.type = 'image/bar';
+// OR
+route.attr('type', 'image/bar');
+</code></pre>
+<p>The URL will look like this:</p>
+<pre><code>https://example.com/#!type=image%2Fbar
+</code></pre>
+<p>The location hash will look like this:</p>
+<pre><code>#!type=image%2Fbar
+</code></pre>
+<h2>Creating a route</h2>
+<p>Use <code>route(url, defaults)</code> to create a
+route. A route is a mapping from a url to
+an object (that is the route's state).
+In order to map to a specific properties in the url,
+prepend a colon to the name of the property like:</p>
+<pre><code class="language-js">route(&quot;#!content/{type}&quot;);
+</code></pre>
+<p>If no routes are added, or no route is matched,
+can-route's data is updated with the <a href="can-route.deparam.html" title="Extract data from a route path.">deparamed</a>
+hash.</p>
+<pre><code class="language-js">location.hash = &quot;#!type=videos&quot;;
+// route -&gt; {type : &quot;videos&quot;}
+</code></pre>
+<p>Once routes are added and the hash changes,
+can-route looks for matching routes and uses them
+to update can-route's data.</p>
+<pre><code class="language-js">route(&quot;#!content/{type}&quot;);
+location.hash = &quot;#!content/images&quot;;
+// route -&gt; {type : &quot;images&quot;}
+route.data.type = &quot;songs&quot;;
+// location.hash -&gt; &quot;#!content/songs&quot;
+</code></pre>
+<p>Default values can be added to a route:</p>
+<pre><code class="language-js">route(&quot;content/{type}&quot;,{type: &quot;videos&quot; });
+location.hash = &quot;#!content/&quot;
+// route -&gt; {type : &quot;videos&quot;}
+// location.hash -&gt; &quot;#!content/&quot;
+</code></pre>
+<p>Defaults can also be set on the root page of your app:</p>
+<pre><code class="language-js">route(&quot;&quot;, { page: &quot;index&quot; });
+location.hash = &quot;#!&quot;;
+// route -&gt; {page : &quot;index&quot;}
+// location.hash -&gt; &quot;#!&quot;
+</code></pre>
+<h2>Initializing can-route</h2>
+<p>After your application has created all of its routes, call <a href="can-route.ready.html" title="Initializes can-route.">ready</a>
+to set can-route's data to match the current hash:</p>
+<pre><code class="language-js">route.ready();
+</code></pre>
+<h2>Changing the route</h2>
+<p>Typically, you don't set <code>location.hash</code>
+directly. Instead, you can change properties on can-route
+like:</p>
+<pre><code class="language-js">route.data.type = 'videos';
+</code></pre>
+<p>This will automatically look up the appropriate
+route and update the hash.</p>
+<p>Often, you want to create links. can-route provides
+the <a href="can-route.link.html" title="Creates a string representation of an anchor link using data and the registered routes.">link</a> and <a href="can-route.url.html" title="Creates a URL fragment based on registered routes given a set of data.">url</a> helpers to make this
+easy:</p>
+<pre><code class="language-js">route.link(&quot;Videos&quot;, {type: 'videos'});
+</code></pre>
+<h2>Finding the matched route</h2>
+<p>The matched route is stored in the compute <code>route.matched</code> and is used to set the <code>window.location.hash</code>. The process can-route uses to find the matched route is:</p>
+<ul>
+<li>Find all routes with all of their map properties set</li>
+<li>If multiple routes are matched, find the route with the highest number of set properties</li>
+<li>If multiple routes are still matched, use the route that was registered first</li>
+</ul>
+<h3>Find all routes with all of their map properties set</h3>
+<p>In order for a route to be matched, all of the map properties it uses must be set. For example, in the following route, <code>page</code> and <code>section</code> must be set in order for this route to be matched:</p>
+<pre><code class="language-js">route('{page}/{section}');
+route.ready();
+
+route.data.page = 'contact';
+route.data.section = 'email';
+
+route.matched(); // &quot;{page}/{section}&quot;
+</code></pre>
+<p>If a route contains default values, these map properties must also be set to match the default value in order for the route to be matched:</p>
+<pre><code class="language-js">route('{page}', { section: 'email' });
+route.ready();
+
+route.data.page = 'contact';
+route.data.section = 'email';
+
+route.matched(); // &quot;{page}&quot;
+</code></pre>
+<h3>Find the route with the highest number of set properties</h3>
+<p>If multiple routes have all of their properties set, the route with the highest number of set properties will be used:</p>
+<pre><code class="language-js">route('{page}');
+route('{page}/{section}');
+route.ready();
+
+route.data.page = 'two';
+route.data.section = 'a';
+
+route.matched(); // &quot;{page}/{section}&quot;
+</code></pre>
+<h3>Find the route that was registered first</h3>
+<p>If multiple routes are still matched, the route that was registered first will be matched:</p>
+<pre><code class="language-js">route('', { page: 'home' });
+route('{section}');
+route.ready();
+
+route.data.page = 'home';
+route.data.section = 'a';
+
+route.matched(); // &quot;&quot;
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-route/can-route.md"},"description":"Manage browser history and client state by synchronizing the `window.location.hash` with a map. \r\n","title":"can-route\r","name":"can-route","parent":"can-core","type":"function","download":"can/route\r","test":"can-route/test.html","link":"../docco/route/route.html docco","package":{"author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bit-docs":{"dependencies":{"bit-docs-glob-finder":"^0.0.5","bit-docs-dev":"^0.0.3","bit-docs-js":"^0.0.3","bit-docs-generate-readme":"^0.0.8"},"glob":{"pattern":"**/*.{js,md}","ignore":"node_modules/**/*"},"readme":{"apis":"./docs/apis.json"},"parent":"can-route"},"bugs":{"url":"https://github.com/canjs/can-route/issues"},"dependencies":{"can-compute":"^3.0.0","can-deparam":"^1.0.1","can-event":"^3.0.1","can-namespace":"1.0.0","can-observation":"^3.0.1","can-param":"^1.0.1","can-simple-map":"^3.0.0","can-types":"^1.0.1","can-util":"^3.1.1"},"description":"[![Build Status](https://travis-ci.org/canjs/can-route.png?branch=master)](https://travis-ci.org/canjs/can-route)","devDependencies":{"bit-docs":"0.0.7","can-define":"^1.0.1","can-list":"^3.0.1","can-map":"^3.0.3","done-serve":"^0.2.0","donejs-cli":"^0.9.5","generator-donejs":"^0.9.0","jshint":"^2.9.1","steal":"^1.2.9","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.3.1"},"homepage":"https://github.com/canjs/can-route#readme","keywords":["canjs","canjs-plugin","donejs"],"main":"can-route","name":"can-route","repository":{"type":"git","url":"git://github.com/canjs/can-route.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","document":"bit-docs","jshint":"jshint ./*.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"steal":{"configDependencies":["live-reload"]},"version":"3.0.11"},"signatures":[{"code":"route(template [, defaults])","description":"\n\r\nCreate a route matching rule. Optionally provide defaults that will be applied to the underlying map when the route matches.\r\n\r\n```js\r\nroute(\"{page}\", { page: \"home\" });\r\n```\r\n\r\nWill apply **cart** when the url is `#cart` and **home** when the url is `#`.\r\n\r","params":[{"types":[{"type":"String"}],"name":"template","description":"the fragment identifier to match.  The fragment identifier should contain characters (a-Z), optionally wrapped in braces ( { } ). Identifiers wrapped in braces are interpreted as being properties on can-route's map. Examples:\r\n\r\n```js\r\nroute(\"{foo}\")\r\nroute(\"foo/{bar}\")\r\n```\r\n\r"},{"types":[{"type":"Object","options":[]}],"optional":true,"name":"defaults","description":"An object of default values. These defaults are applied to can-route's map when the route is matched.\r\n\r"}],"returns":{"types":[{"type":"can-route"}],"description":"\n\r"}}],"_curParam":{"types":[{"type":"Object","options":[]}],"optional":true,"name":"defaults","description":"An object of default values. These defaults are applied to can-route's map when the route is matched.\r\n\r"},"_curReturn":{"types":[{"type":"can-route"}],"description":"\n\r"},"comment":" ","pathToRoot":""};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="./static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix="." />
+		
+	</body>
+</html>

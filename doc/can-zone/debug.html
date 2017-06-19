@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: [object Object]
+	@module can-zone/debug
+######################################################################## -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CanJS - can-zone/debug</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<link rel="stylesheet" type="text/css" href="../static/bundles/bit-docs-site/static.css">
+		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../docs/images/canjs_favicon_57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../../docs/images/canjs_favicon_72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../../docs/images/canjs_favicon_114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../../docs/images/canjs_favicon_128x128.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../../docs/images/canjs_favicon_144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../../docs/images/canjs_favicon_152x152.png">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+	  	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+	
+	
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2302003-11', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+</head>
+	<body>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+		<label for="nav-trigger">Menu</label>
+	  	<div id="everything">
+  <div id="left" class="column">
+    <div class="top-left">
+      
+          <div class="brand">
+	<div class="logo">
+		<a href="../../index.html" alt="CanJS"></a>
+		<div class="dropdown project-dropdown">
+			<a href="https://donejs.com/">DoneJS</a>
+			<a href="https://stealjs.com/">StealJS</a>
+			<a href="https://jquerypp.com/">jQuery++</a>
+			<a href="https://funcunit.com/">FuncUnit</a>
+			<a href="https://documentjs.com/">DocumentJS</a>
+		</div>
+	</div>
+	<div class="version">
+		<div class="version-number">
+			3.8.1
+		</div>
+		<div class="dropdown version-dropdown">
+			
+				<a href="https://v2.canjs.com">2.3.27</a>
+			
+		</div>
+	</div>
+</div>
+<div class="search-bar">
+	<div class="search-wrap" style="display:none;">
+		<span class="search-icon"></span>
+		<input
+			type="text"
+			size="6"
+			class="search"
+			placeholder="Search"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="none"
+			spellcheck="false"/>
+			<span class="search-icon-cancel"></span>
+	</div>
+</div>
+
+
+      
+    </div>
+    <div class="bottom-left">
+       <div class="social-side-container">
+        <ul class="social-side">
+  <li>
+    <a class="header-mobile github" href="https://github.com/canjs/canjs" target="_blank"><img class="social-icon-small" src="../../docs/images/github.png">Github</a>
+  </li>
+  <li>
+    <a class="header-mobile twitter" href="https://twitter.com/canjs" target="_blank"><img class="social-icon-small" src="../../docs/images/twitter.png">Twitter</a>
+  </li>
+</ul>
+<ul class="social-side">
+  <li>
+    <a class="header-mobile" href="https://gitter.im/canjs/canjs" target="_blank">Chat</a>
+  </li>
+  <li>
+    <a class="header-mobile" href="http://forums.donejs.com/c/canjs" target="_blank">Forum</a>
+  </li>
+</ul>
+
+      </div>
+        
+            
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../about.html"
+							title="Welcome to CanJS! Learn about CanJS’s mission &amp; technical highlights, who uses CanJS, and our future roadmap.">
+							About
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../guides.html"
+							title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">
+							Guides
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../api.html"
+							title="Welcome to the CanJS docs! Learn about all the packages that make-up CanJS &amp; how they work together to help you build amazing applications!">
+							API Docs
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../can-core.html"
+							title="The best, most hardened and generally useful libraries in CanJS.">
+							Core
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../can-infrastructure.html"
+							title="Utility libraries that power the core and ecosystem collection.">
+							Infrastructure
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="page"
+							href="../can-ecosystem.html"
+							title="Useful libraries that extend or add important features to the core collection.">
+							Ecosystem
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-connect-cloneable.html"
+							title="Makes mutable clones of can-connected maps. Changes to the clone save back to the original, and changes to the original propogate to the clone.">
+							can-connect-cloneable
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-connect-feathers.html"
+							title="Integrate can-connect with the FeathersJS Client">
+							can-connect-feathers
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-connect-signalr.html"
+							title="Connect to a Hub on a
+SignalR server.">
+							can-connect-signalr
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-construct-super.html"
+							title="can.Construct.super is a plugin that makes it easier to call base
+functions from inside inheriting functions.">
+							can-construct-super
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-define-stream.html"
+							title="Add useful stream conversion methods to a supplied map or list constructor using a stream interface such as can-stream-kefir.">
+							can-define-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-define-stream-kefir.html"
+							title="Exports a function that takes a Type map or list and uses can-stream-kefir to create a streaming object">
+							can-define-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-define-validate-validatejs.html"
+							title="Adds validation methods and observables to a map using validate.js.">
+							can-define-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-fixture.html"
+							title="can-fixture intercepts an AJAX request and simulates the response with a file or function.">
+							can-fixture
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-fixture-socket.html"
+							title="Simulate socket.io services.">
+							can-fixture-socket
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-jquery.html"
+							title="Extensions to the event system so that can events and jQuery events are cross-bound.">
+							can-jquery
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-stache-converters.html"
+							title="Provides a set of converters useful for two-way binding with form elements such as &lt;input&gt; and &lt;select&gt;.">
+							can-stache-converters
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-stream.html"
+							title="Create useful stream methods from a minimal stream wrapper implementation.">
+							can-stream
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-stream-kefir.html"
+							title="Convert observable values into streams. Kefir is used to provide the stream functionality.">
+							can-stream-kefir
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-validate.html"
+							title="Shared utilities and type definitions to process validation errors.">
+							can-validate
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-validate-validatejs.html"
+							title="Create can-validate.validator functions using validate.js.">
+							can-validate-validatejs
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-vdom.html"
+							title="A browser-lite environment for Node.js or a worker thread.">
+							can-vdom
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-view-autorender.html"
+							title="A module that automatically renders script and other elements with
+the can-autorender attribute. This function is useful to know when the templates have finished rendering.">
+							can-view-autorender
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-view-import.html"
+							title="">
+							can-view-import
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						parent
+           						expanded">
+						<a class="module"
+							href="../can-zone.html"
+							title="">
+							can-zone
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li>
+						<span>types</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../can-zone.ZoneSpec.html"
+							title="A ZoneSpec is the way you tap into the lifecycle hooks of a Zone. The hooks are described below.
+Using these hooks you can do things like create timers and override global variables that will change the shape of code that runs within the Zone.">
+							ZoneSpec
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="../can-zone.makeZoneSpec.html"
+							title="A function that returns a can-zone.ZoneSpec object. This can be used any place where a can-zone.ZoneSpec is accepted.">
+							makeZoneSpec
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>static</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="../can-zone.current.html"
+							title="">
+							current
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.error.html"
+							title="">
+							error
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.ignore.html"
+							title="">
+							ignore
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.waitFor.html"
+							title="">
+							waitFor
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>prototype</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.prototype.addWait.html"
+							title="">
+							addWait
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="property"
+							href="../can-zone.prototype.data.html"
+							title="">
+							data
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.prototype.removeWait.html"
+							title="">
+							removeWait
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="function"
+							href="../can-zone.prototype.run.html"
+							title="">
+							run
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>plugins</span>
+						
+	<ul>
+		
+			
+				
+					<li class="current
+           						parent
+           						expanded">
+						<a class="module"
+							href="debug.html"
+							title="">
+							./debug
+						</a>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="typedef"
+							href="debug.DebugInfo.html"
+							title="An array of objects containing information useful for debugging. Gives you the name of the task that failed to complete and a stack trace of where the error occured.
+Each object has a shape of:
+{
+    &quot;task&quot;: &quot;setTimeout&quot;,
+    &quot;stack&quot;: Error ....&quot;
+}">
+							DebugInfo
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="timeout.html"
+							title="">
+							./timeout
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li>
+						<span>modules</span>
+						
+	<ul>
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="register.html"
+							title="In order to do it&#x27;s magic, can-zone has to register handlers for all of the common JavaScript async operations. If you have code (or a dependency with this code) that does:
+var st = setTimeout;
+
+And this module loads before can-zone, any time st is used we won&#x27;t be able to track that within the Zone.
+To work around this, can-zone/register is used as a script that you run before any other modules.
+In Node
+require(&quot;can-zone/register&quot;);
+
+At the top of your entry-point script.
+In the Browser
+You can either add a script tag above all others:
+&lt;script src=&quot;node_modules/can-zone/register.js&quot;&gt;&lt;/script&gt;
+
+Or, if you&#x27;re using a module loader / bundler, configure it so that can-zone/register is placed above all others in the bundle.">
+							./register
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../can-zone-storage.html"
+							title="Implement Zone-safe memory-based storage">
+							can-zone-storage
+						</a>
+						
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="module"
+							href="../steal-stache.html"
+							title="A StealJS extension that allows stache templates as dependencies.">
+							steal-stache
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../can-legacy.html"
+							title="Former libraries that we still accept patches for, but are not under active development.">
+							Legacy
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+					</li>
+				
+			
+		
+			
+				
+					<li class="
+           						
+           						">
+						<a class="page"
+							href="../community.html"
+							title="Get involved with one of the most inviting communities on the internet!">
+							Community
+						</a>
+						
+
+					</li>
+				
+			
+		
+	</ul>
+
+
+        
+        <div class="search-results-container">
+	<div class="search-results-wrap"></div>
+</div>
+
+    </div>
+  </div>
+  <div id="right" class="column">
+    <div class="top-right">
+      <div class="top-right-top">
+	<ul class="top-right-bitovi">
+	  	<li class="dropdown">
+	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<ul class="dropdown-menu">
+	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+	      		<li><a href="https://www.bitovi.com/design">Design</a></li>
+	      		<li><a href="https://www.bitovi.com/development">Development</a></li>
+	      		<li><a href="https://www.bitovi.com/training">Training</a></li>
+	      		<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+	      		<li><a href="https://www.bitovi.com/about">About</a></li>
+	      		<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+	    	</ul>
+	  	</li>
+	</ul>
+	<div class="brand">
+		<div class="logo">
+			<a href="../../index.html" alt="CanJS"></a>
+		</div>
+	</div>
+	<ul class="top-right-links">
+  <li>
+    <a href="https://gitter.im/canjs/canjs">Chat</a>
+  </li>
+  <li>
+    <a href="http://forums.donejs.com/c/canjs">Forum</a>
+  </li>
+  <li>
+    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-count-api="/repos/canjs/canjs#stargazers_count">Star</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </li>
+</ul>
+</div>
+<div class="breadcrumb">
+	
+		<li><a href="../../index.html">CanJS</a></li>
+		<li> / </li>
+	
+		<li><a href="../api.html">API Docs</a></li>
+		<li> / </li>
+	
+		<li><a href="../can-ecosystem.html">Ecosystem</a></li>
+		<li> / </li>
+	
+		<li><a href="../can-zone.html">can-zone</a></li>
+		<li> / </li>
+	
+	
+	<li><a href="debug.html">./debug</a></li>
+	
+	<li class="breadcrumb-dropdown-separator"> / </li>
+	<li class="breadcrumb-dropdown">
+		<a> On this page</a>
+		<ul class="on-this-page"></ul>
+	</li>
+	<div class="nav-toggle" title="Back to top"></div>
+</div>
+
+
+    </div>
+    <div class="bottom-right">
+      <article>
+  <section class="title">
+	<div class="page-type">
+		<h1>can-zone/debug</h1>
+			<ul class="title-social">
+				
+				
+				<li>
+					<a class="button-link" href="//github.com/canjs/can-zone/edit/master/docs/zones/debug.md">Edit on GitHub</a>
+				</li>
+				
+			</ul>
+	</div>
+	<div class="clear-both"></div>
+	
+  
+	<section class="description">
+    
+</section>
+
+  
+	
+</section>
+<section class="on-this-page-table">
+</section>
+
+
+
+
+
+
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>debug(ms)</code>
+  </h2>
+  <p>Creates a new <a href="../can-zone.ZoneSpec.html" title="A ZoneSpec is the way you tap into the lifecycle hooks of a Zone. The hooks are described below.
+Using these hooks you can do things like create timers and override global variables that will change the shape of code that runs within the Zone.">ZoneSpec</a> that can be provided to your Zone, timing out in <code>ms</code> (milliseconds).</p>
+<pre><code class="language-js">var Zone = require(&quot;can-zone&quot;);
+var debug = require(&quot;can-zone/debug&quot;);
+
+var zone = new Zone({
+    plugins: [debug(5000)]
+})
+.catch(function(err){
+    var info = zone.data.debugInfo;
+});
+</code></pre>
+<p>See the <a href="debug.DebugInfo.html" title="An array of objects containing information useful for debugging. Gives you the name of the task that failed to complete and a stack trace of where the error occured.
+Each object has a shape of:
+{
+&quot;task&quot;: &quot;setTimeout&quot;,
+&quot;stack&quot;: Error ....&quot;
+}">DebugInfo</a> type for a list of properties</p>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>ms</b> <code>{Number}</code>: <p>The timeout, in milliseconds, before the <a href="../can-zone.html" title="">Zone</a> will be rejected and debug information attached to the <a href="../can-zone.prototype.data.html" title="">zone's data</a> object.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  
+</div>
+
+
+<div class="signature">
+  <h2 class="signature-title">
+    <code>debug(timeoutZone)</code>
+  </h2>
+  <p>Like the previous signature, but directly pass it a <a href="timeout.html" title="">timeout ZoneSpec</a> object that you create yourself.</p>
+<pre><code class="language-js">var debug = require(&quot;can-zone/debug&quot;);
+var timeout = require(&quot;can-zone/timeout&quot;);
+
+var timeoutZone = timeout(5000);
+var debugZone = debug(timeoutZone):
+
+...
+</code></pre>
+
+  
+  <div class="parameters">
+    <h3 class="parameters-title">Parameters</h3>
+      <ol>
+        
+          <li><b>timeoutZone</b> <code>{<a href="timeout.html" title="">can-zone/timeout</a>}</code>: <p>A <a href="../can-zone.ZoneSpec.html" title="A ZoneSpec is the way you tap into the lifecycle hooks of a Zone. The hooks are described below.
+Using these hooks you can do things like create timers and override global variables that will change the shape of code that runs within the Zone.">ZoneSpec</a> created using the timeout plugin.</p>
+</li>
+        
+      </ol>
+  </div>
+  
+  
+  
+</div>
+
+
+
+
+
+  
+    <section class="body">
+    <h2>Use</h2>
+<p>The <strong>debug</strong> zone gives you information about which tasks failed to complete in case of a timeout. It is to be used with <a href="can-zone/timeout">./timeout.md</a>.</p>
+<p>When a timeout occurs the debug Zone will appending debug information to the Zone's <a href="https://github.com/canjs/can-zone/blob/master/docs/data.md">data</a> property, which can be retrieved when the Zone's promise is rejected:</p>
+<pre><code class="language-js">var debug = require(&quot;can-zone/debug&quot;);
+var Zone = require(&quot;can-zone&quot;);
+
+var zone = new Zone(debug(5000);
+
+zone.run(function(){
+
+    setTimeout(function(){}, 10000);
+
+}).catch(err){
+
+    var debugInfo = zone.data.debugInfo;
+
+});
+</code></pre>
+<h2>DebugInfo</h2>
+<p>The <strong>DebugInfo</strong> is an array of objects that contain information about which tasks failed to complete. Each object has a shape of:</p>
+<pre><code class="language-js">{
+    &quot;task&quot;: &quot;setTimeout&quot;,
+    &quot;stack&quot;: Error ....&quot;
+}
+</code></pre>
+<h3>DebugInfo[].task</h3>
+<p>A <em>string</em> identifier of the task that failed to complete. This can be any of the <a href="https://github.com/canjs/can-zone#tasks">asynchronous tasks</a> supported by can-zone like <code>setTimeout</code> or <code>Promise</code>.</p>
+<h3>DebugInfo[].stack</h3>
+<p>A <em>string</em> stack trace taken as a snapshot when the task was called. This allows you t see the source of the call to help debug why the task never completed.</p>
+<h2>debug(timeout)</h2>
+<p>Create a debug Zone by passing the debug function a timeout in milliseconds:</p>
+<pre><code class="language-js">var debug = require(&quot;can-zone/debug&quot;);
+var Zone = require(&quot;can-zone&quot;);
+
+new Zone({
+    plugins: [
+        debug(5000)
+    ]
+});
+</code></pre>
+<h2>debug(timeoutZone)</h2>
+<p>Create a debug Zone by passing in a timeout Zone that was already created:</p>
+<pre><code class="language-js">var timeout = require(&quot;can-zone/timeout&quot;);
+var debug = require(&quot;can-zone/debug&quot;);
+var Zone = require(&quot;can-zone&quot;);
+
+var timeoutZone = timeout(5000);
+var debugZone = debug(timeoutZone);
+
+new Zone({
+    plugins: [
+        timeoutZone,
+        debugZone
+    ]
+});
+</code></pre>
+
+</section>
+
+  
+
+
+<script type="text/javascript">
+  window.docObject = {"src":{"path":"node_modules/can-zone/docs/zones/debug.md"},"description":"\n","type":"module","title":"can-zone/debug","types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"name":"can-zone/debug","parent":"can-zone.plugins","signatures":[{"code":"debug(ms)","description":"\n\nCreates a new [can-zone.ZoneSpec] that can be provided to your Zone, timing out in `ms` (milliseconds).\n\n```js\nvar Zone = require(\"can-zone\");\nvar debug = require(\"can-zone/debug\");\n\nvar zone = new Zone({\n\tplugins: [debug(5000)]\n})\n.catch(function(err){\n\tvar info = zone.data.debugInfo;\n});\n```\n\nSee the [can-zone/debug.DebugInfo] type for a list of properties \n","params":[{"types":[{"type":"Number"}],"name":"ms","description":"The timeout, in milliseconds, before the [can-zone Zone] will be rejected and debug information attached to the [can-zone.prototype.data zone's data] object.\n"}]},{"code":"debug(timeoutZone)","description":"\n\nLike the previous signature, but directly pass it a [can-zone/timeout timeout ZoneSpec] object that you create yourself.\n\n```js\nvar debug = require(\"can-zone/debug\");\nvar timeout = require(\"can-zone/timeout\");\n\nvar timeoutZone = timeout(5000);\nvar debugZone = debug(timeoutZone):\n\n...\n```\n","params":[{"types":[{"type":"can-zone/timeout"}],"name":"timeoutZone","description":"A [can-zone.ZoneSpec] created using the timeout plugin.\n"}]}],"_curParam":{"types":[{"type":"can-zone/timeout"}],"name":"timeoutZone","description":"A [can-zone.ZoneSpec] created using the timeout plugin.\n"},"comment":" ","pathToRoot":".."};
+</script>
+</article>
+	  
+        <footer><p>CanJS is part of <a href="https://donejs.com" target="_blank">DoneJS</a>. Created and maintained by the core <a href="https://donejs.com/About.html#team" target="_blank">DoneJS team</a> and <a href="https://www.bitovi.com" target="_blank">Bitovi</a>. <strong>Currently 3.8.1.</strong></p>
+</footer>
+	      </div>
+  </div>
+</div>
+
+		
+			<script>
+				steal = {
+				  	instantiated: {
+				    	"bundles/bit-docs-site/static.css!$css" : null
+				  	}
+			  	};
+			</script>
+			<script type='text/javascript' data-main="bit-docs-site/static" src="../static/node_modules/steal/steal.production.js"></script>
+		
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+		<!-- root-level elements with attributes necessary for the app -->
+		<div path-prefix=".." />
+		
+	</body>
+</html>
