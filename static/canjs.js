@@ -40,7 +40,6 @@ var $articleContainer,
 		if (noModifierKeys && sameHostname && sameProtocol) {
 			ev.preventDefault();
 			var href = this.href;
-			window.history.pushState(null, null, href);
 			navigate(href);
 		}
 	});
@@ -92,7 +91,6 @@ function init() {
 	if (!searchControl) {
 		searchControl = new SearchControl(".search-bar", {
 			navigate: function(href){
-				window.history.pushState(null, null, href);
 				navigate(href);
 			},
 			pathPrefix: '/doc',
@@ -237,8 +235,11 @@ function navigate(href) {
 
 			init();
 			setDocTitle();
+
+			window.history.pushState(null, null, href);
 		},
 		error: function() {
+			window.history.pushState(null, null, href);
 			// just reload the page if this fails
 			window.location.reload();
 		},
