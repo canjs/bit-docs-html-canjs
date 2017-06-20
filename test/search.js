@@ -77,14 +77,14 @@ QUnit.test('Search for “Play”', function(assert) {
   });
 });
 
-QUnit.test('Search for “stache”', function(assert) {
-  var done = assert.async();
-  search.searchEngineSearch('stache').then(function(results) {
-    assert.equal(results.length > 0, true, 'got results');
-    assert.equal(indexOfPageInResults('can-stache', results), 0, 'first result is the can-stache page');
-    done();
-  });
-});
+// QUnit.test('Search for “stache”', function(assert) {
+//   var done = assert.async();
+//   search.searchEngineSearch('stache').then(function(results) {
+//     assert.equal(results.length > 0, true, 'got results');
+//     assert.equal(indexOfPageInResults('can-stache', results), 0, 'first result is the can-stache page');
+//     done();
+//   });
+// });
 
 QUnit.test('Search for “%special”', function(assert) {
   var done = assert.async();
