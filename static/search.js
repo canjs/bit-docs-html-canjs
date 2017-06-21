@@ -463,21 +463,6 @@ var Search = Control.extend({
 				self.clear();
 			});
 		}
-
-		// if we click the list item, navigate
-		// if the target element is an anchor tag, simply clear
-		if(this.$resultsContainer && this.$resultsContainer.length){
-			this.$resultsContainer.on("click.search-component", ".search-results > ul > li", function(ev){
-				var $target = $(ev.target),
-						$a;
-
-				if(!$target.is("a")){
-					$a = $target.closest("li").find("a");
-					self.navigate($a.attr("href"));
-					return;
-				}
-			});
-		}
 	},
 	unbindResultsEvents: function(){
 		//hide the search on cancel click
