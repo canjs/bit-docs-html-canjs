@@ -93,7 +93,7 @@ function init() {
 			navigate: function(href){
 				navigate(href);
 			},
-			pathPrefix: '/doc',
+			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
 		});
 	}
@@ -236,7 +236,12 @@ function navigate(href) {
 			init();
 			setDocTitle();
 
-			window.history.pushState(null, null, href);
+			searchControl.options.pathPrefix = window.pathPrefix;
+			if(searchControl.searchResultsCache){
+				searchControl.renderSearchResults(searchControl.searchResultsCache);
+			}
+      
+      window.history.pushState(null, null, href);
 		},
 		error: function() {
 			window.history.pushState(null, null, href);
