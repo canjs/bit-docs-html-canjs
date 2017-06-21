@@ -277,7 +277,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
 
             // Sort by docObject "ordered" property
             ordered.sort(function(x,y) {
-                return x.docObject.order > y.docObject.order;
+                return x.docObject.order - y.docObject.order;
             });
 
             // Insert ordered items to their index in the alphabetical array

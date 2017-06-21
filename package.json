@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
@@ -35,7 +35,7 @@
     "escape-html": "^1.0.3",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
-    "lunr": "^2.0.3",
+    "lunr": "^2.1.0",
     "steal-stache": "^3.0.1",
     "unescape-html": "^1.0.0"
   },

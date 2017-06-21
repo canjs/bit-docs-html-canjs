@@ -1,8 +1,8 @@
 <section class="title">
 	<div class="page-type">
 		<h1>{{getTitle .}}</h1>
-		{{#if package}}
 			<ul class="title-social">
+				{{#if package}}
 				<li>
 					<a class="npm-button" href="https://www.npmjs.com/package/{{package.name}}">
 						<img src="{{badgeLink package.version}}" alt="npm package badge" />
@@ -11,13 +11,13 @@
 				<li>
 					<a class="github-button nav-social" href="https://github.com/canjs/{{repoName src.path}}">Star</a>
 				</li>
+				{{/if}}
 				{{#if src.path}}
 				<li>
 					<a class="button-link" href="{{sourceLink src (repoName src.path)}}">Edit on GitHub</a>
 				</li>
 				{{/if}}
 			</ul>
-		{{/if}}
 	</div>
 	<div class="clear-both"></div>
 	{{#unless hideDescription}}

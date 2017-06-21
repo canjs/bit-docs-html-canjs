@@ -95,7 +95,7 @@ function init() {
 				window.history.pushState(null, null, href);
 				navigate(href);
 			},
-			pathPrefix: '/doc',
+			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
 		});
 	}
@@ -201,7 +201,7 @@ function navigate(href) {
 			ga('send', 'pageview', window.location.pathname);
 
 			// set new content
-			var $content = $(content.match(/<body>(\r|\n|.)+<\/body>/g)[0]);
+			var $content = $(content.match(/<body.*?>[\s\S]+<\/body>/g)[0]);
 			if (!$content.length) {
 				window.location.reload();
 			}
@@ -244,6 +244,11 @@ function navigate(href) {
 
 			init();
 			setDocTitle();
+
+			searchControl.options.pathPrefix = window.pathPrefix;
+			if(searchControl.searchResultsCache){
+				searchControl.renderSearchResults(searchControl.searchResultsCache);
+			}
 		},
 		error: function() {
 			// just reload the page if this fails
