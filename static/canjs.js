@@ -194,7 +194,7 @@ function navigate(href) {
 			ga('send', 'pageview', window.location.pathname);
 
 			// set new content
-			var $content = $(content.match(/<body>(\r|\n|.)+<\/body>/g)[0]);
+			var $content = $(content.match(/<body.*?>[\s\S]+<\/body>/g)[0]);
 			if (!$content.length) {
 				window.location.reload();
 			}
