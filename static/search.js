@@ -636,7 +636,7 @@ var Search = Control.extend({
 		//if no currently active result,
 		//  activate the first one
 		if(!this.$activeResult){
-			this.activateResult(this.$resultsList.find("li").first());
+			this.activateResult(this.$resultsList.find("li").first(), true);
 			return;
 		}
 
@@ -645,10 +645,10 @@ var Search = Control.extend({
 		//if no next result,
 		//  activate the first one
 		if(!$nextResult || ($nextResult && !$nextResult.length)){
-			this.activateResult(this.$resultsList.find("li").first());
+			this.activateResult(this.$resultsList.find("li").first(), true);
 			return;
 		}
-		this.activateResult($nextResult);
+		this.activateResult($nextResult, true);
 	},
 	// function activateNextResult
 	// finds the previous result in the results to activate
@@ -665,7 +665,7 @@ var Search = Control.extend({
 		//if no currently active result,
 		//  activate the last one
 		if(!this.$activeResult){
-			this.activateResult(this.$resultsList.find("li").last());
+			this.activateResult(this.$resultsList.find("li").last(), false);
 			return;
 		}
 
@@ -674,25 +674,32 @@ var Search = Control.extend({
 		//if no prev result,
 		//  activate the last one
 		if(!$prevResult || ($prevResult && !$prevResult.length)){
-			this.activateResult(this.$resultsList.find("li").last());
+			this.activateResult(this.$resultsList.find("li").last(), false);
 			return;
 		}
-		this.activateResult($prevResult);
+		this.activateResult($prevResult, false);
 	},
 
 	// function activateResult
 	// sets property and adds class to active result
-	activateResult: function($result){
+	activateResult: function($result, next){
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
 		var activeResultOffset = this.getActiveResultOffset();
 
-		this.$resultsContainer.scrollTop(
-			(this.$activeResult.position().top + this.$activeResult.outerHeight()) - 
-			(activeResultOffset + this.$resultsContainer.height())
-		);
+		if(next){
+			this.$resultsContainer.scrollTop(
+				(this.$activeResult.position().top + this.$activeResult.outerHeight()) - 
+				(activeResultOffset + this.$resultsContainer.height())
+			);
+		}else{
+			var top = this.$activeResult.position().top;
+			if(top < 0){
+				this.$resultsContainer.scrollTop(top - activeResultOffset);
+			}
+		}
 	},
 
 	// function deactivateResult
