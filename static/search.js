@@ -684,7 +684,7 @@ var Search = Control.extend({
 	// sets property and adds class to active result
 	activateResult: function($result){
 		// Get position top of last active element
-		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top) || 0;
+		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top || 0);
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
@@ -700,10 +700,11 @@ var Search = Control.extend({
 			var isBellow = activeResultPosTop > resultsContainerHeight;
 			
 			if(isBellow){
+				// Scroll down to active result
 				this.$resultsContainer.scrollTop(
-					// Active result's position top less the outer height of the active result
+					// Calculate active result's position bottom
 					(activeResultPosTop + this.$activeResult.outerHeight()) - 
-					// First results position top plus result container's height
+					// Calculate the current scrolled position of the bottom of the list
 					(this.getActiveResultOffset() + resultsContainerHeight)
 				);
 			}
