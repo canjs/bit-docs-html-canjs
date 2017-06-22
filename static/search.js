@@ -682,22 +682,22 @@ var Search = Control.extend({
 
 	// function activateResult
 	// sets property and adds class to active result
-	activateResult: function($result, next){
+	activateResult: function($result, down){
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
 		var activeResultOffset = this.getActiveResultOffset();
 
-		if(next){
+		if(down){
 			this.$resultsContainer.scrollTop(
 				(this.$activeResult.position().top + this.$activeResult.outerHeight()) - 
 				(activeResultOffset + this.$resultsContainer.height())
 			);
 		}else{
-			var top = this.$activeResult.position().top;
+			var top = parseInt(this.$activeResult.position().top);
 			if(top < 0){
-				this.$resultsContainer.scrollTop(top - activeResultOffset);
+				this.$resultsContainer.scrollTop(this.$resultsContainer.scrollTop() + top);
 			}
 		}
 	},
