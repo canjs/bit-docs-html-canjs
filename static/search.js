@@ -636,7 +636,7 @@ var Search = Control.extend({
 		//if no currently active result,
 		//  activate the first one
 		if(!this.$activeResult){
-			this.activateResult(this.$resultsList.find("li").first(), true);
+			this.activateResult(this.$resultsList.find("li").first());
 			return;
 		}
 
@@ -645,10 +645,10 @@ var Search = Control.extend({
 		//if no next result,
 		//  activate the first one
 		if(!$nextResult || ($nextResult && !$nextResult.length)){
-			this.activateResult(this.$resultsList.find("li").first(), true);
+			this.activateResult(this.$resultsList.find("li").first());
 			return;
 		}
-		this.activateResult($nextResult, true);
+		this.activateResult($nextResult);
 	},
 	// function activateNextResult
 	// finds the previous result in the results to activate
@@ -665,7 +665,7 @@ var Search = Control.extend({
 		//if no currently active result,
 		//  activate the last one
 		if(!this.$activeResult){
-			this.activateResult(this.$resultsList.find("li").last(), false);
+			this.activateResult(this.$resultsList.find("li").last());
 			return;
 		}
 
@@ -674,30 +674,46 @@ var Search = Control.extend({
 		//if no prev result,
 		//  activate the last one
 		if(!$prevResult || ($prevResult && !$prevResult.length)){
-			this.activateResult(this.$resultsList.find("li").last(), false);
+			this.activateResult(this.$resultsList.find("li").last());
 			return;
 		}
-		this.activateResult($prevResult, false);
+		this.activateResult($prevResult);
 	},
 
 	// function activateResult
 	// sets property and adds class to active result
-	activateResult: function($result, down){
+	activateResult: function($result){
+		// Get position top of last active element
+		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top) || 0;
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
-		var activeResultOffset = this.getActiveResultOffset();
-
-		if(down){
-			this.$resultsContainer.scrollTop(
-				(this.$activeResult.position().top + this.$activeResult.outerHeight()) - 
-				(activeResultOffset + this.$resultsContainer.height())
-			);
+		// Get position top of current active element
+		var activeResultPosTop = parseInt(this.$activeResult.position().top);
+		
+		// If last result's position top is less than active result's position top,
+		// we know we are moving downward
+		if(lastResultPosTop < this.$activeResult.position().top){
+			var resultsContainerHeight = this.$resultsContainer.height();
+			// If active result's position top is greater than results container's height,
+			// we know the active result is bellow our view and we must scroll up
+			if(activeResultPosTop > resultsContainerHeight){
+				this.$resultsContainer.scrollTop(
+					// Active result's position top less the outer height of the active result
+					(activeResultPosTop + this.$activeResult.outerHeight()) - 
+					// First results position top plus result container's height
+					(this.getActiveResultOffset() + resultsContainerHeight)
+				);
+			}
 		}else{
-			var top = parseInt(this.$activeResult.position().top);
-			if(top < 0){
-				this.$resultsContainer.scrollTop(this.$resultsContainer.scrollTop() + top);
+			// If active result's position top is less than 0,
+			// We know the active result is above our view and we must scroll down
+			if(activeResultPosTop < 0){
+				this.$resultsContainer.scrollTop(
+					this.$resultsContainer.scrollTop() + 
+					activeResultPosTop
+				);
 			}
 		}
 	},
