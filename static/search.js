@@ -682,32 +682,37 @@ var Search = Control.extend({
 
 		// Get position top of current active element
 		var activeResultPosTop = parseInt(this.$activeResult.position().top);
+		var resultsContainerHeight = this.$resultsContainer.height();
 
 		var isMovingDown = lastResultPosTop < this.$activeResult.position().top;
-		
-		if(isMovingDown){
-			var resultsContainerHeight = this.$resultsContainer.height();
+		var isBellow = activeResultPosTop > resultsContainerHeight;
+		var isAbove = activeResultPosTop < 0;
 
-			var isBellow = activeResultPosTop > resultsContainerHeight;
-			
+		if(isMovingDown){
 			if(isBellow){
-				// Scroll down to active result
-				this.$resultsContainer.scrollTop(
-					// Calculate active result's position bottom
-					(activeResultPosTop + this.$activeResult.outerHeight()) - 
-					// Calculate the current scrolled position of the bottom of the list
-					(this.getActiveResultOffset() + resultsContainerHeight)
-				);
+				this.resetScrollToBottom(activeResultPosTop, resultsContainerHeight);
 			}
 		}else{
-			var isAbove = activeResultPosTop < 0;
 			if(isAbove){
-				this.$resultsContainer.scrollTop(
-					this.$resultsContainer.scrollTop() + 
-					activeResultPosTop
-				);
+				this.resetScrollToTop(activeResultPosTop);
 			}
 		}
+	},
+
+	resetScrollToTop: function(activeResultPosTop){
+		this.$resultsContainer.scrollTop(
+			this.$resultsContainer.scrollTop() + 
+			activeResultPosTop
+		);
+	},
+
+	resetScrollToBottom: function(activeResultPosTop, resultsContainerHeight){
+		// Calculate active result's position bottom
+		var scrollTo = (activeResultPosTop + this.$activeResult.outerHeight()) - 
+		// Calculate the current scrolled position of the bottom of the list
+		(this.getActiveResultOffset() + resultsContainerHeight);
+
+		this.$resultsContainer.scrollTop(scrollTo);
 	},
 
 	// function deactivateResult
