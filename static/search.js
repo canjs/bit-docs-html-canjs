@@ -691,14 +691,15 @@ var Search = Control.extend({
 
 		// Get position top of current active element
 		var activeResultPosTop = parseInt(this.$activeResult.position().top);
+
+		var isMovingDown = lastResultPosTop < this.$activeResult.position().top;
 		
-		// If last result's position top is less than active result's position top,
-		// we know we are moving downward
-		if(lastResultPosTop < this.$activeResult.position().top){
+		if(isMovingDown){
 			var resultsContainerHeight = this.$resultsContainer.height();
-			// If active result's position top is greater than results container's height,
-			// we know the active result is bellow our view and we must scroll up
-			if(activeResultPosTop > resultsContainerHeight){
+
+			var isBellow = activeResultPosTop > resultsContainerHeight;
+			
+			if(isBellow){
 				this.$resultsContainer.scrollTop(
 					// Active result's position top less the outer height of the active result
 					(activeResultPosTop + this.$activeResult.outerHeight()) - 
@@ -707,9 +708,8 @@ var Search = Control.extend({
 				);
 			}
 		}else{
-			// If active result's position top is less than 0,
-			// We know the active result is above our view and we must scroll down
-			if(activeResultPosTop < 0){
+			var isAbove = activeResultPosTop < 0;
+			if(isAbove){
 				this.$resultsContainer.scrollTop(
 					this.$resultsContainer.scrollTop() + 
 					activeResultPosTop
