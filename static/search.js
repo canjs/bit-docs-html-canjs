@@ -684,18 +684,16 @@ var Search = Control.extend({
 		var activeResultPosTop = parseInt(this.$activeResult.position().top);
 		var resultsContainerHeight = this.$resultsContainer.height();
 
+		// Detect if the user is arrowing down
 		var isMovingDown = lastResultPosTop < this.$activeResult.position().top;
-		var isBellow = activeResultPosTop > resultsContainerHeight;
+		var isBelow = activeResultPosTop > resultsContainerHeight;
 		var isAbove = activeResultPosTop < 0;
 
-		if(isMovingDown){
-			if(isBellow){
-				this.resetScrollToBottom(activeResultPosTop, resultsContainerHeight);
-			}
-		}else{
-			if(isAbove){
-				this.resetScrollToTop(activeResultPosTop);
-			}
+		if(isMovingDown && isBelow){
+			this.resetScrollToBottom(activeResultPosTop, resultsContainerHeight);
+		}
+		else if(isAbove){
+			this.resetScrollToTop(activeResultPosTop);
 		}
 	},
 
