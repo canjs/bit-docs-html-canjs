@@ -59,6 +59,7 @@ var Search = Control.extend({
 
 	storageFallback: {},
 	useLocalStorage: false,
+	searchResultsCache: null,
 
 	// ---- END PROPERTIES ---- //
 
@@ -462,21 +463,6 @@ var Search = Control.extend({
 				self.clear();
 			});
 		}
-
-		// if we click the list item, navigate
-		// if the target element is an anchor tag, simply clear
-		if(this.$resultsContainer && this.$resultsContainer.length){
-			this.$resultsContainer.on("click.search-component", ".search-results > ul > li", function(ev){
-				var $target = $(ev.target),
-						$a;
-
-				if(!$target.is("a")){
-					$a = $target.closest("li").find("a");
-					self.navigate($a.attr("href"));
-					return;
-				}
-			});
-		}
 	},
 	unbindResultsEvents: function(){
 		//hide the search on cancel click
@@ -502,40 +488,45 @@ var Search = Control.extend({
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
 			self.searchEngineSearch(value).then(function(results) {
-				var numResults = results.length;
-				if (numResults > 50) {
-					numResults = '50+';
-					results = results.slice(0, 50);
-				}
-				var resultsFrag = self.options.resultsRenderer({
-					results: results,
-					numResults: numResults,
-					searchValue:value,
-					pathPrefix: (self.options.pathPrefix === '.') ? '' : '/' + self.options.pathPrefix + '/'
-				},{
-					docUrl: function(){
-						if(self.options.pathPrefix){
-							return self.options.pathPrefix + "/" + this.url;
-						}
-				
-						if(this.url.substr(-1) === "/"){
-							return this.url;
-						}
-
-						return "/" + this.url;
-					}
-				});
-
-				self.$resultsWrap.empty();
-				self.$resultsWrap[0].appendChild(resultsFrag);
-
-				//refresh necessary dom
-				self.$resultsList = null;
-				if(numResults){
-					self.$resultsList = self.$resultsWrap.find(".search-results > ul");
-				}
+				self.searchResultsCache = results;
+				self.renderSearchResults(results);
 			});
 		}, this.options.searchTimeout);
+	},
+
+	renderSearchResults: function(results){
+		var self = this;
+		var numResults = results.length;
+		if (numResults > 50) {
+			numResults = '50+';
+			results = results.slice(0, 50);
+		}
+		var resultsFrag = this.options.resultsRenderer({
+			results: results,
+			numResults: numResults,
+			searchValue: this.searchTerm
+		},{
+			docUrl: function(){
+				if(self.options.pathPrefix){
+					return self.options.pathPrefix + "/" + this.url;
+				}
+
+				if(this.url.substr(-1) === "/"){
+					return this.url;
+				}
+
+				return "/" + this.url;
+			}
+		});
+
+		this.$resultsWrap.empty();
+		this.$resultsWrap[0].appendChild(resultsFrag);
+
+		//refresh necessary dom
+		this.$resultsList = null;
+		if(numResults){
+			this.$resultsList = this.$resultsWrap.find(".search-results > ul");
+		}
 	},
 
 	// ---- SHOW/HIDE ---- //
