@@ -14,6 +14,8 @@ var $articleContainer,
 	$headers,
 	$nav,
 	$pathPrefix,
+	$navTrigger,
+	$navLabel,
 	headerHidden,
 	animating,
 	navigating,
@@ -42,6 +44,18 @@ var $articleContainer,
 			var href = this.href;
 			navigate(href);
 		}
+	}).on('keyup', 'input[type="checkbox"]', function(e){
+		var $target = $(e.target);
+		if(e.keyCode == 13 && $target.is(document.activeElement)){
+			$target.prop('checked', !$target.prop('checked'));
+			$target.trigger('change');
+		}
+	});
+
+	$navTrigger.focus(function(){
+		$navTrigger.siblings('label').addClass('active');
+	}).blur(function(){
+		$navTrigger.siblings('label').removeClass('active');
 	});
 
 	// Back/Forward navigation
@@ -73,6 +87,7 @@ function init() {
 	// Set state
 	$articleContainer = $('#right .bottom-right');
 	$onThisPage = $('.on-this-page');
+	$navTrigger = $('#nav-trigger');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
 	$tableOfContents = $('.on-this-page-table');
 	$everything = $('#everything');
