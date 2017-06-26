@@ -76,6 +76,8 @@ var $articleContainer,
 	setInterval(function() {
 		toggleNav();
 	}, 200);
+	
+	scrollToCurrentMenuItem();
 })();
 
 // Touch support
@@ -114,6 +116,13 @@ function init() {
 	}
 
 	hasShownSearch = true;
+}
+
+function scrollToCurrentMenuItem(){
+	var currentPageLi = $('li.current');
+	if(currentPageLi.length){
+		$('.bottom-left').scrollTop(currentPageLi.offset().top - $('.bottom-left').offset().top);
+	}
 }
 
 function setPathPrefix(){
