@@ -23,7 +23,7 @@
 @media screen and (min-width: @breakpoint) {
 	.getting-started-icons {
 		& .or-separator {
-			height: 150px;
+			height: 100px;
 			width: 100px;
 			margin-top: 100px;
 			display: flex;
@@ -38,17 +38,21 @@
 			}
 			& > ul {
 				display: flex;
-				flex-direction: column;
+				flex-direction: row;
 				justify-content: space-between;
 				list-style: none;
 				padding-left: 0;
 				& > li {
+					margin-right: 35px;
 					text-align: center;
+					&:last-child{
+						margin-right: 0;
+					}
 					& > a {
 						color: #000;
 						& > div {
-							height: 150px;
-							width: 225px;
+							height: 100px;
+							width: 150px;
 							border: 1px solid #eee;
 							display: flex;
 							justify-content: center;
@@ -66,12 +70,17 @@
 }
 
 @media screen and (min-width: 1300px) {
-	.getting-started-icons > .titled-list > ul {
-		flex-direction: row;
-		& > li {
-			margin-right: 35px;
-			&:last-child{
-				margin-right: 0;
+	.getting-started-icons > {
+		& .or-separator {
+			height: 150px;
+			width: 100px;
+			margin-top: 100px;
+		}
+		& .titled-list > ul > li {
+			margin-right: 15px;
+			& > a > div {
+				height: 150px;
+				width: 225px;
 			}
 		}
 	}
