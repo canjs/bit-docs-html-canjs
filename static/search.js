@@ -674,13 +674,43 @@ var Search = Control.extend({
 	// function activateResult
 	// sets property and adds class to active result
 	activateResult: function($result){
+		// Get position top of last active element
+		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top || 0, 10);
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
-		var activeResultOffset = this.getActiveResultOffset();
+		// Get position top of current active element
+		var activeResultPosTop = parseInt(this.$activeResult.position().top);
+		var resultsContainerHeight = this.$resultsContainer.height();
 
-		this.$resultsContainer.scrollTop(this.$activeResult.position().top - activeResultOffset);
+		// Detect if the user is arrowing down
+		var isMovingDown = lastResultPosTop < this.$activeResult.position().top;
+		var isBelow = activeResultPosTop > resultsContainerHeight;
+		var isAbove = activeResultPosTop < 0;
+
+		if(isMovingDown && isBelow){
+			this.resetScrollToBottom(activeResultPosTop, resultsContainerHeight);
+		}
+		else if(isAbove){
+			this.resetScrollToTop(activeResultPosTop);
+		}
+	},
+
+	resetScrollToTop: function(activeResultPosTop){
+		this.$resultsContainer.scrollTop(
+			this.$resultsContainer.scrollTop() + 
+			activeResultPosTop
+		);
+	},
+
+	resetScrollToBottom: function(activeResultPosTop, resultsContainerHeight){
+		// Calculate active result's position bottom
+		var scrollTo = (activeResultPosTop + this.$activeResult.outerHeight()) - 
+		// Calculate the current scrolled position of the bottom of the list
+		(this.getActiveResultOffset() + resultsContainerHeight);
+
+		this.$resultsContainer.scrollTop(scrollTo);
 	},
 
 	// function deactivateResult

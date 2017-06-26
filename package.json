@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "1.0.3",
+  "version": "1.0.3-pre.1",
   "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "bit-docs-generate-html": "^0.6.0",
-    "bit-docs-generate-searchmap": "^0.1.1",
+    "bit-docs-generate-searchmap": "^0.1.2",
     "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
     "normalize.css": "^5.0.0",
