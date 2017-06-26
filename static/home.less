@@ -1,0 +1,87 @@
+@import "mixins.less";
+
+@media screen and (max-width: @breakpoint) {
+	.getting-started-icons {
+		& > .or-separator {
+			display: none;
+		}
+		& > .titled-list {
+			& > h3 {
+				display: none;
+			}
+			& > ul {
+				margin: 0;
+				.icon-list;
+				& > li > a > div {
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: @breakpoint) {
+	.getting-started-icons {
+		& .or-separator {
+			height: 100px;
+			width: 100px;
+			margin-top: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			float: left;
+		}
+		& > .titled-list {
+			float: left;
+			& > h3 {
+				border-bottom: none;
+			}
+			& > ul {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				list-style: none;
+				padding-left: 0;
+				& > li {
+					margin-right: 35px;
+					text-align: center;
+					&:last-child{
+						margin-right: 0;
+					}
+					& > a {
+						color: #000;
+						& > div {
+							height: 100px;
+							width: 150px;
+							border: 1px solid #eee;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							& > img {
+								max-height: 70%;
+								color: @link-color;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1300px) {
+	.getting-started-icons > {
+		& .or-separator {
+			height: 150px;
+			width: 100px;
+			margin-top: 100px;
+		}
+		& .titled-list > ul > li {
+			margin-right: 15px;
+			& > a > div {
+				height: 150px;
+				width: 225px;
+			}
+		}
+	}
+}
