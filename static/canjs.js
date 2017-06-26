@@ -62,6 +62,8 @@ var $articleContainer,
 	setInterval(function() {
 		toggleNav();
 	}, 200);
+	
+	scrollToCurrentMenuItem();
 })();
 
 // Touch support
@@ -87,7 +89,6 @@ function init() {
 	buildTOC();
 	setNavToggleListener();
 	setScrollPosition();
-	scrollToCurrentMenuItem();
 
 	if (!searchControl) {
 		searchControl = new SearchControl(".search-bar", {
