@@ -675,7 +675,7 @@ var Search = Control.extend({
 	// sets property and adds class to active result
 	activateResult: function($result){
 		// Get position top of last active element
-		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top || 0);
+		var lastResultPosTop = parseInt(this.$activeResult && this.$activeResult.position().top || 0, 10);
 		this.deactivateResult();
 		this.$activeResult = $result;
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
