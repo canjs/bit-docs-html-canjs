@@ -18,12 +18,14 @@
         <li>
           <a href="{{docUrl}}" title="{{result.name}}" class="result-name">
             {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
-          
+
 
             {{#if result.title}}
-            <span class="name">
-              ({{result.name}})
-            </span>
+              {{^eq result.name result.title}}
+                <span class="name">
+                  {{result.name}}
+                </span>
+              {{/eq}}
             {{/if}}
 
             {{#if result.description}}
