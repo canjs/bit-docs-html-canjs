@@ -79,40 +79,48 @@ img.social-icon-small{
 		color: darken(@link-color,10%);
 	}
 	// Highest parent level
-	> ul {
-		padding-left: 0;
-		> li {
-			list-style: none;
-			list-style-type: none;
-			padding: 0;
-			.border-bottom;
-			> a {
-				font-size: 110%;
-				padding-bottom: @gutter;
-				padding-top: @gutter;
-			}
-			&.expanded > a {
-				padding-bottom: @gutter/3;
-			}
-			// Second level
-			> ul {
+	.nav-menu { 
+		height: inherit;
+		overflow-y: scroll;
+		& > .scrollable-contents {
+			padding: @gutter*2;
+			& > ul {
+				padding: 0;
+				height: inherit;
 				> li {
+					list-style: none;
+					list-style-type: none;
+					padding: 0;
+					.border-bottom;
 					> a {
+						font-size: 110%;
+						padding-bottom: @gutter;
+						padding-top: @gutter;
+					}
+					&.expanded > a {
 						padding-bottom: @gutter/3;
-						padding-top: @gutter/3;
 					}
-					&.expanded {
-						> a {
-							padding-bottom: @gutter/2;
-							margin-left: -1px;
-						}
-					}
-					 //Third level
+					// Second level
 					> ul {
-						border-left: 1px solid @border-color;
-						li {
-							ul {
-								margin-top: @gutter/3;
+						> li {
+							> a {
+								padding-bottom: @gutter/3;
+								padding-top: @gutter/3;
+							}
+							&.expanded {
+								> a {
+									padding-bottom: @gutter/2;
+									margin-left: -1px;
+								}
+							}
+							//Third level
+							> ul {
+								border-left: 1px solid @border-color;
+								li {
+									ul {
+										margin-top: @gutter/3;
+									}
+								}
 							}
 						}
 					}
