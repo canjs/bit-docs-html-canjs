@@ -522,8 +522,14 @@ var Search = Control.extend({
 				$html.find('a').each(function(){
 					var $a = $(this);
 					var a = $a[0];
+					var isLocal = a.hostname === location.hostname;
+					var isRelative = a.getAttribute('href').indexOf(location.hostname) === -1;
 					if(a.hostname !== location.hostname || a.protocol !== location.protocol){
 						$a.attr('target', '_blank');
+					}
+					if(self.options.pathPrefix && isLocal && isRelative){
+						var href = self.options.pathPrefix + '/' + $a.attr('href');
+						$a.attr('href', href);
 					}
 				});
 				return $html.contents();
