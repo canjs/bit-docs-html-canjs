@@ -516,6 +516,17 @@ var Search = Control.extend({
 				}
 
 				return "/" + this.url;
+			},
+			addTargetToExternalURLs: function(html){
+				var $html = $('<div>').html(html);
+				$html.find('a').each(function(){
+					var $a = $(this);
+					var a = $a[0];
+					if(a.hostname !== location.hostname || a.protocol !== location.protocol){
+						$a.attr('target', '_blank');
+					}
+				});
+				return $html.contents();
 			}
 		});
 

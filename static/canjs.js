@@ -36,13 +36,12 @@ var $articleContainer,
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
 		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
-				sameHostname = this.hostname === window.location.hostname,
-				sameProtocol = this.protocol === window.location.protocol;
+			sameHostname = (ev.target.hostname || this.hostname) === window.location.hostname,
+			sameProtocol = (ev.target.protocol || this.protocol) === window.location.protocol;
 
 		if (noModifierKeys && sameHostname && sameProtocol) {
 			ev.preventDefault();
-			var href = this.href;
-			navigate(href);
+			navigate(ev.target.href || this.href);
 		}
 	}).on('keyup', 'input[type="checkbox"]', function(e){
 		var $target = $(e.target);

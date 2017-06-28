@@ -30,7 +30,7 @@
 
             {{#if result.description}}
               <div class="result-description" title="{{result.description}}">
-                {{{result.description}}}
+                {{{addTargetToExternalURLs(result.description)}}}
               </div>
             {{/if}}
           </a>
