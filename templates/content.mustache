@@ -6,13 +6,17 @@
       {{/with}}
     </div>
     <div class="bottom-left">
-       <div class="social-side-container">
-        {{>social.mustache}}
+      <div class="nav-menu">
+        <div class="scrollable-contents">
+          <div class="social-side-container">
+            {{>social.mustache}}
+          </div>
+          {{#with (getCurrentTree)}}
+              {{>menu.mustache}}
+          {{/with}}
+        </div>
       </div>
-        {{#with (getCurrentTree)}}
-            {{>menu.mustache}}
-        {{/with}}
-        {{>search-results.mustache}}
+      {{>search-results.mustache}}
     </div>
   </div>
   <div id="right" class="column">

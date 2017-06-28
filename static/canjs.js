@@ -121,7 +121,7 @@ function init() {
 function scrollToCurrentMenuItem(){
 	var currentPageLi = $('li.current');
 	if(currentPageLi.length){
-		$('.bottom-left').scrollTop(currentPageLi.offset().top - $('.bottom-left').offset().top);
+		$('.nav-menu').scrollTop(currentPageLi.offset().top - $('.nav-menu').offset().top);
 	}
 }
 
@@ -227,11 +227,11 @@ function navigate(href) {
 			if (!$content.length) {
 				window.location.reload();
 			}
-			var $nav = $content.find(".bottom-left > ul"),
+			var $nav = $content.find(".bottom-left .scrollable-contents > ul"),
 					$article = $content.find("article"),
 					$breadcrumb = $content.find(".breadcrumb"),
 					homeLink = $content.find(".logo > a").attr('href'),
-					$navReplace = $(".bottom-left>ul"),
+					$navReplace = $(".bottom-left .scrollable-contents > ul"),
 
 					//root elements - use .filter; not .find
 					$pathPrefixDiv = $content.filter("[path-prefix]");
