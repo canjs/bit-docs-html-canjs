@@ -315,7 +315,7 @@ var Search = Control.extend({
 		var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
 		var index = this.getLocalStorageItem(searchIndexKey);
 		var indexVersion = this.getLocalStorageItem(searchIndexVersionKey);
-		var currentIndexVersion = 2;// Bump this whenever the index code is changed
+		var currentIndexVersion = 3;// Bump this whenever the index code is changed
 
 		if (index && currentIndexVersion === indexVersion) {
 			searchEngine = lunr.Index.load(index);
