@@ -521,10 +521,9 @@ var Search = Control.extend({
 				var $html = $('<div>').html(html);
 				$html.find('a').each(function(){
 					var $a = $(this);
-					var a = $a[0];
-					var isLocal = a.hostname === location.hostname;
-					var isRelative = a.getAttribute('href').indexOf(location.hostname) === -1;
-					if(a.hostname !== location.hostname || a.protocol !== location.protocol){
+					var isLocal = this.hostname === location.hostname;
+					var isRelative = this.getAttribute('href').indexOf(location.hostname) === -1;
+					if(this.hostname !== location.hostname || this.protocol !== location.protocol){
 						$a.attr('target', '_blank');
 					}
 					if(isLocal && isRelative){
