@@ -523,7 +523,7 @@ var Search = Control.extend({
 					var $a = $(this);
 					var isLocal = this.hostname === location.hostname;
 					var isRelative = this.getAttribute('href').indexOf(location.hostname) === -1;
-					if(this.hostname !== location.hostname || this.protocol !== location.protocol){
+					if(!isLocal || this.protocol !== location.protocol){
 						$a.attr('target', '_blank');
 					}
 					if(isLocal && isRelative){
