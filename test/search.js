@@ -18,7 +18,7 @@ document.body.appendChild(searchBar);
 
 /* Create a new instance of the search control */
 var search = new SearchControl('#search-bar', {
-  pathPrefix: '/doc'
+  pathPrefix: '../doc'
 });
 
 /* Tests */
