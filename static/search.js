@@ -506,18 +506,18 @@ var Search = Control.extend({
 			numResults: numResults,
 			searchValue: this.searchTerm
 		},{
-			docUrl: function(){
+			docUrl: function(url){
 				if(self.options.pathPrefix){
-					return self.options.pathPrefix + "/" + this.url;
+					return self.options.pathPrefix + "/" + url;
 				}
 
-				if(this.url.substr(-1) === "/"){
+				if(url.substr(-1) === "/"){
 					return this.url;
 				}
 
-				return "/" + this.url;
+				return "/" + url;
 			},
-			addTargetToExternalURLs: function(html){
+			addTargetToExternalURLs: function(html, parentHref){
 				var $html = $('<div>').html(html);
 				$html.find('a').each(function(){
 					var $a = $(this);
@@ -527,8 +527,9 @@ var Search = Control.extend({
 					if(a.hostname !== location.hostname || a.protocol !== location.protocol){
 						$a.attr('target', '_blank');
 					}
-					if(self.options.pathPrefix && isLocal && isRelative){
-						var href = self.options.pathPrefix + '/' + $a.attr('href');
+					if(isLocal && isRelative){
+						var prefix = parentHref.substr(0, parentHref.lastIndexOf('/'));
+						var href = prefix + '/' + $a.attr('href');
 						$a.attr('href', href);
 					}
 				});

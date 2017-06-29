@@ -16,7 +16,7 @@
     <ul>
       {{#each results as result}}
         <li>
-          <a href="{{docUrl}}" title="{{result.name}}" class="result-name">
+          <a href="{{docUrl(result.url)}}" title="{{result.name}}" class="result-name">
             {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
 
 
@@ -30,7 +30,7 @@
 
             {{#if result.description}}
               <div class="result-description" title="{{result.description}}">
-                {{{addTargetToExternalURLs(result.description)}}}
+                {{{addTargetToExternalURLs(result.description, docUrl(result.url))}}}
               </div>
             {{/if}}
           </a>
