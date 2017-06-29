@@ -363,20 +363,22 @@ var Search = Control.extend({
 				if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
 
 					// look for an exact match and apply a large positive boost
-					q.term(searchTerm, { usePipeline: true, boost: 375 });
+					q.term(searchTerm, { boost: 375 });
 
 				} else {
 					// add “can-”, look for an exact match in the title field, and apply a positive boost
-					q.term('can-' + searchTerm, { usePipeline: false, boost: 12 });
+					q.term('can-' + searchTerm, { boost: 12 });
 
 					// look for terms that match the beginning or end of this query
-					q.term(searchTerm, { usePipeline: false, wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
+					// look in the title field specifically to boost matches in it
+					q.term(searchTerm, { fields: ['title'], wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
+					q.term(searchTerm, { wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
 				}
 
 				// look for matches in any of the fields and apply a medium positive boost
 				var split = searchTerm.split(lunr.tokenizer.separator);
 				split.forEach(function(term) {
-					q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
+					q.term(term, { boost: 10, fields: q.allFields });
 				});
 			});
 
@@ -717,14 +719,14 @@ var Search = Control.extend({
 
 	resetScrollToTop: function(activeResultPosTop){
 		this.$resultsContainer.scrollTop(
-			this.$resultsContainer.scrollTop() + 
+			this.$resultsContainer.scrollTop() +
 			activeResultPosTop
 		);
 	},
 
 	resetScrollToBottom: function(activeResultPosTop, resultsContainerHeight){
 		// Calculate active result's position bottom
-		var scrollTo = (activeResultPosTop + this.$activeResult.outerHeight()) - 
+		var scrollTo = (activeResultPosTop + this.$activeResult.outerHeight()) -
 		// Calculate the current scrolled position of the bottom of the list
 		(this.getActiveResultOffset() + resultsContainerHeight);
 
