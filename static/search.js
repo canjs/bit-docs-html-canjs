@@ -377,7 +377,6 @@ var Search = Control.extend({
 				var split = searchTerm.split(lunr.tokenizer.separator);
 				split.forEach(function(term) {
 					q.term(term, { usePipeline: false, fields: q.allFields, boost: 10 });
-					q.term(term, { usePipeline: false, fields: q.allFields, wildcard: lunr.Query.wildcard.TRAILING });
 				});
 			});
 
