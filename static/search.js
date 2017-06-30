@@ -320,6 +320,7 @@ var Search = Control.extend({
 		if (index && currentIndexVersion === indexVersion) {
 			searchEngine = lunr.Index.load(index);
 		}else{
+			var dummyContainer = document.createElement('div');
 			searchEngine = lunr(function(){
 				lunr.tokenizer.separator = /[\s]+/;
 
@@ -340,6 +341,10 @@ var Search = Control.extend({
 					if(!item.title){
 						item.title = item.name;
 					}
+					// Convert HTML to text
+					dummyContainer.innerHTML = item.description;
+					item.description = dummyContainer.innerText;
+
 				    this.add(item);
 				  }
 				}
@@ -379,6 +384,8 @@ var Search = Control.extend({
 				var split = searchTerm.split(lunr.tokenizer.separator);
 				split.forEach(function(term) {
 					q.term(term, { boost: 10, fields: q.allFields });
+
+					q.term(term, { usePipeline: false, fields: q.allFields, wildcard: lunr.Query.wildcard.TRAILING });
 				});
 			});
 

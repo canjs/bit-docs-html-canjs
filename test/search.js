@@ -28,6 +28,7 @@ QUnit.test('Search for “about”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('about').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('about', results), 0, 'first result is the About page');
     done();
   });
@@ -37,6 +38,7 @@ QUnit.test('Search for “can-component”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('can-component').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-component', results), 0, 'first result is the can-component page');
     done();
   });
@@ -46,6 +48,7 @@ QUnit.test('Search for “can-connect”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('can-connect').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-connect', results), 0, 'first result is the can-connect page');
     done();
   });
@@ -55,6 +58,7 @@ QUnit.test('Search for “helpers/', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('helpers/').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     done();
   });
 });
@@ -63,6 +67,7 @@ QUnit.test('Search for “Live Binding”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('Live Binding').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-stache.Binding', results) < 2, true, 'first result is the can-stache Live Binding page');
     done();
   });
@@ -81,6 +86,7 @@ QUnit.test('Search for “stache”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('stache').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-stache', results), 0, 'first result is the can-stache page');
     done();
   });
@@ -99,6 +105,7 @@ QUnit.test('Search for “define/map”', function(assert) {
   var done = assert.async();
   search.searchEngineSearch('define/map').then(function(results) {
     assert.equal(results.length > 0, true, 'got results');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-define/map/map', results), 0, 'first result is the can-define/map/map page');
     done();
   });
