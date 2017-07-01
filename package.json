@@ -4,7 +4,7 @@
   "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
-    "start": "node make-example.js -f",
+    "start": "node make-example-search-worker.js && node make-example.js -f",
     "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && npm start",
     "test": "npm start && npm run testee",
     "testee": "testee test/browser.html --browsers firefox",
