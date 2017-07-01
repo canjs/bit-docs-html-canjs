@@ -1,5 +1,6 @@
 var $ = require("jquery");
 var Control = require("can-control");
+var LoadingBar = require('./loading-bar');
 var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
 
@@ -495,8 +496,14 @@ var Search = Control.extend({
 		clearTimeout(this.searchDebounceHandle);
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
+			if (!self.searchIndicator) {
+				self.searchIndicator = new LoadingBar('blue', self.$resultsContainer);
+			}
+			self.searchIndicator.start(0);
+			self.searchIndicator.update(100);
 			self.searchEngineSearch(value).then(function(results) {
 				self.searchResultsCache = results;
+				self.searchIndicator.end();
 				self.renderSearchResults(results);
 			});
 		}, this.options.searchTimeout);
