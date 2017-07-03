@@ -1,0 +1,5 @@
+doc/
+index.html
+.vscode
+*.log
+.DS_Store
