@@ -4,7 +4,7 @@
   "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
-    "start": "node make-example.js -f",
+    "start": "node make-example-search-worker.js && node make-example.js -f",
     "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && npm start",
     "test": "npm start && npm run testee",
     "testee": "testee test/browser.html --browsers firefox",
@@ -35,7 +35,7 @@
     "escape-html": "^1.0.3",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
-    "lunr": "^2.1.0",
+    "lunr": "bit-docs/lunr.js#279-safari-exception",
     "steal-stache": "^3.0.1",
     "unescape-html": "^1.0.0"
   },

@@ -1,10 +1,9 @@
 var $ = require("jquery");
 var Control = require("can-control");
+var LoadingBar = require('./loading-bar');
 var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
-
-//https://lunrjs.com/guides/getting_started.html
-var lunr = require("lunr");
+var currentIndexVersion = 4;// Bump this whenever the index code is changed
 
 var Search = Control.extend({
 
@@ -68,9 +67,6 @@ var Search = Control.extend({
 
 	init: function(){
 
-		var options = this.options;
-		var self = this;
-
 		//init elements
 		this.setElements();
 
@@ -79,20 +75,25 @@ var Search = Control.extend({
 
 		this.useLocalStorage = this.localStorageIsAvailable();
 
+		if (window.Worker) {
+			this.initSearchWorker();
+		} else {
+			console.info('window.Worker not defined, so not enabling search features');
+		}
+	},
+	initSearchWorker: function() {
+		var options = this.options;
+		var self = this;
+		var workerPath = options.pathPrefix + '/workers/static/search-worker.js';
+
+		this.searchWorker = new Worker(workerPath);
+		this.searchWorker.addEventListener('message', this.didReceiveWorkerMessage.bind(this));
+
 		this.searchEnginePromise = new Promise(function(resolve, reject) {
 			self.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject){
 				self.getSearchMap(options.pathPrefix + options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
-					var searchEngine = self.initSearchEngine(searchMap);
-					resolve(searchEngine);
-
-					//show the search input when the search engine is ready
-					if(self.options.animateInOnStart){
-						self.$inputWrap.fadeIn(self.options.searchAnimation);
-					}else{
-						self.$inputWrap.show();
-					}
-
-					self.bindResultsEvents();
+					self.initSearchEngine(searchMap);
+					resolve(searchMap);
 				}, function(error){
 					console.error("getSearchMap error", error);
 					reject(error);
@@ -102,6 +103,42 @@ var Search = Control.extend({
 				reject(error);
 			});
 		});
+	},
+	didReceiveWorkerMessage: function(message) {
+		var data = message.data;
+		switch (data.name) {
+			case 'search did index':
+				var searchIndexKey = this.formatLocalStorageKey(this.searchIndexLocalStorageKey);
+				var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
+				this.setLocalStorageItem(searchIndexKey, data.searchEngine);
+				this.setLocalStorageItem(searchIndexVersionKey, currentIndexVersion);
+				break;
+
+			case 'search engine ready':
+				//show the search input when the search engine is ready
+				if(this.options.animateInOnStart){
+					this.$inputWrap.fadeIn(this.options.searchAnimation);
+				}else{
+					this.$inputWrap.show();
+				}
+
+				this.bindResultsEvents();
+				break;
+
+			case 'search results':
+				//convert the results into a searchMap subset
+				var searchMap = this.searchMap;
+				var results = data.results.map(function(result) {
+					return searchMap[result.ref];
+				});
+				this.searchResultsCache = results;
+				this.searchIndicator.end();
+				this.renderSearchResults(results);
+				break;
+
+			default:
+				console.info('Received message from worker:', message);
+		}
 	},
 	destroy: function(){
 		this.unbindResultsEvents();
@@ -315,84 +352,47 @@ var Search = Control.extend({
 		var searchIndexVersionKey = this.formatLocalStorageKey(this.searchIndexVersionLocalStorageKey);
 		var index = this.getLocalStorageItem(searchIndexKey);
 		var indexVersion = this.getLocalStorageItem(searchIndexVersionKey);
-		var currentIndexVersion = 3;// Bump this whenever the index code is changed
 
 		if (index && currentIndexVersion === indexVersion) {
-			searchEngine = lunr.Index.load(index);
-		}else{
-			var dummyContainer = document.createElement('div');
-			searchEngine = lunr(function(){
-				lunr.tokenizer.separator = /[\s]+/;
-
-				this.pipeline.remove(lunr.stemmer);
-				this.pipeline.remove(lunr.stopWordFilter);
-				this.pipeline.remove(lunr.trimmer);
-				this.searchPipeline.remove(lunr.stemmer);
-
-				this.ref('name');
-				this.field('title');
-				this.field('description');
-				this.field('name');
-				this.field('url');
-
-				for (var itemKey in searchMap) {
-				  if (searchMap.hasOwnProperty(itemKey)) {
-					var item = searchMap[itemKey];
-					if(!item.title){
-						item.title = item.name;
-					}
-					// Convert HTML to text
-					dummyContainer.innerHTML = item.description;
-					item.description = dummyContainer.innerText;
-
-				    this.add(item);
-				  }
-				}
+			this.searchWorker.postMessage({
+				name: 'load index',
+				index: index
 			});
-			this.setLocalStorageItem(searchIndexKey, searchEngine);
-			this.setLocalStorageItem(searchIndexVersionKey, currentIndexVersion);
+
+		} else {
+			this.searchWorker.postMessage({
+				name: 'index data',
+				index: index,
+				items: this.convertSearchMapToIndexableItems(searchMap)
+			});
 		}
-		return searchEngine;
+	},
+
+	convertSearchMapToIndexableItems: function(searchMap) {
+		var dummyContainer = document.createElement('div');
+		var items = [];
+
+		for (var itemKey in searchMap) {
+			if (searchMap.hasOwnProperty(itemKey)) {
+				var item = searchMap[itemKey];
+
+				// Convert HTML to text
+				dummyContainer.innerHTML = item.description;
+				item.description = dummyContainer.innerText;
+
+				items.push(item);
+			}
+		}
+
+		return items;
 	},
 
 	// function searchEngineSearch
 	// takes a value and returns a map of all relevant search items
-	searchEngineSearch: function(value){
-		var searchTerm = value.toLowerCase();
-		var self = this;
-		return this.searchEnginePromise.then(function(searchEngine) {
-
-			//run the search
-			var queryResults = searchEngine.query(function(q) {
-
-				if (searchTerm.indexOf('can-') > -1) {// If the search term includes “can-”
-
-					// look for an exact match and apply a large positive boost
-					q.term(searchTerm, { boost: 375 });
-
-				} else {
-					// add “can-”, look for an exact match in the title field, and apply a positive boost
-					q.term('can-' + searchTerm, { boost: 12 });
-
-					// look for terms that match the beginning or end of this query
-					// look in the title field specifically to boost matches in it
-					q.term(searchTerm, { fields: ['title'], wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
-					q.term(searchTerm, { wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
-				}
-
-				// look for matches in any of the fields and apply a medium positive boost
-				var split = searchTerm.split(lunr.tokenizer.separator);
-				split.forEach(function(term) {
-					q.term(term, { boost: 10, fields: q.allFields });
-
-					q.term(term, { usePipeline: false, fields: q.allFields, wildcard: lunr.Query.wildcard.TRAILING });
-				});
-			});
-
-			//convert the results into a searchMap subset
-			var mappedResults = queryResults.map(function(result){ return self.searchMap[result.ref] });
-
-			return mappedResults;
+	searchEngineSearch: function(value) {
+		this.searchWorker.postMessage({
+			name: 'search',
+			query: value
 		});
 	},
 	//  ---- END SEARCHING / PARSING ---- //
@@ -495,10 +495,12 @@ var Search = Control.extend({
 		clearTimeout(this.searchDebounceHandle);
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
-			self.searchEngineSearch(value).then(function(results) {
-				self.searchResultsCache = results;
-				self.renderSearchResults(results);
-			});
+			if (!self.searchIndicator) {
+				self.searchIndicator = new LoadingBar('blue', self.$resultsContainer);
+			}
+			self.searchIndicator.start(0);
+			self.searchIndicator.update(100);
+			self.searchEngineSearch(value);
 		}, this.options.searchTimeout);
 	},
 
