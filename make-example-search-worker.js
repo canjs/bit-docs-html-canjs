@@ -31,13 +31,14 @@ fs.mkdir(siteConfig.dest, function() {
       }
     }
   }).then(function(){
-    console.log('Replacing "window" with "self"');
+    // Work around for https://github.com/stealjs/steal-tools/issues/775
+    console.info('Replacing "window" with "self"');
     fs.readFile(dest, 'utf8', function(err, file){
       if(err) return console.error(err);
       file = file.replace(/window/gmi, 'self');
       fs.writeFile(dest, file, function(err){
         if(err) return console.error(err);
-        console.log('Done');
+        console.info('Done');
       });
     });
   });
