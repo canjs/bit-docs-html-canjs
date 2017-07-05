@@ -195,6 +195,8 @@ function navigate(href) {
         return;
     }
 
+	window.history.pushState(null, null, href);
+
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
 
@@ -270,8 +272,6 @@ function navigate(href) {
 			if(searchControl.searchResultsCache){
 				searchControl.renderSearchResults(searchControl.searchResultsCache);
 			}
-      
-      window.history.pushState(null, null, href);
 		},
 		error: function() {
 			window.history.pushState(null, null, href);
