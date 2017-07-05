@@ -1,4 +1,5 @@
 var $ = require("jquery");
+var assign = require("can-util/js/assign/");
 var Control = require("can-control");
 var LoadingBar = require('./loading-bar');
 var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
@@ -374,7 +375,7 @@ var Search = Control.extend({
 
 		for (var itemKey in searchMap) {
 			if (searchMap.hasOwnProperty(itemKey)) {
-				var item = searchMap[itemKey];
+				var item = assign({}, searchMap[itemKey]);
 
 				// Convert HTML to text
 				dummyContainer.innerHTML = item.description;
