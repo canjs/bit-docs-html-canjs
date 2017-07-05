@@ -496,7 +496,7 @@ var Search = Control.extend({
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
 			if (!self.searchIndicator) {
-				self.searchIndicator = new LoadingBar('blue', self.$resultsContainer);
+				self.searchIndicator = new LoadingBar('blue', self.$resultsContainerParent);
 			}
 			self.searchIndicator.start(0);
 			self.searchIndicator.update(100);
@@ -548,6 +548,7 @@ var Search = Control.extend({
 			}
 		});
 
+		this.$resultsContainer.scrollTop(0);
 		this.$resultsWrap.empty();
 		this.$resultsWrap[0].appendChild(resultsFrag);
 
