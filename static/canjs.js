@@ -195,8 +195,6 @@ function navigate(href) {
         return;
     }
 
-	window.history.pushState(null, null, href);
-
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
 
@@ -220,6 +218,9 @@ function navigate(href) {
 			return xhr;
 		},
 		success: function(content) {
+			
+			window.history.pushState(null, null, href);
+
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
 
