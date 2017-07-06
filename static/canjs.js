@@ -218,6 +218,9 @@ function navigate(href) {
 			return xhr;
 		},
 		success: function(content) {
+			
+			window.history.pushState(null, null, href);
+
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
 
@@ -270,8 +273,6 @@ function navigate(href) {
 			if(searchControl.searchResultsCache){
 				searchControl.renderSearchResults(searchControl.searchResultsCache);
 			}
-      
-      window.history.pushState(null, null, href);
 		},
 		error: function() {
 			window.history.pushState(null, null, href);
