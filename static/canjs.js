@@ -60,7 +60,7 @@ var $articleContainer,
 	// Back/Forward navigation
 	window.addEventListener('popstate', function(ev) {
 		ev.preventDefault();
-		navigate(window.location.href);
+		navigate(window.location.href, false);
 	});
 
 	$articleContainer.on("scroll", debounce(function(ev) {
@@ -106,9 +106,7 @@ function init() {
 
 	if (!searchControl) {
 		searchControl = new SearchControl(".search-bar", {
-			navigate: function(href){
-				navigate(href);
-			},
+			navigate: navigate,
 			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
 		});
@@ -176,7 +174,7 @@ function setScrollPosition() {
 var $menuButton = $('[for="nav-trigger"]');
 var $navTrigger = $('#nav-trigger');
 
-function navigate(href) {
+function navigate(href, updateLocation) {
 	// make sure we're in the right spot
 	if (href === "javascript://") { // jshint ignore:line
 		return;
@@ -219,7 +217,9 @@ function navigate(href) {
 		},
 		success: function(content) {
 			
-			window.history.pushState(null, null, href);
+			if(updateLocation !== false){
+				window.history.pushState(null, null, href);	
+			}
 
 			// Google Analytics
 			ga('send', 'pageview', window.location.pathname);
@@ -275,7 +275,9 @@ function navigate(href) {
 			}
 		},
 		error: function() {
-			window.history.pushState(null, null, href);
+			if(updateLocation !== false){
+				window.history.pushState(null, null, href);
+			}
 			// just reload the page if this fails
 			window.location.reload();
 		},
