@@ -20,7 +20,10 @@ var siteConfig = {
 			//TODO: This should not be include here and should only be included in package.json.
 			//  we get an error without this, here, though
 			"steal-stache": "^3.0.1"
-        }
+        },
+        staticDist: [
+            path.join(__dirname, "dist", "static")
+        ]
     },
     dest: path.join(__dirname, "doc"),
     parent: "canjs",

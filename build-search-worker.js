@@ -6,7 +6,7 @@ var forceBuild = process.argv.indexOf("-f") !== -1;
 
 var siteConfig = {
   debug: false,
-  dest: path.join(__dirname, 'doc', 'workers'),
+  dest: path.join(__dirname, 'dist'),
   minifyBuild: true
 };
 
