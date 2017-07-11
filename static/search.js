@@ -134,6 +134,7 @@ var Search = Control.extend({
 				});
 				this.searchResultsCache = results;
 				this.searchIndicator.end();
+				this.$resultsContainer.scrollTop(0);
 				this.renderSearchResults(results);
 				break;
 
@@ -549,7 +550,6 @@ var Search = Control.extend({
 			}
 		});
 
-		this.$resultsContainer.scrollTop(0);
 		this.$resultsWrap.empty();
 		this.$resultsWrap[0].appendChild(resultsFrag);
 
