@@ -8,7 +8,8 @@ module.exports = function(bitDocs){
 
     bitDocs.register("html", {
         templates: path.join(__dirname, "templates"),
-        dependencies: dependencies
+        dependencies: dependencies,
+        staticDist: path.join(__dirname, "dist", "static")
     });
 
     bitDocs.register("tags", tags);
