@@ -85,7 +85,7 @@ var Search = Control.extend({
 	initSearchWorker: function() {
 		var options = this.options;
 		var self = this;
-		var workerPath = options.pathPrefix + '/workers/static/search-worker.js';
+		var workerPath = options.pathPrefix + '/static/search-worker.js';
 
 		this.searchWorker = new Worker(workerPath);
 		this.searchWorker.addEventListener('message', this.didReceiveWorkerMessage.bind(this));
