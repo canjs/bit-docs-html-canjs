@@ -704,16 +704,18 @@ var Search = Control.extend({
 		this.$activeResult.addClass(this.options.keyboardActiveClass);
 
 		// Get position top of current active element
-		var activeResultPosTop = parseInt(this.$activeResult.position().top);
+		var activeResultPosTop = parseInt(this.$activeResult.position().top, 10);
+		var activeResultHeight = Math.ceil(this.$activeResult.outerHeight());
+		var activeResultPosBottom = activeResultPosTop + activeResultHeight;
 		var resultsContainerHeight = this.$resultsContainer.height();
 
 		// Detect if the user is arrowing down
 		var isMovingDown = lastResultPosTop < this.$activeResult.position().top;
-		var isBelow = activeResultPosTop > resultsContainerHeight;
+		var isBelow = activeResultPosBottom > resultsContainerHeight;
 		var isAbove = activeResultPosTop < 0;
 
 		if(isMovingDown && isBelow){
-			this.resetScrollToBottom(activeResultPosTop, resultsContainerHeight);
+			this.resetScrollToBottom(activeResultPosBottom, resultsContainerHeight);
 		}
 		else if(isAbove){
 			this.resetScrollToTop(activeResultPosTop);
@@ -727,11 +729,9 @@ var Search = Control.extend({
 		);
 	},
 
-	resetScrollToBottom: function(activeResultPosTop, resultsContainerHeight){
-		// Calculate active result's position bottom
-		var scrollTo = (activeResultPosTop + this.$activeResult.outerHeight()) -
-		// Calculate the current scrolled position of the bottom of the list
-		(this.getActiveResultOffset() + resultsContainerHeight);
+	resetScrollToBottom: function(activeResultPosBottom, resultsContainerHeight){
+		var currentScrollTop = this.$resultsContainer.scrollTop();
+		var scrollTo = activeResultPosBottom - resultsContainerHeight + currentScrollTop;
 
 		this.$resultsContainer.scrollTop(scrollTo);
 	},
@@ -756,22 +756,6 @@ var Search = Control.extend({
 				href = $a.attr("href");
 
 		this.navigate(href);
-	},
-
-	// function getActiveResultOffset
-	// if method provided, use the return value
-	// otherwise, use the position().top of the first list item
-	getActiveResultOffset: function(){
-
-		if(this.options.getActiveResultOffset){
-			return this.options.getActiveResultOffset();
-		}
-
-		var $item = this.$resultsList.find("li").first();
-		if(!$item || ($item && !$item.length)){
-			return 0;
-		}
-		return $item.position().top;
 	},
 
 	// ---- END KEYBOARD NAVIGATION ---- //
