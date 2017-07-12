@@ -75,7 +75,7 @@ var $articleContainer,
 	setInterval(function() {
 		toggleNav();
 	}, 200);
-	
+
 	scrollToCurrentMenuItem();
 })();
 
@@ -216,9 +216,9 @@ function navigate(href, updateLocation) {
 			return xhr;
 		},
 		success: function(content) {
-			
+
 			if(updateLocation !== false){
-				window.history.pushState(null, null, href);	
+				window.history.pushState(null, null, href);
 			}
 
 			// Google Analytics
@@ -241,10 +241,12 @@ function navigate(href, updateLocation) {
 
 			//if any page doesn't have a nav, replacing it won't work,
 			//and the nav will be gone for any subsequent page visits
-			if($navReplace && $navReplace.length){
-				$navReplace.replaceWith($nav);
-			}else{
-				$(".bottom-left").append($nav);
+			if ($nav && $nav.length) {
+				if ($navReplace && $navReplace.length) {
+					$navReplace.replaceWith($nav);
+				} else {
+					$(".bottom-left").append($nav);
+				}
 			}
 			$("article").replaceWith($article);
 			$(".breadcrumb").replaceWith($breadcrumb);
