@@ -664,13 +664,9 @@ var Search = Control.extend({
 
 		$nextResult = this.$activeResult.next("li");
 
-		//if no next result,
-		//  activate the first one
-		if(!$nextResult || ($nextResult && !$nextResult.length)){
-			this.activateResult(this.$resultsList.find("li").first());
-			return;
+		if ($nextResult && $nextResult.length) {
+			this.activateResult($nextResult);
 		}
-		this.activateResult($nextResult);
 	},
 	// function activateNextResult
 	// finds the previous result in the results to activate
@@ -693,13 +689,9 @@ var Search = Control.extend({
 
 		$prevResult = this.$activeResult.prev("li");
 
-		//if no prev result,
-		//  activate the last one
-		if(!$prevResult || ($prevResult && !$prevResult.length)){
-			this.activateResult(this.$resultsList.find("li").last());
-			return;
+		if ($prevResult && $prevResult.length) {
+			this.activateResult($prevResult);
 		}
-		this.activateResult($prevResult);
 	},
 
 	// function activateResult
