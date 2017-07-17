@@ -11,7 +11,7 @@ var Search = Control.extend({
 	defaults: {
 		//dom selectors
 		searchResultsContainerSelector: ".search-results-container",
-		searchResultsContainerParentSelector: ".bottom-left",
+		searchResultsContainerParentSelector: "#left > .bottom",
 
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,
@@ -498,7 +498,7 @@ var Search = Control.extend({
 		var self = this;
 		this.searchDebounceHandle = setTimeout(function(){
 			if (!self.searchIndicator) {
-				self.searchIndicator = new LoadingBar('blue', self.$resultsContainerParent);
+				self.searchIndicator = new LoadingBar('blue', self.$resultsContainer);
 			}
 			self.searchIndicator.start(0);
 			self.searchIndicator.update(100);
@@ -599,7 +599,6 @@ var Search = Control.extend({
 				complete: function(){
 					self.$resultsContainer.removeClass("is-hiding");
 					if(!self.$resultsContainer.is(".is-showing")){
-						self.$resultsContainerParent.removeClass("search-active");
 						if(self.$resultsWrap && self.$resultsWrap.length){
 							self.$resultsWrap.empty();
 						}
@@ -620,7 +619,7 @@ var Search = Control.extend({
 			if(this.options.onResultsShow){
 				this.options.onResultsShow();
 			}
-			this.$resultsContainerParent.stop().addClass("search-active");
+			this.$resultsContainerParent.stop();
 			this.$resultsContainer.addClass("is-showing").fadeIn({
 				duration: this.options.searchAnimation,
 				complete: function(){
