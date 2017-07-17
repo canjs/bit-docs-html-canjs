@@ -86,7 +86,7 @@ $('body').on('touchstart', function() {});
 
 function init() {
 	// Set state
-	$articleContainer = $('#right .bottom-right');
+	$articleContainer = $('#right > .bottom');
 	$onThisPage = $('.on-this-page');
 	$navTrigger = $('#nav-trigger');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
@@ -229,11 +229,11 @@ function navigate(href, updateLocation) {
 			if (!$content.length) {
 				window.location.reload();
 			}
-			var $nav = $content.find(".bottom-left .scrollable-contents > ul"),
+			var $nav = $content.find("#left > .bottom .nav-menu > ul"),
 					$article = $content.find("article"),
 					$breadcrumb = $content.find(".breadcrumb"),
 					homeLink = $content.find(".logo > a").attr('href'),
-					$navReplace = $(".bottom-left .scrollable-contents > ul"),
+					$navReplace = $("#left > .bottom .nav-menu > ul"),
 
 					//root elements - use .filter; not .find
 					$pathPrefixDiv = $content.filter("[path-prefix]");
@@ -245,7 +245,7 @@ function navigate(href, updateLocation) {
 				if ($navReplace && $navReplace.length) {
 					$navReplace.replaceWith($nav);
 				} else {
-					$(".bottom-left").append($nav);
+					$("#left > .bottom").append($nav);
 				}
 			}
 			$("article").replaceWith($article);

@@ -5,16 +5,14 @@
           {{>header-left.mustache}}
       {{/with}}
     </div>
-    <div class="bottom-left">
+    <div class="bottom">
       <div class="nav-menu">
-        <div class="scrollable-contents">
-          <div class="social-side-container">
-            {{>social.mustache}}
-          </div>
-          {{#with (getCurrentTree)}}
-              {{>menu.mustache}}
-          {{/with}}
+        <div class="social-side-container">
+          {{>social.mustache}}
         </div>
+        {{#with (getCurrentTree)}}
+            {{>menu.mustache}}
+        {{/with}}
       </div>
       {{>search-results.mustache}}
     </div>
@@ -23,10 +21,11 @@
     <div class="top-right">
       {{> header-right.mustache}}
     </div>
-    <div class="bottom-right">
+    <div class="bottom">
       <article>{{> article.mustache}}</article>
-	  {{#with (getRoot)}}
+      {{#with (getRoot)}}
         <footer>{{> footer.mustache}}</footer>
-	  {{/with}}    </div>
+      {{/with}}
+    </div>
   </div>
 </div>
