@@ -9,7 +9,7 @@
 					</li>
 				{{else}}
 					<li class="{{#if (isCurrent docObject)}}current{{/if}}
-           						{{#children.length}}parent{{/children.length}}
+           						{{#if children.length}}parent{{/if}}
            						{{#if (hasCurrent docObject)}}expanded{{/if}}">
 						<a class="{{docObject.type}}"
 							href="{{urlTo docObject.name}}"
