@@ -53,6 +53,14 @@
 	}
 }
 
+// Desktop styles for search
+@media screen and (min-width: @breakpoint) {
+	#everything:not(.header-is-hidden) #left > .bottom .search-results-container {
+		height: calc(~"100vh - @{brand-height} - @{breadcrumb-height}");
+		top: @brand-height + @breadcrumb-height;
+	}
+}
+
 #left > .bottom {
 	//Search Results
 	.search-results-container{
@@ -64,13 +72,8 @@
 		background: #fff;
 		left: 0;
 		overflow-y: auto;
-		transition: -webkit-backdrop-filter backdrop-filter background @transition-speed ease;
-
-		// Desktop styles
-		@media screen and (min-width: @breakpoint) {
-			height: calc(~"100vh - @{brand-height} - @{breadcrumb-height}");
-			top: @brand-height + @breadcrumb-height;
-		}
+		transition: all @transition-speed ease;
+		transition-property: -webkit-backdrop-filter, backdrop-filter, background;
 
 		.search-cancel{
 			color: @code-color;
