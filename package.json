@@ -39,6 +39,7 @@
     "lodash": "^4.17.4",
     "lunr": "bit-docs/lunr.js#279-safari-exception",
     "steal-stache": "^3.0.1",
+    "steal-tools": "^1.7.0",
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
