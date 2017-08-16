@@ -42,7 +42,7 @@
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.7.0",
+    "bit-docs-generate-html": "^0.8.0",
     "bit-docs-generate-searchmap": "^0.1.3",
     "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
