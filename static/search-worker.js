@@ -15,7 +15,7 @@ self.addEventListener('message', function(message) {
 		case 'load index':
 			self.postMessage({
 				name: 'search engine ready',
-				searchEngine: logic(data.index)
+				searchEngine: logic.loadIndex(data.index)
 			});
 			break;
 

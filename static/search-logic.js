@@ -22,7 +22,7 @@ module.exports = {
 					item.title = item.name;
 				}
 				this.add(item);
-			}.bind(this));
+			}, this);
 		});
 		return searchEngine;
 	},
