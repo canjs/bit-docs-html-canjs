@@ -33,7 +33,7 @@
   "system": {},
   "dependencies": {
     "can-control": "^3.0.3",
-    "can-util": "^3.0.10",
+    "can-util": "^3.10.6",
     "escape-html": "^1.0.3",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
