@@ -13,7 +13,8 @@
 .border {
   border: 1px solid @border-color;
 }
-.flex {  
+.flex {
+  -js-display: flex; // ie9/10 flexbox fix
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -36,7 +37,7 @@
   font-size: .9em;
   color: @code-color;
 }
-.transition-left { 
+.transition-left {
   -webkit-transition: left .5s ;
   -moz-transition: left .5s;
   -o-transition: left .5s;

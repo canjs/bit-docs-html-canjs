@@ -1,3 +1,4 @@
+require("flexibility#?./needs-flexibility");
 require("./canjs.less!");
 var LoadingBar = require('./loading-bar.js');
 $ = require("jquery");
@@ -29,6 +30,11 @@ var $articleContainer,
 	//(used for fading in or not)
 	hasShownSearch = false;
 	init();
+
+	// flexbox for ie9/10
+	if(typeof flexibility !== 'undefined'){
+		flexibility(document.getElementById('everything'));
+	}
 
 	// prevent sidebar from changing width when header hides
 	$('#left').css('min-width', $('.top-left').width());
@@ -219,7 +225,7 @@ function navigate(href, updateLocation) {
 		},
 		success: function(content) {
 
-			if(updateLocation !== false){
+			if(window.history.pushState && updateLocation !== false){
 				window.history.pushState(null, null, href);
 			}
 
@@ -279,7 +285,7 @@ function navigate(href, updateLocation) {
 			}
 		},
 		error: function() {
-			if(updateLocation !== false){
+			if(window.history.pushState && updateLocation !== false){
 				window.history.pushState(null, null, href);
 			}
 			// just reload the page if this fails

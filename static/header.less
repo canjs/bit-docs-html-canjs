@@ -1,16 +1,15 @@
 .top-right-top {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    height: @brand-height;
-    width: 100%;
-    justify-content: space-between;
+  .flex;
+  flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-shrink: 0;
+  height: @brand-height;
+  justify-content: space-between;
 }
-
 .brand {
     height: @brand-height;
     padding-top: @gutter;
     background: white;
-
     .dropdown {
         display:none;
     }
@@ -112,7 +111,6 @@
 .top-right-links {
     display: none;
     @media screen and (min-width: @breakpoint){
-        display: flex;
         .flex;
         list-style: none;
         margin: @gutter @gutter*2;
@@ -121,6 +119,7 @@
         flex-basis: 100%;
         align-self: flex-start;
         > li {
+            .flex;
             font-size: 14px;
             margin-right: @gutter;
             > a {

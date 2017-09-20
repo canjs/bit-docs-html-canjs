@@ -30,11 +30,11 @@
     "url": "https://github.com/canjs/bit-docs-html-canjs/issues"
   },
   "homepage": "https://github.com/canjs/bit-docs-html-canjs#readme",
-  "system": {},
   "dependencies": {
     "can-control": "^3.0.3",
     "can-util": "^3.0.10",
     "escape-html": "^1.0.3",
+    "flexibility": "^2.0.1",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "lunr": "bit-docs/lunr.js#279-safari-exception",
@@ -42,14 +42,16 @@
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
-    "bit-docs-generate-html": "^0.7.0",
+    "bit-docs-generate-html": "^0.8.0",
     "bit-docs-generate-searchmap": "^0.1.3",
     "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
-    "steal": "^0.16.44",
-    "steal-qunit": "^0.1.4",
+    "steal": "^1.5.9",
+    "steal-conditional": "^0.3.6",
+    "steal-qunit": "^1.0.1",
+    "steal-tools": "^1.8.2",
     "testee": "^0.7.0",
     "zombie": "^5.0.5"
   }

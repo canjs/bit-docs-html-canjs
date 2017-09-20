@@ -9,8 +9,18 @@ module.exports = function(bitDocs){
     bitDocs.register("html", {
         templates: path.join(__dirname, "templates"),
         dependencies: dependencies,
-        staticDist: path.join(__dirname, "dist", "static")
+        staticDist: path.join(__dirname, "dist", "static"),
+        package: {
+            steal: {
+                configDependencies: [
+                    "./node_modules/steal-conditional/conditional"
+                ]
+            },
+            devDependencies: {
+                "flexibility": "^2.0.1"
+            }
+        }
     });
 
     bitDocs.register("tags", tags);
-}
+};

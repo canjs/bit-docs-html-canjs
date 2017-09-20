@@ -13,13 +13,24 @@ var docMap = readFile(__dirname+"/docMap.json").then(function(source){
 var siteConfig = {
     html: {
         templates: path.join(__dirname, "templates"),
+        package: {
+            steal: {
+                configDependencies: [
+                    "./node_modules/steal-conditional/conditional"
+                ]
+            },
+            devDependencies: {
+                "flexibility": "^2.0.1"
+            }
+        },
         dependencies: {
             "bit-docs-html-canjs": __dirname,
             "bit-docs-prettify": "^0.1.0",
-			"bit-docs-html-highlight-line": "^0.2.2",
-			//TODO: This should not be include here and should only be included in package.json.
-			//  we get an error without this, here, though
-			"steal-stache": "^3.0.1"
+            "bit-docs-html-highlight-line": "^0.2.2",
+            //TODO: This should not be include here and should only be included in package.json.
+            //  we get an error without this, here, though
+            "steal-stache": "^3.0.1",
+            "steal-conditional": "^0.3.6"
         },
         staticDist: [
             path.join(__dirname, "dist", "static")

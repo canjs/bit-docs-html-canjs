@@ -9,6 +9,7 @@
   -webkit-overflow-scrolling: touch
 }
 #left {
+  -ms-flex-wrap: wrap;
   position: fixed;
   width: @sidebar-width;
   min-width: 0;
@@ -25,6 +26,7 @@
   }
 }
 #right {
+  -ms-flex-wrap: wrap;
   height: 100%;
   min-height: 100%;
   max-height: 100%;
@@ -53,6 +55,7 @@
 
 @media screen and (min-width: @breakpoint){
   .top-left {
+    width: 100%;
     height: auto;
   }
 }
@@ -60,6 +63,7 @@
   flex-shrink: 0;
   flex-wrap: nowrap;
   height: auto;
+  width: 100%;
   .border-bottom;
   @media screen and (min-width: @breakpoint){
     border: none;
