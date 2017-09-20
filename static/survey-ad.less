@@ -1,0 +1,42 @@
+survey-ad {
+  background: white;
+  border-top: 1px solid @border-color;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  transition: bottom @transition-speed ease;
+  width: 100%;
+  z-index: 90;
+
+  a {
+    display: block;
+    line-height: 3rem;
+    width: 100%;
+  }
+
+  .close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: 3rem;
+  }
+
+  &.hidden {
+    bottom: -3.1rem;// 3 rem + a little bit for the top border
+  }
+}
+
+// Hide this component on mobile
+@media screen and (max-width: @breakpoint) {
+  survey-ad {
+    display: none;
+  }
+}
