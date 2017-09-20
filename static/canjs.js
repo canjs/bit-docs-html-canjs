@@ -5,6 +5,7 @@ $ = require("jquery");
 var debounce = require("lodash/debounce");
 var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
+var SurveyAdControl = require('./survey-ad');
 
 // state
 var $articleContainer,
@@ -23,6 +24,7 @@ var $articleContainer,
 	scrollPositionInterval,
 	currentHref,
 	searchControl,
+	surveyAdControl,
 	hasShownSearch;
 
 (function() {
@@ -118,6 +120,10 @@ function init() {
 			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
 		});
+	}
+
+	if (!surveyAdControl) {
+		surveyAdControl = new SurveyAdControl("survey-ad");
 	}
 
 	hasShownSearch = true;
