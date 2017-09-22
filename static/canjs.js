@@ -123,7 +123,11 @@ function init() {
 	}
 
 	if (!surveyAdControl) {
+		// Set up the survey ad control
 		surveyAdControl = new SurveyAdControl("survey-ad");
+	} else {
+		// Notify the survey ad control that the user loaded a page
+		surveyAdControl.didEngage();
 	}
 
 	hasShownSearch = true;
