@@ -1,12 +1,12 @@
 survey-ad {
   background: white;
   border-top: 1px solid @border-color;
-  bottom: 0;
+  bottom: -3.1rem;// 3 rem + a little bit for the top border
   position: absolute;
   text-align: center;
   transition: bottom @transition-speed ease;
   width: 100%;
-  z-index: 90;
+  z-index: 90;// This matches #right’s z-index
 
   a {
     display: block;
@@ -29,8 +29,8 @@ survey-ad {
     width: 3rem;
   }
 
-  &.hidden {
-    bottom: -3.1rem;// 3 rem + a little bit for the top border
+  &.showing {
+    bottom: 0;
   }
 }
 
