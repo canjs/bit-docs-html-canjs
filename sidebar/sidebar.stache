@@ -1,0 +1,22 @@
+{{#if ./children.length}}
+  <ul>
+    {{#each ./children child=value}}
+      {{^if child.hide}}
+        {{#if child.isGroup}}
+          <li>
+            <span>{{child.shortTitle}}</span>
+            {{>*self}}
+          </li>
+        {{else}}
+          <li class="{{child.classList}}">
+            <a class="{{child.type}}"
+              href="{{child.url}}"
+              title="{{child.linkTitle}}">
+              {{child.shortTitle}}
+            </a>
+          </li>
+        {{/if}}
+      {{/if}}
+    {{/each}}
+  </ul>
+{{/if}}

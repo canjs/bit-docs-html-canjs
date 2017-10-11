@@ -1,3 +1,10 @@
-var Sidebar = require('./sidebar');
+var searchMap = require('../doc/searchMap.json');
+var stache = require('can-stache');
 
-new Sidebar('#sidebar');
+require('./sidebar');
+
+var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
+var fragment = renderer({
+  searchMap: searchMap
+});
+document.body.appendChild(fragment);
