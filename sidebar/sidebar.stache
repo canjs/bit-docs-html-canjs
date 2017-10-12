@@ -6,7 +6,7 @@
           {{#if child.isGroup}}
             <li>
               <span>{{child.shortTitle}}</span>
-              {{>*self}}
+              {{>listTemplate child}}
             </li>
           {{else}}
             <li class="

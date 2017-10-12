@@ -35,3 +35,17 @@ QUnit.test('When an item is selected, its children should be shown', function(as
   assert.ok(firstLinkParent.classList.contains('expanded'), 'has expanded class');
   assert.ok(firstLinkParentChildrenLinks.length > 0, 'has children');
 });
+
+QUnit.test('When a child item is selected, it should still be visible', function(assert) {
+  var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
+  var vm = new ViewModel({searchMap: searchMap});
+  var fragment = renderer(vm);
+  var firstLink = fragment.querySelector('a');
+  firstLink.click();
+  var firstLinkParent = firstLink.parentElement;
+  var firstChildLink = firstLinkParent.querySelector('ul').querySelector('a');
+  firstChildLink.click();
+  var firstLinkParentChildrenLinks = firstLinkParent.querySelectorAll('li');
+  assert.ok(firstLinkParent.classList.contains('expanded'), 'parent has expanded class');
+  assert.ok(firstLinkParentChildrenLinks.length > 0, 'parent has children');
+});
