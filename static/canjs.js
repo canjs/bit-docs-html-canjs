@@ -5,7 +5,10 @@ $ = require("jquery");
 var debounce = require("lodash/debounce");
 var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
+var stache = require('can-stache');
 var SurveyAdControl = require('./survey-ad');
+
+require("../sidebar/sidebar");
 
 // state
 var $articleContainer,
@@ -25,6 +28,7 @@ var $articleContainer,
 	currentHref,
 	searchControl,
 	surveyAdControl,
+	hasInstantiatedSidebar,
 	hasShownSearch;
 
 (function() {
@@ -119,6 +123,34 @@ function init() {
 			navigate: navigate,
 			pathPrefix: window.pathPrefix,
 			animateInOnStart: !hasShownSearch
+		});
+	}
+
+	// Set up the client-side sidebar nav
+	if (!hasInstantiatedSidebar) {
+		hasInstantiatedSidebar = true;
+		searchControl.getSearchMap().then(function(searchMap) {
+
+			// Find the current menu that contains social-side-container and a ul
+			var currentMenu = document.querySelector('.nav-menu');
+
+			// Construct the new sidebar DOM fragment
+			var renderer = stache('<canjs-sidebar class="nav-menu" searchMap:from="searchMap" />');
+			var fragment = renderer({searchMap: searchMap});
+
+			// Add the new sidebar before the current menu
+			var parentContainer = currentMenu.parentElement;
+			parentContainer.insertBefore(fragment, currentMenu);
+
+			// Move the social-side-container to inside the new sidebar
+			var sidebarElement = document.querySelector('canjs-sidebar');
+			var socialContainer = currentMenu.querySelector('.social-side-container');
+			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
+
+			// Get rid of the old menu
+			currentMenu.remove();
+		}, function(error) {
+			console.error('Failed to get search map with error:', error);
 		});
 	}
 

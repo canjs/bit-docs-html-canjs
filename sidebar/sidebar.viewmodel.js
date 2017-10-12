@@ -70,7 +70,7 @@ var Module = DefineMap.extend({
   parentModule: 'any',
   shortTitle: {
     get: function() {
-      return this.title;// TODO
+      return this.title || this.name;// TODO
     }
   },
   title: 'string',
