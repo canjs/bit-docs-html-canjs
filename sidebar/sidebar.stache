@@ -11,7 +11,7 @@
           {{else}}
             <li class="
               {{#eq child selectedModule}}current{{/eq}}
-              {{#if shouldShowChildren(child)}}expanded{{/if}}
+              {{#if isExpanded(child)}}expanded{{/if}}
               {{#if child.children.length}}parent{{/if}}
             ">
               <a {{data "moduleData"}}

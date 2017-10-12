@@ -15,6 +15,16 @@ QUnit.test('Search map is parsed', function(assert) {
   assert.ok(childrenLength > 1 && childrenLength < 10, 'rootModule has a reasonable number of children');
 });
 
+QUnit.test('Parents with @subchildren should show their grandchildren', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var moduleMap = vm.moduleMap;
+  var guidesPage = moduleMap['guides'];
+  var recipesGroup = moduleMap['guides/recipes'];
+  vm.selectedModule = guidesPage;
+  assert.notOk(vm.isExpanded(recipesGroup), 'child is not expanded');
+  assert.ok(vm.shouldShowChildren(recipesGroup), 'child shows its children');
+});
+
 QUnit.test('Only top-level children are initially rendered', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});

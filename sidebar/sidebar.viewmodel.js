@@ -79,7 +79,7 @@ var Module = DefineMap.extend({
 });
 
 module.exports = DefineMap.extend({
-  shouldShowChildren: function(moduleData) {
+  isExpanded: function(moduleData) {
     var selectedModule = this.selectedModule;
 
     // If the selected module and the module being tested are the same,
@@ -147,5 +147,31 @@ module.exports = DefineMap.extend({
       return searchMap;
     }
   },
-  selectedModule: Module
+  selectedModule: Module,
+  shouldShowChildren: function(moduleData) {
+    var selectedModule = this.selectedModule;
+
+    // If the selected module and the module being tested are the same,
+    // then show children
+    if (moduleData === selectedModule) {
+      return true;
+    }
+
+    // If the parent has @subchildren, then show this module’s children
+    if (moduleData.parentModule.subchildren) {
+      return true;
+    }
+
+    // Otherwise, walk up the tree to determine if any of the selected module’s
+    // parents are equal to the one being tested
+    var parent = (selectedModule) ? selectedModule.parentModule : null;
+    while (parent) {
+      if (parent === moduleData) {
+        return true;
+      }
+      parent = parent.parentModule;
+    }
+
+    return false;
+  }
 });
