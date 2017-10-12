@@ -247,25 +247,13 @@ function navigate(href, updateLocation) {
 			if (!$content.length) {
 				window.location.reload();
 			}
-			var $nav = $content.find("#left > .bottom .nav-menu > ul"),
-					$article = $content.find("article"),
-					$breadcrumb = $content.find(".breadcrumb"),
-					homeLink = $content.find(".logo > a").attr('href'),
-					$navReplace = $("#left > .bottom .nav-menu > ul"),
+			var $article = $content.find("article");
+			var $breadcrumb = $content.find(".breadcrumb");
+			var homeLink = $content.find(".logo > a").attr('href');
 
-					//root elements - use .filter; not .find
-					$pathPrefixDiv = $content.filter("[path-prefix]");
+			//root elements - use .filter; not .find
+			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
-
-			//if any page doesn't have a nav, replacing it won't work,
-			//and the nav will be gone for any subsequent page visits
-			if ($nav && $nav.length) {
-				if ($navReplace && $navReplace.length) {
-					$navReplace.replaceWith($nav);
-				} else {
-					$("#left > .bottom").append($nav);
-				}
-			}
 			$("article").replaceWith($article);
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
