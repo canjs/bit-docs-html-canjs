@@ -51,11 +51,6 @@ var Module = DefineMap.extend({
       return [];
     }
   },
-  classList: {
-    get: function() {
-      return '';// TODO
-    }
-  },
   description: 'string',
   dest: 'string',
   isGroup: {
@@ -84,11 +79,10 @@ var Module = DefineMap.extend({
 });
 
 module.exports = DefineMap.extend({
-  children: {
-    get: function() {
-      var rootModule = this.rootModule || {};
-      return rootModule.children || [];
-    }
+  shouldShowChildren: function(moduleData) {
+    var selectedModule = this.selectedModule;
+    // TODO: this should be true of parents of selected grandchildren
+    return moduleData === selectedModule;
   },
   moduleMap: {
     type: 'any',
@@ -136,5 +130,6 @@ module.exports = DefineMap.extend({
 
       return searchMap;
     }
-  }
+  },
+  selectedModule: Module
 });
