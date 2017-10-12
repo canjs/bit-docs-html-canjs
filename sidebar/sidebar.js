@@ -3,6 +3,8 @@ var events = require('./sidebar.events');
 var template = require('./sidebar.stache!steal-stache');
 var ViewModel = require('./sidebar.viewmodel');
 
+require('../static/canjs.less!steal-less');
+
 module.exports = Component.extend({
   events: events,
   tag: 'canjs-sidebar',

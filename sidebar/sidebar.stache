@@ -16,7 +16,7 @@
             ">
               <a {{data "moduleData"}}
                 class="{{child.type}}"
-                href="{{child.url}}"
+                href="{{child.dest}}{{child.url}}"
                 title="{{child.linkTitle}}"
               >
                 {{child.shortTitle}}

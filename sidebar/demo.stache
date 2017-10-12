@@ -1,0 +1,7 @@
+<div id="everything">
+  <div class="column" id="left">
+    <div class="bottom">
+      <canjs-sidebar class="nav-menu" searchMap:from="searchMap" />
+    </div>
+  </div>
+</div>

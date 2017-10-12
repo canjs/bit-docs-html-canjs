@@ -3,8 +3,11 @@ var assign = require("can-util/js/assign/");
 var Control = require("can-control");
 var LoadingBar = require('./loading-bar');
 var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
+var stache = require('can-stache');
 var joinURIs = require("can-util/js/join-uris/");
 var currentIndexVersion = 4;// Bump this whenever the index code is changed
+
+require("../sidebar/sidebar");
 
 var Search = Control.extend({
 
@@ -94,6 +97,7 @@ var Search = Control.extend({
 			self.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject){
 				self.getSearchMap(options.pathPrefix + options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
 					self.initSearchEngine(searchMap);
+					self.initSidebar(searchMap);// TODO: this is not the file where this should be initialized
 					resolve(searchMap);
 				}, function(error){
 					console.error("getSearchMap error", error);
@@ -367,6 +371,19 @@ var Search = Control.extend({
 				index: index,
 				items: this.convertSearchMapToIndexableItems(searchMap)
 			});
+		}
+	},
+	initSidebar: function(searchMap) {// TODO: this is not the file where this should happen
+		var currentMenu = document.querySelector('.nav-menu');
+		if (currentMenu) {// This can be undefined in tests
+			var renderer = stache('<canjs-sidebar class="nav-menu" searchMap:from="searchMap" />');
+			var fragment = renderer({searchMap: searchMap});
+			var parentContainer = currentMenu.parentElement;
+			parentContainer.insertBefore(fragment, currentMenu);
+			var sidebarElement = document.querySelector('canjs-sidebar');
+			var socialContainer = currentMenu.querySelector('.social-side-container');
+			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
+			currentMenu.remove();
 		}
 	},
 
