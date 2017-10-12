@@ -106,6 +106,19 @@ module.exports = DefineMap.extend({
       return {};
     }
   },
+  pathPrefix: {
+    type: 'string',
+    value: '',
+    set: function(pathPrefix) {
+      if (pathPrefix) {
+        if (pathPrefix.substr(-1) !== '/') {
+          return pathPrefix + '/';
+        }
+        return pathPrefix;
+      }
+      return '';
+    }
+  },
   rootModule: {
     get: function() {
       var moduleMap = this.moduleMap || {};

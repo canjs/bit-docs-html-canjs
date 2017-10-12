@@ -5,10 +5,9 @@ $ = require("jquery");
 var debounce = require("lodash/debounce");
 var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
+var SidebarComponent = require("../sidebar/sidebar");
 var stache = require('can-stache');
 var SurveyAdControl = require('./survey-ad');
-
-require("../sidebar/sidebar");
 
 // state
 var $articleContainer,
@@ -27,8 +26,8 @@ var $articleContainer,
 	scrollPositionInterval,
 	currentHref,
 	searchControl,
+	sidebarViewModel,
 	surveyAdControl,
-	hasInstantiatedSidebar,
 	hasShownSearch;
 
 (function() {
@@ -127,16 +126,20 @@ function init() {
 	}
 
 	// Set up the client-side sidebar nav
-	if (!hasInstantiatedSidebar) {
-		hasInstantiatedSidebar = true;
+	if (!sidebarViewModel) {
+		sidebarViewModel = new SidebarComponent.ViewModel({
+			pathPrefix: window.pathPrefix
+		});
+
 		searchControl.getSearchMap().then(function(searchMap) {
+			sidebarViewModel.searchMap = searchMap;
 
 			// Find the current menu that contains social-side-container and a ul
 			var currentMenu = document.querySelector('.nav-menu');
 
 			// Construct the new sidebar DOM fragment
-			var renderer = stache('<canjs-sidebar class="nav-menu" searchMap:from="searchMap" />');
-			var fragment = renderer({searchMap: searchMap});
+			var renderer = stache('<canjs-sidebar class="nav-menu" pathPrefix:from="pathPrefix" searchMap:from="searchMap" />');
+			var fragment = renderer(sidebarViewModel);
 
 			// Add the new sidebar before the current menu
 			var parentContainer = currentMenu.parentElement;
@@ -177,6 +180,12 @@ function setPathPrefix(){
 	if($pathPrefix && $pathPrefix.length){
 		pathPrefix = $pathPrefix.attr("path-prefix");
 		if(pathPrefix && pathPrefix.length){
+			if (searchControl) {
+				searchControl.options.pathPrefix = window.pathPrefix;
+			}
+			if (sidebarViewModel) {
+				sidebarViewModel.pathPrefix = pathPrefix;
+			}
 			window.pathPrefix = pathPrefix;
 		}
 	}
@@ -309,7 +318,6 @@ function navigate(href, updateLocation) {
 			init();
 			setDocTitle();
 
-			searchControl.options.pathPrefix = window.pathPrefix;
 			if(searchControl.searchResultsCache){
 				searchControl.renderSearchResults(searchControl.searchResultsCache);
 			}
