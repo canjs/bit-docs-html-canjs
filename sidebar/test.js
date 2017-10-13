@@ -1,3 +1,4 @@
+var PageModel = require('./page-model');
 var QUnit = require('steal-qunit');
 var searchMap = require('../doc/searchMap.json');
 var stache = require('can-stache');
@@ -7,20 +8,39 @@ require('./sidebar');
 
 QUnit.module('canjs-sidebar');
 
+QUnit.test('Page model returns correct visibleChildren', function(assert) {
+  var pageInCoreCollection = new PageModel({collection: 'core'});
+  var pageInInfrastructureCollection = new PageModel({collection: 'infrastructure'});
+  var parentPage = new PageModel({
+    name: 'api'
+  });
+  var page = new PageModel({
+    isCollapsed: false,
+    parentPage: parentPage,
+    unsortedChildren: [pageInCoreCollection, pageInInfrastructureCollection]
+  });
+
+  assert.deepEqual(page.sortedChildren, page.visibleChildren, 'sortedChildren == visibleChildren');
+
+  page.isCollapsed = true;
+  assert.ok(page.sortedChildren.length > page.visibleChildren.length, 'isCollapsed = true makes visibleChildren ⊂ sortedChildren');
+  assert.strictEqual(page.visibleChildren[0], pageInCoreCollection, 'visibleChildren contains page from Core collection');
+});
+
 QUnit.test('Search map is parsed', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
-  assert.ok(vm.moduleMap, 'moduleMap property is set');
-  assert.ok(vm.rootModule, 'rootModule property is set');
-  var childrenLength = vm.rootModule.children.length;
-  assert.ok(childrenLength > 1 && childrenLength < 10, 'rootModule has a reasonable number of children');
+  assert.ok(vm.pageMap, 'pageMap property is set');
+  assert.ok(vm.rootPage, 'rootPage property is set');
+  var childrenLength = vm.rootPage.sortedChildren.length;
+  assert.ok(childrenLength > 1 && childrenLength < 10, 'rootPage has a reasonable number of children');
 });
 
 QUnit.test('Parents with @subchildren should show their grandchildren', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
-  var moduleMap = vm.moduleMap;
-  var guidesPage = moduleMap['guides'];
-  var recipesGroup = moduleMap['guides/recipes'];
-  vm.selectedModule = guidesPage;
+  var pageMap = vm.pageMap;
+  var guidesPage = pageMap['guides'];
+  var recipesGroup = pageMap['guides/recipes'];
+  vm.selectedPage = guidesPage;
   assert.notOk(vm.isExpanded(recipesGroup), 'child is not expanded');
   assert.ok(vm.shouldShowChildren(recipesGroup), 'child shows its children');
 });
@@ -30,7 +50,7 @@ QUnit.test('Only top-level children are initially rendered', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
   var fragment = renderer(vm);
   var links = fragment.querySelectorAll('li');
-  assert.strictEqual(links.length, vm.rootModule.children.length, 'number of children and links are equal');
+  assert.strictEqual(links.length, vm.rootPage.sortedChildren.length, 'number of children and links are equal');
 });
 
 QUnit.test('When an item is selected, its children should be shown', function(assert) {

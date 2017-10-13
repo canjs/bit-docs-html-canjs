@@ -1,7 +1,7 @@
 {{<listTemplate}}
-  {{#if ./children.length}}
+  {{#if ./visibleChildren.length}}
     <ul>
-      {{#each ./children child=value}}
+      {{#each ./visibleChildren child=value}}
         {{^if child.hide}}
           {{#if child.isGroup}}
             <li>
@@ -10,17 +10,26 @@
             </li>
           {{else}}
             <li class="
-              {{#eq child selectedModule}}current{{/eq}}
+              {{#eq child selectedPage}}current{{/eq}}
               {{#if isExpanded(child)}}expanded{{/if}}
-              {{#if child.children.length}}parent{{/if}}
+              {{#if child.sortedChildren.length}}parent{{/if}}
             ">
-              <a {{data "moduleData"}}
+              <a {{data "page"}}
                 class="{{child.type}}"
                 href="{{pathPrefix}}{{child.url}}"
                 title="{{child.linkTitle}}"
               >
                 {{child.shortTitle}}
               </a>
+              {{#if child.isCollapsible}}
+                <button on:click="child.collapse()">
+                  {{#if child.isCollapsed}}
+                    +
+                  {{else}}
+                    -
+                  {{/if}}
+                </button>
+              {{/if}}
               {{#if shouldShowChildren(child)}}
                 {{>listTemplate child}}
               {{/if}}
@@ -32,4 +41,4 @@
   {{/if}}
 {{/listTemplate}}
 
-{{>listTemplate rootModule}}
+{{>listTemplate rootPage}}
