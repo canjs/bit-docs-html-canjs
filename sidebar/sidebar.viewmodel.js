@@ -84,6 +84,17 @@ module.exports = DefineMap.extend({
     }
   },
   selectedPage: PageModel,
+  selectedPageName: {
+    type: 'string',
+    get: function(selectedPageName) {
+      var selectedPage = this.selectedPage;
+      return selectedPage && selectedPage.name || selectedPageName || '';
+    },
+    set: function(selectedPageName) {
+      this.selectedPage = this.pageMap[selectedPageName];
+      return selectedPageName;
+    }
+  },
   shouldShowChildren: function(page) {
     var selectedPage = this.selectedPage;
 

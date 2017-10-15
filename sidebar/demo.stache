@@ -1,7 +1,17 @@
+{{#each pages page=value}}
+  <button on:click="setSelectedPageName(page.name)">
+    {{page.name}}
+  </button>
+{{/each}}
+
 <div id="everything">
   <div class="column" id="left">
     <div class="bottom">
-      <canjs-sidebar class="nav-menu" searchMap:from="searchMap" />
+      <canjs-sidebar
+        class="nav-menu"
+        searchMap:from="searchMap"
+        selectedPageName:bind="selectedPageName"
+      />
     </div>
   </div>
 </div>

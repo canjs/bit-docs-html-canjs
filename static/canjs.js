@@ -138,7 +138,7 @@ function init() {
 			var currentMenu = document.querySelector('.nav-menu');
 
 			// Construct the new sidebar DOM fragment
-			var renderer = stache('<canjs-sidebar class="nav-menu" pathPrefix:from="pathPrefix" searchMap:from="searchMap" />');
+			var renderer = stache('<canjs-sidebar class="nav-menu" pathPrefix:from="pathPrefix" searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
 			var fragment = renderer(sidebarViewModel);
 
 			// Add the new sidebar before the current menu
@@ -155,6 +155,11 @@ function init() {
 		}, function(error) {
 			console.error('Failed to get search map with error:', error);
 		});
+	}
+
+	// Update the selected page in the sidebar
+	if (window.docObject) {
+		sidebarViewModel.selectedPageName = window.docObject.name;
 	}
 
 	if (!surveyAdControl) {

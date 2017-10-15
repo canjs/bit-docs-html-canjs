@@ -41,4 +41,6 @@
   {{/if}}
 {{/listTemplate}}
 
-{{>listTemplate rootPage}}
+{{#if rootPage}}
+  {{>listTemplate rootPage}}
+{{/if}}

@@ -53,6 +53,17 @@ QUnit.test('Only top-level children are initially rendered', function(assert) {
   assert.strictEqual(links.length, vm.rootPage.sortedChildren.length, 'number of children and links are equal');
 });
 
+QUnit.test('Correct page is selected after “asynchonously” setting the searchMap', function(assert) {
+  var renderer = stache('<canjs-sidebar searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
+  var vm = new ViewModel({selectedPageName: 'about'});
+  vm.searchMap = searchMap;
+  var fragment = renderer(vm);
+  var currentPage = fragment.querySelector('.current');
+  assert.ok(currentPage, 'page is selected when searchMap is provided');
+  var currentPageTitle = currentPage.querySelector('a').textContent.trim();
+  assert.strictEqual('About', currentPageTitle, 'correct page is selected');
+});
+
 QUnit.test('When an item is selected, its children should be shown', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});
