@@ -17,7 +17,7 @@
               <a {{data "page"}}
                 class="{{child.type}}"
                 href="{{pathPrefix}}{{child.url}}"
-                title="{{child.linkTitle}}"
+                title="{{child.descriptionWithoutHTML}}"
               >
                 {{child.shortTitle}}
               </a>

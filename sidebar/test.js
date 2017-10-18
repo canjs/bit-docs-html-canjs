@@ -8,6 +8,13 @@ require('./sidebar');
 
 QUnit.module('canjs-sidebar');
 
+QUnit.test('Page model has descriptionWithoutHTML property', function(assert) {
+  var page = new PageModel({
+    description: '<a href="">link text</a>'
+  });
+  assert.strictEqual(page.descriptionWithoutHTML, 'link text', 'descriptionWithoutHTML is correct');
+});
+
 QUnit.test('Page model returns correct visibleChildren', function(assert) {
   var pageInCoreCollection = new PageModel({collection: 'core'});
   var pageInInfrastructureCollection = new PageModel({collection: 'infrastructure'});

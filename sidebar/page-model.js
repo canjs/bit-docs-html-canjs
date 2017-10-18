@@ -7,6 +7,16 @@ module.exports = DefineMap.extend({
     this.isCollapsed = (this.isCollapsed) ? false : true;
   },
   description: 'string',
+  descriptionWithoutHTML: {
+    get: function() {
+      if (!this.description) {
+        return '';
+      }
+      var div = document.createElement('div');
+      div.innerHTML = this.description;
+      return div.innerText.trim() || '';
+    }
+  },
   dest: 'string',
   isCollapsed: {
     type: 'boolean',
@@ -23,11 +33,6 @@ module.exports = DefineMap.extend({
     type: 'boolean',
     get: function() {
       return ['group', 'prototype', 'static'].indexOf(this.type) !== -1;
-    }
-  },
-  linkTitle: {
-    get: function() {
-      return this.description;// TODO
     }
   },
   name: {
