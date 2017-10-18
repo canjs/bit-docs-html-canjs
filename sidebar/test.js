@@ -15,6 +15,67 @@ QUnit.test('Page model has descriptionWithoutHTML property', function(assert) {
   assert.strictEqual(page.descriptionWithoutHTML, 'link text', 'descriptionWithoutHTML is correct');
 });
 
+QUnit.test('Page model has shortTitle property', function(assert) {
+  var canConnect = new PageModel({
+    name: 'can-connect',
+    title: '',
+    type: 'module'
+  });
+  var canConnectBehaviors = new PageModel({
+    name: 'can-connect.behaviors',
+    parentPage: canConnect,
+    title: 'behaviors',
+    type: 'group'
+  });
+  var canConnectModules = new PageModel({
+    name: 'can-connect.modules',
+    parentPage: canConnect,
+    title: 'modules',
+    type: 'group'
+  });
+  var canUtil = new PageModel({
+    name: 'can-util',
+    title: '',
+    type: 'module'
+  });
+  var canUtilDOM = new PageModel({
+    name: 'can-util/dom',
+    parentPage: canUtil,
+    title: 'can-util/dom',
+    type: 'group'
+  });
+  var canUtilDOMEvents = new PageModel({
+    name: 'can-util/dom/events/events',
+    parentPage: canUtilDOM,
+    title: 'events',
+    type: 'module'
+  });
+
+  var canConnectBase = new PageModel({
+    name: 'can-connect/base/base',
+    parentPage: canConnectBehaviors,
+    title: 'base',
+    type: 'module'
+  });
+  assert.strictEqual(canConnectBase.shortTitle, './base/', 'correct for can-connect/base/base');
+
+  var canConnectHelpersMapDeepMerge = new PageModel({
+    name: 'can-connect/helpers/map-deep-merge',
+    parentPage: canConnectModules,
+    title: 'map-deep-merge',
+    type: 'module'
+  });
+  assert.strictEqual(canConnectHelpersMapDeepMerge.shortTitle, './helpers/map-deep-merge', 'correct for can-connect/helpers/map-deep-merge');
+
+  var canUtilDOMEventsAttributes = new PageModel({
+    name: 'can-util/dom/events/attributes/attributes',
+    parentPage: canUtilDOMEvents,
+    title: 'attributes',
+    type: 'module'
+  });
+  assert.strictEqual(canUtilDOMEventsAttributes.shortTitle, './attributes/', 'correct for can-util/dom/events/attributes/attributes');
+});
+
 QUnit.test('Page model returns correct visibleChildren', function(assert) {
   var pageInCoreCollection = new PageModel({collection: 'core'});
   var pageInInfrastructureCollection = new PageModel({collection: 'infrastructure'});

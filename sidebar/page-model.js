@@ -1,5 +1,41 @@
 var DefineMap = require('can-define/map/map');
 
+var stringEndsWith = function(string, searchString) {
+  return string.substr(0 - searchString.length) === searchString;
+};
+
+var getShortTitleForNameWithParent = function(name, parent) {
+  var parentName = parent && parent.name || '';
+
+  var parentNameWithSlash = parentName + '/';
+  if (name.indexOf(parentNameWithSlash) === 0) {
+    name = name.replace(parentNameWithSlash, './');
+
+  } else {
+    var indexOfLastSlashInParentName = parentName.lastIndexOf('/');
+    var parentNameAfterLastSlash = (indexOfLastSlashInParentName > 0) ? parentName.substr(indexOfLastSlashInParentName + 1) : '';
+    var parentNameBeforeLastSlash = (indexOfLastSlashInParentName > 0) ? parentName.substr(0, indexOfLastSlashInParentName) : '';
+    var parentNameWithLastSlash = parentNameBeforeLastSlash + '/';
+
+    if (parentNameAfterLastSlash && stringEndsWith(parentNameBeforeLastSlash, parentNameAfterLastSlash) && name.indexOf(parentNameWithLastSlash) === 0) {
+      name = name.replace(parentNameWithLastSlash, './');
+
+    } else {
+      return;
+    }
+  }
+
+  var indexOfLastSlashInName = name.lastIndexOf('/');
+  var nameAfterLastSlash = (indexOfLastSlashInName > 0) ? name.substr(indexOfLastSlashInName + 1) : '';
+  var nameWithDoubleSlashes = '/' + nameAfterLastSlash + '/' + nameAfterLastSlash;
+  if (stringEndsWith(name, nameWithDoubleSlashes)) {
+    var nameBeforeLastSlash = (indexOfLastSlashInName > 0) ? name.substr(0, indexOfLastSlashInName) : '';
+    return nameBeforeLastSlash + '/';
+  } else {
+    return name;
+  }
+};
+
 module.exports = DefineMap.extend({
   seal: false
 }, {
@@ -44,7 +80,22 @@ module.exports = DefineMap.extend({
   parentPage: 'any',
   shortTitle: {
     get: function() {
-      return this.title || this.name;// TODO
+      var name = this.name;
+      var title = this.title;
+
+      if (this.type === 'module') {
+        var nameFromParent;
+        var parent = this.parentPage;
+        while (parent) {
+          nameFromParent = getShortTitleForNameWithParent(name, parent);
+          parent = (nameFromParent) ? null : parent.parentPage;
+        }
+        if (nameFromParent) {
+          return nameFromParent;
+        }
+      }
+
+      return title || name;
     }
   },
   sortedChildren: {
