@@ -1,3 +1,4 @@
+var localStorage = require('./local-storage');
 var PageModel = require('./page-model');
 var QUnit = require('steal-qunit');
 var searchMap = require('../doc/searchMap.json');
@@ -93,6 +94,28 @@ QUnit.test('Page model returns correct visibleChildren', function(assert) {
   page.isCollapsed = true;
   assert.ok(page.sortedChildren.length > page.visibleChildren.length, 'isCollapsed = true makes visibleChildren ⊂ sortedChildren');
   assert.strictEqual(page.visibleChildren[0], pageInCoreCollection, 'visibleChildren contains page from Core collection');
+});
+
+QUnit.test('Page model persists expanded state', function(assert) {
+  localStorage.clear();
+  var page = new PageModel({
+    name: 'test'
+  });
+  assert.ok(page.isCollapsed, 'pages are collapsed by default');
+
+  // When collapse() is called, localStorage should be updated
+  page.collapse();
+  assert.notOk(page.isCollapsed, 'collapse method works');
+  assert.ok(localStorage.getItem('canjs-expanded-test'), 'expanded state is persisted');
+
+  // Programmatic changes to isCollapsed do not affect localStorage
+  page.isCollapsed = true;
+  assert.ok(localStorage.getItem('canjs-expanded-test'), 'programmatic changes to isCollapsed are not persisted');
+
+  // Collapsed pages are not stored in localStorage, only expanded pages
+  page.isCollapsed = false;
+  page.collapse();
+  assert.notOk(localStorage.getItem('canjs-expanded-test'), 'collapsed state is persisted');
 });
 
 QUnit.test('Search map is parsed', function(assert) {

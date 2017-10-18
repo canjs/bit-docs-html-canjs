@@ -1,7 +1,8 @@
 var DefineMap = require('can-define/map/map');
+var localStorage = require('./local-storage');
 
-var stringEndsWith = function(string, searchString) {
-  return string.substr(0 - searchString.length) === searchString;
+var expandedStorageKeyForName = function(name) {
+  return 'canjs-expanded-' + name;
 };
 
 var getShortTitleForNameWithParent = function(name, parent) {
@@ -36,11 +37,23 @@ var getShortTitleForNameWithParent = function(name, parent) {
   }
 };
 
+var stringEndsWith = function(string, searchString) {
+  return string.substr(0 - searchString.length) === searchString;
+};
+
 module.exports = DefineMap.extend({
   seal: false
 }, {
   collapse: function() {
-    this.isCollapsed = (this.isCollapsed) ? false : true;
+    var isCollapsed = this.isCollapsed = (this.isCollapsed) ? false : true;
+
+    // Persist expanded sections
+    var storageKey = expandedStorageKeyForName(this.name);
+    if (isCollapsed) {
+      localStorage.removeItem(storageKey);
+    } else {
+      localStorage.setItem(storageKey, true);
+    }
   },
   description: 'string',
   descriptionWithoutHTML: {
@@ -56,7 +69,14 @@ module.exports = DefineMap.extend({
   dest: 'string',
   isCollapsed: {
     type: 'boolean',
-    value: true,
+    get: function(lastSetValue) {
+      if (lastSetValue === undefined) {
+        var storageKey = expandedStorageKeyForName(this.name);
+        var isExpanded = localStorage.getItem(storageKey);
+        return (isExpanded) ? false : true;
+      }
+      return lastSetValue;
+    },
     set: function(isCollapsed) {
       if (isCollapsed === false) {
         var parent = this.parentPage;
