@@ -56,7 +56,16 @@ module.exports = DefineMap.extend({
   dest: 'string',
   isCollapsed: {
     type: 'boolean',
-    value: true
+    value: true,
+    set: function(isCollapsed) {
+      if (isCollapsed === false) {
+        var parent = this.parentPage;
+        if (parent) {
+          parent.isCollapsed = false;
+        }
+      }
+      return isCollapsed;
+    }
   },
   isCollapsible: {
     type: 'boolean',

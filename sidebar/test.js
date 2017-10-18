@@ -113,6 +113,16 @@ QUnit.test('Parents with @subchildren should show their grandchildren', function
   assert.ok(vm.shouldShowChildren(recipesGroup), 'child shows its children');
 });
 
+QUnit.test('When a child item is selected, its parent should not be collapsed', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var pageMap = vm.pageMap;
+  var canAjaxPage = pageMap['can-ajax'];
+  var canAjaxParent = canAjaxPage.parentPage;
+  assert.ok(canAjaxParent.isCollapsed, 'parent is collapsed beforehand');
+  vm.selectedPage = canAjaxPage;
+  assert.notOk(canAjaxParent.isCollapsed, 'parent is not collapsed afterwards');
+});
+
 QUnit.test('Only top-level children are initially rendered', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});
@@ -149,11 +159,17 @@ QUnit.test('When a child item is selected, it should still be visible', function
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});
   var fragment = renderer(vm);
+
+  // Click on the first link (About)
   var firstLink = fragment.querySelector('a');
   firstLink.click();
+
+  // Click on the first link under About (Mission)
   var firstLinkParent = firstLink.parentElement;
   var firstChildLink = firstLinkParent.querySelector('ul').querySelector('a');
   firstChildLink.click();
+
+  // Check to make sure everything looks ok
   var firstLinkParentChildrenLinks = firstLinkParent.querySelectorAll('li');
   assert.ok(firstLinkParent.classList.contains('expanded'), 'parent has expanded class');
   assert.ok(firstLinkParentChildrenLinks.length > 0, 'parent has children');

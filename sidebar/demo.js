@@ -13,7 +13,8 @@ var DemoViewModel = DefineMap.extend({
         searchMap['canjs'],
         searchMap['about'],
         searchMap['guides'],
-        searchMap['api']
+        searchMap['api'],
+        searchMap['can-ajax']
       ];
     }
   },

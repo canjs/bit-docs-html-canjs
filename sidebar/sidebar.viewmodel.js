@@ -83,7 +83,15 @@ module.exports = DefineMap.extend({
       return searchMap;
     }
   },
-  selectedPage: PageModel,
+  selectedPage: {
+    Type: PageModel,
+    set: function(selectedPage) {
+      if (selectedPage) {
+        selectedPage.isCollapsed = false;
+      }
+      return selectedPage;
+    }
+  },
   selectedPageName: {
     type: 'string',
     get: function(selectedPageName) {
