@@ -10,10 +10,9 @@
             </li>
           {{else}}
             <li class="
-              {{#eq child selectedPage}}current{{/eq}}
               {{#if isExpanded(child)}}expanded{{/if}}
               {{#if child.sortedChildren.length}}parent{{/if}}
-            ">
+            " {{#eq child selectedPage}}selected-in-sidebar{{/eq}}>
               <a {{data "page"}}
                 class="{{child.type}}"
                 href="{{pathPrefix}}{{child.url}}"

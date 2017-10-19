@@ -1,9 +1,3 @@
-{{#each pages page=value}}
-  <button on:click="setSelectedPageName(page.name)">
-    {{page.name}}
-  </button>
-{{/each}}
-
 <div id="everything">
   <div class="column" id="left">
     <div class="bottom">
@@ -14,4 +8,12 @@
       />
     </div>
   </div>
+</div>
+
+<div id="demo-controls">
+  {{#each pages page=value}}
+    <button class="go-to-{{page.name}}" on:click="setSelectedPageName(page.name)">
+      {{page.name}}
+    </button>
+  {{/each}}
 </div>

@@ -1,8 +1,10 @@
+var FuncUnit = require('funcunit');
 var localStorage = require('./local-storage');
 var PageModel = require('./page-model');
 var QUnit = require('steal-qunit');
 var searchMap = require('../doc/searchMap.json');
 var stache = require('can-stache');
+var utils = require('./utils');
 var ViewModel = require('./sidebar.viewmodel');
 
 require('./sidebar');
@@ -159,7 +161,7 @@ QUnit.test('Correct page is selected after “asynchonously” setting the searc
   var vm = new ViewModel({selectedPageName: 'about'});
   vm.searchMap = searchMap;
   var fragment = renderer(vm);
-  var currentPage = fragment.querySelector('.current');
+  var currentPage = fragment.querySelector('[selected-in-sidebar]');
   assert.ok(currentPage, 'page is selected when searchMap is provided');
   var currentPageTitle = currentPage.querySelector('a').textContent.trim();
   assert.strictEqual('About', currentPageTitle, 'correct page is selected');
@@ -173,7 +175,7 @@ QUnit.test('When an item is selected, its children should be shown', function(as
   firstLink.click();
   var firstLinkParent = firstLink.parentElement;
   var firstLinkParentChildrenLinks = firstLinkParent.querySelectorAll('li');
-  assert.ok(firstLinkParent.classList.contains('current'), 'has current class');
+  assert.ok(firstLinkParent.hasAttribute('selected-in-sidebar'), 'has selected-in-sidebar attribute');
   assert.ok(firstLinkParent.classList.contains('expanded'), 'has expanded class');
   assert.ok(firstLinkParentChildrenLinks.length > 0, 'has children');
 });
@@ -196,4 +198,38 @@ QUnit.test('When a child item is selected, it should still be visible', function
   var firstLinkParentChildrenLinks = firstLinkParent.querySelectorAll('li');
   assert.ok(firstLinkParent.classList.contains('expanded'), 'parent has expanded class');
   assert.ok(firstLinkParentChildrenLinks.length > 0, 'parent has children');
+});
+
+QUnit.test('Sidebar scrolls to selected items', function(assert) {
+  var done = assert.async(1);
+
+  var timeout = 20000;
+  var timeoutID = setTimeout(function() {
+    assert.notOk(true, 'Test took longer than ' + timeout + 'ms; test timed out.');
+  }, timeout);
+
+  // Open the demo page in a new window
+  FuncUnit.open('../sidebar/demo.html', function() {
+
+    // Set the height & width of FuncUnit’s iframe
+    FuncUnit.frame.height = 200;
+    FuncUnit.frame.width = 600;
+
+    // Select the can-ajax page
+    FuncUnit('.go-to-can-ajax').click();
+
+    // Check to make sure the element is visible
+    FuncUnit('[selected-in-sidebar]').wait(function() {
+      var element = this[0];
+      if (!element) {
+        return false;
+      }
+      var rect = element.getBoundingClientRect();
+      return utils.rectIntersectsWithWindow(rect, FuncUnit.win);
+    }, function() {
+      clearTimeout(timeoutID);
+      assert.ok(true, 'did scroll to selected element');
+      done();
+    });
+  });
 });

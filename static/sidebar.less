@@ -52,6 +52,8 @@ img.social-icon-small{
 
 // ----- SIDE NAVIGATION -----
 #left > .bottom {
+	scroll-behavior: smooth;
+
 	ul {
 		padding-left: @gutter/1.5;
 		margin: 0;
@@ -70,11 +72,11 @@ img.social-icon-small{
 			}
 		}
 	}
-	.current > a, .expanded > a {
+	.current > a, .expanded > a, [selected-in-sidebar] > a {
 		font-weight: bold;
 		color: darken(@link-color,5%);
 	}
-	.current > a {
+	.current > a, [selected-in-sidebar] > a {
 		text-decoration: underline;
 		color: darken(@link-color,10%);
 	}

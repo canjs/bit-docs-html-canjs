@@ -88,8 +88,6 @@ var $articleContainer,
 			toggleNav();
 		}, 200);
 	}
-
-	scrollToCurrentMenuItem();
 })();
 
 // Touch support
@@ -171,13 +169,6 @@ function init() {
 	}
 
 	hasShownSearch = true;
-}
-
-function scrollToCurrentMenuItem(){
-	var currentPageLi = $('li.current');
-	if(currentPageLi.length){
-		$('.nav-menu').scrollTop(currentPageLi.offset().top - $('.nav-menu').offset().top);
-	}
 }
 
 function setPathPrefix(){
