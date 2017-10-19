@@ -22,7 +22,11 @@
                 {{child.shortTitle}}
               </a>
               {{#if child.isCollapsible}}
-                <button on:click="child.collapse()">
+                <button
+                  aria-label="{{#if child.isCollapsed}}Expand{{else}}Collapse{{/if}} section"
+                  aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
+                  on:click="child.collapse()"
+                >
                   {{#if child.isCollapsed}}
                     +
                   {{else}}
