@@ -66,7 +66,6 @@ module.exports = DefineMap.extend({
       return div.innerText.trim() || '';
     }
   },
-  dest: 'string',
   isCollapsed: {
     type: 'boolean',
     get: function(lastSetValue) {

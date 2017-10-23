@@ -177,7 +177,7 @@ function setPathPrefix(){
 		pathPrefix = $pathPrefix.attr("path-prefix");
 		if(pathPrefix && pathPrefix.length){
 			if (searchControl) {
-				searchControl.options.pathPrefix = window.pathPrefix;
+				searchControl.options.pathPrefix = pathPrefix;
 			}
 			if (sidebarViewModel) {
 				sidebarViewModel.pathPrefix = pathPrefix;
