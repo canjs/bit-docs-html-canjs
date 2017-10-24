@@ -33,15 +33,15 @@
                 {{>listTemplate child}}
               {{/if}}
               {{#if child.isCollapsible}}
-                <button
-                  aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
-                >
-                  {{#if child.isCollapsed}}
-                    More
-                  {{else}}
-                    Fewer
-                  {{/if}}
-                </button>
+                {{^if isExpanded(child)}}
+                  <button aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}">
+                    {{#if child.isCollapsed}}
+                      More
+                    {{else}}
+                      Fewer
+                    {{/if}}
+                  </button>
+                {{/if}}
               {{/if}}
             </li>
           {{/if}}
