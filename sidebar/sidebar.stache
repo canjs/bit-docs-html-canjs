@@ -4,16 +4,25 @@
       {{#each ./visibleChildren child=value}}
         {{^if child.hide}}
           {{#if child.isGroup}}
-            <li>
+            <li class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}">
               <span>{{child.shortTitle}}</span>
               {{>listTemplate child}}
             </li>
           {{else}}
-            <li class="
-              {{#if isExpanded(child)}}expanded{{/if}}
-              {{#if child.sortedChildren.length}}parent{{/if}}
-            " {{#eq child selectedPage}}selected-in-sidebar{{/eq}}>
-              <a {{data "page"}}
+            <li
+              {{data "page"}}
+              {{#eq child selectedPage}}selected-in-sidebar{{/eq}}
+              class="
+                {{#if isExpanded(child)}}expanded{{/if}}
+                {{#if child.parentPage.isCollapsible}}
+                  {{child.collection}}
+                  parent-is-collapsible
+                  unanimated
+                {{/if}}
+                {{#if child.sortedChildren.length}}parent{{/if}}
+              "
+            >
+              <a
                 class="{{child.type}}"
                 href="{{pathPrefix}}{{child.url}}"
                 title="{{child.descriptionWithoutHTML}}"
@@ -24,7 +33,6 @@
                 <button
                   aria-label="{{#if child.isCollapsed}}Expand{{else}}Collapse{{/if}} section"
                   aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
-                  on:click="child.collapse()"
                 >
                   {{#if child.isCollapsed}}
                     +

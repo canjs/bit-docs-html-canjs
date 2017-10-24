@@ -91,6 +91,7 @@ QUnit.test('Page model returns correct visibleChildren', function(assert) {
     unsortedChildren: [pageInCoreCollection, pageInInfrastructureCollection]
   });
 
+  assert.equal(page.sortedChildren.length, 4, 'sortedChildren has 2 additional children')
   assert.deepEqual(page.sortedChildren, page.visibleChildren, 'sortedChildren == visibleChildren');
 
   page.isCollapsed = true;

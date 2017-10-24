@@ -141,4 +141,38 @@ canjs-sidebar {
     right: 0 - @gutter;
     top: 0;
   }
+
+	.collection-group {
+		font-size: 80%;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	li + .collection-group {
+		margin-top: 1em;
+	}
+
+	.collection-group,
+	.collection-group > span,
+	.parent-is-collapsible,
+	.parent-is-collapsible > a {
+		display: block;
+		opacity: 1;
+		transition: all @transition-speed ease;
+	}
+	.collection-group > span {
+		height: 14px;
+	}
+	.parent-is-collapsible > a {
+		height: 24px;
+	}
+	.unanimated, .unanimated > a, .unanimated > span {
+		margin-bottom: 0;
+		margin-top: 0 !important;
+		opacity: 0;
+		padding-bottom: 0 !important;
+		padding-top: 0 !important;
+	}
+	.unanimated > a, .unanimated > span {
+		height: 0;
+	}
 }

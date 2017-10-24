@@ -37,11 +37,24 @@ var getShortTitleForNameWithParent = function(name, parent) {
   }
 };
 
+var sortByName = function(x, y) {
+  // “/” comes before “-”
+  var a = x.name.replace(/\//g, '!');
+  var b = y.name.replace(/\//g, '!');
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+};
+
 var stringEndsWith = function(string, searchString) {
   return string.substr(0 - searchString.length) === searchString;
 };
 
-module.exports = DefineMap.extend({
+var PageModel = DefineMap.extend({
   seal: false
 }, {
   collapse: function() {
@@ -128,42 +141,70 @@ module.exports = DefineMap.extend({
   },
   sortedChildren: {
     get: function() {
+      var sorted = [];
       var unsortedChildren = this.unsortedChildren;
 
-      // Logic taken from https://github.com/canjs/bit-docs-html-canjs/blob/00248c638b44458413fd70b0e14d4458fc1066d3/templates/helpers.js#L251-L289
-      var ordered = [];
-      var sorted = [];
+      // If this group is collapsible, then sort/group children by collection
+      if (this.isCollapsible) {
+        var collections = [];
+        var collectionGroup;
+        var collectionGroups = {};
 
-      unsortedChildren.forEach(function(child) {
-        if (child && typeof child.order === 'number') {
-          ordered.push(child);
-        } else {
-          sorted.push(child);
-        }
-      });
+        // Group by collection
+        unsortedChildren.forEach(function(child) {
+          var collection = child.collection;
+          collectionGroup = collectionGroups[collection];
+          if (!collectionGroup) {
+            collectionGroup = collectionGroups[collection] = {
+              name: collection,
+              pages: []
+            };
+            collections.push(collection);
+          }
+          collectionGroups[collection].pages.push(child);
+        });
 
-      // Sort alphabetically, “/” comes before “-”
-      sorted.sort(function(x, y) {
-        var a = x.name.replace(/\//g, '!');
-        var b = y.name.replace(/\//g, '!');
-        if (a < b) {
-          return -1;
-        }
-        if (a > b) {
-          return 1;
-        }
-        return 0;
-      });
+        // Sort the collections alphabetically (core, ecosystem, infrastructure, legacy)
+        collections.sort();
 
-      // Sort by docObject “ordered” property
-      ordered.sort(function(x, y) {
-        return x.order - y.order;
-      });
+        // Add all the collections and pages to the “sorted” array
+        collections.forEach(function(collection) {
+          collectionGroup = collectionGroups[collection];
+          sorted.push(new PageModel({
+            name: collection,
+            parentPage: this,
+            type: 'group'
+          }));
+          collectionGroup.pages.sort(sortByName);
+          sorted.push.apply(sorted, collectionGroup.pages);
+        }.bind(this));
 
-      // Insert ordered items to their index in the alphabetical array
-      ordered.forEach(function(child) {
-        sorted.splice(child.order, 0, child);
-      });
+      } else {
+
+        // Logic taken from https://github.com/canjs/bit-docs-html-canjs/blob/00248c638b44458413fd70b0e14d4458fc1066d3/templates/helpers.js#L251-L289
+        var ordered = [];
+
+        unsortedChildren.forEach(function(child) {
+          if (child && typeof child.order === 'number') {
+            ordered.push(child);
+          } else {
+            sorted.push(child);
+          }
+        });
+
+        // Sort alphabetically
+        sorted.sort(sortByName);
+
+        // Sort by docObject “ordered” property
+        ordered.sort(function(x, y) {
+          return x.order - y.order;
+        });
+
+        // Insert ordered items to their index in the alphabetical array
+        ordered.forEach(function(child) {
+          sorted.splice(child.order, 0, child);
+        });
+      }
 
       return sorted;
     }
@@ -187,3 +228,5 @@ module.exports = DefineMap.extend({
     }
   }
 });
+
+module.exports = PageModel;
