@@ -131,17 +131,16 @@ img.social-icon-small{
 
 // ----- CLIENT-SIDE COMPONENT -----
 canjs-sidebar {
-	button {
-		background: transparent;
-		cursor: pointer;
-		font-size: 80%;
-		margin: @gutter/3 0 @gutter;
-	}
-	ul + button {
-		margin: @gutter/3 0;
-		position: relative;
-		top: 0 - @gutter;
-	}
+  button {
+    background: transparent;
+    border: 0;
+    color: @link-color;
+    cursor: pointer;
+    padding: (@gutter * .25) @gutter (@gutter * .6);
+    position: absolute;
+    right: 0 - @gutter;
+    top: 0;
+  }
 
 	.collection-group {
 		font-size: 80%;
