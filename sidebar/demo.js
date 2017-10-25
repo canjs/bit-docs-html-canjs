@@ -14,6 +14,7 @@ var DemoViewModel = DefineMap.extend({
         searchMap['about'],
         searchMap['guides'],
         searchMap['api'],
+        searchMap['can-compute'],
         searchMap['can-ajax']
       ];
     }

@@ -9,7 +9,11 @@ var ViewModel = require('./sidebar.viewmodel');
 
 require('./sidebar');
 
-QUnit.module('canjs-sidebar');
+QUnit.module('canjs-sidebar', {
+  beforeEach: function() {
+    localStorage.clear();
+  }
+});
 
 QUnit.test('Page model has descriptionWithoutHTML property', function(assert) {
   var page = new PageModel({
@@ -100,7 +104,6 @@ QUnit.test('Page model returns correct visibleChildren', function(assert) {
 });
 
 QUnit.test('Page model persists expanded state', function(assert) {
-  localStorage.clear();
   var page = new PageModel({
     name: 'test'
   });
@@ -154,6 +157,15 @@ QUnit.test('When a purpose group page is selected, its expand/collapse button sh
   var vm = new ViewModel({searchMap: searchMap});
   var canObservablesPage = vm.pageMap['can-observables'];
   vm.selectedPage = canObservablesPage;
+  assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
+});
+
+QUnit.test('When a Core package is selected, its parent should not automatically be expanded', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var canComputePage = vm.pageMap['can-compute'];
+  var canObservablesPage = canComputePage.parentPage;
+  vm.selectedPage = canComputePage;
+  assert.ok(canObservablesPage.isCollapsed, 'parent page is collapsed');
   assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
 

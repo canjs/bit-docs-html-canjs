@@ -92,7 +92,9 @@ module.exports = DefineMap.extend({
         } else {
           var selectedParent = selectedPage.parentPage;
           if (selectedParent) {
-            selectedParent.isCollapsed = false;
+            if (selectedPage.collection !== 'core') {
+              selectedParent.isCollapsed = false;
+            }
           }
         }
       }
@@ -148,6 +150,11 @@ module.exports = DefineMap.extend({
       return page.childrenInCoreCollection.length > 0;
     }
 
-    return !this.isExpanded(page);
+    var pageIsExpanded = this.isExpanded(page);
+    if (pageIsExpanded) {
+      return page.childrenInCoreCollection.indexOf(this.selectedPage) > -1;
+    }
+
+    return true;
   }
 });
