@@ -29,20 +29,18 @@
               >
                 {{child.shortTitle}}
               </a>
-              {{#if child.isCollapsible}}
-                {{^if isExpanded(child)}}
-                  <button
-                    aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-                    aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
-                    title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-                  >
-                    {{#if child.isCollapsed}}
-                      +
-                    {{else}}
-                      -
-                    {{/if}}
+              {{#if shouldShowExpandCollapseButton(child)}}
+                <button
+                  aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+                  aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
+                  title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+                >
+                  {{#if child.isCollapsed}}
+                    +
+                  {{else}}
+                    -
+                  {{/if}}
                 </button>
-                {{/if}}
               {{/if}}
               {{#if shouldShowChildren(child)}}
                 {{>listTemplate child}}

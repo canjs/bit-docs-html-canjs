@@ -147,6 +147,14 @@ QUnit.test('When a child item is selected, its parent should not be collapsed', 
   assert.ok(canAjaxParent.isCollapsed, 'parent is collapsed beforehand');
   vm.selectedPage = canAjaxPage;
   assert.notOk(canAjaxParent.isCollapsed, 'parent is not collapsed afterwards');
+  assert.notOk(vm.shouldShowExpandCollapseButton(canAjaxParent), 'parent does not show expand/collapse button');
+});
+
+QUnit.test('When a purpose group page is selected, its expand/collapse button should be shown', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var canObservablesPage = vm.pageMap['can-observables'];
+  vm.selectedPage = canObservablesPage;
+  assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
 
 QUnit.test('Only top-level children are initially rendered', function(assert) {

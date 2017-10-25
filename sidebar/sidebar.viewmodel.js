@@ -86,8 +86,9 @@ module.exports = DefineMap.extend({
   selectedPage: {
     Type: PageModel,
     set: function(selectedPage) {
-      if (selectedPage) {
-        selectedPage.isCollapsed = false;
+      var selectedParent = (selectedPage) ? selectedPage.parentPage : null;
+      if (selectedParent) {
+        selectedParent.isCollapsed = false;
       }
       return selectedPage;
     }
@@ -128,5 +129,18 @@ module.exports = DefineMap.extend({
     }
 
     return false;
+  },
+  shouldShowExpandCollapseButton: function(page) {
+    if (!page.isCollapsible) {
+      return false;
+    }
+
+    // If the selected page and the page being tested are the same,
+    // then make sure the expand/collapse button is shown
+    if (page === this.selectedPage) {
+      return true;
+    }
+
+    return !this.isExpanded(page);
   }
 });
