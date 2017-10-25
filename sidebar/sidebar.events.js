@@ -30,6 +30,10 @@ module.exports = {
     var parentLi = element.parentElement;
     var page = domData.get.call(parentLi, 'page');
 
+    // Turn on the transition animation
+    parentLi.classList.add('transitions-on');
+    this.transitionsOnElement = parentLi;
+
     // If the page is collapsed, then uncollapse it and run the animation
     if (page.isCollapsed) {
       page.collapse();
@@ -53,6 +57,14 @@ module.exports = {
           page.collapse();
         }
       }, animationTime);
+    }
+  },
+
+  'li transitionend': function() {
+    // We want to turn off transitions after an animation ends
+    if (this.transitionsOnElement) {
+      this.transitionsOnElement.classList.remove('transitions-on');
+      this.transitionsOnElement = null;
     }
   },
 

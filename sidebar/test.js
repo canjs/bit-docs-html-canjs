@@ -209,7 +209,7 @@ QUnit.test('Sidebar scrolls to selected items', function(assert) {
     assert.notOk(true, 'Test took longer than ' + timeout + 'ms; test timed out.');
   }, timeout);
 
-  // Open the demo page in a new window
+  // Open the demo page in an iframe
   FuncUnit.open('../sidebar/demo.html', function() {
 
     // Set the height & width of FuncUnit’s iframe
@@ -230,6 +230,44 @@ QUnit.test('Sidebar scrolls to selected items', function(assert) {
     }, function() {
       clearTimeout(timeoutID);
       assert.ok(true, 'did scroll to selected element');
+      done();
+    });
+  });
+});
+
+QUnit.test('Sidebar animates opened sections', function(assert) {
+  var done = assert.async(1);
+
+  var timeout = 20000;
+  var timeoutID = setTimeout(function() {
+    assert.notOk(true, 'Test took longer than ' + timeout + 'ms; test timed out.');
+  }, timeout);
+
+  // Open the demo page in an iframe
+  FuncUnit.open('../sidebar/demo.html', function() {
+
+    // Set the height & width of FuncUnit’s iframe
+    FuncUnit.frame.height = 200;
+    FuncUnit.frame.width = 600;
+
+    // Select the API Docs page
+    FuncUnit('.go-to-api').click();
+
+    // Open up a section
+    FuncUnit('.parent .parent button').click();
+
+    // Check to make sure the element is visible
+    var firstHeight;
+    FuncUnit('.parent .parent ul').wait(function() {
+      var element = this[0];
+      var rect = element.getBoundingClientRect();
+      if (firstHeight) {
+        return firstHeight < rect.height;
+      }
+      firstHeight = rect.height;
+    }, function() {
+      clearTimeout(timeoutID);
+      assert.ok(true, 'did animate section opening');
       done();
     });
   });
