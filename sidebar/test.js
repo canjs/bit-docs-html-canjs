@@ -157,6 +157,13 @@ QUnit.test('When a purpose group page is selected, its expand/collapse button sh
   assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
 
+QUnit.test('When a collapsed purpose group page with no visible children is selected, it should be expanded', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var domUtilitiesPage = vm.pageMap['can-dom-utilities'];
+  vm.selectedPage = domUtilitiesPage;
+  assert.notOk(domUtilitiesPage.isCollapsed, 'page is not collapsed');
+});
+
 QUnit.test('Only top-level children are initially rendered', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});

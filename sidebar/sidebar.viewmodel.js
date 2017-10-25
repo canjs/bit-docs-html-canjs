@@ -86,9 +86,15 @@ module.exports = DefineMap.extend({
   selectedPage: {
     Type: PageModel,
     set: function(selectedPage) {
-      var selectedParent = (selectedPage) ? selectedPage.parentPage : null;
-      if (selectedParent) {
-        selectedParent.isCollapsed = false;
+      if (selectedPage) {
+        if (selectedPage.isCollapsed && selectedPage.visibleChildren.length === 0) {
+          selectedPage.isCollapsed = false;
+        } else {
+          var selectedParent = selectedPage.parentPage;
+          if (selectedParent) {
+            selectedParent.isCollapsed = false;
+          }
+        }
       }
       return selectedPage;
     }
