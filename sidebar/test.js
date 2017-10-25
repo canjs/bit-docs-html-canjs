@@ -162,6 +162,7 @@ QUnit.test('When a collapsed purpose group page with no visible children is sele
   var domUtilitiesPage = vm.pageMap['can-dom-utilities'];
   vm.selectedPage = domUtilitiesPage;
   assert.notOk(domUtilitiesPage.isCollapsed, 'page is not collapsed');
+  assert.notOk(vm.shouldShowExpandCollapseButton(domUtilitiesPage), 'expand/collapse button is not shown');
 });
 
 QUnit.test('Only top-level children are initially rendered', function(assert) {
@@ -200,7 +201,7 @@ QUnit.test('Children are shown when the sidebar is first initialized with a purp
     assert.notEqual(childContainerRect.height, 0, 'child container has height');
     document.body.removeChild(sidebarElement);// Don’t need it anymore
     done();
-  }, 100);
+  }, 500);
 });
 
 QUnit.test('When an item is selected, its children should be shown', function(assert) {

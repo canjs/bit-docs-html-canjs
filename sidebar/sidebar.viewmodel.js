@@ -142,9 +142,10 @@ module.exports = DefineMap.extend({
     }
 
     // If the selected page and the page being tested are the same,
-    // then make sure the expand/collapse button is shown
+    // then make sure the expand/collapse button is shown, unless
+    // the page doesn’t have any visible children
     if (page === this.selectedPage) {
-      return true;
+      return page.childrenInCoreCollection.length > 0;
     }
 
     return !this.isExpanded(page);

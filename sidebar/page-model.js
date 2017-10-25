@@ -57,6 +57,13 @@ var stringEndsWith = function(string, searchString) {
 var PageModel = DefineMap.extend({
   seal: false
 }, {
+  childrenInCoreCollection: {
+    get: function() {
+      return this.sortedChildren.filter(function(page) {
+        return page.collection === 'core';
+      });
+    }
+  },
   collapse: function() {
     var isCollapsed = this.isCollapsed = (this.isCollapsed) ? false : true;
 
@@ -222,9 +229,7 @@ var PageModel = DefineMap.extend({
       if (!this.isCollapsible || !this.isCollapsed) {
         return this.sortedChildren;
       }
-      return this.sortedChildren.filter(function(page) {
-        return page.collection === 'core';
-      });
+      return this.childrenInCoreCollection;
     }
   }
 });
