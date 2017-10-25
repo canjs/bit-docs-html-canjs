@@ -168,6 +168,26 @@ QUnit.test('Correct page is selected after “asynchonously” setting the searc
   assert.strictEqual('About', currentPageTitle, 'correct page is selected');
 });
 
+QUnit.test('Children are shown when the sidebar is first initialized with a purpose page selected', function(assert) {
+  var done = assert.async(1);
+  var renderer = stache('<canjs-sidebar searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
+  var vm = new ViewModel({
+    searchMap: searchMap,
+    selectedPageName: 'can-observables'
+  });
+  document.body.appendChild(renderer(vm));
+
+  // Need to wait to let the inserted event fire
+  setTimeout(function() {
+    var sidebarElement = document.body.querySelector('canjs-sidebar');
+    var childContainer = sidebarElement.querySelector('[selected-in-sidebar] ul');
+    var childContainerRect = childContainer.getBoundingClientRect();
+    assert.notEqual(childContainerRect.height, 0, 'child container has height');
+    document.body.removeChild(sidebarElement);// Don’t need it anymore
+    done();
+  }, 100);
+});
+
 QUnit.test('When an item is selected, its children should be shown', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" />');
   var vm = new ViewModel({searchMap: searchMap});

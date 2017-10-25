@@ -1,6 +1,8 @@
 var domData = require('can-util/dom/data/data');
 
 module.exports = {
+  '{element} inserted': 'animateElements',
+
   animateElements: function() {
     var element = this.element;
 
