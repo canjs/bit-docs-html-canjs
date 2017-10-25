@@ -4,16 +4,19 @@ module.exports = {
   '{element} inserted': 'animateElements',
 
   animateElements: function() {
-    var element = this.element;
-
     // Need to wait two animation frames for the animation to work correctly
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
-        var unanimatedElements = element.querySelectorAll('.unanimated');
-        unanimatedElements.forEach(function(unanimatedElement) {
-          unanimatedElement.classList.remove('unanimated');
-        });
-      });
+        this.animateElementsImmediately();
+      }.bind(this));
+    }.bind(this));
+  },
+
+  animateElementsImmediately: function() {
+    var element = this.element;
+    var unanimatedElements = element.querySelectorAll('.unanimated');
+    unanimatedElements.forEach(function(unanimatedElement) {
+      unanimatedElement.classList.remove('unanimated');
     });
   },
 
@@ -23,6 +26,13 @@ module.exports = {
 
     // Change the selected module
     viewModel.selectedPage = pageData;
+
+    // When the selectedPage changes, the DOM will be updated and may have some
+    // elements with the “unanimated” class, which would not be removed for two
+    // requestAnimationFrames. Calling animateElementsImmediately will cause the
+    // new elements to have their “unanimated” class instantly removed, which
+    // prevents them from displaying at 0 height for two frames.
+    this.animateElementsImmediately();
 
     // Prevent the default link action
     event.preventDefault();
