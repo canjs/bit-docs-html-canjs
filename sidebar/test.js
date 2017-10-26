@@ -104,10 +104,14 @@ QUnit.test('Page model returns correct visibleChildren', function(assert) {
 });
 
 QUnit.test('Page model persists expanded state', function(assert) {
-  var page = new PageModel({
-    name: 'test'
+  var apiPage = new PageModel({
+    name: 'api'
   });
-  assert.ok(page.isCollapsed, 'pages are collapsed by default');
+  var page = new PageModel({
+    name: 'test',
+    parentPage: apiPage
+  });
+  assert.ok(page.isCollapsed, 'pages under API Docs are collapsed by default');
 
   // When collapse() is called, localStorage should be updated
   page.collapse();
@@ -175,6 +179,15 @@ QUnit.test('When a collapsed purpose group page with no visible children is sele
   vm.selectedPage = domUtilitiesPage;
   assert.notOk(domUtilitiesPage.isCollapsed, 'page is not collapsed');
   assert.notOk(vm.shouldShowExpandCollapseButton(domUtilitiesPage), 'expand/collapse button is not shown');
+});
+
+QUnit.test('When docs in a package are selected, the group should still have the expand/collapse button', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var pageMap = vm.pageMap;
+  var canDefineTypesPage = pageMap['can-define.types'];
+  var canObservablesPage = pageMap['can-observables'];
+  vm.selectedPage = canDefineTypesPage;
+  assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
 
 QUnit.test('Only top-level children are initially rendered', function(assert) {

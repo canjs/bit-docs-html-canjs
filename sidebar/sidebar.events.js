@@ -56,10 +56,19 @@ module.exports = {
       // (which will cause the elements to be removed from the DOM)
 
       // Add the “unanimated” class to all the non-Core pages so they can be collapsed
-      var childPages = parentLi.querySelectorAll('ul li:not(.core)');
-      childPages.forEach(function(childPage) {
-        childPage.classList.add('unanimated');
-      });
+      var parentLiChildren = parentLi.children;
+      for (var i = 0; i < parentLiChildren.length; i++) {
+        var parentLiChild = parentLiChildren[i];
+        if (parentLiChild.tagName === 'UL') {
+          var ulChildren = parentLiChild.children;
+          for (var j = 0; j < ulChildren.length; j++) {
+            var ulChildClassList = ulChildren[j].classList;
+            if (ulChildClassList.contains('core') === false) {
+              ulChildClassList.add('unanimated');
+            }
+          }
+        }
+      }
 
       // Set a timer to collapse the section after the animation has run
       var animationTime = 250;// TODO: this should be set from @transition-speed

@@ -91,10 +91,8 @@ module.exports = DefineMap.extend({
           selectedPage.isCollapsed = false;
         } else {
           var selectedParent = selectedPage.parentPage;
-          if (selectedParent) {
-            if (selectedPage.collection !== 'core') {
-              selectedParent.isCollapsed = false;
-            }
+          if (selectedParent && selectedParent.isCollapsible && selectedPage.collection !== 'core') {
+            selectedParent.isCollapsed = false;
           }
         }
       }
@@ -145,14 +143,26 @@ module.exports = DefineMap.extend({
 
     // If the selected page and the page being tested are the same,
     // then make sure the expand/collapse button is shown, unless
-    // the page doesn’t have any visible children
-    if (page === this.selectedPage) {
+    // the page doesn’t have any children in the Core collection.
+    var selectedPage = this.selectedPage;
+    if (page === selectedPage) {
       return page.childrenInCoreCollection.length > 0;
     }
 
+    // If the page is expanded, then we need to check whether the selected page
+    // is a descendent of a Core package. If it is, then we want to show the
+    // expand/collapse button, otherwise it shouldn’t be shown.
     var pageIsExpanded = this.isExpanded(page);
     if (pageIsExpanded) {
-      return page.childrenInCoreCollection.indexOf(this.selectedPage) > -1;
+      var childrenInCoreCollection = page.childrenInCoreCollection;
+      var parent = selectedPage || null;
+      while (parent) {
+        if (childrenInCoreCollection.indexOf(parent) > -1) {
+          return true;
+        }
+        parent = parent.parentPage;
+      }
+      return false;
     }
 
     return true;

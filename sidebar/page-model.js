@@ -90,6 +90,9 @@ var PageModel = DefineMap.extend({
     type: 'boolean',
     get: function(lastSetValue) {
       if (lastSetValue === undefined) {
+        if (!this.isCollapsible) {
+          return false;
+        }
         var storageKey = expandedStorageKeyForName(this.name);
         var isExpanded = localStorage.getItem(storageKey);
         return (isExpanded) ? false : true;
