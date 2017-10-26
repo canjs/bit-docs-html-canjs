@@ -1,7 +1,7 @@
 var domData = require('can-util/dom/data/data');
 
 module.exports = {
-  '{element} inserted': 'animateElements',
+  '{element} inserted': 'animateElementsImmediately',
 
   animateElements: function() {
     // Need to wait two animation frames for the animation to work correctly
