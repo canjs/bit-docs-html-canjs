@@ -2,51 +2,51 @@
   {{#if ./visibleChildren.length}}
     <ul>
       {{#each ./visibleChildren child=value}}
-        {{^if child.hide}}
-          {{#if child.isGroup}}
-            <li class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}">
-              <span>{{child.shortTitle}}</span>
-              {{>listTemplate child}}
-            </li>
-          {{else}}
-            <li
-              {{data "page"}}
-              {{#eq child selectedPage}}selected-in-sidebar{{/eq}}
-              class="
-                {{#if isExpanded(child)}}expanded{{/if}}
-                {{#if child.parentPage.isCollapsible}}
-                  {{child.collection}}
-                  parent-is-collapsible
-                  unanimated
-                {{/if}}
-                {{#if child.sortedChildren.length}}parent{{/if}}
-              "
+        {{#if child.isGroup}}
+          <li class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}">
+            <span>{{child.shortTitle}}</span>
+            {{>listTemplate child}}
+          </li>
+        {{else}}
+          <li
+            {{data "page"}}
+            {{#eq child selectedPage}}selected-in-sidebar{{/eq}}
+            class="
+              {{#if isExpanded(child)}}expanded{{/if}}
+              {{#if child.parentPage.isCollapsible}}
+                {{child.collection}}
+                parent-is-collapsible
+                unanimated
+              {{/if}}
+              {{#if child.sortedChildren.length}}parent{{/if}}
+            "
+          >
+            <a
+              class="{{child.type}}"
+              href="{{pathPrefix}}{{child.url}}"
+              title="{{child.descriptionWithoutHTML}}"
             >
-              <a
-                class="{{child.type}}"
-                href="{{pathPrefix}}{{child.url}}"
-                title="{{child.descriptionWithoutHTML}}"
+              {{child.shortTitle}}
+            </a>
+            {{#if shouldShowExpandCollapseButton(child)}}
+              <button
+                aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+                aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
+                title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
               >
-                {{child.shortTitle}}
-              </a>
-              {{#if shouldShowExpandCollapseButton(child)}}
-                <button
-                  aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-                  aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
-                  title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-                >
+                <span tabindex="-1">
                   {{#if child.isCollapsed}}
                     +
                   {{else}}
                     -
                   {{/if}}
-                </button>
-              {{/if}}
-              {{#if shouldShowChildren(child)}}
-                {{>listTemplate child}}
-              {{/if}}
-            </li>
-          {{/if}}
+                </span>
+              </button>
+            {{/if}}
+            {{#if shouldShowChildren(child)}}
+              {{>listTemplate child}}
+            {{/if}}
+          </li>
         {{/if}}
       {{/each}}
     </ul>

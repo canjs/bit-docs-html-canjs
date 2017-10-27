@@ -67,7 +67,7 @@ img.social-icon-small{
 				padding-bottom: @gutter/5;
 				white-space: nowrap;
 			}
-			span {
+			> span {
 				color: @gray;
 				font-size: 90%;
 			}
@@ -132,16 +132,27 @@ img.social-icon-small{
 
 // ----- CLIENT-SIDE COMPONENT -----
 canjs-sidebar {
-  button {
-    background: transparent;
-    border: 0;
-    color: @link-color;
-    cursor: pointer;
-    padding: (@gutter * .25) @gutter (@gutter * .6);
-    position: absolute;
-    right: 0 - @gutter;
-    top: 0;
-  }
+	button {
+		background: transparent;
+		border: 0;
+		color: @link-color;
+		cursor: pointer;
+		padding: 0;
+		position: absolute;
+		right: 0 - @gutter;
+		top: 0;
+	}
+	button > span {
+		font-family: monospace;// makes the + / - buttons the same width
+		font-size: 130%;
+		padding: (@gutter * .25) @gutter (@gutter * .6);
+	}
+	button:focus, button > span:focus {
+		outline: 0;
+	}
+	button:focus > span {
+		outline: -webkit-focus-ring-color auto 5px;
+	}
 
 	.collection-group {
 		font-size: 80%;
@@ -167,6 +178,7 @@ canjs-sidebar {
 	}
 	.collection-group > span {
 		height: 14px;
+		margin-top: 2px;
 	}
 	.parent-is-collapsible > a {
 		height: 24px;
