@@ -59,7 +59,7 @@ newGroupings.forEach(function(grouping, order) {
     "description": grouping.name,
     "name": grouping.name,
     "title": grouping.title,
-    "type": "page",
+    "type": "group",
     "parent": "api",
     "order": order,
     "comment": " "
