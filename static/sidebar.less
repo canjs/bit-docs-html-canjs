@@ -71,6 +71,9 @@ img.social-icon-small{
 				color: @gray;
 				font-size: 90%;
 			}
+			&.collection-group > span {
+				color: lighten(@gray, 15%);
+			}
 		}
 	}
 	.current > a, .expanded > a, [selected-in-sidebar] > a {
@@ -99,7 +102,7 @@ img.social-icon-small{
 					padding-top: @gutter;
 				}
 				&.expanded.parent > a {
-					padding-bottom: @gutter/3;
+					padding-bottom: @gutter/2;
 				}
 				// Second level
 				> ul {
@@ -156,11 +159,8 @@ canjs-sidebar {
 
 	.collection-group {
 		font-size: 80%;
-		font-weight: bold;
+		margin-top: @gutter * 1.2;
 		text-transform: uppercase;
-	}
-	li + .collection-group {
-		margin-top: 1em;
 	}
 
 	.collection-group,
@@ -178,7 +178,6 @@ canjs-sidebar {
 	}
 	.collection-group > span {
 		height: 14px;
-		margin-top: 2px;
 	}
 	.parent-is-collapsible > a {
 		height: 24px;
@@ -192,5 +191,9 @@ canjs-sidebar {
 	}
 	.unanimated > a, .unanimated > span {
 		height: 0;
+	}
+
+	> ul > li > ul > li {
+		margin-bottom: @gutter;// Force space between the “purpose” groups
 	}
 }

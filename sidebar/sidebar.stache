@@ -3,8 +3,26 @@
     <ul>
       {{#each ./visibleChildren child=value}}
         {{#if child.isGroup}}
-          <li class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}">
+          <li
+            {{data "page"}}
+            class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}"
+          >
             <span>{{child.shortTitle}}</span>
+            {{#if shouldShowExpandCollapseButton(child)}}
+              <button
+                aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+                aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
+                title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+              >
+                <span tabindex="-1">
+                  {{#if child.isCollapsed}}
+                    +
+                  {{else}}
+                    -
+                  {{/if}}
+                </span>
+              </button>
+            {{/if}}
             {{>listTemplate child}}
           </li>
         {{else}}
@@ -28,21 +46,6 @@
             >
               {{child.shortTitle}}
             </a>
-            {{#if shouldShowExpandCollapseButton(child)}}
-              <button
-                aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-                aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
-                title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
-              >
-                <span tabindex="-1">
-                  {{#if child.isCollapsed}}
-                    +
-                  {{else}}
-                    -
-                  {{/if}}
-                </span>
-              </button>
-            {{/if}}
             {{#if shouldShowChildren(child)}}
               {{>listTemplate child}}
             {{/if}}

@@ -209,7 +209,9 @@ QUnit.test('Correct page is selected after “asynchonously” setting the searc
   assert.strictEqual('About', currentPageTitle, 'correct page is selected');
 });
 
-QUnit.test('Children are shown when the sidebar is first initialized with a purpose page selected', function(assert) {
+// Next test is skipped because the purpose pages are now groups and no longer selectable.
+// If this is the long-term decision, then this test can be permanently deleted.
+QUnit.skip('Children are shown when the sidebar is first initialized with a purpose page selected', function(assert) {
   var done = assert.async(1);
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
   var vm = new ViewModel({
@@ -315,11 +317,11 @@ QUnit.test('Sidebar animates opened sections', function(assert) {
     FuncUnit('.go-to-api').click();
 
     // Open up a section
-    FuncUnit('.parent .parent button').click();
+    FuncUnit('ul li ul li button').click();
 
     // Check to make sure the element is visible
     var firstHeight;
-    FuncUnit('.parent .parent ul').wait(function() {
+    FuncUnit('ul li ul li ul').wait(function() {
       var element = this[0];
       var rect = element.getBoundingClientRect();
       if (firstHeight) {
