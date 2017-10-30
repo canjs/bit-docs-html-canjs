@@ -379,7 +379,7 @@ var Search = Control.extend({
 		var items = [];
 
 		for (var itemKey in searchMap) {
-			if (searchMap.hasOwnProperty(itemKey)) {
+			if (searchMap.hasOwnProperty(itemKey) && searchMap[itemKey]['type'] !== 'group') {
 				var item = assign({}, searchMap[itemKey]);
 
 				// Convert HTML to text
