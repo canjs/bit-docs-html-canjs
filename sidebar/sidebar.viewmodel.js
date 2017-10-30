@@ -2,6 +2,11 @@ var DefineMap = require('can-define/map/map');
 var PageModel = require('./page-model');
 
 module.exports = DefineMap.extend({
+  descriptionForCollection: function(page) {
+    var collection = this.pageMap[page.name];
+    return collection.descriptionWithoutHTML;
+  },
+
   isExpanded: function(page) {
     var selectedPage = this.selectedPage;
 
@@ -91,7 +96,7 @@ module.exports = DefineMap.extend({
           selectedPage.isCollapsed = false;
         } else {
           var selectedParent = selectedPage.parentPage;
-          if (selectedParent && selectedParent.isCollapsible && selectedPage.collection !== 'core') {
+          if (selectedParent && selectedParent.isCollapsible && selectedPage.collection !== 'can-core') {
             selectedParent.isCollapsed = false;
           }
         }
@@ -166,5 +171,10 @@ module.exports = DefineMap.extend({
     }
 
     return true;
+  },
+
+  urlForCollection: function(page) {
+    var collection = this.pageMap[page.name];
+    return (collection) ? this.pathPrefix + collection.url : '';
   }
 });

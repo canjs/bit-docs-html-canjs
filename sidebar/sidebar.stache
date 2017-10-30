@@ -5,9 +5,21 @@
         {{#if child.isGroup}}
           <li
             {{data "page"}}
-            class="{{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}"
+            class="
+              {{#if child.isCollapsible}}is-collapsible{{/if}}
+              {{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}
+            "
           >
-            <span>{{child.shortTitle}}</span>
+            {{#if child.parentPage.isCollapsible}}
+              <a
+                href="{{urlForCollection(child)}}"
+                title="{{descriptionForCollection(child)}}"
+              >
+                {{child.shortTitle}}
+              </a>
+            {{else}}
+              <span>{{child.shortTitle}}</span>
+            {{/if}}
             {{#if shouldShowExpandCollapseButton(child)}}
               <button
                 aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"

@@ -63,7 +63,7 @@ module.exports = {
           var ulChildren = parentLiChild.children;
           for (var j = 0; j < ulChildren.length; j++) {
             var ulChildClassList = ulChildren[j].classList;
-            if (ulChildClassList.contains('core') === false) {
+            if (ulChildClassList.contains('can-core') === false) {
               ulChildClassList.add('unanimated');
             }
           }

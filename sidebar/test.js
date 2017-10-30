@@ -84,7 +84,7 @@ QUnit.test('Page model has shortTitle property', function(assert) {
 });
 
 QUnit.test('Page model returns correct visibleChildren', function(assert) {
-  var pageInCoreCollection = new PageModel({collection: 'core'});
+  var pageInCoreCollection = new PageModel({collection: 'can-core'});
   var pageInInfrastructureCollection = new PageModel({collection: 'infrastructure'});
   var parentPage = new PageModel({
     name: 'api'
@@ -166,9 +166,9 @@ QUnit.test('When a purpose group page is selected, its expand/collapse button sh
 
 QUnit.test('When a Core package is selected, its parent should not automatically be expanded', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
-  var canComputePage = vm.pageMap['can-compute'];
-  var canObservablesPage = canComputePage.parentPage;
-  vm.selectedPage = canComputePage;
+  var canDefinePage = vm.pageMap['can-define'];
+  var canObservablesPage = canDefinePage.parentPage;
+  vm.selectedPage = canDefinePage;
   assert.ok(canObservablesPage.isCollapsed, 'parent page is collapsed');
   assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
@@ -196,6 +196,19 @@ QUnit.test('Only top-level children are initially rendered', function(assert) {
   var fragment = renderer(vm);
   var links = fragment.querySelectorAll('li');
   assert.strictEqual(links.length, vm.rootPage.sortedChildren.length, 'number of children and links are equal');
+});
+
+QUnit.test('Collection titles are links', function(assert) {
+  var renderer = stache('<canjs-sidebar searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
+  var vm = new ViewModel({
+    searchMap,
+    selectedPageName: 'api'
+  });
+  var fragment = renderer(vm);
+  var showMoreButton = fragment.querySelector('li > button');
+  showMoreButton.click();
+  var collectionGroupLink = fragment.querySelector('.collection-group a');
+  assert.ok(collectionGroupLink, 'collection group contains a link');
 });
 
 QUnit.test('Correct page is selected after “asynchonously” setting the searchMap', function(assert) {

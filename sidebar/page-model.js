@@ -1,5 +1,6 @@
 var DefineMap = require('can-define/map/map');
 var localStorage = require('./local-storage');
+var sortedCollectionNames = ['can-core', 'can-infrastructure', 'can-ecosystem', 'can-legacy'];
 
 var expandedStorageKeyForName = function(name) {
   return 'canjs-expanded-' + name;
@@ -60,7 +61,7 @@ var PageModel = DefineMap.extend({
   childrenInCoreCollection: {
     get: function() {
       return this.sortedChildren.filter(function(page) {
-        return page.collection === 'core';
+        return page.collection === 'can-core';
       });
     }
   },
@@ -174,8 +175,10 @@ var PageModel = DefineMap.extend({
           collectionGroups[collection].pages.push(child);
         });
 
-        // Sort the collections alphabetically (core, ecosystem, infrastructure, legacy)
-        collections.sort();
+        // Sort the collections (can-core, can-infrastructure, can-ecosystem, can-legacy)
+        collections.sort(function(x, y) {
+          return sortedCollectionNames.indexOf(x) - sortedCollectionNames.indexOf(y);
+        });
 
         // Add all the collections and pages to the “sorted” array
         collections.forEach(function(collection) {
@@ -183,6 +186,7 @@ var PageModel = DefineMap.extend({
           sorted.push(new PageModel({
             name: collection,
             parentPage: this,
+            title: collection.substr(4),// Remove the `can-` prefix
             type: 'group'
           }));
           collectionGroup.pages.sort(sortByName);
