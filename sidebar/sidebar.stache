@@ -12,15 +12,15 @@
           >
             {{#if child.parentPage.isCollapsible}}
               <a
-                href="{{urlForCollection(child)}}"
-                title="{{descriptionForCollection(child)}}"
+                href="{{scope.root.urlForCollection(child)}}"
+                title="{{scope.root.descriptionForCollection(child)}}"
               >
                 {{child.shortTitle}}
               </a>
             {{else}}
               <span>{{child.shortTitle}}</span>
             {{/if}}
-            {{#if shouldShowExpandCollapseButton(child)}}
+            {{#if scope.root.shouldShowExpandCollapseButton(child)}}
               <button
                 aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
                 aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
@@ -40,9 +40,9 @@
         {{else}}
           <li
             {{data "page"}}
-            {{#eq child selectedPage}}selected-in-sidebar{{/eq}}
+            {{#eq child scope.root.selectedPage}}selected-in-sidebar{{/eq}}
             class="
-              {{#if isExpanded(child)}}expanded{{/if}}
+              {{#if scope.root.isExpanded(child)}}expanded{{/if}}
               {{#if child.parentPage.isCollapsible}}
                 {{child.collection}}
                 parent-is-collapsible
@@ -53,12 +53,12 @@
           >
             <a
               class="{{child.type}}"
-              href="{{pathPrefix}}{{child.url}}"
+              href="{{scope.root.pathPrefix}}{{child.url}}"
               title="{{child.descriptionWithoutHTML}}"
             >
               {{child.shortTitle}}
             </a>
-            {{#if shouldShowChildren(child)}}
+            {{#if scope.root.shouldShowChildren(child)}}
               {{>listTemplate child}}
             {{/if}}
           </li>
