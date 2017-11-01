@@ -5,6 +5,7 @@
         {{#if child.isGroup}}
           <li
             {{data "page"}}
+            {{#eq child.name scope.root.selectedPage.name}}selected-in-sidebar{{/eq}}
             class="
               {{#if child.isCollapsible}}is-collapsible{{/if}}
               {{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}

@@ -72,16 +72,20 @@ module.exports = DefineMap.extend({
 
         if (page.parent) {
           var parentPage = pageMap[page.parent];
-          if (parentPage) {
-            parentPage.unsortedChildren.push(page);
-          } else {
+          if (!parentPage) {
             parentPage = new PageModel({
-              unsortedChildren: [page],
               name: page.parent
             });
             pageMap[page.parent] = parentPage;
           }
           page.parentPage = parentPage;
+
+          // Do not add the collections as children to the API Docs page
+          // because they’ll be shown as children of each purpose group.
+          if (page.isCollection === false) {
+            parentPage.unsortedChildren.push(page);
+          }
+
         }
       }
 

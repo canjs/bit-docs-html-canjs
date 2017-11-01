@@ -114,7 +114,13 @@ var PageModel = DefineMap.extend({
     type: 'boolean',
     get: function() {
       var parentPage = this.parentPage || {};
-      return parentPage.name === 'api';
+      return parentPage.name === 'api' && this.isCollection === false;
+    }
+  },
+  isCollection: {
+    type: 'boolean',
+    get: function() {
+      return sortedCollectionNames.indexOf(this.name) !== -1;
     }
   },
   isGroup: {

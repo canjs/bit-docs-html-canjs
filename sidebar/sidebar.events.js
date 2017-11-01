@@ -21,18 +21,23 @@ module.exports = {
   },
 
   'a click': function(element, event) {
-    var pageData = domData.get.call(element.parentElement, 'page');
-    var viewModel = this.viewModel;
+    try {
+      var pageData = domData.get.call(element.parentElement, 'page');
+      var viewModel = this.viewModel;
 
-    // Change the selected module
-    viewModel.selectedPage = pageData;
+      // Change the selected module
+      viewModel.selectedPage = pageData;
 
-    // When the selectedPage changes, the DOM will be updated and may have some
-    // elements with the “unanimated” class, which would not be removed for two
-    // requestAnimationFrames. Calling animateElementsImmediately will cause the
-    // new elements to have their “unanimated” class instantly removed, which
-    // prevents them from displaying at 0 height for two frames.
-    this.animateElementsImmediately();
+      // When the selectedPage changes, the DOM will be updated and may have some
+      // elements with the “unanimated” class, which would not be removed for two
+      // requestAnimationFrames. Calling animateElementsImmediately will cause the
+      // new elements to have their “unanimated” class instantly removed, which
+      // prevents them from displaying at 0 height for two frames.
+      this.animateElementsImmediately();
+
+    } catch (error) {
+      console.error('Caught error while handling click event:', error);
+    }
 
     // Prevent the default link action
     event.preventDefault();
