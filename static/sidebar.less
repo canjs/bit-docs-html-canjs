@@ -52,6 +52,8 @@ img.social-icon-small{
 
 // ----- SIDE NAVIGATION -----
 #left > .bottom {
+	scroll-behavior: smooth;
+
 	ul {
 		padding-left: @gutter/1.5;
 		margin: 0;
@@ -68,19 +70,24 @@ img.social-icon-small{
 				color: @gray;
 				font-size: 90%;
 			}
+			&.collection-group > a {
+				color: lighten(@gray, 15%);
+			}
 		}
 	}
-	.current > a, .expanded > a {
+	.current > a, .expanded > a, [selected-in-sidebar] > a {
 		font-weight: bold;
 		color: darken(@link-color,5%);
 	}
-	.current > a {
+	.current > a, [selected-in-sidebar] > a {
 		text-decoration: underline;
 		color: darken(@link-color,10%);
 	}
 	// Highest parent level
 	.nav-menu {
+		display: block;
 		padding: @gutter * 2 @gutter * 2 0;
+
 		& > ul {
 			padding: 0;
 			height: inherit;
@@ -95,7 +102,7 @@ img.social-icon-small{
 					padding-top: @gutter;
 				}
 				&.expanded.parent > a {
-					padding-bottom: @gutter/3;
+					padding-bottom: @gutter/2;
 				}
 				// Second level
 				> ul {
@@ -122,6 +129,74 @@ img.social-icon-small{
 					}
 				}
 			}
+		}
+	}
+
+	canjs-sidebar {
+		button {
+			background: transparent;
+			border: 0;
+			color: @link-color;
+			cursor: pointer;
+			padding: 0;
+			position: absolute;
+			right: 0 - @gutter;
+			top: 0;
+		}
+		button > span {
+			font-family: monospace;// makes the + / - buttons the same width
+			font-size: 130%;
+			padding: (@gutter * .25) @gutter (@gutter * .6);
+		}
+		button:focus, button > span:focus {
+			outline: 0;
+		}
+		button:focus > span {
+			border-radius: 5px;
+			box-shadow: 0 0 5px @link-color;
+		}
+
+		.collection-group {
+			font-size: 80%;
+			margin-top: @gutter * 1.2;
+			text-transform: uppercase;
+		}
+
+		.collection-group,
+		.collection-group > a,
+		.parent-is-collapsible,
+		.parent-is-collapsible > a {
+			display: block;
+			opacity: 1;
+		}
+		.transitions-on .collection-group,
+		.transitions-on .collection-group > a,
+		.transitions-on .parent-is-collapsible,
+		.transitions-on .parent-is-collapsible > a {
+			transition: all @transition-speed ease;
+		}
+		.collection-group > a {
+			height: 20px;
+		}
+		.parent-is-collapsible > a {
+			height: 24px;
+			max-width: 215px;// based roughly on the width of “can-define-validate-validatejs”
+			white-space: nowrap;
+		}
+		.unanimated, .unanimated > a, .unanimated > span {
+			margin-bottom: 0;
+			margin-top: 0;
+			opacity: 0;
+			padding-bottom: 0;
+			padding-top: 0;
+		}
+		.unanimated > a, .unanimated > span {
+			height: 0;
+			max-width: 175px;// based roughly on the width of “can-stache/helpers/route”
+		}
+
+		.is-collapsible {
+			margin-bottom: @gutter;// Force space between the “purpose” groups
 		}
 	}
 }

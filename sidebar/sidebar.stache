@@ -1,0 +1,74 @@
+{{<listTemplate}}
+  {{#if ./visibleChildren.length}}
+    <ul>
+      {{#each ./visibleChildren child=value}}
+        {{#if child.isGroup}}
+          <li
+            {{data "page"}}
+            {{#eq child.name scope.root.selectedPage.name}}selected-in-sidebar{{/eq}}
+            class="
+              {{#if child.isCollapsible}}is-collapsible{{/if}}
+              {{#if child.parentPage.isCollapsible}}collection-group unanimated{{/if}}
+            "
+          >
+            {{#if child.parentPage.isCollapsible}}
+              <a
+                href="{{scope.root.urlForCollection(child)}}"
+                title="{{scope.root.descriptionForCollection(child)}}"
+              >
+                {{child.shortTitle}}
+              </a>
+            {{else}}
+              <span>{{child.shortTitle}}</span>
+            {{/if}}
+            {{#if scope.root.shouldShowExpandCollapseButton(child)}}
+              <button
+                aria-label="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+                aria-pressed="{{#if child.isCollapsed}}false{{else}}true{{/if}}"
+                title="Show {{#if child.isCollapsed}}more{{else}}less{{/if}}"
+              >
+                <span tabindex="-1">
+                  {{#if child.isCollapsed}}
+                    +
+                  {{else}}
+                    -
+                  {{/if}}
+                </span>
+              </button>
+            {{/if}}
+            {{>listTemplate child}}
+          </li>
+        {{else}}
+          <li
+            {{data "page"}}
+            {{#eq child scope.root.selectedPage}}selected-in-sidebar{{/eq}}
+            class="
+              {{#if scope.root.isExpanded(child)}}expanded{{/if}}
+              {{#if child.parentPage.isCollapsible}}
+                {{child.collection}}
+                parent-is-collapsible
+                unanimated
+              {{/if}}
+              {{#if child.sortedChildren.length}}parent{{/if}}
+            "
+          >
+            <a
+              class="{{child.type}}"
+              href="{{scope.root.pathPrefix}}{{child.url}}"
+              title="{{child.descriptionWithoutHTML}}"
+            >
+              {{child.shortTitle}}
+            </a>
+            {{#if scope.root.shouldShowChildren(child)}}
+              {{>listTemplate child}}
+            {{/if}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/listTemplate}}
+
+{{#if rootPage}}
+  {{>listTemplate rootPage}}
+{{/if}}

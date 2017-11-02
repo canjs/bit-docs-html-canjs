@@ -91,16 +91,11 @@ var Search = Control.extend({
 		this.searchWorker.addEventListener('message', this.didReceiveWorkerMessage.bind(this));
 
 		this.searchEnginePromise = new Promise(function(resolve, reject) {
-			self.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject){
-				self.getSearchMap(options.pathPrefix + options.searchMapUrl, searchMapHashChangedObject).then(function(searchMap){
-					self.initSearchEngine(searchMap);
-					resolve(searchMap);
-				}, function(error){
-					console.error("getSearchMap error", error);
-					reject(error);
-				});
+			self.getSearchMap().then(function(searchMap){
+				self.initSearchEngine(searchMap);
+				resolve(searchMap);
 			}, function(error){
-				console.error("checkSearchMapHash error", error);
+				console.error("getSearchMap error", error);
 				reject(error);
 			});
 		});
@@ -218,58 +213,67 @@ var Search = Control.extend({
 	// retrieves the searchMap either from localStorage
 	// or the specified url
 	//
-	// @param dataUrl the url of the searchMap.json file
-	// @param searchMapHashChangedObject {localStorageKey, data} if we should clear localStorage
-	//				false otherwise
-	//
 	// @returns thenable
-	getSearchMap: function(dataUrl, searchMapHashChangedObject) {
-		var self = this,
-				returnDeferred = $.Deferred(),
-				localStorageKey = this.formatLocalStorageKey(this.searchMapLocalStorageKey);
+	getSearchMap: function() {
+		if (this.searchMapDeferred) {// Only fetch this once
+			return this.searchMapDeferred;
+		}
+		this.searchMapDeferred = $.Deferred();
 
-		this.searchMap = this.getLocalStorageItem(localStorageKey);
-		if(this.searchMap && !searchMapHashChangedObject){
-			returnDeferred.resolve(this.searchMap);
-		}else{
+		var options = this.options;
+		var self = this;
 
-			$.ajax({
-				url: dataUrl,
-				dataType: "json",
-				cache: true
-			}).then(function(data){
-				if(!data){
-					if(self.searchMap){
-						returnDeferred.resolve(self.searchMap);
-					}else{
-						returnDeferred.reject({
-							error: "No searchMap data"
-						});
+		this.checkSearchMapHash(options.pathPrefix + options.searchMapHashUrl).then(function(searchMapHashChangedObject) {
+			var localStorageKey = self.formatLocalStorageKey(self.searchMapLocalStorageKey);
+			self.searchMap = self.getLocalStorageItem(localStorageKey);
+
+			if (self.searchMap && !searchMapHashChangedObject) {
+				self.searchMapDeferred.resolve(self.searchMap);
+
+			} else {
+				var dataUrl = options.pathPrefix + options.searchMapUrl;
+
+				$.ajax({
+					url: dataUrl,
+					dataType: "json",
+					cache: true
+				}).then(function(data) {
+					if (!data) {
+						if (self.searchMap) {
+							self.searchMapDeferred.resolve(self.searchMap);
+						} else {
+							self.searchMapDeferred.reject({
+								error: "No searchMap data"
+							});
+						}
+
+						return false;
 					}
 
-					return false;
-				}
+					//wait until after we have a new searchMap before clearing (if necessary)
+					if (searchMapHashChangedObject) {
+						localStorage.clear();
+						//set the searchMapHash item
+						self.setLocalStorageItem(searchMapHashChangedObject.localStorageKey, searchMapHashChangedObject.data);
+					}
 
-				//wait until after we have a new searchMap before clearing (if necessary)
-				if(searchMapHashChangedObject){
-					localStorage.clear();
-					//set the searchMapHash item
-					self.setLocalStorageItem(searchMapHashChangedObject.localStorageKey, searchMapHashChangedObject.data);
-				}
+					//save search map
+					self.searchMap = data;
+					self.setLocalStorageItem(localStorageKey, data);
+					self.searchMapDeferred.resolve(data);
+				}, function(error) {
+					if (self.searchMap) {
+						self.searchMapDeferred.resolve(self.searchMap);
+					} else {
+						self.searchMapDeferred.reject(error);
+					}
+				});
+			}
+		}, function(error) {
+			self.searchMapDeferred.reject(error);
+		});
 
-				//save search map
-				self.searchMap = data;
-				self.setLocalStorageItem(localStorageKey, data);
-				returnDeferred.resolve(data);
-			}, function(error){
-				if(self.searchMap){
-					returnDeferred.resolve(self.searchMap);
-				}else{
-					returnDeferred.reject(error);
-				}
-			});
-		}
-		return returnDeferred;
+		return self.searchMapDeferred;
 	},
 
 	searchMapHashLocalStorageKey: 'map-hash',
@@ -375,7 +379,7 @@ var Search = Control.extend({
 		var items = [];
 
 		for (var itemKey in searchMap) {
-			if (searchMap.hasOwnProperty(itemKey)) {
+			if (searchMap.hasOwnProperty(itemKey) && searchMap[itemKey]['type'] !== 'group') {
 				var item = assign({}, searchMap[itemKey]);
 
 				// Convert HTML to text

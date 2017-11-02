@@ -5,6 +5,8 @@ $ = require("jquery");
 var debounce = require("lodash/debounce");
 var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
+var SidebarComponent = require("../sidebar/sidebar");
+var stache = require('can-stache');
 var SurveyAdControl = require('./survey-ad');
 
 // state
@@ -24,6 +26,7 @@ var $articleContainer,
 	scrollPositionInterval,
 	currentHref,
 	searchControl,
+	sidebarViewModel,
 	surveyAdControl,
 	hasShownSearch;
 
@@ -85,8 +88,6 @@ var $articleContainer,
 			toggleNav();
 		}, 200);
 	}
-
-	scrollToCurrentMenuItem();
 })();
 
 // Touch support
@@ -122,6 +123,43 @@ function init() {
 		});
 	}
 
+	// Set up the client-side sidebar nav
+	if (!sidebarViewModel) {
+		sidebarViewModel = new SidebarComponent.ViewModel({
+			pathPrefix: window.pathPrefix
+		});
+
+		searchControl.getSearchMap().then(function(searchMap) {
+			sidebarViewModel.searchMap = searchMap;
+
+			// Find the current menu that contains social-side-container and a ul
+			var currentMenu = document.querySelector('.nav-menu');
+
+			// Construct the new sidebar DOM fragment
+			var renderer = stache('<canjs-sidebar class="nav-menu" pathPrefix:from="pathPrefix" searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
+			var fragment = renderer(sidebarViewModel);
+
+			// Add the new sidebar before the current menu
+			var parentContainer = currentMenu.parentElement;
+			parentContainer.insertBefore(fragment, currentMenu);
+
+			// Move the social-side-container to inside the new sidebar
+			var sidebarElement = document.querySelector('canjs-sidebar');
+			var socialContainer = currentMenu.querySelector('.social-side-container');
+			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
+
+			// Get rid of the old menu
+			currentMenu.remove();
+		}, function(error) {
+			console.error('Failed to get search map with error:', error);
+		});
+	}
+
+	// Update the selected page in the sidebar
+	if (window.docObject) {
+		sidebarViewModel.selectedPageName = window.docObject.name;
+	}
+
 	if (!surveyAdControl) {
 		// Set up the survey ad control
 		surveyAdControl = new SurveyAdControl("survey-ad");
@@ -133,18 +171,17 @@ function init() {
 	hasShownSearch = true;
 }
 
-function scrollToCurrentMenuItem(){
-	var currentPageLi = $('li.current');
-	if(currentPageLi.length){
-		$('.nav-menu').scrollTop(currentPageLi.offset().top - $('.nav-menu').offset().top);
-	}
-}
-
 function setPathPrefix(){
 	var pathPrefix;
 	if($pathPrefix && $pathPrefix.length){
 		pathPrefix = $pathPrefix.attr("path-prefix");
 		if(pathPrefix && pathPrefix.length){
+			if (searchControl) {
+				searchControl.options.pathPrefix = pathPrefix;
+			}
+			if (sidebarViewModel) {
+				sidebarViewModel.pathPrefix = pathPrefix;
+			}
 			window.pathPrefix = pathPrefix;
 		}
 	}
@@ -247,25 +284,13 @@ function navigate(href, updateLocation) {
 			if (!$content.length) {
 				window.location.reload();
 			}
-			var $nav = $content.find("#left > .bottom .nav-menu > ul"),
-					$article = $content.find("article"),
-					$breadcrumb = $content.find(".breadcrumb"),
-					homeLink = $content.find(".logo > a").attr('href'),
-					$navReplace = $("#left > .bottom .nav-menu > ul"),
+			var $article = $content.find("article");
+			var $breadcrumb = $content.find(".breadcrumb");
+			var homeLink = $content.find(".logo > a").attr('href');
 
-					//root elements - use .filter; not .find
-					$pathPrefixDiv = $content.filter("[path-prefix]");
+			//root elements - use .filter; not .find
+			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
-
-			//if any page doesn't have a nav, replacing it won't work,
-			//and the nav will be gone for any subsequent page visits
-			if ($nav && $nav.length) {
-				if ($navReplace && $navReplace.length) {
-					$navReplace.replaceWith($nav);
-				} else {
-					$("#left > .bottom").append($nav);
-				}
-			}
 			$("article").replaceWith($article);
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
@@ -289,7 +314,6 @@ function navigate(href, updateLocation) {
 			init();
 			setDocTitle();
 
-			searchControl.options.pathPrefix = window.pathPrefix;
 			if(searchControl.searchResultsCache){
 				searchControl.renderSearchResults(searchControl.searchResultsCache);
 			}

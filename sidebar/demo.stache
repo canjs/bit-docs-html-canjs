@@ -1,0 +1,19 @@
+<div id="everything">
+  <div class="column" id="left">
+    <div class="bottom">
+      <canjs-sidebar
+        class="nav-menu"
+        searchMap:from="searchMap"
+        selectedPageName:bind="selectedPageName"
+      />
+    </div>
+  </div>
+</div>
+
+<div id="demo-controls">
+  {{#each pages page=value}}
+    <button class="go-to-{{page.name}}" on:click="setSelectedPageName(page.name)">
+      {{page.name}}
+    </button>
+  {{/each}}
+</div>
