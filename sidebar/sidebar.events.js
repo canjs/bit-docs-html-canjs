@@ -1,4 +1,5 @@
 var domData = require('can-util/dom/data/data');
+var each = require("can-util/js/each/each");
 
 module.exports = {
   '{element} inserted': 'animateElementsImmediately',
@@ -15,7 +16,7 @@ module.exports = {
   animateElementsImmediately: function() {
     var element = this.element;
     var unanimatedElements = element.querySelectorAll('.unanimated');
-    unanimatedElements.forEach(function(unanimatedElement) {
+    each(unanimatedElements, function(unanimatedElement) {
       unanimatedElement.classList.remove('unanimated');
     });
   },
