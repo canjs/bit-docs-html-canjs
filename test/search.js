@@ -4,9 +4,11 @@ var searchLogic = require('../static/search-logic');
 
 /* Helper function for finding a specific result */
 var indexOfPageInResults = function(pageName, results) {
-  return results.findIndex(function(result) {
-    return result.ref === pageName;
-  });
+  for (var i = 0; i < results.length; i++) {
+    if (results[i].ref === pageName) {
+      return i;
+    }
+  }
 };
 
 /* Clear local storage */
