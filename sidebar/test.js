@@ -201,7 +201,7 @@ QUnit.test('Only top-level children are initially rendered', function(assert) {
 QUnit.test('Collection titles are links', function(assert) {
   var renderer = stache('<canjs-sidebar searchMap:from="searchMap" selectedPageName:from="selectedPageName" />');
   var vm = new ViewModel({
-    searchMap,
+    searchMap: searchMap,
     selectedPageName: 'api'
   });
   var fragment = renderer(vm);

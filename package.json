@@ -5,6 +5,8 @@
   "main": "static/canjs",
   "scripts": {
     "build": "node build-search-worker.js",
+    "ci": "npm test && node test.sauce-labs.js",
+    "http-server": "http-server -p 3000 --silent",
     "start": "node build-search-worker.js && node make-example.js -f",
     "styles": "rm -rf node_modules/bit-docs-generate-html/site/static && npm start",
     "test": "npm start && npm run testee",
@@ -52,12 +54,14 @@
     "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
     "funcunit": "^3.4.3",
+    "http-server": "^0.10.0",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
     "steal": "^1.5.9",
     "steal-conditional": "^0.3.6",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^1.8.2",
+    "test-saucelabs": "0.0.2",
     "testee": "^0.7.0",
     "zombie": "^5.0.5"
   }

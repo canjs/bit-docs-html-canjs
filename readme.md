@@ -1,5 +1,7 @@
 # bit-docs-html-canjs
 
+[![Sauce Labs Test Status](https://saucelabs.com/browser-matrix/bit-docs-html-canjs.svg)](https://saucelabs.com/u/bit-docs-html-canjs)
+
 [![Build Status](https://travis-ci.org/canjs/bit-docs-html-canjs.svg?branch=master)](https://travis-ci.org/canjs/bit-docs-html-canjs)
 [![npm version](https://badge.fury.io/js/bit-docs-html-canjs.svg)](https://www.npmjs.com/package/bit-docs-html-canjs)
 
