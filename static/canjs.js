@@ -143,7 +143,7 @@ function init() {
 			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
 
 			// Get rid of the old menu
-			currentMenu.remove();
+			currentMenu.parentNode.removeChild(currentMenu);
 		}, function(error) {
 			console.error('Failed to get search map with error:', error);
 		});
