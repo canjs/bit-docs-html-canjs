@@ -40,6 +40,12 @@ var $articleContainer,
 
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
+
+		// Fix relative URLs in IE 11
+		if (!ev.target.hostname && !this.hostname && !ev.target.protocol && !this.protocol) {
+			this.href = this.href;
+		}
+
 		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
 			sameHostname = (ev.target.hostname || this.hostname) === window.location.hostname,
 			sameProtocol = (ev.target.protocol || this.protocol) === window.location.protocol;
