@@ -1,4 +1,3 @@
-require("flexibility#?./needs-flexibility");
 require("./canjs.less!");
 var LoadingBar = require('./loading-bar.js');
 $ = require("jquery");
@@ -35,11 +34,6 @@ var $articleContainer,
 	//(used for fading in or not)
 	hasShownSearch = false;
 	init();
-
-	// flexbox for ie9/10
-	if(typeof flexibility !== 'undefined'){
-		flexibility(document.getElementById('everything'));
-	}
 
 	// prevent sidebar from changing width when header hides
 	$('#left').css('min-width', $('.top-left').width());
