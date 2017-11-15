@@ -288,6 +288,14 @@ function navigate(href, updateLocation) {
 			var $breadcrumb = $content.find(".breadcrumb");
 			var homeLink = $content.find(".logo > a").attr('href');
 
+			// Remove GitHub star buttons from the main body in IE
+			if (!!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g)) {
+				var gitHubButtons = $article.find('.body .github-button');
+				gitHubButtons.each(function() {
+					this.classList.remove('github-button');
+				});
+			}
+
 			//root elements - use .filter; not .find
 			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
