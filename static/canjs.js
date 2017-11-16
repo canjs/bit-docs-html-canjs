@@ -1,4 +1,3 @@
-require("flexibility#?./needs-flexibility");
 require("./canjs.less!");
 var LoadingBar = require('./loading-bar.js');
 $ = require("jquery");
@@ -36,16 +35,17 @@ var $articleContainer,
 	hasShownSearch = false;
 	init();
 
-	// flexbox for ie9/10
-	if(typeof flexibility !== 'undefined'){
-		flexibility(document.getElementById('everything'));
-	}
-
 	// prevent sidebar from changing width when header hides
 	$('#left').css('min-width', $('.top-left').width());
 
 	// Override link behavior
 	$(document.body).on("click", "a", function(ev) {
+
+		// Fix relative URLs in IE 11
+		if (!ev.target.hostname && !this.hostname && !ev.target.protocol && !this.protocol) {
+			this.href = this.href;
+		}
+
 		var noModifierKeys = !ev.altKey && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey,
 			sameHostname = (ev.target.hostname || this.hostname) === window.location.hostname,
 			sameProtocol = (ev.target.protocol || this.protocol) === window.location.protocol;
@@ -149,7 +149,7 @@ function init() {
 			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
 
 			// Get rid of the old menu
-			currentMenu.remove();
+			currentMenu.parentNode.removeChild(currentMenu);
 		}, function(error) {
 			console.error('Failed to get search map with error:', error);
 		});
@@ -287,6 +287,14 @@ function navigate(href, updateLocation) {
 			var $article = $content.find("article");
 			var $breadcrumb = $content.find(".breadcrumb");
 			var homeLink = $content.find(".logo > a").attr('href');
+
+			// Remove GitHub star buttons from the main body in IE
+			if (!!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g)) {
+				var gitHubButtons = $article.find('.body .github-button');
+				gitHubButtons.each(function() {
+					this.classList.remove('github-button');
+				});
+			}
 
 			//root elements - use .filter; not .find
 			var $pathPrefixDiv = $content.filter("[path-prefix]");

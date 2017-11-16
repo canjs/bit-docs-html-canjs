@@ -15,9 +15,6 @@ module.exports = function(bitDocs){
                 configDependencies: [
                     "./node_modules/steal-conditional/conditional"
                 ]
-            },
-            devDependencies: {
-                "flexibility": "^2.0.1"
             }
         }
     });
