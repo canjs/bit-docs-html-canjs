@@ -98,10 +98,16 @@ module.exports = DefineMap.extend({
       if (selectedPage) {
         if (selectedPage.isCollapsed && selectedPage.visibleChildren.length === 0) {
           selectedPage.isCollapsed = false;
-        } else {
-          var selectedParent = selectedPage.parentPage;
-          if (selectedParent && selectedParent.isCollapsible && selectedPage.collection !== 'can-core') {
-            selectedParent.isCollapsed = false;
+
+        } else if (selectedPage.collection !== 'can-core') {
+          // If the page is not in the core collection, walk up the parents to
+          // make sure they are not collapsed.
+          var parent = (selectedPage) ? selectedPage.parentPage : null;
+          while (parent) {
+            if (parent.isCollapsible) {
+              parent.isCollapsed = false;
+            }
+            parent = parent.parentPage;
           }
         }
       }

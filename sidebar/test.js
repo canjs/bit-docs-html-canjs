@@ -157,6 +157,17 @@ QUnit.test('When a child item is selected, its parent should not be collapsed', 
   assert.notOk(vm.shouldShowExpandCollapseButton(canAjaxParent), 'parent does not show expand/collapse button');
 });
 
+QUnit.test('When a grandchild item is selected, its grandparent should not be collapsed', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var pageMap = vm.pageMap;
+  var grandchildPage = pageMap['can-view-live.attr'];
+  var grandparentPage = grandchildPage.parentPage.parentPage;
+  assert.ok(grandparentPage.isCollapsed, 'grandparent is collapsed beforehand');
+  vm.selectedPage = grandchildPage;
+  assert.notOk(grandparentPage.isCollapsed, 'grandparent is not collapsed afterwards');
+  assert.notOk(vm.shouldShowExpandCollapseButton(grandparentPage), 'grandparent does not show expand/collapse button');
+});
+
 QUnit.test('When a purpose group page is selected, its expand/collapse button should be shown', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
   var canObservablesPage = vm.pageMap['can-observables'];
