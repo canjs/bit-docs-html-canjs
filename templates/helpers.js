@@ -205,6 +205,9 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getParents: function(){
             return docMapInfo.getParents(docMapInfo.getCurrent());
         },
+        getChildren: function(docObject) {
+            return docMapInfo.getChildren(docObject);
+        },
         getCurrent: function(){
             return docMapInfo.getCurrent();
         },
