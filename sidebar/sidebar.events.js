@@ -22,26 +22,32 @@ module.exports = {
   },
 
   'a click': function(element, event) {
-    try {
-      var pageData = domData.get.call(element.parentElement, 'page');
-      var viewModel = this.viewModel;
 
-      // Change the selected module
-      viewModel.selectedPage = pageData;
+    // Check for modifier keys before preventing default
+    var noModifierKeys = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+    if (noModifierKeys) {
 
-      // When the selectedPage changes, the DOM will be updated and may have some
-      // elements with the “unanimated” class, which would not be removed for two
-      // requestAnimationFrames. Calling animateElementsImmediately will cause the
-      // new elements to have their “unanimated” class instantly removed, which
-      // prevents them from displaying at 0 height for two frames.
-      this.animateElementsImmediately();
+      try {
+        var pageData = domData.get.call(element.parentElement, 'page');
+        var viewModel = this.viewModel;
 
-    } catch (error) {
-      console.error('Caught error while handling click event:', error);
+        // Change the selected module
+        viewModel.selectedPage = pageData;
+
+        // When the selectedPage changes, the DOM will be updated and may have some
+        // elements with the “unanimated” class, which would not be removed for two
+        // requestAnimationFrames. Calling animateElementsImmediately will cause the
+        // new elements to have their “unanimated” class instantly removed, which
+        // prevents them from displaying at 0 height for two frames.
+        this.animateElementsImmediately();
+
+      } catch (error) {
+        console.error('Caught error while handling click event:', error);
+      }
+
+      // Prevent the default link action
+      event.preventDefault();
     }
-
-    // Prevent the default link action
-    event.preventDefault();
   },
 
   'button click': function(element) {
