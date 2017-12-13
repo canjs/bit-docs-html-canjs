@@ -2,7 +2,7 @@
   <h2 class="signature-title">
     <code>{{{makeSignature code}}}</code>
   </h2>
-  {{{makeHtml (makeLinks description)}}}
+  {{{makeHtml (makeLinks (renderAsTemplate description))}}}
   {{#if params}}
   <div class="parameters">
     <h3 class="parameters-title">Parameters</h3>
