@@ -24,7 +24,7 @@ testSauceLabs({
   }, {
     browserName: 'safari',
     platform: 'OS X 10.12',
-    version: '10'
+    version: 'latest'
   }, {
     browserName: 'googlechrome',
     platform: 'Windows 7',
