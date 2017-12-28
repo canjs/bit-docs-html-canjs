@@ -71,6 +71,7 @@ var $articleContainer,
 	// Back/Forward navigation
 	window.addEventListener('popstate', function(ev) {
 		ev.preventDefault();
+		ev.stopImmediatePropagation();// This helps maintain the correct scroll position in Chrome
 		navigate(window.location.href, false);
 	});
 
@@ -240,13 +241,17 @@ function navigate(href, updateLocation) {
 		return;
 	}
 
-	$articleContainer.scrollTop(0);
-
 	// just scroll to hash if possible
-    if (window.location.hash && href.replace(/#.*/, '') === currentHref.replace(/#.*/, '')) {
-        scrollToElement($(window.location.hash));
-        return;
-    }
+	var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
+	var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
+	if (currentHrefBase === hrefBase) {
+		var hrefHash = href.match(/#.*/, '') || [];// Match the hash part of the URL, including the hash
+		scrollToElement($(hrefHash[0]));
+		if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
+			window.history.pushState({ articleScroll: $articleContainer.scrollTop() }, null, href);
+		}
+		return;
+	}
 
 	// clear existing scroll interval if it's still alive
 	clearInterval(scrollPositionInterval);
@@ -284,6 +289,10 @@ function navigate(href, updateLocation) {
 			if (!$content.length) {
 				window.location.reload();
 			}
+
+			// Scroll to the top of the page
+			$articleContainer.scrollTop(0);
+
 			var $article = $content.find("article");
 			var $breadcrumb = $content.find(".breadcrumb");
 			var homeLink = $content.find(".logo > a").attr('href');
@@ -424,7 +433,7 @@ function setOnThisPageScroll() {
 		$.each($headers, function(index, header) {
 			var $header = $(header);
 			var marginTop = parseInt($header.css('margin-top')) || 20;
-			if ($header.offset().top - marginTop - contOffsetTop <= 0) {
+			if ($header.offset().top - marginTop - contOffsetTop < 1) {// < 1 to allow fractional values
 				onThisPageTitle = $header.html();
 			}
 		});
