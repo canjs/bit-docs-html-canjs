@@ -37,7 +37,7 @@
     "can-control": "^3.0.3",
     "can-define": "^1.5.1",
     "can-stache": "^3.13.0",
-    "can-util": "^3.0.10",
+    "can-util": "3.11.0",
     "can-view-callbacks": "^3.2.2",
     "escape-html": "^1.0.3",
     "jquery": "^3.1.1",
