@@ -35,7 +35,7 @@
   "dependencies": {
     "can-component": "^3.3.4",
     "can-control": "^3.0.3",
-    "can-define": "^1.5.1",
+    "can-define": "^2.0.0",
     "can-stache": "^3.13.0",
     "can-util": "^3.0.10",
     "can-view-callbacks": "^3.2.2",
