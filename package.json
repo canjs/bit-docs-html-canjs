@@ -34,7 +34,7 @@
   "homepage": "https://github.com/canjs/bit-docs-html-canjs#readme",
   "dependencies": {
     "can-component": "^3.3.4",
-    "can-control": "^3.0.3",
+    "can-control": "^4.0.0",
     "can-define": "^1.5.1",
     "can-stache": "^3.13.0",
     "can-util": "^3.0.10",
