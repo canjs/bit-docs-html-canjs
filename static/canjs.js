@@ -361,7 +361,9 @@ function getHeaders(useOutline) {
 		headerArr.push('h' + (i + 1));
 	}
 
-	return $(headerArr.join(', ')).each(function(index, header) {
+	return $(headerArr.join(', ')).filter(function(index, header) {
+		return !header.attributes['data-skip'];
+	}).each(function(index, header) {
 		if (!header.id) {
 			header.id = generateId(header);
 		}

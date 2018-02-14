@@ -55,28 +55,45 @@ ul.title-links {
 		padding-top: @gutter;
 	}
 }
-.on-this-page-table{
+
+.on-this-page-table {
+	display: inline-block;
+	margin-left: @gutter*2;
+	margin-bottom: @gutter*2;
+	border: none;
+
+	.on-this-page-title {
+		margin-top: @gutter;
+		margin-bottom: @gutter;
+		border: none;
+		line-height: 1;
+		font-size: 18px;
+	}
+
 	ol {
 		counter-reset: item;
-		margin-right: @gutter*2;
-		margin-left:@gutter*2;
+		margin: 0;
 		padding: 0;
+
 		li {
-		  	display: block;
-		  	color: @link-color;
-		  	line-height: 1.7em;
-		  	a:hover{
-		  		cursor: pointer;
-		  		text-decoration: underline;
-		  	}
+			display: block;
+			color: @link-color;
+			line-height: 1.7em;
+
+			a:hover {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+
+			&:before {
+				content: counter(item) ". ";
+				counter-increment: item;
+				color: @gray;
+			}
 		}
 	}
-  	ol li:before {
-	    content: counter(item) ". ";
-	    counter-increment: item;
-	    color: @gray;
-  	}
 }
+
 .description{
   	margin: @gutter 0;
 }
