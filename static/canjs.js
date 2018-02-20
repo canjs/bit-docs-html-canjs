@@ -546,6 +546,7 @@ function buildTOC() {
 	var $tocHeaders = getHeaders(true);
 
 	if (!$tocHeaders.length || $tocHeaders.length < 2) {
+		$tableOfContents.remove();
 		return;
 	}
 
