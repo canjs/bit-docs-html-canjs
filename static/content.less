@@ -21,7 +21,6 @@ article {
     .border-radius(0);
   }
   code {
-
     .highlight {
 	    background: @highlight-color;
 	    padding: 3px 0;
@@ -29,25 +28,9 @@ article {
     .obscured{
       background: lighten(@border-color, 2%);
     }
-    .expand {
-      background-color: @border-color;
-      text-align: center;
-      padding: 4px 0px;
-      margin: @gutter/2 0;
-      border-top: 1px solid @dark-border-color;
-      border-bottom: 1px solid @dark-border-color;
-      color: black;
-    }
-    .expand:before {
+
+    .collapse.collapsed::before {
       content: url(../static/img/expand_icon.svg);
-      display: block;
-      width: 15px;
-      height: 15px;
-      margin: 0 auto;
-    }
-    .expand:hover{
-      opacity: .6;
-      cursor: pointer;
     }
   }
   pre code {
