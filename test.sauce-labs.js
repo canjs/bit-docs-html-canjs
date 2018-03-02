@@ -6,7 +6,7 @@ testSauceLabs({
   platforms: [{
     browserName: 'MicrosoftEdge',
     platform: 'Windows 10',
-    version: '14'
+    version: '16'
   }, {
     'appium-version': '1.6.3',
     browserName: 'safari',

@@ -22,7 +22,6 @@ canViewCallbacks.attr('selected-in-sidebar', function(element) {
           parentScrollTop += parent.scrollTop;
           parent = parent.parentElement;
         }
-        console.log("Scrolled", element, elementRect.top, parentScrollTop, - utils.safeInset.top);
         containerElement.scrollTop = elementRect.top + parentScrollTop - utils.safeInset.top;
       }
     },100);
