@@ -10,7 +10,8 @@ canViewCallbacks.attr('selected-in-sidebar', function(element) {
   // Using rAF because otherwise getBoundingClientRect won’t return useful values
   // Need to wait two animation frames for the correct scrollTop to be calculated
   requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
+    // fixes bug after upgrade
+    setTimeout(function() {
       var elementRect = element.getBoundingClientRect();
 
       // Only scroll if the element isn’t in the viewport
@@ -23,6 +24,6 @@ canViewCallbacks.attr('selected-in-sidebar', function(element) {
         }
         containerElement.scrollTop = elementRect.top + parentScrollTop - utils.safeInset.top;
       }
-    });
+    },100);
   });
 });

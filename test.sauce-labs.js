@@ -4,13 +4,9 @@ const testSauceLabs = require('test-saucelabs');
 
 testSauceLabs({
   platforms: [{
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '11'
-  }, {
     browserName: 'MicrosoftEdge',
     platform: 'Windows 10',
-    version: '14'
+    version: '16'
   }, {
     'appium-version': '1.6.3',
     browserName: 'safari',
