@@ -26,7 +26,7 @@ var siteConfig = {
             "bit-docs-html-highlight-line": "^0.2.2",
             //TODO: This should not be include here and should only be included in package.json.
             //  we get an error without this, here, though
-            "steal-stache": "^3.0.1",
+            "steal-stache": "^4.0.1",
             "steal-conditional": "^0.3.6"
         },
         staticDist: [

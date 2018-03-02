@@ -7,6 +7,10 @@ var SearchControl = require('./search');
 var SidebarComponent = require("../sidebar/sidebar");
 var stache = require('can-stache');
 var SurveyAdControl = require('./survey-ad');
+var can = require("can-namespace");
+
+// exposes canjs stuff so widgets can use it.
+window.can = can;
 
 // state
 var $articleContainer,

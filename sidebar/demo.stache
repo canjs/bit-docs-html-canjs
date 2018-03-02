@@ -12,7 +12,7 @@
 
 <div id="demo-controls">
   {{#each pages page=value}}
-    <button class="go-to-{{page.name}}" on:click="setSelectedPageName(page.name)">
+    <button class="go-to-{{page.name}}" on:click="../setSelectedPageName(page.name)">
       {{page.name}}
     </button>
   {{/each}}

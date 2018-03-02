@@ -1,5 +1,7 @@
-var domData = require('can-util/dom/data/data');
+var domData = require('can-dom-data-state');
 var each = require("can-util/js/each/each");
+require("can-3-4-compat/dom-mutation-events");
+
 
 module.exports = {
   '{element} inserted': 'animateElementsImmediately',
@@ -22,7 +24,7 @@ module.exports = {
   },
 
   'a click': function(element, event) {
-
+      
     // Check for modifier keys before preventing default
     var noModifierKeys = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
     if (noModifierKeys) {

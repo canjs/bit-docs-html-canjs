@@ -32,19 +32,27 @@
     "url": "https://github.com/canjs/bit-docs-html-canjs/issues"
   },
   "homepage": "https://github.com/canjs/bit-docs-html-canjs#readme",
+  "steal": {
+    "plugins": [
+      "steal-less"
+    ]
+  },
   "dependencies": {
-    "can-component": "^3.3.4",
-    "can-control": "^3.0.3",
-    "can-define": "^1.5.1",
-    "can-stache": "^3.13.0",
+    "can-3-4-compat": "^1.0.0",
+    "can-component": "^4.0.0",
+    "can-control": "^4.0.0",
+    "can-define": "^2.0.0",
+    "can-dom-data-state": "^1.0.1",
+    "can-namespace": "^1.0.0",
+    "can-stache": "^4.0.0",
     "can-util": "^3.0.10",
-    "can-view-callbacks": "^3.2.2",
+    "can-view-callbacks": "^4.0.0",
     "escape-html": "^1.0.3",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "lunr": "bit-docs/lunr.js#279-safari-exception",
     "steal-less": "^1.2.0",
-    "steal-stache": "^3.0.1",
+    "steal-stache": "^4.0.1",
     "unescape-html": "^1.0.0"
   },
   "devDependencies": {
@@ -57,7 +65,7 @@
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
     "steal": "^1.5.9",
-    "steal-conditional": "^0.3.6",
+    "steal-conditional": "^1.0.0",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^1.8.2",
     "test-saucelabs": "0.0.3",
