@@ -20,8 +20,7 @@ article {
     padding: 0;
     .border-radius(0);
   }
-  code {
-
+  pre code {
     .highlight {
 	    background: @highlight-color;
 	    padding: 3px 0;
@@ -29,25 +28,9 @@ article {
     .obscured{
       background: lighten(@border-color, 2%);
     }
-    .expand {
-      background-color: @border-color;
-      text-align: center;
-      padding: 4px 0px;
-      margin: @gutter/2 0;
-      border-top: 1px solid @dark-border-color;
-      border-bottom: 1px solid @dark-border-color;
-      color: black;
-    }
-    .expand:before {
+
+    .collapse.collapsed::before {
       content: url(../static/img/expand_icon.svg);
-      display: block;
-      width: 15px;
-      height: 15px;
-      margin: 0 auto;
-    }
-    .expand:hover{
-      opacity: .6;
-      cursor: pointer;
     }
   }
   pre code {
@@ -55,15 +38,9 @@ article {
     display: block;
     margin: @gutter;
     word-wrap: break-word;
-    font-size: 15px;
     line-height: 20px;
     letter-spacing: 0;
     -webkit-font-smoothing: initial;
-
-    &.line-highlight {
-      display: inline-block;
-      min-width: 100%;
-    }
   }
   .signature {
     padding: @gutter*2;
@@ -78,11 +55,13 @@ article {
       margin-top: 0;
       border-bottom: 0;
       word-wrap: break-word;
+
       code {
         font-weight: bold;
         .font-smoothing;
+
         padding: 0;
-        background: none;
+        border: none;
       }
     }
   }
@@ -129,13 +108,6 @@ video{
 }
 blockquote{
   .notify-normal;
-}
-.line-highlight{
-  margin: @gutter 0;
-  span.line{
-    padding: 0 @gutter;
-    display: block;
-  }
 }
 .body{
   margin: @gutter*2;
