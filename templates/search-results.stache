@@ -14,23 +14,23 @@
 
   {{#if numResults}}
     <ul>
-      {{#each results as result}}
+      {{#each(results)}}
         <li>
-          <a href="{{docUrl(result.url)}}" title="{{result.name}}" class="result-name">
-            {{#if result.title}}{{result.title}}{{else}}{{result.name}}{{/if}}
-
-
-            {{#if result.title}}
-              {{^eq result.name result.title}}
+          <a href="{{docUrl(url)}}" title="{{name}}" class="result-name">
+            {{#if title}}
+              {{title}}
+              {{^eq name title}}
                 <span class="name">
-                  {{result.name}}
+                  {{name}}
                 </span>
               {{/eq}}
+            {{else}}
+              {{name}}
             {{/if}}
 
-            {{#if result.description}}
-              <div class="result-description" title="{{result.description}}">
-                {{{addTargetToExternalURLs(result.description, docUrl(result.url))}}}
+            {{#if description}}
+              <div class="result-description" title="{{description}}">
+                {{{addTargetToExternalURLs(description, docUrl(url))}}}
               </div>
             {{/if}}
           </a>
