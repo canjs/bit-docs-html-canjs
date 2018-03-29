@@ -184,6 +184,15 @@ QUnit.test('When a Core package is selected, its parent should not automatically
   assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
 });
 
+QUnit.test('When a child page of a Core package is selected, the package’s group should not automatically be expanded', function(assert) {
+  var vm = new ViewModel({searchMap: searchMap});
+  var canDefineTypesPage = vm.pageMap['can-define.types'];
+  var canObservablesPage = canDefineTypesPage.parentPage.parentPage.parentPage;
+  vm.selectedPage = canDefineTypesPage;
+  assert.ok(canObservablesPage.isCollapsed, 'parent page is collapsed');
+  assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
+});
+
 QUnit.test('When a collapsed purpose group page with no visible children is selected, it should be expanded', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
   var domUtilitiesPage = vm.pageMap['can-dom-utilities'];
