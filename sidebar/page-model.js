@@ -76,6 +76,7 @@ var PageModel = DefineMap.extend({
       localStorage.setItem(storageKey, true);
     }
   },
+  collection: 'string',
   description: 'string',
   descriptionWithoutHTML: {
     get: function() {
@@ -129,9 +130,25 @@ var PageModel = DefineMap.extend({
       return ['group', 'prototype', 'static'].indexOf(this.type) !== -1;
     }
   },
+  isInCoreCollection: {
+    type: 'boolean',
+    default: false,
+    get: function() {
+      var collection = this.collection;
+      if (!collection) {
+        // Walk up the parents to find the collection
+        var parent = this.parentPage;
+        while (parent) {
+          collection = parent.collection;
+          parent = (collection) ? null : parent.parentPage;
+        }
+      }
+      return collection === 'can-core';
+    }
+  },
   name: {
     type: 'string',
-    value: ''
+    default: ''
   },
   order: 'number',
   parent: 'string',
@@ -232,7 +249,7 @@ var PageModel = DefineMap.extend({
   title: 'string',
   type: 'string',
   unsortedChildren: {
-    value: function() {
+    default: function() {
       return [];
     }
   },

@@ -30,13 +30,13 @@ module.exports = DefineMap.extend({
   },
   pageMap: {
     type: 'any',
-    value: function() {
+    default: function() {
       return {};
     }
   },
   pathPrefix: {
     type: 'string',
-    value: '',
+    default: '',
     set: function(pathPrefix) {
       if (pathPrefix) {
         if (pathPrefix.substr(-1) !== '/') {
@@ -99,7 +99,7 @@ module.exports = DefineMap.extend({
         if (selectedPage.isCollapsed && selectedPage.visibleChildren.length === 0) {
           selectedPage.isCollapsed = false;
 
-        } else if (selectedPage.collection !== 'can-core') {
+        } else if (!selectedPage.isInCoreCollection) {
           // If the page is not in the core collection, walk up the parents to
           // make sure they are not collapsed.
           var parent = (selectedPage) ? selectedPage.parentPage : null;
