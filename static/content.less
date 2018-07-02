@@ -42,6 +42,25 @@ article {
     letter-spacing: 0;
     -webkit-font-smoothing: initial;
   }
+  .codepen:before {
+      content: "Run in your browser";
+  }
+  .codepen {
+      border: solid 1px #dfdfdf;
+      display: block;
+      position: relative;
+      text-align: center;
+      top: -20px;
+      border-top: none;
+      background-color: #dfdfdf;
+      color: gray;
+      padding: 3px;
+      cursor: pointer;
+  }
+  .codepen:hover {
+      color: white;
+      background-color: #4078c0;
+  }
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
