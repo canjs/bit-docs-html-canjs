@@ -64,7 +64,7 @@
     "http-server": "^0.11.0",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
-    "steal": "^1.5.9",
+    "steal": "^2.0.0",
     "steal-conditional": "^1.0.0",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^1.8.2",
