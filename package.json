@@ -70,6 +70,6 @@
     "steal-tools": "^1.8.2",
     "test-saucelabs": "0.0.6",
     "testee": "^0.7.0",
-    "zombie": "^6.0.0"
+    "zombie": "^6.1.2"
   }
 }
