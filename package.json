@@ -51,7 +51,7 @@
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "lunr": "bit-docs/lunr.js#279-safari-exception",
-    "steal-less": "^1.2.0",
+    "steal-less": "^1.3.4",
     "steal-stache": "^4.0.1",
     "unescape-html": "^1.0.0"
   },
