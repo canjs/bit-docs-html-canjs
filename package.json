@@ -44,7 +44,7 @@
     "can-define": "^2.0.0",
     "can-dom-data-state": "^1.0.1",
     "can-namespace": "^1.0.0",
-    "can-stache": "^4.0.0",
+    "can-stache": "^4.17.5",
     "can-util": "^3.0.10",
     "can-view-callbacks": "^4.0.0",
     "escape-html": "^1.0.3",
