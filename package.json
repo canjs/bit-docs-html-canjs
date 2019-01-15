@@ -60,7 +60,7 @@
     "bit-docs-generate-searchmap": "^0.2.0",
     "bit-docs-html-toc": "^0.6.0",
     "connect": "^3.5.0",
-    "funcunit": "^3.4.3",
+    "funcunit": "^3.6.2",
     "http-server": "^0.11.0",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
