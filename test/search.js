@@ -34,7 +34,7 @@ var setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
     // Wait for the search worker to be set up
     setTimeout(function() {
       resolve(searchLogic.indexData(search.convertSearchMapToIndexableItems(searchMap)));
-    }, 1000);
+    }, 2000);
   });
 });
 
