@@ -34,7 +34,7 @@ var setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
     // Wait for the search worker to be set up
     setTimeout(function() {
       resolve(searchLogic.indexData(search.convertSearchMapToIndexableItems(searchMap)));
-    }, 2000);
+    }, 1000);
   });
 });
 
@@ -48,7 +48,7 @@ QUnit.test('Search results render', function(assert) {
       var firstResultText = searchResultLis[0].querySelector('a').textContent.trim();
       assert.notEqual(firstResultText, '', 'first result has text');
       done();
-    }, 1000);
+    }, 500);
   });
 });
 
