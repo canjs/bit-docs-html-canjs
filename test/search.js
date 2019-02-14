@@ -52,7 +52,7 @@ QUnit.test('Search results render', function(assert) {
   });
 });
 
-QUnit.test('Search for “about”', function(assert) {
+/*QUnit.test('Search for “about”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
     var results = searchLogic.search('about');
@@ -151,3 +151,4 @@ QUnit.test('Speed while searching for can-*', function(assert) {
     done();
   });
 });
+*/
