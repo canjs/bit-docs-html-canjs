@@ -19,7 +19,7 @@ testSauceLabs({
 	}, {
 		browserName: 'safari',
 		platform: 'OS X 10.13',
-		version: 'latest'
+		version: '11',
 	}, {
 		browserName: 'googlechrome',
 		platform: 'OS X 10.12',
