@@ -48,7 +48,7 @@
     "can-util": "^3.0.10",
     "can-view-callbacks": "^4.0.0",
     "escape-html": "^1.0.3",
-    "jquery": "^3.1.1",
+    "jquery": "3.3.1",
     "lodash": "^4.17.4",
     "lunr": "bit-docs/lunr.js#279-safari-exception",
     "steal-less": "^1.2.0",
