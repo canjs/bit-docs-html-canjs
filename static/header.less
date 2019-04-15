@@ -1,9 +1,11 @@
 .top-right-top {
   .flex;
-  flex-direction: row-reverse;
   flex-shrink: 0;
   height: @brand-height;
   justify-content: space-between;
+  .search-section li {
+        list-style: none;
+    }
 }
 .brand {
     height: @brand-height;
@@ -119,25 +121,36 @@
         align-self: flex-start;
         > li {
             .flex;
-            font-size: 14px;
+            font-size: 24px;
             margin-right: @gutter;
             > a {
-                .button-link
+                color: #1E1E1E;
+                // .button-link
+            }
+            &.current {
+                > a {
+                    color: @link-color;
+                    text-decoration: underline;
+                    cursor: default;
+                }
             }
         }
     }
 }
-
 // ----- BITOVI BITS DROPDOWN -----
 .top-right-bitovi {
     .flex;
     padding: 0;
     margin: 0;
     list-style: none;
-    padding-bottom: 17px;
+    justify-content: center;
+    align-items: center;
     .dropdown {
+        display: flex;
         position: relative;
-        padding-top: 18px;
+        width: 150px;
+        height: 100%;
+        padding: 10px;
         .dropdown-menu {
             display: none;
         }
@@ -176,15 +189,11 @@
             }
         }
     }
-    .bitovi.icon-bits {
-        margin-top: 0px;
-        white-space: nowrap;
-        overflow: hidden;
-        padding: 0px 30px;
-        width: auto;
-        background: url(img/bitovi_bits.svg) no-repeat;
+    .bitovi.by-bitovi {
+        width: 100%;
+        background: url(img/by-bitovi-logo.svg) no-repeat;
         background-position: center;
-        background-size: 30px;
+        background-size: contain;
         height: auto;
         color: rgba(0, 0, 0, 0);
     }

@@ -11,7 +11,7 @@ var Search = Control.extend({
 	defaults: {
 		//dom selectors
 		searchResultsContainerSelector: ".search-results-container",
-		searchResultsContainerParentSelector: "#left > .bottom",
+		searchResultsContainerParentSelector: ".search-bar-container",
 
 		//renderer stuff
 		resultsRenderer: searchResultsRenderer,

@@ -1,7 +1,19 @@
 <div class="top-right-top">
+	<div class="brand">
+		<div class="logo">
+			<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
+		</div>
+	</div>
+	{{> nav-links.mustache }}
+	<div class="search-section">
+		{{> search-bar.mustache}}
+		<div class="search-bar-container">
+		</div>
+		{{>search-results.mustache}}
+	</div>
 	<ul class="top-right-bitovi">
 	  	<li class="dropdown">
-	    	<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+	    	<a href="https://www.bitovi.com" class="bitovi by-bitovi">Bitovi</a>
 	    	<ul class="dropdown-menu">
 	      		<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
 	      		<li><a href="https://www.bitovi.com/blog">Blog</a></li>
@@ -14,11 +26,5 @@
 	    	</ul>
 	  	</li>
 	</ul>
-	<div class="brand">
-		<div class="logo">
-			<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
-		</div>
-	</div>
-	{{> nav-links.mustache }}
 </div>
-{{> breadcrumb.mustache }}
+

@@ -1,14 +1,18 @@
  //Search
 .search-bar {
-	background: @code-color;
+	// background: @code-color;
 	height: @breadcrumb-height;
-	padding: @gutter @gutter*2;
+	padding: 0 @gutter*2 @gutter;
 	cursor:pointer;
 
 	.search-wrap{
 		display: flex;
 		position: relative;
 		top: 1px;
+		padding: 10px;
+		background: #FFFFFF;
+		box-shadow: inset 0 0 20px 0 rgba(0,0,0,0.20);
+		border-radius: 20px;
 
 		.search-icon{
 			display: block;
@@ -16,7 +20,7 @@
 			width: 1em;
 			font-size: 1em;
 			cursor: pointer;
-			background-image: url(img/icon-search-white.svg);
+			background-image: url(img/icon-search-black.svg);
 			background-size: cover;
 			background-repeat: no-repeat;
 		}
@@ -27,8 +31,8 @@
 			font-size: .8em;
 			top: 0.125em;
 			cursor: pointer;
-			background-color: @code-color;
-			background-image: url(img/icon-x-white.svg);
+			// background-color: @code-color;
+			background-image: url(img/icon-x-black.svg);
 			background-size: cover;
 			background-repeat: no-repeat;
 			display:none;
@@ -36,8 +40,8 @@
 
 		.search{
 			transition: width @transition-speed ease;
-			background: @code-color;
-			color: #ffffff;
+			// background: @code-color;
+			color: #000000;
 			border: none;
 			padding: 0 .5em;
 			flex: 1;
