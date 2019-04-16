@@ -1,11 +1,11 @@
+<div class="header">
+  {{#with (getRoot)}}
+        {{>header.mustache}}
+    {{/with}}
+</div>
 <div id="everything">
   <div id="left" class="column">
-    <div class="top-left">
-      {{#with (getRoot)}}
-          {{>header-left.mustache}}
-      {{/with}}
-    </div>
-    <div class="bottom">
+
       <div class="nav-menu">
         <div class="social-side-container">
           {{>social.mustache}}
@@ -14,18 +14,15 @@
             {{>menu.mustache}}
         {{/with}}
       </div>
-    </div>
+
   </div>
   <div id="right" class="column">
-    <div class="top-right">
-      {{> header-right.mustache}}
-    </div>
-    <div class="bottom">
+
       <article>{{> article.mustache}}</article>
       {{#with (getRoot)}}
         <footer>{{> footer.mustache}}</footer>
       {{/with}}
-    </div>
+
   </div>
 </div>
 {{> survey-ad.mustache}}
