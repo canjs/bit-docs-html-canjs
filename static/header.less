@@ -9,6 +9,8 @@
 }
 .header {
     display: flex;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
+    z-index: 1
 }
 .brand {
     display: flex;
@@ -22,7 +24,7 @@
         display: inline-block;
         width: 60px;
         height: 100%;
-        margin-right: @gutter;
+        margin: 0 @gutter 0 @gutter*5.5;
         cursor: pointer;
         &:hover > a {
             opacity: .7;
@@ -36,6 +38,9 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+    }
+    .version {
+        display: none;
     }
 }
 
@@ -117,14 +122,17 @@
 
 // ----- CHAT, FORUM, GITHUB STAR, TWITTER -----
 .top-right-links {
-    display: none;
+    margin: 0;
+    padding: 0;
+    > li {
+        display: none;
+    }
     @media screen and (min-width: @breakpoint){
         .flex;
         list-style: none;
         margin: 20px auto auto @gutter*4;
         height: 23px;
         padding: 0;
-        flex-basis: 100%;
         align-self: flex-start;
         > li {
             .flex;
@@ -151,14 +159,14 @@
 .top-right-bitovi {
     .flex;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 10px;
     list-style: none;
     justify-content: center;
     align-items: center;
     .dropdown {
         display: flex;
         position: relative;
-        width: 150px;
+        width: 100px;
         height: 100%;
         padding: 10px;
         .dropdown-menu {

@@ -5,7 +5,7 @@
 label[for="nav-trigger"] {
   position: fixed;
   top: 9px;
-  left: @gutter*2;
+  left: @gutter;
   z-index: 12;
   font-family: Lato, sans-serif;
   border: 1px solid @border-color;
@@ -24,10 +24,6 @@ label[for="nav-trigger"] {
 }
 label:hover{
   background: @border-color;
-}
-.nav-trigger:checked + label{
-  left: @sidebar-width + @gutter*2;
-  transition: left @transition-speed*2;
 }
 .nav-trigger ~ #everything #right {
 	width: 100%;
