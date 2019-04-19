@@ -299,6 +299,7 @@ function navigate(href, updateLocation) {
 
 			var $article = $content.find("article");
 			var $breadcrumb = $content.find(".breadcrumb");
+			var $headerLinks = $content.find(".top-right-links");
 			var homeLink = $content.find(".logo > a").attr('href');
 
 			// Remove GitHub star buttons from the main body in IE
@@ -312,6 +313,7 @@ function navigate(href, updateLocation) {
 			//root elements - use .filter; not .find
 			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
+			$(".top-right-links").replaceWith($headerLinks);
 			$("article").replaceWith($article);
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
