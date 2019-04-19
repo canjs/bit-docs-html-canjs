@@ -1,7 +1,17 @@
-<ul class="top-right-links">
-  <li class="current"><a class="page" href="doc/about.html" title="Learn about CanJS’s mission, technical highlights, who uses CanJS, and our future roadmap.">About</a></li>
-  <li><a class="page" href="doc/guides.html" title="Welcome to CanJS! These guides are here to help you develop and improve your relationship with CanJS. After all, picking a JavaScript framework is a commitment.  We want CanJS to be the framework you marry.  This page helps you know how to advance through the different stages of this relationship:">Guides</a></li>
-  <li><a class="page" href="doc/api.html" title="Welcome to the CanJS API documentation! Learn about all the packages that make-up CanJS and how they work together to help you build amazing applications!">API&nbsp;Docs</a></li>
-  <li><a class="page" href="doc/community.html" title="Get involved with one of the most inviting communities on the internet!">Community</a></li>
-  <li><a class="page" href="doc/guides/contribute.html" title="Learn how to contribute to CanJS!">Contributing</a></li>
-</ul>
+{{#if children.length}}
+	<ul class="top-right-links">
+		{{#each (customSort children)}}
+			{{^if docObject.hide}}
+				{{^if (isGroup docObject)}}
+					<li class="{{#if (isCurrent docObject)}}current{{/if}}">
+						<a class="{{docObject.type}}"
+							href="{{urlTo docObject.name}}"
+							title="{{getLinkTitle docObject}}">
+							{{getShortTitle docObject}}
+						</a>
+					</li>
+				{{/if}}
+			{{/if}}
+		{{/each}}
+	</ul>
+{{/if}}
