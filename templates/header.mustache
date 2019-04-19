@@ -1,26 +1,30 @@
-<div class="brand">
-	<div class="logo">
-		<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
-		<div class="dropdown project-dropdown">
-			<a href="https://donejs.com/">DoneJS</a>
-			<a href="https://stealjs.com/">StealJS</a>
-			<a href="https://jquerypp.com/">jQuery++</a>
-			<a href="https://funcunit.com/">FuncUnit</a>
-			<a href="https://documentjs.com/">DocumentJS</a>
+{{#with (getRoot)}}
+	<div class="brand">
+		<div class="logo">
+			<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
+			<div class="dropdown project-dropdown">
+				<a href="https://donejs.com/">DoneJS</a>
+				<a href="https://stealjs.com/">StealJS</a>
+				<a href="https://jquerypp.com/">jQuery++</a>
+				<a href="https://funcunit.com/">FuncUnit</a>
+				<a href="https://documentjs.com/">DocumentJS</a>
+			</div>
+		</div>
+		<div class="version">
+			<div class="version-number">
+				{{package.version}}
+			</div>
+			<div class="dropdown version-dropdown">
+				{{#each (getAltVersions)}}
+					<a href="{{.}}">{{@key}}</a>
+				{{/each}}
+			</div>
 		</div>
 	</div>
-	<div class="version">
-		<div class="version-number">
-			{{package.version}}
-		</div>
-		<div class="dropdown version-dropdown">
-			{{#each (getAltVersions)}}
-				<a href="{{.}}">{{@key}}</a>
-			{{/each}}
-		</div>
-	</div>
-</div>
-{{> nav-links.mustache }}
+{{/with}}
+{{#with (getCurrentTree)}}
+	{{> nav-links.mustache }}
+{{/with}}
 <div class="search-section">
 	{{> search-bar.mustache}}
 	<div class="search-bar-container">
