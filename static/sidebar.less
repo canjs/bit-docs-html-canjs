@@ -51,6 +51,13 @@ img.social-icon-small{
 }
 
 // ----- SIDE NAVIGATION -----
+@media screen and (min-width: @breakpoint){
+	[data-current-page="canjs"], [data-current-page="community"] {
+		#left {
+			display: none;
+		}
+	}
+}
 #left {
 	scroll-behavior: smooth;
 

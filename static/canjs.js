@@ -299,6 +299,7 @@ function navigate(href, updateLocation) {
 
 			var $article = $content.find("article");
 			var $breadcrumb = $content.find(".breadcrumb");
+			var currentPage = $content.filter("#everything").attr("data-current-page");
 			var $headerLinks = $content.find(".top-right-links");
 			var homeLink = $content.find(".logo > a").attr('href');
 
@@ -318,6 +319,7 @@ function navigate(href, updateLocation) {
 			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
 			$("[path-prefix]").replaceWith($pathPrefixDiv);
+			$("[data-current-page]").attr("data-current-page", currentPage);
 
 			// Initialize jsbin scripts
 			delete window.jsbinified;
