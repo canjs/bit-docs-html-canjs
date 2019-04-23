@@ -91,12 +91,12 @@ QUnit.test('Search for “helpers/', function(assert) {
   });
 });
 
-QUnit.test('Search for “Live Binding”', function(assert) {
+QUnit.test('Search for “Call Expression”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-    var results = searchLogic.search('Live Binding');
+    var results = searchLogic.search('Call Expression');
     assert.equal(results.length > 1, true, 'got more than 1 result');
-    assert.equal(indexOfPageInResults('can-stache.Binding', results) < 2, true, 'first result is the can-stache Live Binding page');
+    assert.equal(indexOfPageInResults('can-stache/expressions/call', results) < 2, true, 'first result is the can-stache Call Expression page');
     done();
   });
 });
@@ -121,12 +121,12 @@ QUnit.test('Search for “stache”', function(assert) {
   });
 });
 
-QUnit.test('Search for “%special”', function(assert) {
+QUnit.test('Search for “{{#expression}}', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-    var results = searchLogic.search('%special');
+    var results = searchLogic.search('{{#expression}}');
     assert.equal(results.length > 0, true, 'got results');
-    assert.equal(indexOfPageInResults('can-stache/keys/special', results), 0, 'first result is the can-stache/keys/special page');
+    assert.equal(indexOfPageInResults('can-stache.tags.section', results), 0, 'first result is the can-stache.tags.section page');
     done();
   });
 });
