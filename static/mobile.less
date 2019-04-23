@@ -36,10 +36,9 @@ label:hover{
     overflow-x: hidden;
   }
 }
-.nav-trigger:not(:checked) ~ #everything #left {
-  @media screen and (max-width: @breakpoint -1){
+@media screen and (max-width: 999px) {
+  .nav-trigger:not(:checked) ~ #everything #left {
     visibility: hidden;
-    transition: visibility @transition-speed;
   }
 }
 .nav-trigger + label {
