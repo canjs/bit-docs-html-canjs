@@ -460,6 +460,9 @@ var Search = Control.extend({
 		this.$input.trigger("focus");
 	},
 
+	// show the results when the input is given focus
+	".search focus": "showResults",
+
 	//cancel search on cancel click
 	".search-icon-cancel click": "clear",
 	".search-icon-cancel touchend": "clear",
@@ -603,9 +606,6 @@ var Search = Control.extend({
 				complete: function(){
 					self.$resultsContainer.removeClass("is-hiding");
 					if(!self.$resultsContainer.is(".is-showing")){
-						if(self.$resultsWrap && self.$resultsWrap.length){
-							self.$resultsWrap.empty();
-						}
 						if(self.options.onResultsHidden){
 							self.options.onResultsHidden();
 						}
@@ -624,6 +624,12 @@ var Search = Control.extend({
 				this.options.onResultsShow();
 			}
 			this.$resultsContainerParent.stop();
+
+			// Clear the previous search results if the text field is empty
+			if (!this.searchTerm && self.$resultsWrap && self.$resultsWrap.length) {
+				self.$resultsWrap.empty();
+			}
+
 			this.$resultsContainer.addClass("is-showing").fadeIn({
 				duration: this.options.searchAnimation,
 				complete: function(){

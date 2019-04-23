@@ -56,7 +56,13 @@ var $articleContainer,
 
 		if (noModifierKeys && sameHostname && sameProtocol) {
 			ev.preventDefault();
+			searchControl.hideResults();
 			navigate(ev.target.href || this.href);
+		}
+	}).on('click', function(event) {
+		var searchContainer = document.querySelector('.search-section');
+		if ($.contains(searchContainer, event.target) === false) {
+			searchControl.hideResults();
 		}
 	}).on('keyup', 'input[type="checkbox"]', function(e){
 		var $target = $(e.target);
