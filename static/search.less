@@ -3,7 +3,9 @@
 	display: flex;
 	flex-direction: column;
 	align-self: center;
-	margin-left: auto;
+	@media screen and (max-width: 399px){
+        margin-right: @gutter;
+    }
 }
 .search-bar {
 	cursor:pointer;
