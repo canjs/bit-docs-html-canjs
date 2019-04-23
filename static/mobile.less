@@ -3,9 +3,8 @@
   clip: rect(0, 0, 0, 0);
 }
 label[for="nav-trigger"] {
-  position: fixed;
-  top: 9px;
-  left: @gutter*2;
+  position: relative;
+  margin: 10px 0 10px 15px;
   z-index: 12;
   font-family: Lato, sans-serif;
   border: 1px solid @border-color;
@@ -25,10 +24,6 @@ label[for="nav-trigger"] {
 label:hover{
   background: @border-color;
 }
-.nav-trigger:checked + label{
-  left: @sidebar-width + @gutter*2;
-  transition: left @transition-speed*2;
-}
 .nav-trigger ~ #everything #right {
 	width: 100%;
 }
@@ -39,13 +34,11 @@ label:hover{
     position: fixed;
     left: @sidebar-width;
     overflow-x: hidden;
-    z-index: 50;
   }
 }
-.nav-trigger:not(:checked) ~ #everything #left {
-  @media screen and (max-width: @breakpoint){
+@media screen and (max-width: 999px) {
+  .nav-trigger:not(:checked) ~ #everything #left {
     visibility: hidden;
-    transition: visibility @transition-speed;
   }
 }
 .nav-trigger + label {
@@ -66,7 +59,7 @@ label:hover{
   }
 }
 
-@media screen and (max-width: @breakpoint){
+@media screen and (max-width: @breakpoint -1){
   .top-left > .brand{
     display: none;
   }

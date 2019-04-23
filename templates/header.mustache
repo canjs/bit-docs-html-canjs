@@ -1,0 +1,49 @@
+{{#with (getRoot)}}
+	<label for="nav-trigger">Menu</label>
+	<div class="brand">
+		<div class="logo">
+			<a href="{{urlTo 'canjs'}}" alt="CanJS"></a>
+			<div class="dropdown project-dropdown">
+				<a href="https://donejs.com/">DoneJS</a>
+				<a href="https://stealjs.com/">StealJS</a>
+				<a href="https://jquerypp.com/">jQuery++</a>
+				<a href="https://funcunit.com/">FuncUnit</a>
+				<a href="https://documentjs.com/">DocumentJS</a>
+			</div>
+		</div>
+		<div class="version">
+			<div class="version-number">
+				{{package.version}}
+			</div>
+			<div class="dropdown version-dropdown">
+				{{#each (getAltVersions)}}
+					<a href="{{.}}">{{@key}}</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+{{/with}}
+{{#with (getCurrentTree)}}
+	{{> nav-links.mustache }}
+{{/with}}
+<div class="search-section">
+	{{> search-bar.mustache}}
+	<div class="search-bar-container">
+	</div>
+	{{>search-results.mustache}}
+</div>
+<ul class="top-right-bitovi">
+	<li class="dropdown">
+		<a href="https://www.bitovi.com" class="bitovi by-bitovi">Bitovi</a>
+		<ul class="dropdown-menu">
+			<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+			<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+			<li><a href="https://www.bitovi.com/design">Design</a></li>
+			<li><a href="https://www.bitovi.com/development">Development</a></li>
+			<li><a href="https://www.bitovi.com/training">Training</a></li>
+			<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+			<li><a href="https://www.bitovi.com/about">About</a></li>
+			<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+		</ul>
+	</li>
+</ul>

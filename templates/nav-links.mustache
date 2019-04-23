@@ -1,14 +1,17 @@
-<ul class="top-right-links">
-  <li>
-    <a href="https://www.bitovi.com/community/slack">Chat</a>
-  </li>
-  <li>
-    <a href="https://forums.bitovi.com/c/canjs">Forum</a>
-  </li>
-  <li>
-    <a class="github-button nav-social" href="https://github.com/canjs/canjs" data-count-href="/canjs/canjs/stargazers" data-show-count="true">Star</a>
-  </li>
-  <li>
-    <a href="https://twitter.com/canjs" class="twitter-follow-button nav-social" data-show-count="true" data-show-screen-name="false">Follow @canjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </li>
-</ul>
+{{#if children.length}}
+	<ul class="top-right-links">
+		{{#each (customSort children)}}
+			{{^if docObject.hide}}
+				{{^if (isGroup docObject)}}
+					<li class="{{#if (isCurrent docObject)}}current{{/if}}">
+						<a class="{{docObject.type}}"
+							href="{{urlTo docObject.name}}"
+							title="{{getLinkTitle docObject}}">
+							{{getShortTitle docObject}}
+						</a>
+					</li>
+				{{/if}}
+			{{/if}}
+		{{/each}}
+	</ul>
+{{/if}}
