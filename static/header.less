@@ -126,12 +126,12 @@
     @media screen and (min-width: @breakpoint){
         .flex;
         list-style: none;
-        margin: 20px auto auto @gutter*4;
-        height: 23px;
+        margin: auto auto auto @gutter*4;
         padding: 0;
         align-self: flex-start;
         > li {
             .flex;
+            align-items: center;
             font-family: Lato, sans-serif;
             font-size: 12px;
             color: #3E4548;
@@ -139,11 +139,13 @@
             margin-right: @gutter*2;
             > a {
                 color: #1E1E1E;
-                padding: 0 5px;
+                padding: 20px 5px;
             }
             &.current {
                 > a {
                     border-bottom: 4px solid @link-color;
+                    padding-bottom: 6px;
+                    margin-bottom: 10px;
                     text-decoration: none;
                     cursor: default;
                 }
@@ -159,6 +161,7 @@
     list-style: none;
     justify-content: center;
     align-items: center;
+    z-index: 999999;
     .dropdown {
         display: flex;
         position: relative;
