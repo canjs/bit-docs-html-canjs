@@ -10,7 +10,10 @@
 .header {
     display: flex;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
-    z-index: 1
+    z-index: 1;
+    flex-shrink: 0;
+    background-color: #FFFFFF;
+    white-space: nowrap;
 }
 .brand {
     display: flex;
@@ -23,7 +26,7 @@
         display: inline-block;
         width: 60px;
         height: 100%;
-        margin: 0 @gutter 0 @gutter*5.5;
+        margin: 0 @gutter 0 @gutter;
         cursor: pointer;
         &:hover > a {
             opacity: .7;

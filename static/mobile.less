@@ -3,9 +3,8 @@
   clip: rect(0, 0, 0, 0);
 }
 label[for="nav-trigger"] {
-  position: fixed;
-  top: 9px;
-  left: @gutter;
+  position: relative;
+  margin: 10px 0 10px 15px;
   z-index: 12;
   font-family: Lato, sans-serif;
   border: 1px solid @border-color;
@@ -35,7 +34,6 @@ label:hover{
     position: fixed;
     left: @sidebar-width;
     overflow-x: hidden;
-    z-index: 50;
   }
 }
 .nav-trigger:not(:checked) ~ #everything #left {
