@@ -765,6 +765,9 @@ var Search = Control.extend({
 				href = $a.attr("href");
 
 		this.navigate(href);
+
+		// Dismiss the search results
+		this.hideResults();
 	},
 
 	// ---- END KEYBOARD NAVIGATION ---- //

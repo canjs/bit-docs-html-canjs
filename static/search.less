@@ -108,6 +108,7 @@
 				padding: .9em .5em;
 			}
 			.name{
+				color: @gray;
 				line-height: 1;
 				font-size: .75em;
 				font-weight: bold;
@@ -119,15 +120,10 @@
 			}
 			.result-description{
 				font-size: .85em;
-				// white-space: nowrap;
-				// text-overflow: ellipsis;
-				// overflow: hidden;
 				width: 100%;
 				display:block;
 				color: @gray;
 				margin-top: .3em;
-				overflow: hidden;
-				text-overflow: ellipsis;
 			}
 			code {
 				background-color: inherit;
@@ -162,6 +158,6 @@
 	.search-results-container {
 		-webkit-backdrop-filter: @backdrop-blur;
 		backdrop-filter: @backdrop-blur;
-		background: rgba(100%, 100%, 100%, .9);// this should be .8, but Safari 12.1 has a bug where it doesn’t apply the filter the first time the results are shown
+		background: rgba(100%, 100%, 100%, .95);// this should be .8, but Safari 12.1 has a bug where it doesn’t apply the filter the first time the results are shown
 	}
 }
