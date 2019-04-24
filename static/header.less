@@ -9,15 +9,19 @@
 }
 .header {
     display: flex;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
-    z-index: 1;
+    align-items: center;
     flex-shrink: 0;
+    padding: 0 @gutter*2;
+    @media screen and (max-width: 499px){
+        padding: 0 @gutter;
+    }
     background-color: #FFFFFF;
+    z-index: 1;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
 }
 .brand {
     display: flex;
-    height: @brand-height;
-    padding-top: @gutter;
+    white-space: nowrap;
     .dropdown {
         display:none;
     }
@@ -25,7 +29,6 @@
         display: inline-block;
         width: 60px;
         height: 100%;
-        margin: 0 @gutter 0 @gutter;
         cursor: pointer;
         &:hover > a {
             opacity: .7;
@@ -58,7 +61,7 @@
         }
 
         .logo {
-            margin: 0 @gutter 0 @gutter*2;
+            margin: 0 @gutter 0 0;
 
             &:hover .dropdown {
                 display: block;
@@ -129,27 +132,40 @@
     @media screen and (min-width: @breakpoint){
         .flex;
         list-style: none;
-        margin: auto auto auto @gutter*4;
-        padding: 0;
-        align-self: flex-start;
+        margin: auto auto auto @gutter*2;
         > li {
             .flex;
-            align-items: center;
-            font-family: Lato, sans-serif;
-            font-size: 12px;
-            color: #3E4548;
-            text-transform: uppercase;
-            margin-right: @gutter*2;
             > a {
-                color: #1E1E1E;
-                padding: 20px 5px;
+                color: @gray;
+                position: relative;
+                text-decoration: none;
+                padding: 20px 10px @gutter;
+                margin: 0 10px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    bottom: 20px;
+                    left: 0px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: #CCCCCC;
+                    opacity: 0;
+                    z-index: -1;
+                    transition: all 0.4s ease-in-out;
+                }
+                &:hover:before {
+                    bottom: 8px;
+                    opacity: 1;
+                }
             }
             &.current {
                 > a {
-                    border-bottom: 4px solid @link-color;
-                    padding-bottom: 6px;
-                    margin-bottom: 10px;
-                    text-decoration: none;
+                    color: @link-color;
+                }
+                > a:before {
+                    bottom: 8px;
+                    opacity: 1;
+                    background-color: @link-color;
                     cursor: default;
                 }
             }
@@ -162,8 +178,8 @@
     @media screen and (max-width: 399px){
         display: none;
     }
-    padding: 0;
-    margin: 0 0 0 10px;
+    padding: 8px 5px 10px;
+    margin: 0 0 0 @gutter;
     list-style: none;
     justify-content: center;
     align-items: center;
@@ -171,11 +187,18 @@
     .dropdown {
         display: flex;
         position: relative;
-        width: 100px;
-        height: 100%;
-        padding: 10px;
+        width: 85px;
+        height: 35px;
         .dropdown-menu {
             display: none;
+        }
+        .bitovi.by-bitovi {
+            width: 100%;
+            height: 100%;
+            background: url(img/by-bitovi-logo.svg) no-repeat;
+            background-position: center;
+            background-size: contain;
+            color: rgba(0, 0, 0, 0);
         }
     }
     &:hover {
@@ -187,8 +210,8 @@
             background: white;
             .border;
             border-top: none;
-            right: 0;
-            top: @brand-height;
+            right: -5px;
+            top: @gutter*3;
             list-style: none;
             padding: 0;
             width: 240px;
@@ -211,13 +234,5 @@
                 }
             }
         }
-    }
-    .bitovi.by-bitovi {
-        width: 100%;
-        background: url(img/by-bitovi-logo.svg) no-repeat;
-        background-position: center;
-        background-size: contain;
-        height: auto;
-        color: rgba(0, 0, 0, 0);
     }
 }
