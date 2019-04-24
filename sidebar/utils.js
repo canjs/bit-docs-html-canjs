@@ -8,7 +8,7 @@ module.exports = {
     );
   },
   safeInset: {
-    bottom: 49,
-    top: 101
+    bottom: 0,
+    top: 53 // @brand-height
   }
 };

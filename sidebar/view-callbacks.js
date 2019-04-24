@@ -2,7 +2,7 @@ var canViewCallbacks = require('can-view-callbacks');
 var utils = require('./utils');
 
 canViewCallbacks.attr('selected-in-sidebar', function(element) {
-  var containerElement = document.querySelector('#left .bottom');
+  var containerElement = document.querySelector('#left');
   if (!containerElement) {
     return;
   }
