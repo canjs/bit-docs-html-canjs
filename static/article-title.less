@@ -72,15 +72,15 @@ ul.title-links {
 
 	ol {
 		counter-reset: item;
-		margin-left: @gutter*2;
 		margin-right: @gutter*2;
 		padding: 0;
-
+		list-style: none;
 		li {
 			display: block;
 			color: @link-color;
 			line-height: 1.7em;
-
+			position: relative;
+			margin-left: @gutter*2;
 			a:hover {
 				cursor: pointer;
 				text-decoration: underline;
@@ -90,6 +90,10 @@ ul.title-links {
 				content: counter(item) ". ";
 				counter-increment: item;
 				color: @gray;
+				position: absolute;
+				text-align: right;
+				left: -(@gutter*2);
+				width: 22px;
 			}
 		}
 	}

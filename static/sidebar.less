@@ -51,11 +51,18 @@ img.social-icon-small{
 }
 
 // ----- SIDE NAVIGATION -----
-#left > .bottom {
+@media screen and (min-width: @breakpoint){
+	[data-current-page="canjs"], [data-current-page="community"] {
+		#left {
+			display: none;
+		}
+	}
+}
+#left {
 	scroll-behavior: smooth;
 
 	ul {
-		padding-left: @gutter/1.5;
+		padding-left: 0;
 		margin: 0;
 		margin-bottom: @gutter;
 		list-style: none;
@@ -73,6 +80,9 @@ img.social-icon-small{
 			&.collection-group > a {
 				color: lighten(@gray, 15%);
 			}
+		}
+		ul {
+			padding-left: 5px;
 		}
 	}
 	.current > a, .expanded > a, [selected-in-sidebar] > a {
@@ -96,6 +106,14 @@ img.social-icon-small{
 				list-style-type: none;
 				padding: 0;
 				.border-bottom;
+				@media screen and (min-width: @breakpoint){
+					border-bottom: none;
+				}
+				&:not(.expanded) {
+					@media screen and (min-width: @breakpoint){
+						display: none;
+					}
+				}
 				> a {
 					font-size: 110%;
 					padding-bottom: @gutter;
@@ -103,6 +121,11 @@ img.social-icon-small{
 				}
 				&.expanded.parent > a {
 					padding-bottom: @gutter/2;
+				}
+				&.expanded > a {
+					@media screen and (min-width: @breakpoint){
+						display: none;
+					}
 				}
 				// Second level
 				> ul {

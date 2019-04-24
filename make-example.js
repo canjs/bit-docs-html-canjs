@@ -27,7 +27,8 @@ var siteConfig = {
             //TODO: This should not be include here and should only be included in package.json.
             //  we get an error without this, here, though
             "steal-stache": "^4.0.1",
-            "steal-conditional": "^0.3.6"
+            "steal-conditional": "^0.3.6",
+            "bit-docs-html-codepen-link": "^1.0.0"
         },
         staticDist: [
             path.join(__dirname, "dist", "static")

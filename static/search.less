@@ -1,160 +1,163 @@
  //Search
+.search-section {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: 170px;
+	@media screen and (max-width: 399px){
+        margin-right: @gutter;
+    }
+}
 .search-bar {
-	background: @code-color;
-	height: @breadcrumb-height;
-	padding: @gutter @gutter*2;
 	cursor:pointer;
 
 	.search-wrap{
 		display: flex;
 		position: relative;
 		top: 1px;
-
+		padding: 5px 10px;
+		background: #f1f1f3;
+		border-radius: 20px;
 		.search-icon{
 			display: block;
 			height: 1em;
 			width: 1em;
-			font-size: 1em;
+			font-size: 1.25em;
 			cursor: pointer;
-			background-image: url(img/icon-search-white.svg);
+			background-image: url(img/icon-search-black-thin.svg);
 			background-size: cover;
 			background-repeat: no-repeat;
+			opacity: .25;
 		}
 		.search-icon-cancel{
 			position: relative;
 			height: 1em;
 			width: 1em;
 			font-size: .8em;
-			top: 0.125em;
+			top: 0;
 			cursor: pointer;
-			background-color: @code-color;
-			background-image: url(img/icon-x-white.svg);
+			// background-color: @code-color;
+			background-image: url(img/icon-x-black-thin.svg);
 			background-size: cover;
 			background-repeat: no-repeat;
 			display:none;
+			opacity: .25;
+			margin-left: .5em;
+			padding: 10px;
 		}
 
 		.search{
 			transition: width @transition-speed ease;
-			background: @code-color;
-			color: #ffffff;
+			background: transparent;
+			color: #000000;
 			border: none;
-			padding: 0 .5em;
+			padding: 0 0 0 .5em;
 			flex: 1;
-			.placeholder(@gray);
+			.placeholder(@dark-border-color);
 			&:focus{
 				outline:none;
 			}
 		}
-
 		&.has-value .search-icon-cancel{
 			display:block;
 		}
 	}
 }
 
-// Desktop styles for search
-@media screen and (min-width: @breakpoint) {
-	#everything:not(.header-is-hidden) #left > .bottom .search-results-container {
-		height: calc(~"100vh - @{brand-height} - @{breadcrumb-height}");
-		top: @brand-height + @breadcrumb-height;
+//Search Results
+.search-results-container{
+	display:none;
+	position: absolute;
+	top: @brand-height;
+	background: #fff;
+	right: 10px;
+	overflow-y: auto;
+	box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.25);
+	width: 350px;
+	@media screen and (max-width: @breakpoint){
+		width: auto;
+		max-width: 350px;
 	}
-}
+	max-height: calc(~"100vh - 122px");// 53px header + 49px survey ad + 20px drop shadow
+	z-index: 999998;
+	transition: all @transition-speed ease;
+	transition-property: -webkit-backdrop-filter, backdrop-filter, background;
 
-#left > .bottom {
-	//Search Results
-	.search-results-container{
-		display:none;
-		height: calc(~"100vh - @{breadcrumb-height}");
-		position: absolute;
-		top: @breadcrumb-height;
-		width: 100%;
-		background: #fff;
-		left: 0;
-		overflow-y: auto;
-		transition: all @transition-speed ease;
-		transition-property: -webkit-backdrop-filter, backdrop-filter, background;
+	.search-cancel{
+		color: @code-color;
+		display: block;
+		font-weight: bold;
+		padding: .5em;
+		font-size: 1em;
+		line-height: 1;
+	}
 
-		.search-cancel{
-			color: @code-color;
-			display: block;
-			font-weight: bold;
-			padding: .5em;
-			font-size: 1em;
-			line-height: 1;
-		}
-
-		ul{
-			padding:0;
-			> li{
-				border-bottom: 1px solid @light-gray-color;
-				a{
-					display: inline;
-					&:hover {
-						text-decoration: none;
-					}
-				}
-				> a {
-					display: block;
-					padding: .9em .5em;
-				}
-				.name{
-					line-height: 1;
-					font-size: .75em;
-					font-weight: bold;
-					font-style: italic;
-					display: inline-block;
-					width: 100%;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
-				.result-description{
-					font-size: .85em;
-					// white-space: nowrap;
-					// text-overflow: ellipsis;
-					// overflow: hidden;
-					width: 100%;
-					display:block;
-					color: @gray;
-					margin-top: .3em;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
-				code {
-					background-color: inherit;
-				}
-				&:hover,
-				&.keyboard-active{
-					background-color: @light-gray-color;
-					cursor:pointer;
-				}
-			}
-		}
-
-		.search-results-heading{
+	ul{
+		padding:0;
+		margin: 0;
+		> li{
 			border-bottom: 1px solid @light-gray-color;
-			padding: 1em .5em;
-			.count{
-				font-weight:bold;
+			a{
+				display: inline;
+				&:hover {
+					text-decoration: none;
+				}
 			}
-			.description{
-				margin:0;
-				text-align: center;
+			> a {
+				display: block;
+				padding: .9em .5em;
+			}
+			.name{
 				color: @gray;
+				line-height: 1;
+				font-size: .75em;
+				font-weight: bold;
+				font-style: italic;
+				display: inline-block;
+				width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
-			.key{
-				margin: .5em 0;
-				text-align: center;
+			.result-description{
+				font-size: .85em;
+				width: 100%;
+				display:block;
+				color: @gray;
+				margin-top: .3em;
 			}
+			code {
+				background-color: inherit;
+			}
+			&:hover,
+			&.keyboard-active{
+				background-color: @light-gray-color;
+				cursor:pointer;
+			}
+		}
+	}
+
+	.search-results-heading{
+		border-bottom: 1px solid @light-gray-color;
+		padding: 1em .5em;
+		.count{
+			font-weight:bold;
+		}
+		.description{
+			margin:0;
+			text-align: center;
+			color: @gray;
+		}
+		.key{
+			margin: .5em 0;
+			text-align: center;
 		}
 	}
 }
 
 @supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
-	#left > .bottom .search-results-container {
+	.search-results-container {
 		-webkit-backdrop-filter: @backdrop-blur;
-		-webkit-font-smoothing: subpixel-antialiased;
 		backdrop-filter: @backdrop-blur;
-		background: rgba(100%, 100%, 100%, .65);
+		background: rgba(100%, 100%, 100%, .95);// this should be .8, but Safari 12.1 has a bug where it doesn’t apply the filter the first time the results are shown
 	}
 }

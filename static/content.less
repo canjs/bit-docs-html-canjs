@@ -42,6 +42,32 @@ article {
     letter-spacing: 0;
     -webkit-font-smoothing: initial;
   }
+  .codepen:before {
+      content: "Run in your browser";
+  }
+  .codepen {
+      border: solid 1px #dfdfdf;
+      display: block;
+      position: relative;
+      text-align: center;
+      top: -15px;
+      border-top: none;
+      background-color: #dfdfdf;
+      color: gray;
+      padding: 3px;
+      cursor: pointer;
+      line-height: 18px;
+  }
+  .codepen:hover {
+      color: white;
+      background-color: #4078c0;
+  }
+  .demo_wrapper + .codepen {
+      top: -30px;
+  }
+  .demo_wrapper + .codepen:before {
+      content: "Edit in your browser";
+  }
   .signature {
     padding: @gutter*2;
     margin: @gutter*2;
@@ -101,6 +127,24 @@ article {
   }
   .deprecated.warning {
     .notify-warning;
+  }
+  details {
+    border: 1px solid #dfdfdf;
+    background-color: #fdfdfd;
+    border-radius: 1px;
+    padding: 1em 1em 0.5em 1em;
+  }
+  summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+    cursor: pointer;
+  }
+  details[open] {
+    padding: 1em;
+  }
+  details[open] summary {
+    margin-bottom: .5em;
   }
 }
 video{

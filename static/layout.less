@@ -30,10 +30,6 @@
     padding: 0px;
     position: relative;
     width: auto;
-
-    &.search-showing {
-      min-width: 300px !important;
-    }
   }
 }
 #right {
@@ -43,18 +39,19 @@
   background: white;
   .box-shadow;
   overflow-x: hidden;
-  z-index: 90;
+  // z-index: 90;
   position: relative;
   left: 0;
   .transition-left;
+  flex-grow: 1;
   @media screen and (min-width: @breakpoint){
-    box-shadow: none;
     display: flex;
     flex-grow: 1;
   }
 }
 .column {
   height: 100%;
+  overflow-y: auto;
   box-sizing: border-box;
   .flex;
   justify-content: flex-start;
