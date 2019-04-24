@@ -108,7 +108,7 @@ $('body').on('touchstart', function() {});
 
 function init() {
 	// Set state
-	$articleContainer = $('#right > .bottom');
+	$articleContainer = $('#right');
 	$onThisPage = $('.on-this-page');
 	$navTrigger = $('#nav-trigger');
 	$onThisPageTitle = $('.breadcrumb-dropdown a');
