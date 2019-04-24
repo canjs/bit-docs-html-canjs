@@ -6,7 +6,6 @@ var loader = new LoadingBar('blue');
 var SearchControl = require('./search');
 var SidebarComponent = require("../sidebar/sidebar");
 var stache = require('can-stache');
-var SurveyAdControl = require('./survey-ad');
 var can = require("can-namespace");
 
 // exposes canjs stuff so widgets can use it.
@@ -30,7 +29,6 @@ var $articleContainer,
 	currentHref,
 	searchControl,
 	sidebarViewModel,
-	surveyAdControl,
 	hasShownSearch;
 
 (function() {
@@ -156,14 +154,6 @@ function init() {
 	// Update the selected page in the sidebar
 	if (window.docObject) {
 		sidebarViewModel.selectedPageName = window.docObject.name;
-	}
-
-	if (!surveyAdControl) {
-		// Set up the survey ad control
-		surveyAdControl = new SurveyAdControl("survey-ad");
-	} else {
-		// Notify the survey ad control that the user loaded a page
-		surveyAdControl.didEngage();
 	}
 
 	hasShownSearch = true;
