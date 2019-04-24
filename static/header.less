@@ -12,6 +12,9 @@
     align-items: center;
     flex-shrink: 0;
     padding: 0 @gutter*2;
+    @media screen and (max-width: 499px){
+        padding: 0 @gutter;
+    }
     background-color: #FFFFFF;
     z-index: 1;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
@@ -175,7 +178,7 @@
     @media screen and (max-width: 399px){
         display: none;
     }
-    padding: 0;
+    padding: 8px 5px 10px;
     margin: 0 0 0 @gutter;
     list-style: none;
     justify-content: center;
@@ -207,7 +210,7 @@
             background: white;
             .border;
             border-top: none;
-            right: 0;
+            right: -5px;
             top: @gutter*3;
             list-style: none;
             padding: 0;
