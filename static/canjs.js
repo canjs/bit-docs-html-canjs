@@ -88,17 +88,7 @@ var $articleContainer,
 	$articleContainer.on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
-
-		// Update the "On This Page" placeholder with header text at scroll position
-		setOnThisPageScroll();
 	}, 50));
-
-	// toggle nav on interval instead of scroll to prevent queueing issues
-	if (!isMobile()) {
-		setInterval(function() {
-			toggleNav();
-		}, 200);
-	}
 })();
 
 // Touch support
@@ -111,7 +101,6 @@ function init() {
 	$articleContainer = $('#right');
 	$onThisPage = $('.on-this-page');
 	$navTrigger = $('#nav-trigger');
-	$onThisPageTitle = $('.breadcrumb-dropdown a');
 	$tableOfContents = $('.on-this-page-table');
 	$everything = $('#everything');
 	$headers = getHeaders();
@@ -121,9 +110,7 @@ function init() {
 	currentHref = window.location.href;
 
 	setPathPrefix();
-	setOnThisPageContent();
 	buildTOC();
-	setNavToggleListener();
 	setScrollPosition();
 
 	if (!searchControl) {
@@ -304,7 +291,6 @@ function navigate(href, updateLocation) {
 			$articleContainer.scrollTop(0);
 
 			var $article = $content.find("article");
-			var $breadcrumb = $content.find(".breadcrumb");
 			var currentPage = $content.filter("#everything").attr("data-current-page");
 			var $headerLinks = $content.find(".top-right-links");
 			var homeLink = $content.find(".logo > a").attr('href');
@@ -322,7 +308,6 @@ function navigate(href, updateLocation) {
 
 			$(".top-right-links").replaceWith($headerLinks);
 			$("article").replaceWith($article);
-			$(".breadcrumb").replaceWith($breadcrumb);
 			$(".logo > a").attr('href', homeLink);
 			$("[path-prefix]").replaceWith($pathPrefixDiv);
 			$("[data-current-page]").attr("data-current-page", currentPage);
@@ -400,159 +385,6 @@ function scrollToElement($element) {
 		$articleContainer.scrollTop(pos);
 	} else {
 		$articleContainer.scrollTop(0);
-	}
-	setOnThisPageTitle($element.html());
-}
-
-function setOnThisPageContent() {
-	var $breadcrumb = $(".breadcrumb");
-	var $h2 = $('h2');
-	var showDropdown = $h2.length > 1;
-
-	if (showDropdown) {
-		$breadcrumb.addClass('dropdown-has-items');
-	} else {
-		$breadcrumb.removeClass('dropdown-has-items');
-	}
-
-	// don't bother with 1 header
-	if (!showDropdown) {
-		return;
-	}
-
-	// remove anything in the "On This Page" list
-	$onThisPage.empty();
-
-	$onThisPage.parent().css('display', 'inline-block');
-	// add items to on-this-page dropdown
-	$.each($h2, function(index, header) {
-		if (header.tagName === 'A') {
-			header = header.innerHTML;
-		}
-		$onThisPage.append("<a href=#"+header.id+"><li>"+$(header).html()+"</li></a>");
-	});
-}
-
-function setOnThisPageTitle(title) {
-	$onThisPageTitle.html(title || 'On this page');
-}
-
-function setOnThisPageScroll() {
-	var onThisPageTitle = '';
-	if ($articleContainer[0].scrollHeight - $articleContainer.scrollTop() === $articleContainer.outerHeight()) {
-		// Show last header if at bottom of page
-		var $header = $($headers[$headers.length-1]);
-		onThisPageTitle = $header.html();
-	} else {
-		// Otherwise, try to set to last header value before scroll position
-		var contOffsetTop = $articleContainer.offset().top;
-		$.each($headers, function(index, header) {
-			var $header = $(header);
-			var marginTop = parseInt($header.css('margin-top')) || 20;
-			if ($header.offset().top - marginTop - contOffsetTop < 1) {// < 1 to allow fractional values
-				onThisPageTitle = $header.html();
-			}
-		});
-	}
-	setOnThisPageTitle(onThisPageTitle);
-}
-
-function setNavToggleListener() {
-	$('.nav-toggle').on('click', function(){
-		$articleContainer.scrollTop(0);
-		toggleNav(false);
-	});
-}
-
-function toggleNav(hide) {
-	// Don't run in mobile
-	if (isMobile()) {
-		return;
-	}
-
-	// Don't rely on jQuery's queue.
-	// The animation completion functions break it.
-	if (animating) {
-		return;
-	}
-
-	var breakpoint = 20,
-		headerHeight = 53;
-
-	// Show the toggle button if nav is hidden
-	if ($nav.css('display') === 'none') {
-		$('.nav-toggle').show();
-	}
-
-	// Determines if the nav should hide (true) or show (false)
-	// Use `hide` override if passed as argument
-	// Otherwise, check if scroll position is past hiding breakpoint
-	var shouldHide = hide === undefined ? $articleContainer.scrollTop() >= breakpoint : hide;
-
-	// Don't run on new page before breakpoint unless `hide` override is passed as argument.
-	if (headerHidden === undefined && shouldHide === false && hide === undefined) {
-		return;
-	}
-
-	// Don't hide if already hidden, set hidden state
-	if (shouldHide && $nav.css('display') === 'none') {
-		headerHidden = true;
-		return;
-	}
-
-	// Don't run headerHidden isn't changing
-	if (shouldHide === headerHidden) {
-		return;
-	}
-
-	// Set hiding and animation states
-	headerHidden = shouldHide;
-	animating = true;
-
-	var $searchResultsContainer = $('.search-results-container');
-
-	if (shouldHide) {
-		$('.nav-toggle').show();
-		$everything.animate({
-			"margin-top": 0-headerHeight,
-			"height": parseFloat($everything.css('height')) + headerHeight
-		}, {
-			duration: 250,
-			complete: function() {
-				$nav.hide();
-				$everything.css('height', '');
-				$everything.css('margin-top', '');
-				animating = false;
-			}
-		});
-		$searchResultsContainer.animate({
-			"height": parseFloat($searchResultsContainer.css('height')) + headerHeight
-		}, {
-			duration: 250,
-			complete: function() {
-				$searchResultsContainer.css('height', '');
-				$everything.addClass('header-is-hidden');
-			}
-		});
-	} else {
-		$('.nav-toggle').hide();
-		$everything.css('height', parseFloat($everything.css('height')) + headerHeight);
-		$everything.css('margin-top', 0-headerHeight);
-		$searchResultsContainer.css('height', parseFloat($searchResultsContainer.css('height')) + headerHeight);
-		$searchResultsContainer.css('margin-top', headerHeight);
-		$nav.show();
-		$everything.animate({
-			"margin-top": '0',
-			"height": '100%'
-		}, {
-			duration: 250,
-			complete: function() {
-				animating = false;
-				$searchResultsContainer.css('height', '');
-				$searchResultsContainer.css('margin-top', 0);
-				$everything.removeClass('header-is-hidden');
-			}
-		});
 	}
 }
 

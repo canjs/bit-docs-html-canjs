@@ -22,6 +22,7 @@
 }
 #left {
   position: fixed;
+  scroll-behavior: smooth;
   width: @sidebar-width;
   min-width: 0;
   transition: min-width @transition-speed ease;
@@ -42,6 +43,7 @@
   // z-index: 90;
   position: relative;
   left: 0;
+  scroll-behavior: smooth;
   .transition-left;
   flex-grow: 1;
   @media screen and (min-width: @breakpoint){
