@@ -13,12 +13,12 @@
     flex-shrink: 0;
     padding: 0 @gutter*2;
     background-color: #FFFFFF;
-    white-space: nowrap;
     z-index: 1;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
 }
 .brand {
     display: flex;
+    white-space: nowrap;
     .dropdown {
         display:none;
     }
@@ -122,6 +122,7 @@
 .top-right-links {
     margin: 0 auto;
     padding: 0;
+    white-space: nowrap;
     > li {
         display: none;
     }
@@ -183,8 +184,8 @@
     .dropdown {
         display: flex;
         position: relative;
-        width: 57px;
-        height: 20px;
+        width: 85px;
+        height: 35px;
         .dropdown-menu {
             display: none;
         }
@@ -207,7 +208,7 @@
             .border;
             border-top: none;
             right: 0;
-            top: @gutter*2;
+            top: @gutter*3;
             list-style: none;
             padding: 0;
             width: 240px;
