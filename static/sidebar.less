@@ -59,92 +59,86 @@ img.social-icon-small{
 	}
 }
 #left {
-
-	ul {
-		padding-left: 0;
-		margin: 0;
-		margin-bottom: @gutter;
-		list-style: none;
-		li {
-			position: relative;
-			a {
-				display: block;
-				padding-top: @gutter/5;
-				padding-bottom: @gutter/5;
-			}
-			span {
-				color: @gray;
-				font-size: 90%;
-			}
-			&.collection-group > a {
-				color: lighten(@gray, 15%);
-			}
-		}
-		ul {
-			padding-left: 5px;
-		}
-	}
-	.current > a, .expanded > a, [selected-in-sidebar] > a {
-		font-weight: bold;
-		color: darken(@link-color,5%);
-	}
-	.current > a, [selected-in-sidebar] > a {
-		text-decoration: underline;
-		color: darken(@link-color,10%);
-	}
-	// Highest parent level
 	.nav-menu {
 		display: block;
 		padding: @gutter * 2 @gutter * 2 0;
 		margin-bottom: @gutter*2;
-		& > ul {
+		ul {
 			padding: 0;
-			height: inherit;
-			> li {
-				list-style: none;
-				list-style-type: none;
-				padding: 0;
-				.border-bottom;
-				@media screen and (min-width: @breakpoint){
-					border-bottom: none;
+			margin: 0;
+			list-style: none;
+			line-height: 2;
+			li {
+				position: relative;
+				a {
+					display: block;
 				}
-				&:not(.expanded) {
-					@media screen and (min-width: @breakpoint){
-						display: none;
+				span {
+					color: @gray;
+				}
+				&.collection-group {
+					a {
+						color: lighten(@gray, 15%);
+						margin: 10px 0 0;
+						letter-spacing: 1px;
+						font-size: 8px;
+					}
+					&:first-of-type a {
+						margin-top: 0px;
 					}
 				}
-				> a {
-					font-size: 110%;
-					padding-bottom: @gutter;
-					padding-top: @gutter;
-				}
-				&.expanded.parent > a {
-					padding-bottom: @gutter/2;
-				}
-				&.expanded > a {
-					@media screen and (min-width: @breakpoint){
-						display: none;
-					}
-				}
-				// Second level
-				> ul {
-					> li {
-						> a {
-							padding-bottom: @gutter/3;
-							padding-top: @gutter/3;
+				ul {
+					margin-bottom: 5px;
+					padding: 0;
+					li {
+						span {
+							font-size: 12px;
+							letter-spacing: 1px;
+							font-weight: bold;
+							text-transform: uppercase;
 						}
-						&.expanded {
-							> a {
-								padding-bottom: @gutter/2;
-								margin-left: -1px;
+						button {
+							background: transparent;
+							border: 0;
+							color: @link-color;
+							cursor: pointer;
+							padding: 0;
+							position: absolute;
+							right: 0 - @gutter;
+							top: 0;
+							span {
+								display: inline-block;
+								font-family: monospace;// makes the + / - buttons the same width
+								font-size: 150%;
+								padding: (@gutter * .25) @gutter (@gutter * .6);
+							}
+							&:focus, span:focus {
+								outline: 0;
+							}
+							&:focus span {
+								border-radius: 5px;
+								box-shadow: 0 0 5px @link-color;
 							}
 						}
-						//Third level
-						> ul {
-							border-left: 1px solid @border-color;
-							li {
-								ul {
-									margin-top: @gutter/3;
+						ul li ul li {
+							padding-left: 5px;
+							span {
+								font-weight: normal;
+								margin-top: 10px;
+								display: inline-flex;
+								text-transform: none;
+								font-weight: bold;
+							}
+							ul li {
+								padding-left: 0;
+								span {
+									font-weight: normal;
+								}
+								ul li {
+									padding-left: 5px;
+									ul li {
+										padding-left: 0;
+									}
 								}
 							}
 						}
@@ -152,35 +146,7 @@ img.social-icon-small{
 				}
 			}
 		}
-	}
-
-	canjs-sidebar {
-		button {
-			background: transparent;
-			border: 0;
-			color: @link-color;
-			cursor: pointer;
-			padding: 0;
-			position: absolute;
-			right: 0 - @gutter;
-			top: 0;
-		}
-		button > span {
-			font-family: monospace;// makes the + / - buttons the same width
-			font-size: 130%;
-			padding: (@gutter * .25) @gutter (@gutter * .6);
-		}
-		button:focus, button > span:focus {
-			outline: 0;
-		}
-		button:focus > span {
-			border-radius: 5px;
-			box-shadow: 0 0 5px @link-color;
-		}
-
 		.collection-group {
-			font-size: 80%;
-			margin-top: @gutter * 1.2;
 			text-transform: uppercase;
 		}
 
@@ -197,11 +163,7 @@ img.social-icon-small{
 		.transitions-on .parent-is-collapsible > a {
 			transition: all @transition-speed ease;
 		}
-		.collection-group > a {
-			height: 20px;
-		}
 		.parent-is-collapsible > a {
-			height: 24px;
 			max-width: 215px;// based roughly on the width of “can-define-validate-validatejs”
 			white-space: nowrap;
 		}
@@ -219,6 +181,29 @@ img.social-icon-small{
 
 		.is-collapsible {
 			margin-bottom: @gutter;// Force space between the “purpose” groups
+		}
+	}
+	.current > a, .expanded > a, [selected-in-sidebar] > a {
+		font-weight: bold;
+		color: darken(@link-color,5%);
+	}
+	.current > a, [selected-in-sidebar] > a {
+		text-decoration: underline;
+		color: darken(@link-color,10%);
+	}
+	// Hides nav structure for pages outside of current page on desktop
+	@media screen and (min-width: @breakpoint) {
+		.nav-menu {
+			& > ul {
+				> li {
+					&.expanded > a {
+						display: none;
+					}
+					&:not(.expanded) {
+							display: none;
+					}
+				}
+			}
 		}
 	}
 }
