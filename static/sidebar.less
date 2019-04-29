@@ -1,19 +1,19 @@
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
-ul.social-side{
+ul.social-side {
 	margin: 0;
 	list-style: none;
 	padding: 0;
 	display: flex ;
-	@media screen and (min-width: @breakpoint){
+	@media screen and (min-width: @breakpoint) {
 		display: none;
 	}
-	> li{
+	> li {
 		display: inline-block;
 		margin: 0 @gutter/2 @gutter/2 0;
 		border-bottom: none;
 		text-align: center;
 		width: 79px;
-		> a.header-mobile{
+		> a.header-mobile {
 			font-weight: 700;
 			font-size: 12px;
 			padding-top: 10px;
@@ -29,7 +29,7 @@ ul.social-side{
 				background: @border-color;
 			}
 		}
-		> a.twitter{
+		> a.twitter {
 			background: @twitter-color;
 			border: 1px solid darken(@twitter-color, 5%);
 			color: white;
@@ -38,20 +38,20 @@ ul.social-side{
 				border: 1px solid darken(@twitter-color, 15%);
 			}
 		}
-		> a.github{
+		> a.github {
 			background: @light-gray-color;
 			color: @gray;
 		}
 	}
 }
-img.social-icon-small{
+img.social-icon-small {
 	width: 15px;
 	margin-right: 4px;
 	vertical-align: middle;
 }
 
 // ----- SIDE NAVIGATION -----
-@media screen and (min-width: @breakpoint){
+@media screen and (min-width: @breakpoint) {
 	[data-current-page="canjs"], [data-current-page="community"] {
 		#left {
 			display: none;
