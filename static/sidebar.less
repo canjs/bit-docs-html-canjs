@@ -163,6 +163,12 @@ img.social-icon-small {
 				}
 			}
 		}
+		@media screen and (max-width: @breakpoint) {
+			& > ul > li.expanded.parent > ul {
+				padding-left: 5px;
+				// targets just the top level's subgroup to indent on mobile
+			}
+		}
 		.collection-group {
 			text-transform: uppercase;
 		}
