@@ -89,9 +89,6 @@ img.social-icon-small {
 				ul {
 					margin-bottom: 5px;
 					padding: 0;
-					@media screen and (max-width: @breakpoint) {
-						padding-left: 5px;
-					}
 					li {
 						span {
 							font-size: 12px;
@@ -150,6 +147,15 @@ img.social-icon-small {
 									ul li {
 										padding-left: 0;
 									}
+								}
+							}
+						}
+						&.expanded.parent ul {
+							padding-left: 5px;
+							ul {
+								padding-left: 0;
+								li {
+									padding-left: 0;
 								}
 							}
 						}
