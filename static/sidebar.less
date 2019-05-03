@@ -93,17 +93,21 @@ img.social-icon-small {
 					margin-bottom: @gutter;
 					padding: 0;
 					li {
+						&.is-collapsible span + ul {
+							padding-left: 5px;
+						}
 						span {
 							font-size: 12px;
 							letter-spacing: 1px;
 							font-weight: bold;
 							text-transform: uppercase;
-							+ ul {
-								line-height: 24px;
+							& + [aria-pressed="true"] + ul {
+								line-height: @list-line-height;
+								padding-left: 5px;
 							}
 						}
 						a {
-							line-height: 24px;
+							line-height: @list-line-height;
 							& + ul {
 								padding-left: 5px;
 							}
@@ -147,23 +151,26 @@ img.social-icon-small {
 								text-transform: none;
 								font-weight: bold;
 							}
-							ul li {
-								// fifth
-								line-height: 1.5;
-								padding-left: 0;
-								span {
-									font-weight: normal;
-								}
-								ul {
-									// sixth
-									padding-left: 5px !important;
-									li {
-										padding-left: 5px;
-										ul {
-											// seventh
-											padding-left: 0 !important;
-											li {
-												padding-left: 0;
+							ul {
+								margin-bottom: 5px;
+								li {
+									// fifth
+									line-height: 1.5;
+									padding-left: 0;
+									span {
+										font-weight: normal;
+									}
+									ul {
+										// sixth
+										padding-left: 5px !important;
+										li {
+											padding-left: 5px;
+											ul {
+												// seventh
+												padding-left: 0 !important;
+												li {
+													padding-left: 0;
+												}
 											}
 										}
 									}
@@ -210,10 +217,10 @@ img.social-icon-small {
 			transition: all @transition-speed ease;
 		}
 		.collection-group > a {
-			height: 24px;
+			height: @list-line-height;
 		}
 		.parent-is-collapsible > a {
-			height: 24px;
+			height: @list-line-height;
 			max-width: 215px;// based roughly on the width of “can-define-validate-validatejs”
 			white-space: nowrap;
 		}
