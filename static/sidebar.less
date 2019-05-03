@@ -65,6 +65,7 @@ img.social-icon-small {
 		padding: @gutter*2 @gutter*2 @gutter*4;
 		margin-bottom: @gutter*2;
 		ul {
+			// first
 			padding: 0;
 			margin: 0;
 			list-style: none;
@@ -73,6 +74,7 @@ img.social-icon-small {
 				position: relative;
 				a {
 					display: block;
+					white-space: nowrap;
 				}
 				span {
 					color: @gray;
@@ -87,6 +89,8 @@ img.social-icon-small {
 					}
 				}
 				ul {
+					// second
+					margin-top: -10px;
 					margin-bottom: 5px;
 					padding: 0;
 					li {
@@ -104,7 +108,7 @@ img.social-icon-small {
 							padding: 0;
 							position: absolute;
 							right: 0 - @gutter;
-							top: 0;
+							top: 2px;
 							span {
 								display: inline-block;
 								font-family: monospace;// makes the + / - buttons the same width
@@ -120,15 +124,14 @@ img.social-icon-small {
 							}
 							&[aria-pressed="false"] + ul {
 								margin-top: -10px;
-								transition: margin-top .15s ease-out;
 							}
 							&[aria-pressed="true"] + ul {
-								margin-top: 0px;
-								transition: margin-top .5s;
+								margin-top: -10px;
 							}
 						}
 						ul li ul li {
-							padding-left: 5px;
+							// third forth
+							padding-left: 0;
 							span {
 								font-weight: normal;
 								margin-top: 10px;
@@ -137,15 +140,24 @@ img.social-icon-small {
 								font-weight: bold;
 							}
 							ul li {
+								// fifth
 								line-height: 1.5;
 								padding-left: 0;
 								span {
 									font-weight: normal;
 								}
-								ul li {
-									padding-left: 5px;
-									ul li {
-										padding-left: 0;
+								ul {
+									// sixth
+									padding-left: 5px !important;
+									li {
+										padding-left: 5px;
+										ul {
+											// seventh
+											padding-left: 0 !important;
+											li {
+												padding-left: 0;
+											}
+										}
 									}
 								}
 							}
@@ -168,6 +180,9 @@ img.social-icon-small {
 				padding-left: 5px;
 				// targets just the top level's subgroup to indent on mobile
 			}
+		}
+		a.page.recipes + ul {
+			padding-left: 5px;
 		}
 		.collection-group {
 			text-transform: uppercase;
