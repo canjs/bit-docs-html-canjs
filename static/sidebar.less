@@ -69,7 +69,7 @@ img.social-icon-small {
 			padding: 0;
 			margin: 0;
 			list-style: none;
-			line-height: 2;
+			line-height: 1;
 			li {
 				position: relative;
 				a {
@@ -90,7 +90,7 @@ img.social-icon-small {
 				}
 				ul {
 					// second
-					margin-bottom: 5px;
+					margin-bottom: @gutter;
 					padding: 0;
 					li {
 						span {
@@ -98,6 +98,15 @@ img.social-icon-small {
 							letter-spacing: 1px;
 							font-weight: bold;
 							text-transform: uppercase;
+							+ ul {
+								line-height: 24px;
+							}
+						}
+						a {
+							line-height: 24px;
+							& + ul {
+								padding-left: 5px;
+							}
 						}
 						button {
 							background: transparent;
@@ -107,7 +116,7 @@ img.social-icon-small {
 							padding: 0;
 							position: absolute;
 							right: 0 - @gutter;
-							top: 2px;
+							top: -@gutter/3;
 							span {
 								display: inline-block;
 								font-family: monospace;// makes the + / - buttons the same width
@@ -121,12 +130,12 @@ img.social-icon-small {
 								border-radius: 5px;
 								box-shadow: 0 0 5px @link-color;
 							}
-							&[aria-pressed="false"] + ul {
-								margin-top: -10px;
-							}
-							&[aria-pressed="true"] + ul {
-								margin-top: -10px;
-							}
+							// &[aria-pressed="false"] + ul {
+							// 	margin-top: -10px;
+							// }
+							// &[aria-pressed="true"] + ul {
+							// 	margin-top: -10px;
+							// }
 						}
 						ul li ul li {
 							// third forth
@@ -201,7 +210,7 @@ img.social-icon-small {
 			transition: all @transition-speed ease;
 		}
 		.collection-group > a {
-			height: 20px;
+			height: 24px;
 		}
 		.parent-is-collapsible > a {
 			height: 24px;
