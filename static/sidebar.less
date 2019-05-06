@@ -96,7 +96,11 @@ img.social-icon-small {
 					padding: 0;
 					li {
 						&.is-collapsible span + ul {
-							padding-left: 5px;
+							padding-left: 0;
+							margin-top: -10px;
+						}
+						&.can-infrastructure span + ul {
+							margin-top: unset;
 						}
 						span {
 							font-size: 12px;
@@ -104,12 +108,7 @@ img.social-icon-small {
 							font-weight: bold;
 							text-transform: uppercase;
 							& + [aria-pressed="true"] + ul {
-								padding-left: 5px;
 								margin-top: -10px;
-							}
-							& + [aria-pressed="false"] + ul {
-								padding-left: 0;
-								transition: padding-left .25s ease-out;
 							}
 						}
 						a {
