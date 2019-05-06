@@ -8,6 +8,10 @@
     }
 }
 .header {
+    position: fixed;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -15,20 +19,20 @@
     @media screen and (max-width: 499px){
         padding: 0 @gutter;
     }
-    background-color: #FFFFFF;
-    z-index: 1;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
+    z-index: 101;
 }
 .brand {
     display: flex;
     white-space: nowrap;
+    align-items: center;
     .dropdown {
         display:none;
     }
     .logo {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         width: 60px;
-        height: 100%;
+        height: @brand-height;
         cursor: pointer;
         &:hover > a {
             opacity: .7;
@@ -47,7 +51,6 @@
         display: none;
     }
 }
-
 // ----- CANJS LOGO AND VERSION DESKTOP -----
 @media screen and (min-width: @breakpoint) {
     .brand {
@@ -82,11 +85,10 @@
             }
         }
         .version {
-            display: inline-flex;
-            vertical-align: top;
-            height: 100%;
-            padding-top: 7px;
+            display: flex;
+            align-items: center;
             font-size: 12px;
+            height: @brand-height;
             cursor: pointer;
             .version-number::after {
                 display: inline-block;
