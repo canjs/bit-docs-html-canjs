@@ -8,6 +8,10 @@
     }
 }
 .header {
+    position: fixed;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -15,9 +19,7 @@
     @media screen and (max-width: 499px){
         padding: 0 @gutter;
     }
-    background-color: #FFFFFF;
-    z-index: 1;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
+    z-index: 101;
 }
 .brand {
     display: flex;
@@ -47,7 +49,6 @@
         display: none;
     }
 }
-
 // ----- CANJS LOGO AND VERSION DESKTOP -----
 @media screen and (min-width: @breakpoint) {
     .brand {
