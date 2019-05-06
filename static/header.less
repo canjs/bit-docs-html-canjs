@@ -22,13 +22,15 @@
 .brand {
     display: flex;
     white-space: nowrap;
+    align-items: center;
     .dropdown {
         display:none;
     }
     .logo {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         width: 60px;
-        height: 100%;
+        height: @brand-height;
         cursor: pointer;
         &:hover > a {
             opacity: .7;
@@ -82,11 +84,10 @@
             }
         }
         .version {
-            display: inline-flex;
-            vertical-align: top;
-            height: 100%;
-            padding-top: 7px;
+            display: flex;
+            align-items: center;
             font-size: 12px;
+            height: @brand-height;
             cursor: pointer;
             .version-number::after {
                 display: inline-block;
