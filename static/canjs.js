@@ -278,7 +278,7 @@ function navigate(href, updateLocation) {
 			}
 
 			// Scroll to the top of the page
-			$articleContainer.scrollTop(0);
+			$('html').scrollTop(0);
 
 			var $article = $content.find("article");
 			var currentPage = $content.filter("#everything").attr("data-current-page");
