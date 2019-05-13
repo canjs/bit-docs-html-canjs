@@ -11,7 +11,10 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    grid-area: header;
     padding: 0 @gutter*2;
+    position: fixed;
+    width: 100%;
     @media screen and (max-width: 499px){
         padding: 0 @gutter;
     }
@@ -88,6 +91,7 @@
             align-items: center;
             font-size: 12px;
             height: @brand-height;
+            padding-top: 7px;
             cursor: pointer;
             .version-number::after {
                 display: inline-block;

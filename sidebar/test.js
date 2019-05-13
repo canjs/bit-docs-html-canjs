@@ -136,7 +136,9 @@ QUnit.test('Search map is parsed', function(assert) {
   assert.ok(childrenLength > 1 && childrenLength < 10, 'rootPage has a reasonable number of children');
 });
 
-QUnit.test('Parents with @subchildren should show their grandchildren', function(assert) {
+// This used to test how the Recipes page had groups underneath it,
+// but that page was removed and Chasen couldn’t find another like it.
+QUnit.skip('Parents with @subchildren should show their grandchildren', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
   var pageMap = vm.pageMap;
   var guidesPage = pageMap['guides'];

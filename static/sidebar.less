@@ -1,35 +1,36 @@
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
-ul.social-side{
+ul.social-side {
 	margin: 0;
 	list-style: none;
 	padding: 0;
 	display: flex ;
-	@media screen and (min-width: @breakpoint){
+	@media screen and (min-width: @breakpoint) {
 		display: none;
 	}
-	> li{
-		display: inline-block;
+	> li {
 		margin: 0 @gutter/2 @gutter/2 0;
 		border-bottom: none;
 		text-align: center;
-		width: 79px;
-		> a.header-mobile{
+		width: 100%;
+		&:last-child {
+			margin-right: 0;
+		}
+		> a.header-mobile {
 			font-weight: 700;
 			font-size: 12px;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			text-transform: sentence-case;
+			text-transform: capitalize;
 			.border-radius;
 			border: 1px solid lighten(@link-color, 40%);
 			text-decoration: none;
 			background: white;
+			width: 100%;
 			&:hover {
 				border: 1px solid lighten(@link-color, 40%);
 				text-decoration: none;
 				background: @border-color;
 			}
 		}
-		> a.twitter{
+		> a.twitter {
 			background: @twitter-color;
 			border: 1px solid darken(@twitter-color, 5%);
 			color: white;
@@ -38,20 +39,20 @@ ul.social-side{
 				border: 1px solid darken(@twitter-color, 15%);
 			}
 		}
-		> a.github{
+		> a.github {
 			background: @light-gray-color;
 			color: @gray;
 		}
 	}
 }
-img.social-icon-small{
+img.social-icon-small {
 	width: 15px;
 	margin-right: 4px;
 	vertical-align: middle;
 }
 
 // ----- SIDE NAVIGATION -----
-@media screen and (min-width: @breakpoint){
+@media screen and (min-width: @breakpoint) {
 	[data-current-page="canjs"], [data-current-page="community"] {
 		#left {
 			display: none;
@@ -59,92 +60,130 @@ img.social-icon-small{
 	}
 }
 #left {
-
-	ul {
-		padding-left: 0;
-		margin: 0;
-		margin-bottom: @gutter;
-		list-style: none;
-		li {
-			position: relative;
-			a {
-				display: block;
-				padding-top: @gutter/5;
-				padding-bottom: @gutter/5;
-			}
-			span {
-				color: @gray;
-				font-size: 90%;
-			}
-			&.collection-group > a {
-				color: lighten(@gray, 15%);
-			}
-		}
-		ul {
-			padding-left: 5px;
-		}
-	}
-	.current > a, .expanded > a, [selected-in-sidebar] > a {
-		font-weight: bold;
-		color: darken(@link-color,5%);
-	}
-	.current > a, [selected-in-sidebar] > a {
-		text-decoration: underline;
-		color: darken(@link-color,10%);
-	}
-	// Highest parent level
 	.nav-menu {
 		display: block;
-		padding: @gutter * 2 @gutter * 2 0;
-		margin-bottom: @gutter*2;
-		& > ul {
+		padding: @gutter*2;
+		ul {
+			// first
 			padding: 0;
-			height: inherit;
-			> li {
-				list-style: none;
-				list-style-type: none;
-				padding: 0;
-				.border-bottom;
-				@media screen and (min-width: @breakpoint){
-					border-bottom: none;
+			margin: 0;
+			list-style: none;
+			line-height: @list-line-height;
+			li {
+				position: relative;
+				a {
+					display: block;
+					white-space: nowrap;
 				}
-				&:not(.expanded) {
-					@media screen and (min-width: @breakpoint){
-						display: none;
+				span {
+					color: @gray;
+				}
+				&.collection-group {
+					a {
+						color: lighten(@gray, 15%);
+						margin: 10px 0 0;
+						letter-spacing: 1px;
+						font-size: 11px;
 					}
 				}
-				> a {
-					font-size: 110%;
-					padding-bottom: @gutter;
-					padding-top: @gutter;
-				}
-				&.expanded.parent > a {
-					padding-bottom: @gutter/2;
-				}
-				&.expanded > a {
-					@media screen and (min-width: @breakpoint){
-						display: none;
-					}
-				}
-				// Second level
-				> ul {
-					> li {
-						> a {
-							padding-bottom: @gutter/3;
-							padding-top: @gutter/3;
-						}
-						&.expanded {
-							> a {
-								padding-bottom: @gutter/2;
-								margin-left: -1px;
+				ul {
+					// second
+					margin-bottom: @gutter;
+					padding: 0;
+					li {
+						&.is-collapsible span + ul {
+							padding-left: 0;
+							margin-top: -10px;
+							ul {
+								margin-top: 0;
 							}
 						}
-						//Third level
-						> ul {
-							border-left: 1px solid @border-color;
-							li {
-								ul {
-									margin-top: @gutter/3;
+						&.can-infrastructure span + ul {
+							margin-top: unset;
+						}
+						span {
+							font-size: 12px;
+							letter-spacing: 1px;
+							font-weight: bold;
+							text-transform: uppercase;
+							& + [aria-pressed="true"] + ul {
+								margin-top: -10px;
+							}
+						}
+						a {
+							line-height: @list-line-height;
+							& + ul {
+								padding-left: 5px;
+							}
+						}
+						button {
+							background: transparent;
+							border: 0;
+							color: @link-color;
+							cursor: pointer;
+							padding: 0;
+							position: absolute;
+							right: 0 - @gutter;
+							top: -(@gutter * .5) + 1;
+							span {
+								display: inline-block;
+								font-family: monospace;// makes the + / - buttons the same width
+								font-size: 150%;
+								padding: (@gutter * .5) @gutter (@gutter * .6);
+							}
+							&:focus, span:focus {
+								outline: 0;
+							}
+							&:focus span {
+								border-radius: 5px;
+								box-shadow: 0 0 5px @link-color;
+							}
+						}
+						ul li ul li {
+							// third forth
+							padding-left: 0;
+							span {
+								font-weight: normal;
+								display: inline-flex;
+								text-transform: none;
+								font-weight: bold;
+							}
+							ul {
+								margin-bottom: 5px;
+								li {
+									// fifth
+									line-height: @list-line-height;
+									padding-left: 0;
+									span {
+										font-weight: normal;
+									}
+									ul {
+										// sixth
+										li {
+											padding-left: 5px;
+											ul {
+												// seventh
+												li {
+													padding-left: 0;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						&.expanded.parent ul {
+							padding-left: 5px;
+							ul {
+								padding-left: 0;
+								li {
+									padding-left: 0;
+									ul {
+										padding-left: 5px;
+										ul {
+											padding-left: 0;
+										}
+									}
 								}
 							}
 						}
@@ -152,35 +191,13 @@ img.social-icon-small{
 				}
 			}
 		}
-	}
-
-	canjs-sidebar {
-		button {
-			background: transparent;
-			border: 0;
-			color: @link-color;
-			cursor: pointer;
-			padding: 0;
-			position: absolute;
-			right: 0 - @gutter;
-			top: 0;
+		@media screen and (max-width: @breakpoint) {
+			& > ul > li.expanded.parent > ul {
+				padding-left: 5px;
+				// targets just the top level's subgroup to indent on mobile
+			}
 		}
-		button > span {
-			font-family: monospace;// makes the + / - buttons the same width
-			font-size: 130%;
-			padding: (@gutter * .25) @gutter (@gutter * .6);
-		}
-		button:focus, button > span:focus {
-			outline: 0;
-		}
-		button:focus > span {
-			border-radius: 5px;
-			box-shadow: 0 0 5px @link-color;
-		}
-
 		.collection-group {
-			font-size: 80%;
-			margin-top: @gutter * 1.2;
 			text-transform: uppercase;
 		}
 
@@ -198,10 +215,10 @@ img.social-icon-small{
 			transition: all @transition-speed ease;
 		}
 		.collection-group > a {
-			height: 20px;
+			height: @list-line-height;
 		}
 		.parent-is-collapsible > a {
-			height: 24px;
+			height: @list-line-height;
 			max-width: 215px;// based roughly on the width of “can-define-validate-validatejs”
 			white-space: nowrap;
 		}
@@ -221,4 +238,39 @@ img.social-icon-small{
 			margin-bottom: @gutter;// Force space between the “purpose” groups
 		}
 	}
+	.current > a, .expanded > a, [selected-in-sidebar] > a {
+		font-weight: bold;
+		color: darken(@link-color,5%);
+	}
+	.current > a, [selected-in-sidebar] > a {
+		text-decoration: underline;
+		color: darken(@link-color,10%);
+	}
+	// Hides nav structure for pages outside of current page on desktop
+	@media screen and (min-width: @breakpoint) {
+		.nav-menu {
+			& > ul {
+				> li {
+					&.expanded > a {
+						display: none;
+					}
+					&:not(.expanded) {
+							display: none;
+					}
+				}
+			}
+		}
+	}
+		// Hides nav structure for pages outside of current page on desktop
+		@media screen and (max-width: @breakpoint) {
+			.nav-menu {
+				> ul {
+					> li {
+						> a {
+							margin-top: @gutter;
+						}
+					}
+				}
+			}
+		}
 }
