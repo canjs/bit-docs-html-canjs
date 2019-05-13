@@ -262,4 +262,16 @@ img.social-icon-small {
 			}
 		}
 	}
+		// Hides nav structure for pages outside of current page on desktop
+		@media screen and (max-width: @breakpoint) {
+			.nav-menu {
+				> ul {
+					> li {
+						> a {
+							margin-top: @gutter;
+						}
+					}
+				}
+			}
+		}
 }
