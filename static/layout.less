@@ -17,14 +17,14 @@
   overflow-y: scroll;
   position: fixed;
   scroll-behavior: smooth;
-  top: 53px;
+  top: @brand-height;
   width: @sidebar-width;
   transition: min-width @transition-speed ease;
   border-right: 3px solid #F4F4F4;
   @media screen and (min-width: @breakpoint){
     .sticky;
-    margin: 53px 0 0;
-    height: calc(~"100vh - 53px");// 53px header
+    margin: @brand-height 0 0;
+    height: calc(~"100vh - @brand-height");// 53px header
     width: auto;
   }
 }
@@ -34,7 +34,7 @@
   -ms-grid-column: 2;
   grid-area: content;
   overflow-x: hidden;
-  padding-top: 53px;
+  padding-top: @brand-height;
   position: relative;
   left: 0;
   .transition-left;
