@@ -156,6 +156,18 @@ function init() {
 		sidebarViewModel.selectedPageName = window.docObject.name;
 	}
 
+	// Set up the client-side TOC
+	var tocContainer = document.querySelector("#toc-sidebar");
+	var oldToc = document.querySelector("bit-toc");
+	if (oldToc) {
+		tocContainer.removeChild(oldToc);
+	}
+	var newToc = document.createElement("bit-toc");
+	newToc.depth = window.docObject.outline;
+	newToc.headingContainerSelector = "#right > article";
+	newToc.scrollSelector = "#toc-sidebar";
+	tocContainer.appendChild(newToc);
+
 	hasShownSearch = true;
 }
 

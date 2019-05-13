@@ -5,15 +5,15 @@
   transition: padding-bottom @transition-speed ease;
   display:-ms-grid;
   display: grid;
-  -ms-grid-columns: 300px 1fr;
-  grid-template-columns: max-content 1fr;
-  grid-template-areas: "header header" "left-nav content";
+  -ms-grid-columns: 300px 1fr 300px;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas: "header header header" "nav-sidebar content toc-sidebar";
 }
 #left {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
-  grid-area: left-nav;
+  grid-area: nav-sidebar;
   height: calc(~"100vh - " @brand-height);// 53px header
   overflow-y: scroll;
   position: fixed;
@@ -39,6 +39,9 @@
   left: 0;
   .transition-left;
   flex-grow: 1;
+}
+#toc-sidebar {
+  grid-area: toc-sidebar;
 }
 .column {
   height: 100%;
