@@ -3,11 +3,16 @@
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0;
   transition: padding-bottom @transition-speed ease;
+  display:-ms-grid;
   display: grid;
+  -ms-grid-columns: 300px 1fr;
   grid-template-columns: max-content 1fr;
   grid-template-areas: "header header" "left-nav content";
 }
 #left {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
   grid-area: left-nav;
   overflow-y: scroll;
   position: fixed;
@@ -26,6 +31,7 @@
 #right {
   background: white;
   display: flex;
+  -ms-grid-column: 2;
   grid-area: content;
   overflow-x: hidden;
   padding-top: 53px;
