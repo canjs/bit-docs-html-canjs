@@ -14,6 +14,7 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-area: left-nav;
+  height: calc(~"100vh - " @brand-height);// 53px header
   overflow-y: scroll;
   position: fixed;
   scroll-behavior: smooth;
@@ -24,7 +25,6 @@
   @media screen and (min-width: @breakpoint){
     .sticky;
     margin: @brand-height 0 0;
-    height: calc(~"100vh - " @brand-height);// 53px header
     width: auto;
   }
 }
