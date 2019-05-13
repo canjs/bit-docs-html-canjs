@@ -122,12 +122,12 @@ img.social-icon-small {
 							padding: 0;
 							position: absolute;
 							right: 0 - @gutter;
-							top: -@gutter/3;
+							top: -(@gutter * .5) + 1;
 							span {
 								display: inline-block;
 								font-family: monospace;// makes the + / - buttons the same width
 								font-size: 150%;
-								padding: (@gutter * .25) @gutter (@gutter * .6);
+								padding: (@gutter * .5) @gutter (@gutter * .6);
 							}
 							&:focus, span:focus {
 								outline: 0;
