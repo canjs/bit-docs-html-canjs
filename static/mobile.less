@@ -24,26 +24,21 @@ label[for="nav-trigger"] {
 label:hover{
   background: @border-color;
 }
-
-@media screen and (max-width: @breakpoint){
-  .nav-trigger:not(:checked) ~ #everything #left {
-    left: -@sidebar-width;
-    overflow-x: hidden;
-    transition: left .5s ease-in-out;
-  }
-  .nav-trigger:checked ~ #everything #left {
-    left: 0;
-    transition: left .5s ease-in-out;
-  }
-  .nav-trigger:not(:checked) ~ #everything #right {
-    left: 0;
-    overflow-x: hidden;
-    transition: left .5s ease-in-out;
-  }
-  .nav-trigger:checked ~ #everything #right {
+.nav-trigger ~ #everything #right {
+	width: 100%;
+}
+.nav-trigger:checked ~ #everything #right {
+  @media screen and (max-width: @breakpoint){
+    flex-shrink: 0;
+    width: auto;
+    position: fixed;
     left: @sidebar-width;
     overflow-x: hidden;
-    transition: left .5s ease-in-out;
+  }
+}
+@media screen and (max-width: 999px) {
+  .nav-trigger:not(:checked) ~ #everything #left {
+    visibility: hidden;
   }
 }
 .nav-trigger + label {
