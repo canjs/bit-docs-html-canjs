@@ -1,13 +1,4 @@
 #toc-sidebar {
-	position: -webkit-sticky;
-	position: sticky;
-	height: calc(100vh - 53px);
-	min-height: 50px;
-	top: 53px;
-	overflow-y: scroll;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	border-bottom: 1px solid #eeeeee;
 	h6 {
 		font-size: 15px;
 		font-weight: 700;
@@ -16,7 +7,8 @@
 	}
 	ul {
 		padding-inline-start: 20px;
-		padding-right: 15px;
+		padding-top: @gutter;
+		padding-right: @gutter;
 		li {
 			list-style: none;
 			font-size: 14px;
@@ -35,15 +27,15 @@
 			&:before {
 				border-radius: 50%;
 				background-color: #ccc;
-				color: #ccc;
+				color: transparent;
 				content: counter(step-counter);
 				display: inline-block;
 				float: left;
 				height: 15px;
-				line-height: 10px;
-				margin-left: -29px;
-				text-align: center;
 				width: 15px;
+				margin-left: -29px;
+				line-height: 10px;
+				text-align: center;
 			}
 			a {
 				display: block;
@@ -61,18 +53,23 @@
 			&.active {
 				&:before {
 					background-color: #3163a4;
-					color: #3163a4;
+					color: transparent;
 				}
 			}
 			&.completed {
 				border-left: 3px solid #3163a4;
 				&:before {
 					background-color: #3163a4;
-					color: #3163a4;
+					color: transparent;
 				}
 				&:last-child {
 					border-left: 3px solid transparent;
 				}
+			}
+		}
+		ul {
+			padding: 15px 0 0;
+			li:last-child {
 			}
 		}
 	}
