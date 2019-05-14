@@ -164,8 +164,48 @@ function init() {
 	}
 	var newToc = document.createElement("bit-toc");
 	newToc.depth = window.docObject.outline;
-	newToc.headingContainerSelector = "#right > article";
+	newToc.headingsContainerSelector = "body";
 	newToc.scrollSelector = "#toc-sidebar";
+	newToc.highlight = function() {
+		var articleRect = this.article.getBoundingClientRect();
+		var buttons = this.buttons;
+		var positions = this.titles.map(function(header, i) {
+			return {
+				header: header,
+				rect: header.getBoundingClientRect(),
+				button: buttons[i]
+			};
+		});
+		positions.push({ rect: { top: articleRect.top + this.article.scrollHeight - this.article.scrollTop } });
+		positions.slice(0, positions.length - 1).forEach(function(position, index) {
+			position.button.classList.remove('completed', 'active');
+			var curRect = position.rect;
+			var curDistance = curRect.top;// was - articleRect.top
+			var nextRect = positions[index + 1].rect;
+			var nextDistance = nextRect.top;// was - articleRect.top
+			if (nextDistance >= 0 && nextDistance <= articleRect.height && curDistance >= 0 && curDistance <= articleRect.height) {
+				position.button.classList.add('active');
+			} else if (nextDistance < articleRect.height / 2) {
+				position.button.classList.add('completed');
+			} else if (nextDistance >= articleRect.height / 2 && curDistance < articleRect.height / 2) {
+				position.button.classList.add('active');
+			}
+		});
+		var elementToScroll = this.outlineScrollElement;
+		if (elementToScroll) {
+			var distance = (this.article.scrollTop + this.article.offsetHeight / 2) / this.article.scrollHeight;
+			elementToScroll.scrollTop = elementToScroll.scrollHeight * distance - elementToScroll.offsetHeight / 2;
+		}
+	};
+	newToc.setupHighlighting = function() {
+		this.article = document.querySelector(this.containerSelector);
+		var highlight =  debounce(this.highlight.bind(this),1);
+		window.addEventListener("scroll",highlight);
+		this.teardowns.push(function() {
+			window.removeEventListener("scroll", highlight);
+		}.bind(this));
+		this.highlight();
+	};
 	tocContainer.appendChild(newToc);
 
 	hasShownSearch = true;
