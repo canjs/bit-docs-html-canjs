@@ -96,7 +96,7 @@ $('body').on('touchstart', function() {});
 
 function init() {
 	// Set state
-	$articleContainer = $('#right');
+	$articleContainer = $('html');
 	$onThisPage = $('.on-this-page');
 	$navTrigger = $('#nav-trigger');
 	$tableOfContents = $('.on-this-page-table');
