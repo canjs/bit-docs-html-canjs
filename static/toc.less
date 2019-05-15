@@ -1,79 +1,139 @@
 #toc-sidebar {
 	padding-top: @gutter * 2;
+	padding-right: 30px;
+	p {
+		font-size: 14px;
+		line-height: 1.5;
+		border-bottom: 1px solid #eee;
+		margin: 5px 0 5px 15px;
+		padding: 15px 0 20px 0;
+		&.bug {
+			color: #666;
+		}
+	}
 	h1 {
 		font-size: 15px;
 		font-weight: 700;
 		margin: 0;
 		padding: 0 0 0 10px;
 	}
-	ul {
-		padding-inline-start: 20px;
-		padding: @gutter;
-		li {
-			list-style: none;
-			font-size: 14px;
-			line-height: 17px;
-			border: none;
-			border-left: 3px solid #ccc;
-			box-sizing: border-box;
-			border-radius: 0;
-			counter-increment: step-counter;
-			margin: 0;
-			padding: 0 0 20px 20px;
-			&:last-child {
-				border-left: 3px solid transparent;
-				padding-bottom: 0;
-			}
-			&:before {
-				border-radius: 50%;
-				background-color: #ccc;
-				color: transparent;
-				content: counter(step-counter);
-				display: inline-block;
-				float: left;
-				height: 15px;
-				width: 15px;
-				margin-left: -29px;
-				line-height: 10px;
-				text-align: center;
-			}
-			a {
-				display: block;
-				overflow: hidden;
-				padding: 0;
-				text-decoration: none;
-				&:visited {
-					color: #333333;
-				}
-				&.active {
-					background-color: transparent;
-					color: inherit;
-				}
-			}
-			&.active {
-				&:before {
-					background-color: #3163a4;
-					color: transparent;
-				}
-			}
-			&.completed {
-				border-left: 3px solid #3163a4;
-				&:before {
-					background-color: #3163a4;
-					color: transparent;
-				}
+	nav {
+		ul {
+			padding-inline-start: 20px;
+			padding: @gutter;
+			li {
+				list-style: none;
+				font-size: 14px;
+				line-height: 17px;
+				border: none;
+				border-left: 3px solid #ccc;
+				box-sizing: border-box;
+				border-radius: 0;
+				counter-increment: step-counter;
+				margin: 0;
+				padding: 0 0 20px 20px;
 				&:last-child {
 					border-left: 3px solid transparent;
+					padding-bottom: 0;
+				}
+				&:before {
+					border-radius: 50%;
+					background-color: #ccc;
+					color: transparent;
+					content: counter(step-counter);
+					display: inline-block;
+					float: left;
+					height: 15px;
+					width: 15px;
+					margin-left: -29px;
+					line-height: 10px;
+					text-align: center;
+				}
+				a {
+					display: block;
+					overflow: hidden;
+					padding: 0;
+					text-decoration: none;
+					&.active {
+						background-color: transparent;
+						color: inherit;
+					}
+				}
+				&.active {
+					&:before {
+						background-color: #3163a4;
+						color: transparent;
+					}
+				}
+				&.completed {
+					border-left: 3px solid #3163a4;
+					&:before {
+						background-color: #3163a4;
+						color: transparent;
+					}
+					&:last-child {
+						border-left: 3px solid transparent;
+					}
+				}
+			}
+			ul {
+				padding: 15px 0 0;
+				li:last-child {
 				}
 			}
 		}
-		ul {
-			padding: 15px 0 0;
-			li:last-child {
+		.nested, .nested.completed {
+			border-left: 3px solid transparent;
+		}
+	}
+	.social-list {
+		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+		line-height: 2;
+		margin-top: 5px;
+		a {
+			&:before {
+				display: inline-flex;
+				vertical-align: middle;
+				width: 30px;
+				height: 30px;
+				margin: 0 @gutter/3 0 @gutter;
+				content: '';
+				background-repeat: no-repeat;
+			}
+			&.icon-slack:before {
+				background-image: url(img/icon-slack-gray.svg);
+			}
+			&.icon-github:before {
+				background-image: url(img/icon-github-gray.svg);
+			}
+			&.icon-twitter:before {
+				background-image: url(img/icon-twitter-gray.svg);
+			}
+			&.icon-forums:before {
+				background-image: url(img/icon-forums-gray.svg);
+			}
+			&.icon-blog:before {
+				background-image: url(img/icon-rss-gray.svg);
+			}
+			&.icon-youtube:before {
+				background-image: url(img/icon-youtube-gray.svg);
+			}
+			&.icon-meetup:before {
+				background-image: url(img/icon-meetup-gray.svg);
+			}
+			&.icon-stackoverflow:before {
+				background-image: url(img/icon-stackoverflow-gray.svg);
 			}
 		}
 	}
-	.nested, .nested.completed {
-		border-left: 3px solid transparent;
+}
+// ----- HIDE ON HOME PAGE -----
+@media screen and (min-width: @breakpoint) {
+	[data-current-page="canjs"] {
+		#toc-sidebar {
+			display: none;
+		}
 	}
 }

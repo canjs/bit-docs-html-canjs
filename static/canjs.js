@@ -163,7 +163,9 @@ function init() {
 		tocContainer.removeChild(oldToc);
 	}
 	var newToc = document.createElement("bit-toc");
-	newToc.depth = window.docObject.outline;
+	newToc.depth = parseInt(window.docObject.outline, 10) || 1;
+	console.log("newToc.depth", newToc.depth);
+	console.log("window.docObject.outline", window.docObject.outline);
 	newToc.headingsContainerSelector = "body";
 	newToc.scrollSelector = "#toc-sidebar nav";
 	newToc.highlight = function() {
