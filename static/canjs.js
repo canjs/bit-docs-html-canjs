@@ -85,7 +85,7 @@ var $articleContainer,
 
 	$articleContainer.on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
-		window.history.replaceState({ articleScroll: $articleContainer.scrollTop() }, null, window.location.href);
+		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
 	}, 50));
 })();
 
@@ -191,7 +191,7 @@ function setScrollPosition() {
 	var lastAutoScroll;
 	animating = true; // flag animating on first run only
 	scrollPositionInterval = setInterval(function() {
-		var currentScroll = $articleContainer.scrollTop();
+		var currentScroll = getPageScrollTop();
 		if (lastAutoScroll === undefined || lastAutoScroll === currentScroll) {
 			if (window.location.hash) {
 				var $currentHeader = $(window.location.hash);
@@ -199,13 +199,13 @@ function setScrollPosition() {
 			} else {
 				var articleScroll = window.history.state && window.history.state.articleScroll;
 				if (articleScroll) {
-					$articleContainer.scrollTop(articleScroll);
+					setPageScrollTop(articleScroll);
 				} else {
-					$articleContainer.scrollTop(0);
+					setPageScrollTop(0);
 					clearInterval(scrollPositionInterval);
 				}
 			}
-			lastAutoScroll = $articleContainer.scrollTop();
+			lastAutoScroll = getPageScrollTop();
 		} else {
 			// User manually scrolled
 			clearInterval(scrollPositionInterval);
@@ -235,7 +235,7 @@ function navigate(href, updateLocation) {
 		var hrefHash = href.match(/#.*/, '') || [];// Match the hash part of the URL, including the hash
 		scrollToElement($(hrefHash[0]));
 		if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
-			window.history.pushState({ articleScroll: $articleContainer.scrollTop() }, null, href);
+			window.history.pushState({ articleScroll: getPageScrollTop() }, null, href);
 		}
 		return;
 	}
@@ -278,7 +278,7 @@ function navigate(href, updateLocation) {
 			}
 
 			// Scroll to the top of the page
-			$('html').scrollTop(0);
+			setPageScrollTop(0);
 
 			var $article = $content.find("article");
 			var currentPage = $content.filter("#everything").attr("data-current-page");
@@ -370,12 +370,11 @@ function isMobile() {
 
 function scrollToElement($element) {
 	if ($element.length) {
-		var topMargin = parseInt($element.css('margin-top')) || 20;
+		var topMargin = Math.max(parseInt($element.css('margin-top')), 60);// Minimum of 60px to clear the navigation
 		var pos = $element.offset().top - topMargin - $articleContainer.offset().top;
 		setTimeout(function() {
 			// Without this timeout, the scrollTop will be set correctly and then reverted
-			$('body').scrollTop(pos);
-			$('html').scrollTop(pos);
+			setPageScrollTop(pos);
 		});
 	} else {
 		$articleContainer.scrollTop(0);
@@ -420,4 +419,15 @@ function buildTOC() {
 
 	toc += Array(level - baseLevel + 1).join('</li></ol>') + "</li></ol>";
 	$tableOfContents.append(toc);
+}
+
+function getPageScrollTop() {
+	// Different browsers return different values for this
+	return $('body').scrollTop() || $('html').scrollTop();
+}
+
+function setPageScrollTop(value) {
+	// Different browsers require this to be set on different elements
+	$('body').scrollTop(value)
+	$('html').scrollTop(value);
 }
