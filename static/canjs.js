@@ -96,7 +96,7 @@ $('body').on('touchstart', function() {});
 
 function init() {
 	// Set state
-	$articleContainer = $('html');
+	$articleContainer = $('body');
 	$onThisPage = $('.on-this-page');
 	$navTrigger = $('#nav-trigger');
 	$tableOfContents = $('.on-this-page-table');
@@ -371,8 +371,12 @@ function isMobile() {
 function scrollToElement($element) {
 	if ($element.length) {
 		var topMargin = parseInt($element.css('margin-top')) || 20;
-		var pos = $element.offset().top - topMargin - $articleContainer.offset().top + $articleContainer.scrollTop();
-		$articleContainer.scrollTop(pos);
+		var pos = $element.offset().top - topMargin - $articleContainer.offset().top;
+		setTimeout(function() {
+			// Without this timeout, the scrollTop will be set correctly and then reverted
+			$('body').scrollTop(pos);
+			$('html').scrollTop(pos);
+		});
 	} else {
 		$articleContainer.scrollTop(0);
 	}
