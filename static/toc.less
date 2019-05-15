@@ -1,6 +1,5 @@
 #toc-sidebar {
-	padding-top: 35px;
-	padding-right: 30px;
+	padding: 35px @gutter*2 @gutter*2;
 	p {
 		font-size: 14px;
 		line-height: 1.5;
@@ -91,40 +90,44 @@
 		font-size: 14px;
 		line-height: 2;
 		margin-top: @gutter;
-		a {
+		list-style: none;
+		padding-left: 0;
+		li {
 			margin: @gutter/3 0;
-			&:before {
-				display: inline-flex;
-				vertical-align: middle;
-				width: 30px;
-				height: 30px;
-				margin: 0 @gutter 0 0;
-				content: '';
-				background-repeat: no-repeat;
-			}
-			&.icon-slack:before {
-				background-image: url(img/icon-slack-gray.svg);
-			}
-			&.icon-github:before {
-				background-image: url(img/icon-github-gray.svg);
-			}
-			&.icon-twitter:before {
-				background-image: url(img/icon-twitter-gray.svg);
-			}
-			&.icon-forums:before {
-				background-image: url(img/icon-forums-gray.svg);
-			}
-			&.icon-blog:before {
-				background-image: url(img/icon-rss-gray.svg);
-			}
-			&.icon-youtube:before {
-				background-image: url(img/icon-youtube-gray.svg);
-			}
-			&.icon-meetup:before {
-				background-image: url(img/icon-meetup-gray.svg);
-			}
-			&.icon-stackoverflow:before {
-				background-image: url(img/icon-stackoverflow-gray.svg);
+			a {
+				&:before {
+					display: inline-flex;
+					vertical-align: middle;
+					width: 30px;
+					height: 30px;
+					margin: 0 @gutter 0 0;
+					content: '';
+					background-repeat: no-repeat;
+				}
+				&.icon-slack:before {
+					background-image: url(img/icon-slack-gray.svg);
+				}
+				&.icon-github:before {
+					background-image: url(img/icon-github-gray.svg);
+				}
+				&.icon-twitter:before {
+					background-image: url(img/icon-twitter-gray.svg);
+				}
+				&.icon-forums:before {
+					background-image: url(img/icon-forums-gray.svg);
+				}
+				&.icon-blog:before {
+					background-image: url(img/icon-rss-gray.svg);
+				}
+				&.icon-youtube:before {
+					background-image: url(img/icon-youtube-gray.svg);
+				}
+				&.icon-meetup:before {
+					background-image: url(img/icon-meetup-gray.svg);
+				}
+				&.icon-stackoverflow:before {
+					background-image: url(img/icon-stackoverflow-gray.svg);
+				}
 			}
 		}
 	}
