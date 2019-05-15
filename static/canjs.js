@@ -157,7 +157,7 @@ function init() {
 	}
 
 	// Set up the client-side TOC
-	var tocContainer = document.querySelector("#toc-sidebar");
+	var tocContainer = document.querySelector("#toc-sidebar nav");
 	var oldToc = document.querySelector("bit-toc");
 	if (oldToc) {
 		tocContainer.removeChild(oldToc);
@@ -165,7 +165,7 @@ function init() {
 	var newToc = document.createElement("bit-toc");
 	newToc.depth = window.docObject.outline;
 	newToc.headingsContainerSelector = "body";
-	newToc.scrollSelector = "#toc-sidebar";
+	newToc.scrollSelector = "#toc-sidebar nav";
 	newToc.highlight = function() {
 		var articleRect = this.article.getBoundingClientRect();
 		var buttons = this.buttons;
@@ -184,10 +184,18 @@ function init() {
 			var nextRect = positions[index + 1].rect;
 			var nextDistance = nextRect.top;// was - articleRect.top
 			if (nextDistance >= 0 && nextDistance <= articleRect.height && curDistance >= 0 && curDistance <= articleRect.height) {
+				var lastPosition = positions[index - 1];
+				if (lastPosition) {
+					lastPosition.button.classList.add('completed');
+				}
 				position.button.classList.add('active');
 			} else if (nextDistance < articleRect.height / 2) {
 				position.button.classList.add('completed');
 			} else if (nextDistance >= articleRect.height / 2 && curDistance < articleRect.height / 2) {
+				var lastPosition = positions[index - 1];
+				if (lastPosition) {
+					lastPosition.button.classList.add('completed');
+				}
 				position.button.classList.add('active');
 			}
 		});
@@ -198,6 +206,13 @@ function init() {
 		}
 	};
 	newToc.setupHighlighting = function() {
+
+		// Add a class to li elements with a ul element inside them
+		tocContainer.querySelectorAll("li > ul").forEach(function(childUl) {
+			childUl.parentElement.classList.add("nested");
+		});
+
+		// Highlighting
 		this.article = document.querySelector(this.containerSelector);
 		var highlight =  debounce(this.highlight.bind(this),1);
 		window.addEventListener("scroll",highlight);
