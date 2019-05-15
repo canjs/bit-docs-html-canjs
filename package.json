@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-html-canjs",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "description": "The plugins to produce the CanJS site",
   "main": "static/canjs",
   "scripts": {
