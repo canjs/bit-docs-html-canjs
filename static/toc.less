@@ -1,17 +1,14 @@
 #toc-sidebar {
-	h6 {
+	padding-top: @gutter * 2;
+	h1 {
 		font-size: 15px;
 		font-weight: 700;
 		margin: 0;
-		padding: 0;
-	}
-	.nested {
-		border-left: 3px solid transparent !important;
+		padding: 0 0 0 10px;
 	}
 	ul {
 		padding-inline-start: 20px;
-		padding-top: @gutter;
-		padding-right: @gutter;
+		padding: @gutter;
 		li {
 			list-style: none;
 			font-size: 14px;
@@ -75,5 +72,8 @@
 			li:last-child {
 			}
 		}
+	}
+	.nested, .nested.completed {
+		border-left: 3px solid transparent;
 	}
 }
