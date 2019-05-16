@@ -164,8 +164,6 @@ function init() {
 	}
 	var newToc = document.createElement("bit-toc");
 	newToc.depth = parseInt(window.docObject.outline, 10) || 1;
-	console.log("newToc.depth", newToc.depth);
-	console.log("window.docObject.outline", window.docObject.outline);
 	newToc.headingsContainerSelector = "body";
 	newToc.scrollSelector = "#toc-sidebar nav";
 	newToc.highlight = function() {
@@ -346,8 +344,9 @@ function navigate(href, updateLocation) {
 				window.location.reload();
 			}
 
-			// Scroll to the top of the page
+			// Scroll to the top of the page & TOC sidebar
 			setPageScrollTop(0);
+			$('#toc-sidebar').scrollTop(0);
 
 			var $article = $content.find("article");
 			var currentPage = $content.filter("#everything").attr("data-current-page");
