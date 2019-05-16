@@ -10,8 +10,11 @@
   grid-template-areas: "header header header" "nav-sidebar content toc-sidebar";
 }
 @media screen and (max-width: @breakpoint-sidebar-right){
-  :not([data-current-page="canjs"])#everything {
+  #everything {
     grid-template-columns: minmax(@sidebar-width-min, @sidebar-width) 1fr 0;
+  }
+  [data-current-page="canjs"]#everything {
+    grid-template-columns: 0 1fr 0;
   }
 }
 @media screen and (max-width: 999px){
