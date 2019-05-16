@@ -1,5 +1,6 @@
 #toc-sidebar {
-	padding: 35px @gutter*2 @gutter*2;
+	display: block;
+	padding: 35px @gutter*2 0;
 	p {
 		font-size: 14px;
 		line-height: 1.5;
@@ -26,27 +27,21 @@
 				border-radius: 0;
 				counter-increment: step-counter;
 				margin: 0;
-				// padding: 0 0 @gutter 20px;
 				padding: 0 0 @gutter @gutter;
 				&:last-child {
 					border-left: 2px solid transparent;
 					padding-bottom: 0;
 				}
 				&:before {
-					border-radius: 50%;
-					background-color: #ccc;
-					color: transparent;
-					content: counter(step-counter);
 					display: inline-block;
 					float: left;
-					// height: 15px;
-					// width: 15px;
-					// margin-left: -29px;
 					height: 8px;
 					width: 8px;
 					margin-left: -20px;
-					line-height: 10px;
-					text-align: center;
+					background-color: #ccc;
+					border-radius: 50%;
+					color: transparent;
+					content: counter(step-counter);
 				}
 				a {
 					display: block;
@@ -92,6 +87,7 @@
 		font-size: 14px;
 		line-height: 2;
 		margin-top: @gutter;
+		margin-bottom: @gutter*2;
 		list-style: none;
 		padding-left: 0;
 		li {
