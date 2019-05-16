@@ -15,13 +15,14 @@
 	}
 	nav {
 		ul {
+			position: relative;
 			padding-inline-start: 20px;
 			padding: 0 10px @gutter;
 			li {
 				list-style: none;
 				font-size: 14px;
 				border: none;
-				border-left: 2px solid #ccc;
+				border-left: 2px solid #CCC;
 				box-sizing: border-box;
 				border-radius: 0;
 				counter-increment: step-counter;
@@ -37,7 +38,7 @@
 					height: 8px;
 					width: 8px;
 					margin-left: -20px;
-					background-color: #ccc;
+					background-color: #CCC;
 					border-radius: 50%;
 					color: transparent;
 					content: counter(step-counter);
@@ -72,8 +73,20 @@
 			}
 			ul {
 				padding: 15px 0 0;
-				li:last-child {
+				&:before {
+					background: #CCC;
+					height: 40px;
+					width: 2px;
+					position: absolute;
+					content: "";
+					transform: rotate(-28deg);
+					top: -16px;
+					left: -8px;
+					z-index: -1;
 				}
+			}
+			.completed > ul:before {
+				background: #3163a4;
 			}
 		}
 		.nested, .nested.completed {
@@ -81,12 +94,9 @@
 		}
 	}
 	.social-list {
-		display: flex;
-		flex-direction: column;
+		display: block;
 		font-size: 14px;
-		line-height: 2;
-		margin-top: @gutter;
-		margin-bottom: @gutter*2;
+		padding-bottom: @gutter*2;
 		list-style: none;
 		padding-left: 0;
 		li {
