@@ -21,7 +21,7 @@
 				list-style: none;
 				font-size: 14px;
 				border: none;
-				border-left: 3px solid #ccc;
+				border-left: 2px solid #ccc;
 				box-sizing: border-box;
 				border-radius: 0;
 				counter-increment: step-counter;
@@ -29,7 +29,7 @@
 				// padding: 0 0 @gutter 20px;
 				padding: 0 0 @gutter @gutter;
 				&:last-child {
-					border-left: 3px solid transparent;
+					border-left: 2px solid transparent;
 					padding-bottom: 0;
 				}
 				&:before {
@@ -42,9 +42,9 @@
 					// height: 15px;
 					// width: 15px;
 					// margin-left: -29px;
-					height: 9px;
-					width: 9px;
-					margin-left: -21px;
+					height: 8px;
+					width: 8px;
+					margin-left: -20px;
 					line-height: 10px;
 					text-align: center;
 				}
@@ -52,6 +52,8 @@
 					display: block;
 					overflow: hidden;
 					padding: 0;
+					position: relative;
+					top: -4px;
 					&.active {
 						background-color: transparent;
 						color: inherit;
@@ -64,13 +66,13 @@
 					}
 				}
 				&.completed {
-					border-left: 3px solid #3163a4;
+					border-left: 2px solid #3163a4;
 					&:before {
 						background-color: #3163a4;
 						color: transparent;
 					}
 					&:last-child {
-						border-left: 3px solid transparent;
+						border-left: 2px solid transparent;
 					}
 				}
 			}
@@ -81,7 +83,7 @@
 			}
 		}
 		.nested, .nested.completed {
-			border-left: 3px solid transparent;
+			border-left: 2px solid transparent;
 		}
 	}
 	.social-list {
