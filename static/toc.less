@@ -80,20 +80,18 @@
 			}
 			ul {
 				padding: 15px 0 0;
-				&:before {
-					background: #CCC;
-					height: 40px;
-					width: 2px;
-					position: absolute;
-					content: "";
-					transform: rotate(-29deg);
-					top: -16px;
-					left: -8px;
-					z-index: -1;
+				li {
+					font-size: 13px;
+					a {
+						top: -3px;
+					}
+					li {
+						font-size: 12px;
+						a {
+							top: -2px;
+						}
+					}
 				}
-			}
-			.completed > ul:before {
-				background: #3163a4;
 			}
 		}
 		.nested, .nested.completed {
