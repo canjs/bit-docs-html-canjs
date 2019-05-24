@@ -40,7 +40,7 @@
   "dependencies": {
     "can-3-4-compat": "^1.0.0",
     "can-component": "^4.0.0",
-    "can-control": "^4.0.0",
+    "can-control": "^4.4.2",
     "can-define": "^2.0.0",
     "can-dom-data-state": "^1.0.1",
     "can-namespace": "^1.0.0",
