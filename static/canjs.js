@@ -165,7 +165,7 @@ function init() {
 	var newToc = document.createElement("bit-toc");
 	newToc.depth = parseInt(window.docObject.outline, 10) || 1;
 	newToc.headingsContainerSelector = "body";
-	newToc.scrollSelector = "#toc-sidebar nav";
+	newToc.scrollSelector = "#toc-sidebar";
 	newToc.highlight = function() {
 		var articleRect = this.article.getBoundingClientRect();
 		var buttons = this.buttons;
@@ -199,10 +199,33 @@ function init() {
 				position.button.classList.add('active');
 			}
 		});
-		var elementToScroll = this.outlineScrollElement;
-		if (elementToScroll) {
-			var distance = (this.article.scrollTop + this.article.offsetHeight / 2) / this.article.scrollHeight;
-			elementToScroll.scrollTop = elementToScroll.scrollHeight * distance - elementToScroll.offsetHeight / 2;
+
+		// Get the last element in the nav that’s highlighted
+		var activeOrCompleted = this.querySelectorAll(".active,.completed");
+		var lastActiveOrCompleted = activeOrCompleted[activeOrCompleted.length - 1];
+		if (lastActiveOrCompleted) {
+			lastActiveOrCompleted = lastActiveOrCompleted.querySelector('a');
+
+			// Check to see if it’s in viewport
+			var lastActiveOrCompletedRect = lastActiveOrCompleted.getBoundingClientRect();
+			var sidebarElement = this.outlineScrollElement;
+			var topInset = sidebarElement.getBoundingClientRect().top;// Main nav height
+			var viewportHeight = window.innerHeight;
+			var lastActiveOrCompletedRectIsInViewport = (
+				lastActiveOrCompletedRect.bottom <= viewportHeight &&
+	      lastActiveOrCompletedRect.left >= 0 &&
+	      lastActiveOrCompletedRect.left <= window.innerWidth &&
+				lastActiveOrCompletedRect.top >= topInset &&
+	      lastActiveOrCompletedRect.top <= viewportHeight
+	    );
+			if (lastActiveOrCompletedRectIsInViewport === false) {
+				// Scroll the sidebar so the highlighted element is in the viewport
+				var visibleSidebarHeight = sidebarElement.offsetHeight;// Not the entire height, just what’s visible in the viewport
+				var amountScrolledDownSidebar = sidebarElement.scrollTop;
+				var additionalScrollAmount = lastActiveOrCompletedRect.top - viewportHeight;
+				var amountToScroll = topInset + (visibleSidebarHeight / 2) + additionalScrollAmount + amountScrolledDownSidebar;
+				sidebarElement.scrollTop = amountToScroll;
+			}
 		}
 	};
 	newToc.setupHighlighting = function() {

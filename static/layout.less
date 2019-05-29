@@ -27,7 +27,6 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-area: nav-sidebar;
-  scroll-behavior: smooth;
 }
 #right {
   background: white;
@@ -53,6 +52,7 @@
   height: calc(~"100vh - " @brand-height);// 53px header
   overflow-y: scroll;
   position: fixed;
+  scroll-behavior: smooth;
   top: @brand-height;
   width: @sidebar-width;
   transition: min-width @transition-speed ease;
