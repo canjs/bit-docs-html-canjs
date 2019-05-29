@@ -213,11 +213,11 @@ function init() {
 			var viewportHeight = window.innerHeight;
 			var lastActiveOrCompletedRectIsInViewport = (
 				lastActiveOrCompletedRect.bottom <= viewportHeight &&
-	      lastActiveOrCompletedRect.left >= 0 &&
-	      lastActiveOrCompletedRect.left <= window.innerWidth &&
+				lastActiveOrCompletedRect.left >= 0 &&
+				lastActiveOrCompletedRect.left <= window.innerWidth &&
 				lastActiveOrCompletedRect.top >= topInset &&
-	      lastActiveOrCompletedRect.top <= viewportHeight
-	    );
+				lastActiveOrCompletedRect.top <= viewportHeight
+			);
 			if (lastActiveOrCompletedRectIsInViewport === false) {
 				// Scroll the sidebar so the highlighted element is in the viewport
 				var visibleSidebarHeight = sidebarElement.offsetHeight;// Not the entire height, just what’s visible in the viewport
