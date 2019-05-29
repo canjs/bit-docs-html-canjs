@@ -246,6 +246,18 @@ function init() {
 	};
 	tocContainer.appendChild(newToc);
 
+	// Show the “On this page” title
+	var onThisPage = document.querySelector("#toc-sidebar h1");
+	onThisPage.classList.remove("hide");
+
+	// After the TOC loads, determine whether the “On this page” title should show
+	setTimeout(function() {
+		if (tocContainer.contains(newToc) === false) {
+			// Hide the “On this page” title
+			onThisPage.classList.add("hide");
+		}
+	});
+
 	hasShownSearch = true;
 }
 
