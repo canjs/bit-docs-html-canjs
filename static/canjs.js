@@ -156,6 +156,108 @@ function init() {
 		sidebarViewModel.selectedPageName = window.docObject.name;
 	}
 
+	// Set up the client-side TOC
+	var tocContainer = document.querySelector("#toc-sidebar nav");
+	var oldToc = document.querySelector("bit-toc");
+	if (oldToc) {
+		tocContainer.removeChild(oldToc);
+	}
+	var newToc = document.createElement("bit-toc");
+	newToc.depth = parseInt(window.docObject.outline, 10) || 1;
+	newToc.headingsContainerSelector = "body";
+	newToc.scrollSelector = "#toc-sidebar";
+	newToc.highlight = function() {
+		var articleRect = this.article.getBoundingClientRect();
+		var buttons = this.buttons;
+		var positions = this.titles.map(function(header, i) {
+			return {
+				header: header,
+				rect: header.getBoundingClientRect(),
+				button: buttons[i]
+			};
+		});
+		positions.push({ rect: { top: articleRect.top + this.article.scrollHeight - this.article.scrollTop } });
+		positions.slice(0, positions.length - 1).forEach(function(position, index) {
+			position.button.classList.remove('completed', 'active');
+			var curRect = position.rect;
+			var curDistance = curRect.top;// was - articleRect.top
+			var nextRect = positions[index + 1].rect;
+			var nextDistance = nextRect.top;// was - articleRect.top
+			if (nextDistance >= 0 && nextDistance <= articleRect.height && curDistance >= 0 && curDistance <= articleRect.height) {
+				var lastPosition = positions[index - 1];
+				if (lastPosition) {
+					lastPosition.button.classList.add('completed');
+				}
+				position.button.classList.add('active');
+			} else if (nextDistance < articleRect.height / 2) {
+				position.button.classList.add('completed');
+			} else if (nextDistance >= articleRect.height / 2 && curDistance < articleRect.height / 2) {
+				var lastPosition = positions[index - 1];
+				if (lastPosition) {
+					lastPosition.button.classList.add('completed');
+				}
+				position.button.classList.add('active');
+			}
+		});
+
+		// Get the last element in the nav that’s highlighted
+		var activeOrCompleted = this.querySelectorAll(".active,.completed");
+		var lastActiveOrCompleted = activeOrCompleted[activeOrCompleted.length - 1];
+		if (lastActiveOrCompleted) {
+			lastActiveOrCompleted = lastActiveOrCompleted.querySelector('a');
+
+			// Check to see if it’s in viewport
+			var lastActiveOrCompletedRect = lastActiveOrCompleted.getBoundingClientRect();
+			var sidebarElement = this.outlineScrollElement;
+			var topInset = sidebarElement.getBoundingClientRect().top;// Main nav height
+			var viewportHeight = window.innerHeight;
+			var lastActiveOrCompletedRectIsInViewport = (
+				lastActiveOrCompletedRect.bottom <= viewportHeight &&
+				lastActiveOrCompletedRect.left >= 0 &&
+				lastActiveOrCompletedRect.left <= window.innerWidth &&
+				lastActiveOrCompletedRect.top >= topInset &&
+				lastActiveOrCompletedRect.top <= viewportHeight
+			);
+			if (lastActiveOrCompletedRectIsInViewport === false) {
+				// Scroll the sidebar so the highlighted element is in the viewport
+				var visibleSidebarHeight = sidebarElement.offsetHeight;// Not the entire height, just what’s visible in the viewport
+				var amountScrolledDownSidebar = sidebarElement.scrollTop;
+				var additionalScrollAmount = lastActiveOrCompletedRect.top - viewportHeight;
+				var amountToScroll = topInset + (visibleSidebarHeight / 2) + additionalScrollAmount + amountScrolledDownSidebar;
+				sidebarElement.scrollTop = amountToScroll;
+			}
+		}
+	};
+	newToc.setupHighlighting = function() {
+
+		// Add a class to li elements with a ul element inside them
+		tocContainer.querySelectorAll("li > ul").forEach(function(childUl) {
+			childUl.parentElement.classList.add("nested");
+		});
+
+		// Highlighting
+		this.article = document.querySelector(this.containerSelector);
+		var highlight =  debounce(this.highlight.bind(this),1);
+		window.addEventListener("scroll",highlight);
+		this.teardowns.push(function() {
+			window.removeEventListener("scroll", highlight);
+		}.bind(this));
+		this.highlight();
+	};
+	tocContainer.appendChild(newToc);
+
+	// Show the “On this page” title
+	var onThisPage = document.querySelector("#toc-sidebar h1");
+	onThisPage.classList.remove("hide");
+
+	// After the TOC loads, determine whether the “On this page” title should show
+	setTimeout(function() {
+		if (tocContainer.contains(newToc) === false) {
+			// Hide the “On this page” title
+			onThisPage.classList.add("hide");
+		}
+	});
+
 	hasShownSearch = true;
 }
 
@@ -277,8 +379,9 @@ function navigate(href, updateLocation) {
 				window.location.reload();
 			}
 
-			// Scroll to the top of the page
+			// Scroll to the top of the page & TOC sidebar
 			setPageScrollTop(0);
+			$('#toc-sidebar').scrollTop(0);
 
 			var $article = $content.find("article");
 			var currentPage = $content.filter("#everything").attr("data-current-page");

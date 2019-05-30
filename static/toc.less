@@ -1,0 +1,156 @@
+#toc-sidebar {
+	padding: 35px @gutter*2 0;
+	p {
+		font-size: 14px;
+		line-height: 1.5;
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+	h1 {
+		font-size: 12px;
+		letter-spacing: 1px;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: @gray;
+		margin: 0 0 @gutter;
+		padding: 0;
+
+		&.hide {
+			display: none;
+		}
+	}
+	nav {
+		ul {
+			position: relative;
+			margin-top: 0;
+			padding-inline-start: 20px;
+			padding: 0 10px @gutter;
+			li {
+				list-style: none;
+				font-size: 14px;
+				border: none;
+				border-left: 2px solid #CCC;
+				box-sizing: border-box;
+				border-radius: 0;
+				counter-increment: step-counter;
+				margin: 0;
+				padding: 0 0 @gutter @gutter;
+				&:last-child {
+					border-left: 2px solid transparent;
+					padding-bottom: 0;
+				}
+				&:before {
+					display: inline-block;
+					float: left;
+					height: 8px;
+					width: 8px;
+					margin-left: -20px;
+					background-color: #CCC;
+					border-radius: 50%;
+					color: transparent;
+					content: counter(step-counter);
+				}
+				a {
+					display: block;
+					overflow: hidden;
+					padding: 0;
+					position: relative;
+					top: -4px;
+					&.active {
+						background-color: transparent;
+						color: inherit;
+					}
+				}
+				&.active {
+					&:before {
+						background-color: #3163a4;
+						color: transparent;
+					}
+				}
+				&.completed {
+					border-left: 2px solid #3163a4;
+					&:before {
+						background-color: #3163a4;
+						color: transparent;
+					}
+					&:last-child {
+						border-left: 2px solid transparent;
+					}
+				}
+			}
+			ul {
+				padding: 15px 0 0;
+				li {
+					font-size: 13px;
+					a {
+						top: -3px;
+					}
+					li {
+						font-size: 12px;
+						a {
+							top: -2px;
+						}
+					}
+				}
+			}
+		}
+		.nested, .nested.completed {
+			border-left: 2px solid transparent;
+		}
+	}
+	.social-list {
+		display: block;
+		font-size: 14px;
+		padding-bottom: @gutter*2;
+		list-style: none;
+		padding-left: 0;
+		li {
+			margin: @gutter/3 0;
+			a {
+				white-space: nowrap;
+				&:before {
+					display: inline-flex;
+					vertical-align: middle;
+					width: 30px;
+					height: 30px;
+					margin: 0 @gutter 0 0;
+					content: '';
+					background-repeat: no-repeat;
+				}
+				&.icon-slack:before {
+					background-image: url(img/icon-slack-gray.svg);
+				}
+				&.icon-github:before {
+					background-image: url(img/icon-github-gray.svg);
+				}
+				&.icon-twitter:before {
+					background-image: url(img/icon-twitter-gray.svg);
+				}
+				&.icon-forums:before {
+					background-image: url(img/icon-forums-gray.svg);
+				}
+				&.icon-blog:before {
+					background-image: url(img/icon-rss-gray.svg);
+				}
+				&.icon-youtube:before {
+					background-image: url(img/icon-youtube-gray.svg);
+				}
+				&.icon-meetup:before {
+					background-image: url(img/icon-meetup-gray.svg);
+				}
+				&.icon-stackoverflow:before {
+					background-image: url(img/icon-stackoverflow-gray.svg);
+				}
+			}
+		}
+	}
+}
+// ----- HIDE ON HOME PAGE -----
+@media screen and (min-width: @breakpoint) {
+	[data-current-page="canjs"] {
+		#toc-sidebar {
+			display: none;
+		}
+	}
+}
