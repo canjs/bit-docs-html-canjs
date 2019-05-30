@@ -445,7 +445,7 @@ function getHeaders(useOutline) {
 		headerDepth = 1;
 
 	if (useOutline) {
-		var	outline = window.docObject && parseInt(window.docObject.outline);
+		var outline = (window.docObject && window.docObject.outline !== undefined) ? (window.docObject.outline.depth ? parseInt(window.docObject.outline.depth) : parseInt(window.docObject.outline)) : 1;
 		headerDepth = !isNaN(outline) ? outline : 1;
 	}
 
