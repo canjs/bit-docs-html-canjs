@@ -163,7 +163,7 @@ function init() {
 		tocContainer.removeChild(oldToc);
 	}
 	var newToc = document.createElement("bit-toc");
-	newToc.depth = parseInt(window.docObject.outline, 10) || 1;
+	newToc.depth = getOutlineDepth();
 	newToc.headingsContainerSelector = "body";
 	newToc.scrollSelector = "#toc-sidebar";
 	newToc.highlight = function() {
@@ -441,12 +441,11 @@ function navigate(href, updateLocation) {
 }
 
 function getHeaders(useOutline) {
-	var headerArr = [],
-		headerDepth = 1;
+	var headerArr = [];
+	var headerDepth = 1;
 
 	if (useOutline) {
-		var outline = (window.docObject && window.docObject.outline !== undefined) ? (window.docObject.outline.depth !== undefined ? parseInt(window.docObject.outline.depth) : parseInt(window.docObject.outline)) : 1;
-		headerDepth = !isNaN(outline) ? outline : 1;
+		headerDepth = getOutlineDepth();
 	}
 
 	for (var i = 1; i <= headerDepth; i++) {
@@ -465,6 +464,11 @@ function getHeaders(useOutline) {
 function generateId(element) {
 	var txt = element.textContent;
 	return txt.replace(/\s/g,"").replace(/[^\w]/g,"_");
+}
+
+function getOutlineDepth() {
+	var outline = (window.docObject && window.docObject.outline !== undefined) ? (window.docObject.outline.depth !== undefined ? parseInt(window.docObject.outline.depth) : parseInt(window.docObject.outline)) : 1;
+	return !isNaN(outline) ? outline : 1;
 }
 
 function isMobile() {
