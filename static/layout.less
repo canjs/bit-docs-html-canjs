@@ -43,6 +43,13 @@
 }
 #toc-sidebar {
   grid-area: toc-sidebar;
+  overflow: auto;
+  @media (hover: hover) {
+    &:not(:hover) {
+      overflow: hidden;
+    }
+  }
+
 }
 @media screen and (max-width: @breakpoint-sidebar-right){
   #toc-sidebar {
