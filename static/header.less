@@ -19,7 +19,7 @@
         padding: 0 @gutter;
     }
     background-color: #FFFFFF;
-    z-index: 1;
+    z-index: @z-index-1;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
 }
 .brand {
@@ -59,7 +59,7 @@
         .dropdown {
             position: absolute;
             top: 52px;
-            z-index: 91;
+            z-index: @z-index-big;
             background-color: white;
             border: 1px solid #ccc;
             box-shadow: 0 6px 12px rgba(0,0,0,.175);
@@ -155,7 +155,7 @@
                     height: 4px;
                     background-color: #CCCCCC;
                     opacity: 0;
-                    z-index: -1;
+                    z-index: @z-index-minus-1;
                     transition: all 0.4s ease-in-out;
                 }
                 &:hover:before {
@@ -186,7 +186,7 @@
     list-style: none;
     justify-content: center;
     align-items: center;
-    z-index: 999999;
+    z-index: @z-index-really-big;
     .dropdown {
         display: flex;
         position: relative;
@@ -208,7 +208,7 @@
         background: @border-color;
         .dropdown-menu {
             display: block;
-            z-index:99;
+            z-index: @z-index-big;
             position: absolute;
             background: white;
             .border;

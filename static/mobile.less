@@ -5,7 +5,6 @@
 label[for="nav-trigger"] {
   position: relative;
   margin: 10px @gutter 10px 0;
-  z-index: 12;
   font-family: "Helvetica Neue ", sans-serif;
   border: 1px solid @border-color;
   padding: 10px;
@@ -15,7 +14,7 @@ label[for="nav-trigger"] {
   cursor: pointer;
   font-weight: 700;
   .border-radius;
-  z-index: 99;
+  z-index: @z-index-big;
   transition: background @transition-speed;
   &.active {
     outline: #3092eb auto 5px;
