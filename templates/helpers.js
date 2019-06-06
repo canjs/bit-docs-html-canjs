@@ -151,7 +151,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getLinkTitle: function(docObject) {
             var description = docObject.description || docObject.name;
             description = helpers.stripMarkdown(description);
-            return unescapeHTML(description);
+            return unescapeHTML(description).replace(/\n/g, " ").trim();
         },
         getShortTitle: function(docObject){
             return docMapInfo.getShortTitle(docObject);
@@ -159,9 +159,14 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
         getAltVersions: function() {
             return options.altVersions;
         },
+        getCodeRepository: function(docObject) {
+          if (docObject.package && docObject.package.repository) {
+            return docObject.package.repository.github || docObject.package.repository.url || docObject.package.repository;
+          }
+        },
         getDocumentTitle: function(docObject){
             var title = docMapInfo.getTitle(docObject) || 'CanJS';
-            if (title && title.toLowerCase() === 'canjs') {
+            if (docObject.name === 'canjs' || (title && title.toLowerCase() === 'canjs')) {
                 return title;
             }
             return 'CanJS - ' + title;
