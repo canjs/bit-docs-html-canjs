@@ -4,7 +4,28 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{getDocumentTitle .}}</title>
+	<meta name="description" content="{{getLinkTitle .}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta property="og:image" content="https://www.bitovi.com/hubfs/open-source/os-canjs.png">
+	<meta property="og:description" content="{{getLinkTitle .}}">
+	<meta property="og:title" content="{{getDocumentTitle .}}">
+	<script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "{{#with (getClosestWithPackage)}}{{getCodeRepository .}}{{/with}}",
+			"description": "{{getLinkTitle .}}",
+			"image": "https://www.bitovi.com/hubfs/open-source/os-canjs.png",
+			"license": "https://github.com/canjs/canjs/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hubfs/open-source/os-canjs.png",
+			"name": "{{getDocumentTitle .}}",
+			"programmingLanguage": "JavaScript",
+			"softwareVersion" : "{{#with (getClosestWithPackage)}}{{package.version}}{{/with}}"
+		}
+	</script>
 	{{^devBuild}}
 		<link rel="stylesheet" type="text/css" href="{{pathToDest}}/static/bundles/bit-docs-site/static.css">
 		<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/docs/images/canjs_favicon.ico">
