@@ -76,6 +76,13 @@ var $articleContainer,
 		$navTrigger.siblings('label').removeClass('active');
 	});
 
+	// Set the scrollbar-width CSS variable
+	window.addEventListener("focus", updateScrollbarWidthCSSVariable);
+	updateScrollbarWidthCSSVariable();
+
+	// If the window changes size, we might need to hide the TOC scrollbar
+	window.addEventListener("resize", debounce(hideTOCSidebarScrollbar, 20));
+
 	// Back/Forward navigation
 	window.addEventListener('popstate', function(ev) {
 		ev.preventDefault();
@@ -257,6 +264,9 @@ function init() {
 				// Hide the “On this page” title
 				onThisPage.classList.add("hide");
 			}
+
+			// Determine whether space for the scrollbar needs to be added
+			hideTOCSidebarScrollbar();
 		});
 	}
 
@@ -473,6 +483,15 @@ function getOutlineDepth() {
 	return !isNaN(outline) ? outline : 1;
 }
 
+function hideTOCSidebarScrollbar() {
+	var tocSidebar = document.querySelector("#toc-sidebar");
+	if (tocSidebar.scrollHeight > tocSidebar.offsetHeight) {
+		tocSidebar.classList.add("hide-scrollbar");
+	} else {
+		tocSidebar.classList.remove("hide-scrollbar");
+	}
+}
+
 function isMobile() {
 	return window.innerWidth < 1000;
 }
@@ -540,3 +559,13 @@ function setPageScrollTop(value) {
 	$('body').scrollTop(value)
 	$('html').scrollTop(value);
 }
+
+function updateScrollbarWidthCSSVariable() {
+	var parent = document.createElement('div');
+	parent.innerHTML = "<div style='height:50px;left:-50px;overflow:auto;position:absolute;top:-50px;width:50px'><div style='height:100px;width:1px'></div></div>";
+	var child = parent.firstChild;
+	document.body.appendChild(child);
+	var width = child.offsetWidth - child.clientWidth;
+	document.documentElement.style.setProperty("--scrollbar-width", width + "px");
+	document.body.removeChild(child);
+};

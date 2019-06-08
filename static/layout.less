@@ -47,7 +47,8 @@
 #toc-sidebar {
   grid-area: toc-sidebar;
   @media (hover: hover) {
-    &:not(:hover) {
+    &.hide-scrollbar:not(:hover) {
+      margin-right: var(--scrollbar-width);
       overflow: hidden;
     }
   }
