@@ -19,7 +19,7 @@
         padding: 0 @gutter;
     }
     background-color: #FFFFFF;
-    z-index: @z-index-over;
+    z-index: @z-index-header;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
 }
 .brand {
@@ -59,7 +59,6 @@
         .dropdown {
             position: absolute;
             top: 52px;
-            z-index: @z-index-mid;
             background-color: white;
             border: 1px solid #ccc;
             box-shadow: 0 6px 12px rgba(0,0,0,.175);
@@ -155,7 +154,6 @@
                     height: 4px;
                     background-color: #CCCCCC;
                     opacity: 0;
-                    z-index: @z-index-under;
                     transition: all 0.4s ease-in-out;
                 }
                 &:hover:before {
@@ -186,7 +184,6 @@
     list-style: none;
     justify-content: center;
     align-items: center;
-    z-index: @z-index-top;
     .dropdown {
         display: flex;
         position: relative;
@@ -208,7 +205,6 @@
         background: @border-color;
         .dropdown-menu {
             display: block;
-            z-index: @z-index-mid;
             position: absolute;
             background: white;
             .border;
