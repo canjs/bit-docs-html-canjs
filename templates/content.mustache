@@ -16,7 +16,7 @@
   </div>
   <div id="right" class="column">
 
-      <article>{{> article.mustache}}</article>
+      <article class="main">{{> article.mustache}}</article>
       {{#with (getRoot)}}
         <footer>{{> footer.mustache}}</footer>
       {{/with}}
@@ -24,7 +24,9 @@
   </div>
   <div id="toc-sidebar" class="column">
     <h1 class="hide">On this page</h1>
-    <nav>
+		
+    <nav id="scroll-toc">
+			<bit-toc heading-container-selector="article.main" scroll-selector="#scroll-toc"></bit-toc>
     </nav>
 
     <h1>Get help</h1>

@@ -503,6 +503,7 @@ function buildTOC() {
 		toc = "<ol>";
 
 	$tocHeaders.each(function(index, element) {
+		
 		var $el = $(element);
 		var title = $el.text().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 		var link = '#' + generateId($el[0]);
