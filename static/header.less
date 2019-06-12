@@ -35,6 +35,7 @@
         width: 60px;
         height: @brand-height;
         cursor: pointer;
+        margin: 0 @gutter 0 0;
         &:hover > a {
             opacity: .7;
         }
@@ -49,7 +50,41 @@
         }
     }
     .version {
-        display: none;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        height: @brand-height;
+        padding-top: 7px;
+        cursor: pointer;
+        .version-number::after {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            vertical-align: bottom;
+            content: '';
+            background-image: url(img/down_black.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        &:hover > a {
+            opacity: .7;
+        }
+        &:hover .dropdown {
+            display: block;
+        }
+        .version-dropdown {
+            left: 100px;
+            width: 100px;
+        }
+        .version-dropdown a {
+            color: black;
+            padding: 5px 10px;
+            text-decoration: none;
+            display: block;
+            &:hover {
+                background-color: @light-gray-color;
+            }
+        }
     }
 }
 
