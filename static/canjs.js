@@ -177,7 +177,10 @@ function init() {
 		newToc.highlight = function() {
 			var articleRect = this.article.getBoundingClientRect();
 			var buttons = this.buttons;
-			var positions = this.titles.map(function(header, i) {
+			var titles = this.titles.filter(function(title) {
+				return !title.attributes['data-skip'];
+			});
+			var positions = titles.map(function(header, i) {
 				return {
 					header: header,
 					rect: header.getBoundingClientRect(),

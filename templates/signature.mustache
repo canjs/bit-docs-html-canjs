@@ -5,7 +5,7 @@
   {{{makeHtml (makeLinks (renderAsTemplate description))}}}
   {{#if params}}
   <div class="parameters">
-    <h3 class="parameters-title">Parameters</h3>
+    <h3 class="parameters-title" data-skip>Parameters</h3>
       <ol>
         {{#params}}
           <li>{{{makeParams}}}: {{{makeHtml (makeLinks description)}}}</li>
