@@ -173,7 +173,7 @@ function init() {
 		var newToc = document.createElement("bit-toc");
 		newToc.depth = getOutlineDepth();
 		newToc.headingsContainerSelector = "body";
-		newToc.scrollSelector = "#toc-sidebar";
+		newToc.scrollSelector = "#toc-sidebar nav";
 		newToc.highlight = function() {
 			var articleRect = this.article.getBoundingClientRect();
 			var buttons = this.buttons;
@@ -220,22 +220,22 @@ function init() {
 				// Check to see if it’s in viewport
 				var lastActiveOrCompletedRect = lastActiveOrCompleted.getBoundingClientRect();
 				var sidebarElement = this.outlineScrollElement;
-				var topInset = sidebarElement.getBoundingClientRect().top;// Main nav height
-				var viewportHeight = window.innerHeight;
+				var sidebarElementBoundingRect = sidebarElement.getBoundingClientRect();
+				var topInset = sidebarElementBoundingRect.top;// Main nav height
+				var visibleSidebarHeight = sidebarElementBoundingRect.height;// Not the entire height, just what’s visible in the viewport
 				var lastActiveOrCompletedRectIsInViewport = (
-					lastActiveOrCompletedRect.bottom <= viewportHeight &&
+					lastActiveOrCompletedRect.bottom <= visibleSidebarHeight &&
 					lastActiveOrCompletedRect.left >= 0 &&
 					lastActiveOrCompletedRect.left <= window.innerWidth &&
 					lastActiveOrCompletedRect.top >= topInset &&
-					lastActiveOrCompletedRect.top <= viewportHeight
+					lastActiveOrCompletedRect.top <= visibleSidebarHeight
 				);
 				if (lastActiveOrCompletedRectIsInViewport === false) {
 					// Scroll the sidebar so the highlighted element is in the viewport
-					var visibleSidebarHeight = sidebarElement.offsetHeight;// Not the entire height, just what’s visible in the viewport
-					var amountScrolledDownSidebar = sidebarElement.scrollTop;
-					var additionalScrollAmount = lastActiveOrCompletedRect.top - viewportHeight;
+					var amountScrolledDownSidebar = tocContainer.scrollTop;
+					var additionalScrollAmount = lastActiveOrCompletedRect.top - visibleSidebarHeight;
 					var amountToScroll = topInset + (visibleSidebarHeight / 2) + additionalScrollAmount + amountScrolledDownSidebar;
-					sidebarElement.scrollTop = amountToScroll;
+					tocContainer.scrollTop = amountToScroll;
 				}
 			}
 		};
@@ -258,7 +258,7 @@ function init() {
 		tocContainer.appendChild(newToc);
 
 		// Show the “On this page” title
-		var onThisPage = document.querySelector("#toc-sidebar h1");
+		var onThisPage = document.querySelector("#toc-sidebar nav h1");
 		onThisPage.classList.remove("hide");
 
 		// After the TOC loads, determine whether the “On this page” title should show
@@ -396,7 +396,7 @@ function navigate(href, updateLocation) {
 
 			// Scroll to the top of the page & TOC sidebar
 			setPageScrollTop(0);
-			$('#toc-sidebar').scrollTop(0);
+			$('#toc-sidebar nav').scrollTop(0);
 
 			var $article = $content.find("article");
 			var currentPage = $content.filter("#everything").attr("data-current-page");
@@ -487,7 +487,7 @@ function getOutlineDepth() {
 }
 
 function hideTOCSidebarScrollbar() {
-	var tocSidebar = document.querySelector("#toc-sidebar");
+	var tocSidebar = document.querySelector("#toc-sidebar nav");
 	if (tocSidebar.scrollHeight > tocSidebar.offsetHeight) {
 		tocSidebar.classList.add("hide-scrollbar");
 	} else {
