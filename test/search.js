@@ -141,6 +141,46 @@ QUnit.test('Search for “define/map”', function(assert) {
   });
 });
 
+QUnit.test('Search for “restModel”', function(assert) {
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('restModel');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
+    assert.equal(indexOfPageInResults('can-rest-model', results), 0, 'first result is the can-rest-model page');
+    done();
+  });
+});
+
+QUnit.test('Search for “QueryLogic”', function(assert) {
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('QueryLogic');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
+    assert.equal(indexOfPageInResults('can-query-logic', results), 0, 'first result is the can-query-logic page');
+    done();
+  });
+});
+
+QUnit.test('Search for “DefineList”', function(assert) {
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('DefineList');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
+    assert.equal(indexOfPageInResults('can-define/list/list', results), 0, 'first result is the can-define/list/list page');
+    done();
+  });
+});
+
+QUnit.test('Search for “DefineMap”', function(assert) {
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('DefineMap');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
+    assert.equal(indexOfPageInResults('can-define/map/map', results), 0, 'first result is the can-define/map/map page');
+    done();
+  });
+});
+
 QUnit.test('Speed while searching for can-*', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {

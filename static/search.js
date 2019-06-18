@@ -4,7 +4,7 @@ var Control = require("can-control");
 var LoadingBar = require('./loading-bar');
 var searchResultsRenderer = require("../templates/search-results.stache!steal-stache");
 var joinURIs = require("can-util/js/join-uris/");
-var currentIndexVersion = 4;// Bump this whenever the index code is changed
+var currentIndexVersion = 5;// Bump this whenever the index code is changed
 
 var Search = Control.extend({
 

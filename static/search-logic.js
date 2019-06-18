@@ -13,7 +13,9 @@ module.exports = {
 
 			this.ref('name');
 			this.field('title');
+			this.field('concatenatedName');
 			this.field('description');
+			this.field('isPackage');
 			this.field('name');
 			this.field('url');
 
@@ -21,6 +23,8 @@ module.exports = {
 				if (!item.title) {
 					item.title = item.name;
 				}
+				item.concatenatedName = item.name.replace('can-', '').replace(/-/g, '').replace(/\//g, '');
+				item.isPackage = (item.collection !== undefined).toString();
 				this.add(item);
 			}.bind(this));
 		});
@@ -47,9 +51,16 @@ module.exports = {
 				q.term('can-' + searchTerm, { boost: 12 });
 
 				// look for terms that match the beginning or end of this query
+				q.term(searchTerm, { wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
+
 				// look in the title field specifically to boost matches in it
 				q.term(searchTerm, { fields: ['title'], wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
-				q.term(searchTerm, { wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING });
+
+				// support searches for strings like “restModel”
+				q.term(searchTerm, { fields: ['concatenatedName'], wildcard: lunr.Query.wildcard.TRAILING });
+
+				// favor modules
+				q.term('true', { boost: 6, fields: ['isPackage'] });
 			}
 
 			// look for matches in any of the fields and apply a medium positive boost
