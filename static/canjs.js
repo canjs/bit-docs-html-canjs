@@ -11,6 +11,19 @@ var can = require("can-namespace");
 // exposes canjs stuff so widgets can use it.
 window.can = can;
 
+// helpers
+var ucfirst = function (str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+var getParentModule = function(docObject) {
+	if (docObject.type === "module") {
+		return docObject;
+	} else {
+		return getParentModule(docObject.parentPage);
+	}
+};
+
 // state
 var $articleContainer,
 	$onThisPage,
@@ -292,13 +305,40 @@ function setPathPrefix(){
 	}
 }
 
-function setDocTitle() {
-	var title = window.docObject.title || window.docObject.name;
+function setDocTitle(docObject) {
+	var title = docObject.title || docObject.name || "CanJS";
 	if (title.toLowerCase() === 'canjs') {
-		document.title = title;
-	} else {
-		document.title = 'CanJS - ' + title;
+		return title;
 	}
+	if (docObject.type !== "page") {
+		var group, groupParentPage;
+		if (docObject.type === "module") {
+			group = docObject.parentPage;
+		} else {
+			var parentModule = getParentModule(docObject);
+			group = parentModule.parentPage;
+			title += " | " + (parentModule.title || parentModule.name);
+		}
+		
+		groupParentPage =  group.parentPage;
+		if (groupParentPage.type === "module") {
+			//handle sub-modules paths, eg. can-connect
+			title += " | "  + (groupParentPage.title || groupParentPage.name);
+			if (groupParentPage.parentPage.type === "group") {
+				title += " | " + groupParentPage.parentPage.title + " | " + groupParentPage.parentPage.parentPage.title;
+			}
+		} else {
+			title += " | " + group.title + " | " + groupParentPage.title;
+		}
+		title += " | CanJS";
+	} else {
+		var parentPage = docObject.parentPage;
+		while(parentPage) {
+			title += " | " + ucfirst(parentPage.title);
+			parentPage = parentPage.parentPage;
+		}
+	}
+	document.title = title;
 }
 
 // Set the scroll position until user scrolls or navigates away.
@@ -436,7 +476,7 @@ function navigate(href, updateLocation) {
 			}
 
 			init();
-			setDocTitle();
+			setDocTitle(sidebarViewModel.selectedPage);
 
 			if(searchControl.searchResultsCache){
 				searchControl.renderSearchResults(searchControl.searchResultsCache);

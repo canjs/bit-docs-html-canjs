@@ -3,6 +3,11 @@ var path = require("path");
 var escapeHTML = require("escape-html");
 var unescapeHTML = require("unescape-html");
 
+//helpers
+var ucfirst = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
@@ -164,12 +169,53 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             return docObject.package.repository.github || docObject.package.repository.url || docObject.package.repository;
           }
         },
-        getDocumentTitle: function(docObject){
+        getDocumentTitle: function(docObject) {
             var title = docMapInfo.getTitle(docObject) || 'CanJS';
             if (docObject.name === 'canjs' || (title && title.toLowerCase() === 'canjs')) {
                 return title;
             }
-            return 'CanJS - ' + title;
+
+            if (docObject.type !== "page") {
+                var group;
+                if (docObject.type === "module") {
+                    group = docMap[this.parent];
+                } else {
+                    var parentModule = docMap[docObject.parent];
+                    while(parentModule && parentModule.type !== "module") {
+                        parentModule = docMap[parentModule.parent];
+                    }
+                    if (parentModule) {
+                        group = docMap[parentModule.parent];
+                        title += " | " + (parentModule.title || parentModule.name);
+                    }
+                }
+                if(group) {
+                    var groupParent =  docMap[group.parent];
+                    if (groupParent) {
+                        if (groupParent.type === "module") {
+                            title += " | "  + (groupParent.title || groupParent.name);
+                            if (docMap[groupParent.parent].type === "group") {
+                                var groupGrandParent = docMap[groupParent.parent];
+                                var groupGrandParentParent = docMap[groupGrandParent.parent];
+                                
+                                title += " | " + groupGrandParent.title + " | " + groupGrandParentParent.title;
+                            }
+                        } else { 
+                            title += " | " + group.title + " | " + groupParent.title;
+                        }
+                    } else {
+                        title += " | " + group.title;
+                    }
+                }
+                title += " | CanJS";
+            } else {
+                var parentPage = docMap[docObject.parent];
+                while(parentPage) {
+                    title += " | " + ucfirst(parentPage.title);
+                    parentPage = docMap[parentPage.parent];
+                }
+            }
+            return title;
         },
         isGroup: function(docObject){
             return docMapInfo.isGroup(docObject);
