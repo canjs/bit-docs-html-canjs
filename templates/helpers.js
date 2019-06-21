@@ -3,11 +3,6 @@ var path = require("path");
 var escapeHTML = require("escape-html");
 var unescapeHTML = require("unescape-html");
 
-//helpers
-var ucfirst = function(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
 module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars){
     // create children lookup
     var childrenMap = makeChildrenMap(docMap);
@@ -211,7 +206,7 @@ module.exports = function(docMap, options, getCurrent, helpers, OtherHandlebars)
             } else {
                 var parentPage = docMap[docObject.parent];
                 while(parentPage) {
-                    title += " | " + ucfirst(parentPage.title);
+                    title += " | " + parentPage.title;
                     parentPage = docMap[parentPage.parent];
                 }
             }
