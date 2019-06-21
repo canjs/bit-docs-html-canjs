@@ -11,11 +11,6 @@ var can = require("can-namespace");
 // exposes canjs stuff so widgets can use it.
 window.can = can;
 
-// helpers
-var ucfirst = function (str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
 var getParentModule = function(docObject) {
 	if (docObject.type === "module") {
 		return docObject;
@@ -334,7 +329,7 @@ function setDocTitle(docObject) {
 	} else {
 		var parentPage = docObject.parentPage;
 		while(parentPage) {
-			title += " | " + ucfirst(parentPage.title);
+			title += " | " + parentPage.title;
 			parentPage = parentPage.parentPage;
 		}
 	}
