@@ -5,12 +5,15 @@
   <div id="left" class="column">
 
       <div class="nav-menu">
-        <div class="social-side-container">
-          {{>social.mustache}}
-        </div>
         {{#with (getCurrentTree)}}
             {{>menu.mustache}}
         {{/with}}
+        <div class="social-side-container">
+          {{>social.mustache}}
+        </div>
+        <div class="by-bitovi-container">
+          <a href="https://www.bitovi.com" class="bitovi by-bitovi">Bitovi</a>
+        </div>
       </div>
 
   </div>

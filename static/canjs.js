@@ -162,7 +162,9 @@ function init() {
 			// Move the social-side-container to inside the new sidebar
 			var sidebarElement = document.querySelector('canjs-sidebar');
 			var socialContainer = currentMenu.querySelector('.social-side-container');
-			sidebarElement.insertBefore(socialContainer, sidebarElement.firstChild);
+			var bitoviContainer = currentMenu.querySelector('.by-bitovi-container');
+			sidebarElement.insertBefore(socialContainer, sidebarElement.secondChild);
+			sidebarElement.insertBefore(bitoviContainer, sidebarElement.thirdChild);
 
 			// Get rid of the old menu
 			currentMenu.parentNode.removeChild(currentMenu);
