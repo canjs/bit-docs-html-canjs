@@ -131,6 +131,9 @@ var Search = Control.extend({
 				this.searchIndicator.end();
 				this.$resultsContainer.scrollTop(0);
 				this.renderSearchResults(results);
+				if (window.ga) {
+					ga('send', 'pageview', window.location.pathname + '?q=' + data.query);
+				}
 				break;
 
 			default:
