@@ -1,4 +1,7 @@
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
+.social-side-container {
+	margin: @gutter*1.5 0;
+}
 ul.social-side {
 	margin: 0;
 	list-style: none;
@@ -62,7 +65,17 @@ img.social-icon-small {
 #left {
 	.nav-menu {
 		display: block;
-		padding: @gutter*2;
+		padding: @gutter @gutter*2 @gutter*2;
+		.by-bitovi-container {
+			width: 140px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			margin: 0 auto;
+			@media screen and (min-width: @breakpoint){
+				display: none;
+			}
+		}
 		ul {
 			// first
 			padding: 0;
