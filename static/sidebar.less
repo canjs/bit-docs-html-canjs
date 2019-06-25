@@ -66,6 +66,17 @@ img.social-icon-small {
 	.nav-menu {
 		display: block;
 		padding: @gutter @gutter*2 @gutter*2;
+		// Mobile sidebar By Bitovi logo
+		.by-bitovi-container {
+			width: 140px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			margin: 0 auto;
+			@media screen and (min-width: @breakpoint){
+				display: none;
+			}
+		}
 		ul {
 			// first
 			padding: 0;
@@ -276,12 +287,4 @@ img.social-icon-small {
 				}
 			}
 		}
-}
-// Mobile sidebar By Bitovi logo
-.by-bitovi-container {
-	width: 140px;
-	height: 30px;
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
 }
