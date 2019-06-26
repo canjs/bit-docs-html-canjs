@@ -1,6 +1,16 @@
+.by-bitovi-container {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+
+	@media screen and (min-width: @breakpoint){
+		display: none;
+	}
+}
+
 // ----- SOCIAL BUTTONS FOR MOBILE VIEW -----
 .social-side-container {
-	margin: @gutter*1.5 0;
+	margin: @gutter*2 0;
 }
 ul.social-side {
 	margin: 0;
@@ -13,12 +23,14 @@ ul.social-side {
 	> li {
 		margin: 0 @gutter/2 @gutter/2 0;
 		border-bottom: none;
+		line-height: @list-line-height;
 		text-align: center;
 		width: 100%;
 		&:last-child {
 			margin-right: 0;
 		}
 		> a.header-mobile {
+			display: block;
 			font-weight: 700;
 			font-size: 12px;
 			text-transform: capitalize;
@@ -63,19 +75,9 @@ img.social-icon-small {
 	}
 }
 #left {
+	padding: @gutter @gutter*2 @gutter*2;
 	.nav-menu {
 		display: block;
-		padding: @gutter @gutter*2 @gutter*2;
-		.by-bitovi-container {
-			width: 140px;
-			height: 30px;
-			display: flex;
-			justify-content: center;
-			margin: 0 auto;
-			@media screen and (min-width: @breakpoint){
-				display: none;
-			}
-		}
 		ul {
 			// first
 			padding: 0;

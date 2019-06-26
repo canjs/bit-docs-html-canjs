@@ -154,13 +154,6 @@ function init() {
 			var parentContainer = currentMenu.parentElement;
 			parentContainer.insertBefore(fragment, currentMenu);
 
-			// Move the social-side-container to inside the new sidebar
-			var sidebarElement = document.querySelector('canjs-sidebar');
-			var socialContainer = currentMenu.querySelector('.social-side-container');
-			var bitoviContainer = currentMenu.querySelector('.by-bitovi-container');
-			sidebarElement.appendChild(socialContainer);
-			sidebarElement.appendChild(bitoviContainer);
-
 			// Get rid of the old menu
 			currentMenu.parentNode.removeChild(currentMenu);
 		}, function(error) {
@@ -316,7 +309,7 @@ function setDocTitle(docObject) {
 			group = parentModule.parentPage;
 			title += " | " + (parentModule.title || parentModule.name);
 		}
-		
+
 		groupParentPage =  group.parentPage;
 		if (groupParentPage.type === "module") {
 			//handle sub-modules paths, eg. can-connect
