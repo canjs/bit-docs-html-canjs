@@ -38,7 +38,7 @@
     ]
   },
   "dependencies": {
-    "can-3-4-compat": "^1.0.0",
+    "can-3-4-compat": "1.0.0",
     "can-component": "^4.0.0",
     "can-control": "^4.0.0",
     "can-define": "^2.0.0",
