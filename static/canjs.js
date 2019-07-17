@@ -447,13 +447,16 @@ function navigate(href, updateLocation) {
 			// handle inline javascript code
 			// create a steal module on the fly
 			var scripts = $article[0].querySelectorAll('script[type="text/steal-module"]');
-			$.each(scripts, function (i, script) {
-				if (typeof steal !== 'undefined') {
-					if (script.id && !steal.loader.has(script.id)) {
-						steal.loader.define(script.id, script.innerText);
+			if (scripts && scripts.length > 0 ) {
+				$.each(scripts, function (i, script) {
+					if (typeof steal !== 'undefined') {
+						var moduleName = currentPage + "/" + i
+						if (!steal.loader.has(moduleName)) {
+							steal.loader.define(moduleName, script.innerText);
+						}
 					}
-				}
-			});
+				});
+			}
 
 			$(".top-right-links").replaceWith($headerLinks);
 			$("article").replaceWith($article);
