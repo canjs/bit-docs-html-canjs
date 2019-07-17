@@ -445,15 +445,13 @@ function navigate(href, updateLocation) {
 			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
 			// handle inline javascript code
-			// create a steal module on the fly
+			// define a steal module on the fly
 			var scripts = $article[0].querySelectorAll('script[type="text/steal-module"]');
 			if (scripts && scripts.length > 0 ) {
-				$.each(scripts, function (i, script) {
-					if (typeof steal !== 'undefined') {
-						var moduleName = currentPage + "/" + i
-						if (!steal.loader.has(moduleName)) {
-							steal.loader.define(moduleName, script.innerText);
-						}
+				scripts.forEach(function (script, i) {
+					var moduleName = currentPage + "/" + i
+					if (!steal.loader.has(moduleName)) {
+						steal.loader.define(moduleName, script.innerText);
 					}
 				});
 			}
