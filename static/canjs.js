@@ -444,6 +444,17 @@ function navigate(href, updateLocation) {
 			//root elements - use .filter; not .find
 			var $pathPrefixDiv = $content.filter("[path-prefix]");
 
+			// handle inline javascript code
+			// create a steal module on the fly
+			var scripts = $article[0].querySelectorAll('script[type="text/steal-module"]');
+			$.each(scripts, function (i, script) {
+				if (typeof steal !== 'undefined') {
+					if (script.id && !steal.loader.has(script.id)) {
+						steal.loader.define(script.id, script.innerText);
+					}
+				}
+			});
+
 			$(".top-right-links").replaceWith($headerLinks);
 			$("article").replaceWith($article);
 			$(".logo > a").attr('href', homeLink);
