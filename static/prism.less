@@ -1,41 +1,43 @@
-div.code-toolbar {
-	line-height: 0;
-	> .toolbar {
+.body {
+	div.code-toolbar {
 		line-height: 0;
-		top: 0 !important;
-		right: 0 !important;
-		border-left: 1px #dfdfdf solid;
-		border-bottom: 1px #dfdfdf solid;
-		> .toolbar-item {
-			line-height: 0;
-		}
-	}
-	@media (hover: none) {
 		> .toolbar {
-			opacity: 1 !important;
+			line-height: 0;
+			top: 1px;
+			right: 1px;
+			
+			> .toolbar-item {
+				line-height: 0;
+			}
+		}
+		@media (hover: none) {
+			> .toolbar {
+				opacity: 1;
+			}
+		}
+
+	}
+	div.code-toolbar {
+		.toolbar a, 
+		.toolbar button, 
+		.toolbar span {
+			background: #eee;
+			background: rgba(238, 238, 238, 1);
+			color: #858585;
+			padding: .26em 2.25em;
+			box-shadow: none;
+			border-radius: 0;
+			cursor: pointer;
+			@media(hover: hover) {
+				&:hover {
+					background: rgba(238, 238, 238, .6);
+					color: #4078c0;
+				}
+			}
 		}
 	}
 
-}
-
-.toolbar a, 
-.toolbar button, 
-.toolbar span {
-	background: #eee !important;
-	background: rgba(238, 238, 238, 1) !important;
-	color: #858585 !important;
-	padding: .35em 2.25em !important;
-	box-shadow: none !important;
-	border-radius: 0 !important;
-	cursor: pointer;
-	@media(hover: hover) {
-		&:hover {
-			background: rgba(238, 238, 238, .6) !important;
-			color: #4078c0 !important;
-		}
+	pre code .collapse.collapsed {
+		padding: calc(~"0.29em -" 1px) 0;
 	}
-}
-
-pre code .collapse.collapsed {
-	padding: calc(~"0.29em -" 1px) 0 !important;
 }
