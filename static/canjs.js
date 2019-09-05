@@ -98,14 +98,14 @@ var $articleContainer,
 		navigate(window.location.href, false);
 	});
 
-	$articleContainer.on("scroll", debounce(function(ev) {
+	$(window).on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
-	}, 50));
+	}, 250));
 })();
 
 // Touch support
-$('body').on('touchstart', function() {});
+//$('body').on('touchstart', function() {});
 
 //////////
 
@@ -342,13 +342,18 @@ function setScrollPosition() {
 		if (lastAutoScroll === undefined || lastAutoScroll === currentScroll) {
 			if (window.location.hash) {
 				var $currentHeader = $(window.location.hash);
-				scrollToElement($currentHeader);
+				var topMargin = Math.max(parseInt($currentHeader.css('margin-top')), 60);
+				var pos = $currentHeader.offset().top - topMargin  - $articleContainer.offset().top;
+				if (currentScroll === Math.round(pos)) {
+					scrollToElement($currentHeader);
+				} else {
+					setPageScrollTop(currentScroll);
+				}
 			} else {
 				var articleScroll = window.history.state && window.history.state.articleScroll;
 				if (articleScroll) {
 					setPageScrollTop(articleScroll);
 				} else {
-					setPageScrollTop(0);
 					clearInterval(scrollPositionInterval);
 				}
 			}
@@ -360,6 +365,7 @@ function setScrollPosition() {
 		animating = false;
 	}, 250);
 }
+
 
 var $menuButton = $('[for="nav-trigger"]');
 var $navTrigger = $('#nav-trigger');
@@ -543,12 +549,12 @@ function isMobile() {
 
 function scrollToElement($element) {
 	if ($element.length) {
-		var topMargin = Math.max(parseInt($element.css('margin-top')), 60);// Minimum of 60px to clear the navigation
+		var topMargin = Math.max(parseInt($element.css('margin-top')), 60);
 		var pos = $element.offset().top - topMargin - $articleContainer.offset().top;
 		setTimeout(function() {
 			// Without this timeout, the scrollTop will be set correctly and then reverted
 			setPageScrollTop(pos);
-		});
+		}, 250);
 	} else {
 		$articleContainer.scrollTop(0);
 	}
