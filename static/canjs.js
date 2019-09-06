@@ -98,10 +98,10 @@ var $articleContainer,
 		navigate(window.location.href, false);
 	});
 
-	$(window).on("scroll", debounce(function(ev) {
+	$articleContainer.on("scroll", debounce(function(ev) {
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
-	}, 250));
+	}, 50));
 })();
 
 // Touch support
