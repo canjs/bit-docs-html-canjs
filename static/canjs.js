@@ -549,7 +549,7 @@ function isMobile() {
 
 function scrollToElement($element) {
 	if ($element.length) {
-		var topMargin = Math.max(parseInt($element.css('margin-top')), 60);
+		var topMargin = Math.max(parseInt($element.css('margin-top')), 60);// Minimum of 60px to clear the navigation
 		var pos = $element.offset().top - topMargin - $articleContainer.offset().top;
 		setTimeout(function() {
 			// Without this timeout, the scrollTop will be set correctly and then reverted
