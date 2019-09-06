@@ -105,7 +105,7 @@ var $articleContainer,
 })();
 
 // Touch support
-//$('body').on('touchstart', function() {});
+$('body').on('touchstart', function() {});
 
 //////////
 
