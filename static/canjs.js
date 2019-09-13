@@ -102,6 +102,31 @@ var $articleContainer,
 		// Maintain scroll state in history
 		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
 	}, 50));
+
+	// Start firefox scrolling jump fix
+	if (window.navigator.userAgent.indexOf('Firefox/') > -1) {
+		// Persist the current scroll postion for the current page
+		$(window).on("beforeunload", function() {
+			updatePageScrollPosition($(window).scrollTop());
+		});
+
+		// this allows Firefox to restore the correct
+		// scroll position the brrowser widow finishs loading
+		window.onload = function() {
+			var scrollPosition = localStorage.getItem("scroll-position");
+			if (scrollPosition){ 
+				scrollPosition = JSON.parse(scrollPosition);
+				if (scrollPosition.page === location.pathname) {
+					setTimeout(function() {
+						window.scrollTo(0, Math.round(scrollPosition.position));
+					}, 50);
+				} else {
+					localStorage.removeItem("scroll-position");
+				}
+			}
+		}
+	}
+	// End firefox scrolling jump fix
 })();
 
 // Touch support
@@ -620,3 +645,12 @@ function updateScrollbarWidthCSSVariable() {
 	document.documentElement.style.setProperty("--scrollbar-width", width + "px");
 	document.body.removeChild(child);
 };
+
+
+function updatePageScrollPosition(pos) {
+	var pageScrollPostion = {
+		page: location.pathname,
+		position: pos
+	};
+	localStorage.setItem("scroll-position", JSON.stringify(pageScrollPostion));
+}

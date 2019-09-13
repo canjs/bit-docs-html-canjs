@@ -61,7 +61,7 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 	
 });
 
-QUnit.skip("Refresh after going to a specific section and scrolling", function(assert) {
+QUnit.test("Refresh after going to a specific section and scrolling", function(assert) {
 	var done = assert.async(1);
 
 	F.open('../doc/guides/html.html', function() {
