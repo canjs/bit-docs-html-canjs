@@ -22,13 +22,13 @@ var siteConfig = {
         },
         dependencies: {
             "bit-docs-html-canjs": __dirname,
-            "bit-docs-prettify": "^0.1.0",
-            "bit-docs-html-highlight-line": "^0.2.2",
+            "bit-docs-prettify": "^0.3.0",
+            "bit-docs-html-highlight-line": "^0.5.3",
             //TODO: This should not be include here and should only be included in package.json.
             //  we get an error without this, here, though
             "steal-stache": "^4.0.1",
             "steal-conditional": "^0.3.6",
-            "bit-docs-html-codepen-link": "^1.0.0",
+            "bit-docs-html-codepen-link": "^2.0.0",
             "bit-docs-html-toc": "^1.1.1"
         },
         staticDist: [
