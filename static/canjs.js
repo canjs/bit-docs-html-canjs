@@ -119,6 +119,7 @@ var $articleContainer,
 				if (scrollPosition.page === location.pathname) {
 					setTimeout(function() {
 						window.scrollTo(0, Math.round(scrollPosition.position));
+						localStorage.removeItem("scroll-position"); // Remove after positioning
 					}, 50);
 				} else {
 					localStorage.removeItem("scroll-position");

@@ -61,19 +61,21 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 	
 });
 
-QUnit.test("Refresh after going to a specific section and scrolling", function(assert) {
+QUnit.skip("Refresh after going to a specific section and scrolling", function(assert) {
 	var done = assert.async(1);
 
 	F.open('../doc/guides/html.html', function() {
 		F.frame.height = 400;
 		F.frame.width = "100%";
 	
-		F.win.location.hash = "#Components";
-		var pos = F("#Stachetemplatesandbindings").offset().top - 60;
-		F.win.scroll("top", pos);
-		F.win.location.reload();
+		F(".on-this-page-table a[href='#Overview']").click();
+		F("#Overview").wait(function() {
+			var pos = F("#Components").offset().top - 60;
+			F.win.scroll("top", pos);
+			F.win.location.reload();
+		});
 		
-		F("#Stachetemplatesandbindings").wait(function() {
+		F("#Components").exists(function() {
 			var element = this[0];
 			if (!element) {
 				return false;
