@@ -103,31 +103,38 @@ var $articleContainer,
 		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
 	}, 50));
 
-	// Start firefox scrolling jump fix
-	if (window.navigator.userAgent.indexOf('Firefox/') > -1) {
-		// Persist the current scroll postion for the current page
-		$(window).on("beforeunload", function() {
-			updatePageScrollPosition($(window).scrollTop());
-		});
+	// Start restore scrolling fix
+	// Persist the current scroll postion for the current page
+	$(window).on("beforeunload", function() {
+		updatePageScrollPosition($(window).scrollTop());
+	});
 
-		// this allows Firefox to restore the correct
-		// scroll position the brrowser widow finishs loading
-		window.onload = function() {
-			var scrollPosition = localStorage.getItem("scroll-position");
-			if (scrollPosition){ 
+	// this allows to restore the correct
+	// scroll position when the browser window finishs loading
+	window.onload = function () {
+		var scrollPosition = localStorage.getItem('scroll-position');
+		var timeout = 66;
+		if (scrollPosition) {
+			setTimeout(function () {
 				scrollPosition = JSON.parse(scrollPosition);
-				if (scrollPosition.page === location.pathname) {
-					setTimeout(function() {
-						window.scrollTo(0, Math.round(scrollPosition.position));
-						localStorage.removeItem("scroll-position"); // Remove after positioning
-					}, 50);
-				} else {
-					localStorage.removeItem("scroll-position");
+				var pos = Math.round(scrollPosition.position);
+				var currentScrollPosition = Math.round($(window).scrollTop());
+				if (scrollPosition.page === location.pathname && currentScrollPosition !== pos) {
+					window.scrollTo(0, pos);
+					localStorage.removeItem('scroll-position');
 				}
-			}
+			}, timeout);
+		} else if (window.location.hash) {
+			// Redirecting from a page
+			// to another with URL contains a hash
+			var $header = $(window.location.hash);
+			setTimeout(function () {
+				scrollToElement($header);
+			}, timeout);
+
 		}
-	}
-	// End firefox scrolling jump fix
+	};
+	// End restoring scrolling
 })();
 
 // Touch support
@@ -150,7 +157,6 @@ function init() {
 
 	setPathPrefix();
 	buildTOC();
-	setScrollPosition();
 
 	if (!searchControl) {
 		searchControl = new SearchControl(".search-bar", {
@@ -355,41 +361,6 @@ function setDocTitle(docObject) {
 		}
 	}
 	document.title = title;
-}
-
-// Set the scroll position until user scrolls or navigates away.
-// This ensures that the scroll position is correctly set to the target element,
-// regardless of asynchonously embedded elements.
-function setScrollPosition() {
-	var lastAutoScroll;
-	animating = true; // flag animating on first run only
-	scrollPositionInterval = setInterval(function() {
-		var currentScroll = getPageScrollTop();
-		if (lastAutoScroll === undefined || lastAutoScroll === currentScroll) {
-			if (window.location.hash) {
-				var $currentHeader = $(window.location.hash);
-				var topMargin = Math.max(parseInt($currentHeader.css('margin-top')), 60);
-				var pos = $currentHeader.offset().top - topMargin  - $articleContainer.offset().top;
-				if (currentScroll === Math.round(pos)) {
-					scrollToElement($currentHeader);
-				} else {
-					setPageScrollTop(currentScroll);
-				}
-			} else {
-				var articleScroll = window.history.state && window.history.state.articleScroll;
-				if (articleScroll) {
-					setPageScrollTop(articleScroll);
-				} else {
-					clearInterval(scrollPositionInterval);
-				}
-			}
-			lastAutoScroll = getPageScrollTop();
-		} else {
-			// User manually scrolled
-			clearInterval(scrollPositionInterval);
-		}
-		animating = false;
-	}, 250);
 }
 
 
