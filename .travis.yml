@@ -1,5 +1,5 @@
 language: node_js
-node_js: node
+node_js: 10
 before_script:
   - npm run http-server &
   - sleep 2

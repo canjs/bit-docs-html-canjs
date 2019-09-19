@@ -5,7 +5,8 @@
 			line-height: 0;
 			border-left: 1px solid #dfdfdf;
 			border-bottom: 1px solid #dfdfdf;
-			top: 0;
+			border-top: 1px solid #dfdfdf;
+			top: -1px;
 			right: 0;
 			> .toolbar-item {
 				line-height: 0;
@@ -45,4 +46,15 @@
 		padding: calc(~"0.29em -" 1px) 0;
 		border-top-color: transparent;
 	}
+	.demo {
+		.tab-content {
+			div.code-toolbar {
+				>.toolbar{
+					top: 0px;
+					right: 1px;
+				}
+			}
+		}
+	}
 }
+
