@@ -48,7 +48,7 @@ QUnit.test('Search results render', function(assert) {
       var firstResultText = searchResultLis[0].querySelector('a').textContent.trim();
       assert.notEqual(firstResultText, '', 'first result has text');
       done();
-    }, 1000);
+    }, 2000);
   });
 });
 
