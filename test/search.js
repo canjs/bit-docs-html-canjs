@@ -39,7 +39,7 @@ var setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
 });
 
 QUnit.test('Search results render', function(assert) {
-  var done = assert.async();
+  var done = assert.async(2);
   setUpSearchControl.then(function() {
     search.search('can-');
     setTimeout(function() {
@@ -48,7 +48,8 @@ QUnit.test('Search results render', function(assert) {
       var firstResultText = searchResultLis[0].querySelector('a').textContent.trim();
       assert.notEqual(firstResultText, '', 'first result has text');
       done();
-    }, 2000);
+		}, 2000);
+		done();
   });
 });
 
