@@ -34,12 +34,12 @@ var setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
     // Wait for the search worker to be set up
     setTimeout(function() {
       resolve(searchLogic.indexData(search.convertSearchMapToIndexableItems(searchMap)));
-    }, 1000);
+    }, 2000);
   });
 });
 
 QUnit.test('Search results render', function(assert) {
-  var done = assert.async(2);
+  var done = assert.async();
   setUpSearchControl.then(function() {
     search.search('can-');
     setTimeout(function() {
@@ -49,7 +49,6 @@ QUnit.test('Search results render', function(assert) {
       assert.notEqual(firstResultText, '', 'first result has text');
       done();
     }, 2000);
-    done();
   });
 });
 
