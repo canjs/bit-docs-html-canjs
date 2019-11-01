@@ -53,7 +53,7 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 			}
 			var rect = element.getBoundingClientRect();
 			return utils.rectIntersectsWithWindow(rect, F.win)
-		}, 4000, function(){
+		}, function(){
 			assert.ok(true);
 			done();
 		});
