@@ -61,9 +61,14 @@ var $articleContainer,
 			sameProtocol = (ev.target.protocol || this.protocol) === window.location.protocol;
 
 		if (noModifierKeys && sameHostname && sameProtocol) {
-			ev.preventDefault();
-			searchControl.hideResults();
-			navigate(ev.target.href || this.href);
+			var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
+			var href = ev.target.href;
+			var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
+			if (currentHrefBase !== hrefBase) {
+				ev.preventDefault();
+				searchControl.hideResults();
+				navigate(href || this.href);
+			}
 		}
 	}).on('click', function(event) {
 		var searchContainer = document.querySelector('.search-section');
@@ -104,36 +109,36 @@ var $articleContainer,
 	// }, 50));
 	//
 	// // Start restore scrolling fix
-	// // Persist the current scroll postion for the current page
-	// $(window).on("beforeunload", function() {
-	// 	updatePageScrollPosition($(window).scrollTop());
-	// });
+	// Persist the current scroll postion for the current page
+	$(window).on("beforeunload", function() {
+		updatePageScrollPosition($(window).scrollTop());
+	});
 	//
 	// // this allows to restore the correct
 	// // scroll position when the browser window finishs loading
-	// window.onload = function () {
-	// 	var scrollPosition = localStorage.getItem('scroll-position');
-	// 	var timeout = 66;
-	// 	if (scrollPosition) {
-	// 		setTimeout(function () {
-	// 			scrollPosition = JSON.parse(scrollPosition);
-	// 			var pos = Math.round(scrollPosition.position);
-	// 			var currentScrollPosition = Math.round($(window).scrollTop());
-	// 			if (scrollPosition.page === location.pathname && currentScrollPosition !== pos) {
-	// 				window.scrollTo(0, pos);
-	// 				localStorage.removeItem('scroll-position');
-	// 			}
-	// 		}, timeout);
-	// 	} else if (window.location.hash) {
-	// 		// Redirecting from a page
-	// 		// to another with URL contains a hash
-	// 		var $header = $(window.location.hash);
-	// 		setTimeout(function () {
-	// 			scrollToElement($header);
-	// 		}, timeout);
-	//
-	// 	}
-	// };
+	window.onload = function () {
+		var scrollPosition = localStorage.getItem('scroll-position');
+		var timeout = 66;
+		if (scrollPosition) {
+			setTimeout(function () {
+				scrollPosition = JSON.parse(scrollPosition);
+				var pos = Math.round(scrollPosition.position);
+				var currentScrollPosition = Math.round($(window).scrollTop());
+				if (scrollPosition.page === location.pathname && currentScrollPosition !== pos) {
+					window.scrollTo(0, pos);
+					localStorage.removeItem('scroll-position');
+				}
+			}, timeout);
+		// } else if (window.location.hash) {
+		// 	// Redirecting from a page
+		// 	// to another with URL contains a hash
+		// 	var $header = $(window.location.hash);
+		// 	setTimeout(function () {
+		// 		scrollToElement($header);
+		// 	}, timeout);
+
+		}
+	};
 	// // End restoring scrolling
 })();
 
@@ -382,16 +387,16 @@ function navigate(href, updateLocation) {
 	var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
 	var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
 	if (currentHrefBase === hrefBase) {
-		var hrefHash = href.match(/#.*/, '') || [];// Match the hash part of the URL, including the hash
-		scrollToElement($(hrefHash[0]));
-		if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
-			window.history.pushState({ articleScroll: getPageScrollTop() }, null, href);
-		}
+		// var hrefHash = href.match(/#.*/, '') || [];// Match the hash part of the URL, including the hash
+		// scrollToElement($(hrefHash[0]));
+		// if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
+		// 	window.history.pushState({ articleScroll: getPageScrollTop() }, null, href);
+		// }
 		return;
 	}
 
-	// clear existing scroll interval if it's still alive
-	clearInterval(scrollPositionInterval);
+	// // clear existing scroll interval if it's still alive
+	// clearInterval(scrollPositionInterval);
 
 	loader.start();
 
