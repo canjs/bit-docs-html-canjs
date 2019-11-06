@@ -98,43 +98,43 @@ var $articleContainer,
 		navigate(window.location.href, false);
 	});
 
-	$articleContainer.on("scroll", debounce(function(ev) {
-		// Maintain scroll state in history
-		window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
-	}, 50));
-
-	// Start restore scrolling fix
-	// Persist the current scroll postion for the current page
-	$(window).on("beforeunload", function() {
-		updatePageScrollPosition($(window).scrollTop());
-	});
-
-	// this allows to restore the correct
-	// scroll position when the browser window finishs loading
-	window.onload = function () {
-		var scrollPosition = localStorage.getItem('scroll-position');
-		var timeout = 66;
-		if (scrollPosition) {
-			setTimeout(function () {
-				scrollPosition = JSON.parse(scrollPosition);
-				var pos = Math.round(scrollPosition.position);
-				var currentScrollPosition = Math.round($(window).scrollTop());
-				if (scrollPosition.page === location.pathname && currentScrollPosition !== pos) {
-					window.scrollTo(0, pos);
-					localStorage.removeItem('scroll-position');
-				}
-			}, timeout);
-		} else if (window.location.hash) {
-			// Redirecting from a page
-			// to another with URL contains a hash
-			var $header = $(window.location.hash);
-			setTimeout(function () {
-				scrollToElement($header);
-			}, timeout);
-
-		}
-	};
-	// End restoring scrolling
+	// $articleContainer.on("scroll", debounce(function(ev) {
+	// 	// Maintain scroll state in history
+	// 	window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
+	// }, 50));
+	//
+	// // Start restore scrolling fix
+	// // Persist the current scroll postion for the current page
+	// $(window).on("beforeunload", function() {
+	// 	updatePageScrollPosition($(window).scrollTop());
+	// });
+	//
+	// // this allows to restore the correct
+	// // scroll position when the browser window finishs loading
+	// window.onload = function () {
+	// 	var scrollPosition = localStorage.getItem('scroll-position');
+	// 	var timeout = 66;
+	// 	if (scrollPosition) {
+	// 		setTimeout(function () {
+	// 			scrollPosition = JSON.parse(scrollPosition);
+	// 			var pos = Math.round(scrollPosition.position);
+	// 			var currentScrollPosition = Math.round($(window).scrollTop());
+	// 			if (scrollPosition.page === location.pathname && currentScrollPosition !== pos) {
+	// 				window.scrollTo(0, pos);
+	// 				localStorage.removeItem('scroll-position');
+	// 			}
+	// 		}, timeout);
+	// 	} else if (window.location.hash) {
+	// 		// Redirecting from a page
+	// 		// to another with URL contains a hash
+	// 		var $header = $(window.location.hash);
+	// 		setTimeout(function () {
+	// 			scrollToElement($header);
+	// 		}, timeout);
+	//
+	// 	}
+	// };
+	// // End restoring scrolling
 })();
 
 // Touch support
