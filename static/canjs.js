@@ -64,7 +64,12 @@ var $articleContainer,
 			var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
 			var href = ev.target.href;
 			var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
-			if (currentHrefBase !== hrefBase) {
+			if (currentHrefBase === hrefBase) {
+				setTimeout(function () {
+					var $header = $(window.location.hash);
+					scrollToElement($header);
+				}, 66);
+			} else {
 				ev.preventDefault();
 				searchControl.hideResults();
 				navigate(href || this.href);
