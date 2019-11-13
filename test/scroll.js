@@ -19,7 +19,6 @@ QUnit.test('Scroll down and refresh the page', function(assert) {
 		var pos = section.offsetTop - topMargin - document.querySelector("body").offsetTop;
 		F.win.scroll("top", pos);
 
-		
 		F("#Overview").wait(function(){
 			var element = this[0];
 			if (!element) {
@@ -33,7 +32,7 @@ QUnit.test('Scroll down and refresh the page', function(assert) {
 			done();
 		});
 	});
-	
+
 });
 
 QUnit.test('Refresh after going to a specific section', function(assert) {
@@ -41,11 +40,11 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 	F.open('../doc/guides/html.html', function() {
 		F.frame.height = 400;
 		F.frame.width = "100%";
-		
+
 		F(".on-this-page-table a[href='#Components']").click();
-		
+
 		F.win.location.reload();
-		
+
 		F("#Components").wait(function(){
 			var element = this[0];
 			if (!element) {
@@ -58,7 +57,7 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 			done();
 		});
 	});
-	
+
 });
 
 QUnit.test("Refresh after going to a specific section and scrolling", function(assert) {
@@ -67,14 +66,13 @@ QUnit.test("Refresh after going to a specific section and scrolling", function(a
 	F.open('../doc/guides/html.html', function() {
 		F.frame.height = 400;
 		F.frame.width = "100%";
-	
+
 		F(".on-this-page-table a[href='#Overview']").click();
-		
+
 		var pos = F("#Components").offset().top - 60;
 		F.win.scroll("top", pos);
 		F.win.location.reload();
-		
-		
+
 		F("#Components").wait(function() {
 			var element = this[0];
 			if (!element) {

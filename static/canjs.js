@@ -33,7 +33,6 @@ var $articleContainer,
 	headerHidden,
 	animating,
 	navigating,
-	scrollPositionInterval,
 	currentHref,
 	searchControl,
 	sidebarViewModel,
@@ -108,22 +107,15 @@ var $articleContainer,
 		navigate(window.location.href, false);
 	});
 
-	// $articleContainer.on("scroll", debounce(function(ev) {
-	// 	// Maintain scroll state in history
-	// 	window.history.replaceState({ articleScroll: getPageScrollTop() }, null, window.location.href);
-	// }, 50));
-	//
-	// // Start restore scrolling fix
 	// Persist the current scroll postion for the current page
 	$(window).on("beforeunload", function() {
 		updatePageScrollPosition($(window).scrollTop());
 	});
-	//
-	// // this allows to restore the correct
-	// // scroll position when the browser window finishs loading
+
+	// this allows to restore the correct
+	// scroll position when the browser window finishs loading
 	window.onload = function () {
 		var scrollPosition = localStorage.getItem('scroll-position');
-		var timeout = 66;
 		if (scrollPosition) {
 			setTimeout(function () {
 				scrollPosition = JSON.parse(scrollPosition);
@@ -133,18 +125,9 @@ var $articleContainer,
 					window.scrollTo(0, pos);
 					localStorage.removeItem('scroll-position');
 				}
-			}, timeout);
-		// } else if (window.location.hash) {
-		// 	// Redirecting from a page
-		// 	// to another with URL contains a hash
-		// 	var $header = $(window.location.hash);
-		// 	setTimeout(function () {
-		// 		scrollToElement($header);
-		// 	}, timeout);
-
+			}, 66);
 		}
 	};
-	// // End restoring scrolling
 })();
 
 // Touch support
@@ -388,21 +371,6 @@ function navigate(href, updateLocation) {
 		return;
 	}
 
-	// just scroll to hash if possible
-	var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
-	var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
-	if (currentHrefBase === hrefBase) {
-		// var hrefHash = href.match(/#.*/, '') || [];// Match the hash part of the URL, including the hash
-		// scrollToElement($(hrefHash[0]));
-		// if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
-		// 	window.history.pushState({ articleScroll: getPageScrollTop() }, null, href);
-		// }
-		return;
-	}
-
-	// // clear existing scroll interval if it's still alive
-	// clearInterval(scrollPositionInterval);
-
 	loader.start();
 
 	if($menuButton.is(':visible')){
@@ -627,7 +595,6 @@ function updateScrollbarWidthCSSVariable() {
 	document.documentElement.style.setProperty("--scrollbar-width", width + "px");
 	document.body.removeChild(child);
 };
-
 
 function updatePageScrollPosition(pos) {
 	var pageScrollPostion = {
