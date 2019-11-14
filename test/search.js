@@ -13,29 +13,36 @@ var indexOfPageInResults = function(pageName, results) {
   }
 };
 
-/* Clear local storage */
-window.localStorage.clear();
-
-/* Render the search templates into the page */
-var qunitFixture = document.getElementById('qunit-fixture');
-qunitFixture.appendChild(searchBarTemplate());
-qunitFixture.appendChild(searchResultsTemplate());
-
-/* Create a new instance of the search control */
-var search = new SearchControl('.search-bar', {
-  pathPrefix: '../doc'
-});
+var search;
+var setUpSearchControl;
 
 /* Tests */
-QUnit.module('search control');
+QUnit.module('search control', {
+  before: function() {
 
-var setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
-  return new Promise(function(resolve) {
-    // Wait for the search worker to be set up
-    setTimeout(function() {
-      resolve(searchLogic.indexData(search.convertSearchMapToIndexableItems(searchMap)));
-    }, 2000);
-  });
+    /* Clear local storage */
+    window.localStorage.clear();
+
+    /* Render the search templates into the page */
+    var qunitFixture = document.getElementById('qunit-fixture');
+    qunitFixture.appendChild(searchBarTemplate());
+    qunitFixture.appendChild(searchResultsTemplate());
+
+    /* Create a new instance of the search control */
+    search = new SearchControl('.search-bar', {
+      pathPrefix: '../doc'
+    });
+
+    setUpSearchControl = search.searchEnginePromise.then(function(searchMap) {
+      return new Promise(function(resolve) {
+        // Wait for the search worker to be set up
+        setTimeout(function() {
+          resolve(searchLogic.indexData(search.convertSearchMapToIndexableItems(searchMap)));
+        }, 2000);
+      });
+    });
+
+  }
 });
 
 QUnit.test('Search results render', function(assert) {
