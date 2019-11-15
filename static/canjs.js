@@ -371,6 +371,16 @@ function navigate(href, updateLocation) {
 		return;
 	}
 
+	// don’t do anything if just the hash changed
+	var currentHrefBase = currentHref.replace(/#.*/, '');// This is the current URL without the hash
+	var hrefBase = href.replace(/#.*/, '');// This is the new URL without the hash
+	if (currentHrefBase === hrefBase) {
+		if (updateLocation !== false) {// We don’t want to pushState when our popstate listener calls this
+			window.history.pushState({ articleScroll: getPageScrollTop() }, null, href);
+		}
+		return;
+	}
+
 	loader.start();
 
 	if($menuButton.is(':visible')){
