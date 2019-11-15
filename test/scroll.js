@@ -22,7 +22,7 @@ QUnit.test('Scroll down and refresh the page', function(assert) {
 		var offset = 100;
 
 		// Set the size so the page takes up some space
-		F.frame.height = 400;
+		F.frame.height = 200;
 		F.frame.width = "100%";
 
 		// Scroll down 100px
@@ -51,7 +51,7 @@ QUnit.test('Refresh after going to a specific section', function(assert) {
 	F.open('../doc/guides/html.html', function() {
 
 		// Set the size so the page takes up some space
-		F.frame.height = 400;
+		F.frame.height = 200;
 		F.frame.width = "100%";
 
 		// Click a TOC link to go to a specific section
@@ -84,7 +84,7 @@ QUnit.test("Refresh after going to a specific section and scrolling", function(a
 		var offset = 100;
 
 		// Set the size so the page takes up some space
-		F.frame.height = 400;
+		F.frame.height = 200;
 		F.frame.width = "100%";
 
 		// Click a TOC link to go to a specific section
