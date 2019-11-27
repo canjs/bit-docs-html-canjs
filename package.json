@@ -67,7 +67,7 @@
     "steal": "^2.0.0",
     "steal-conditional": "^1.0.0",
     "steal-qunit": "^2.0.0",
-    "steal-tools": "^2.0.0",
+    "steal-tools": "2.2.4",
     "test-saucelabs": "^0.0.6",
     "testee": "^0.9.0",
     "zombie": "^6.0.0"
