@@ -198,3 +198,13 @@ QUnit.test('Speed while searching for can-*', function(assert) {
     done();
   });
 });
+
+QUnit.test('Search for helper starting with "#xxx"', function(assert) {
+	var done = assert.async();
+	setUpSearchControl.then(function() {
+		var results = searchLogic.search('#let');
+		assert.equal(results.length > 1, true, 'Got results for #let');
+		assert.equal(indexOfPageInResults('can-stache.helpers.let', results), 0, 'first result is the can-stache.helpers.let page');
+		done();
+	});
+});

@@ -36,7 +36,12 @@ module.exports = {
 	},
 
 	search: function(value) {
+		var HELPER_START_PATTERN = /^#[a-z]/;
 		var searchTerm = value.toLowerCase();
+
+		if (HELPER_START_PATTERN.test(searchTerm)) {
+			searchTerm = value.substr(1, value.length)
+		}
 
 		//run the search
 		return searchEngine.query(function(q) {
