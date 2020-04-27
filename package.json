@@ -61,7 +61,7 @@
     "bit-docs-html-toc": "^1.1.1",
     "connect": "^3.5.0",
     "funcunit": "^3.4.3",
-    "http-server": "^0.11.0",
+    "http-server": "^0.12.3",
     "normalize.css": "^5.0.0",
     "q": "^1.4.1",
     "steal": "^2.0.0",
