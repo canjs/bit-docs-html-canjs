@@ -179,7 +179,7 @@ QUnit.test('When a purpose group page is selected, its expand/collapse button sh
 
 QUnit.test('When a Core package is selected, its parent should not automatically be expanded', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
-  var canDefinePage = vm.pageMap['can-define'];
+  var canDefinePage = vm.pageMap['can-observable-object'];
   var canObservablesPage = canDefinePage.parentPage;
   vm.selectedPage = canDefinePage;
   assert.ok(canObservablesPage.isCollapsed, 'parent page is collapsed');
@@ -188,7 +188,7 @@ QUnit.test('When a Core package is selected, its parent should not automatically
 
 QUnit.test('When a child page of a Core package is selected, the package’s group should not automatically be expanded', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
-  var canDefineTypesPage = vm.pageMap['can-define.types'];
+  var canDefineTypesPage = vm.pageMap['can-observable-object/object.static.propertyDefaults'];
   var canObservablesPage = canDefineTypesPage.parentPage.parentPage.parentPage;
   vm.selectedPage = canDefineTypesPage;
   assert.ok(canObservablesPage.isCollapsed, 'parent page is collapsed');
@@ -206,7 +206,7 @@ QUnit.test('When a collapsed purpose group page with no visible children is sele
 QUnit.test('When docs in a package are selected, the group should still have the expand/collapse button', function(assert) {
   var vm = new ViewModel({searchMap: searchMap});
   var pageMap = vm.pageMap;
-  var canDefineTypesPage = pageMap['can-define.types'];
+  var canDefineTypesPage = pageMap['can-observable-object/object.static.propertyDefaults'];
   var canObservablesPage = pageMap['can-observables'];
   vm.selectedPage = canDefineTypesPage;
   assert.ok(vm.shouldShowExpandCollapseButton(canObservablesPage), 'expand/collapse button is shown');
