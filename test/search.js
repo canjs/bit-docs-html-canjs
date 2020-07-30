@@ -101,8 +101,8 @@ QUnit.test('Search for “helpers/', function(assert) {
 QUnit.test('Search for “Call Expression”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-		var results = searchLogic.search('Call Expression');
-		assert.equal(results.length > 1, true, 'got more than 1 result');
+    var results = searchLogic.search('Call Expression');
+    assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-stache/expressions/call', results) < 2, true, 'first result is the can-stache Call Expression page');
     done();
   });
@@ -111,7 +111,7 @@ QUnit.test('Search for “Call Expression”', function(assert) {
 QUnit.test('Search for “Play”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-		var results = searchLogic.search('Play');
+    var results = searchLogic.search('Play');
     assert.equal(results.length > 0, true, 'got results');
     assert.equal(indexOfPageInResults('guides/recipes/playlist-editor', results), 0, 'first result is the “Playlist Editor (Advanced)” guide');
     done();
@@ -131,7 +131,7 @@ QUnit.test('Search for “stache”', function(assert) {
 QUnit.test('Search for “{{#expression}}', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-		var results = searchLogic.search('{{#expression}}');
+    var results = searchLogic.search('{{#expression}}');
     assert.equal(results.length > 0, true, 'got results');
     assert.equal(indexOfPageInResults('can-stache.tags.section', results), 0, 'first result is the can-stache.tags.section page');
     done();
@@ -141,7 +141,7 @@ QUnit.test('Search for “{{#expression}}', function(assert) {
 QUnit.test('Search for “define/map”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-		var results = searchLogic.search('define/map');
+    var results = searchLogic.search('define/map');
     assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-define/map/map', results), 0, 'first result is the can-define/map/map page');
     done();
@@ -171,7 +171,7 @@ QUnit.test('Search for “QueryLogic”', function(assert) {
 QUnit.test('Search for “DefineList”', function(assert) {
   var done = assert.async();
   setUpSearchControl.then(function() {
-		var results = searchLogic.search('DefineList');
+    var results = searchLogic.search('DefineList');
     assert.equal(results.length > 1, true, 'got more than 1 result');
     assert.equal(indexOfPageInResults('can-define/list/list', results), 0, 'first result is the can-define/list/list page');
     done();
@@ -200,21 +200,21 @@ QUnit.test('Speed while searching for can-*', function(assert) {
 });
 
 QUnit.test('Search for helper starting with "#xxx"', function(assert) {
-	var done = assert.async();
-	setUpSearchControl.then(function() {
-		var results = searchLogic.search('#let');
-		assert.equal(results.length > 1, true, 'Got results for #let');
-		assert.equal(indexOfPageInResults('can-stache.helpers.let', results), 0, 'first result is the can-stache.helpers.let page');
-		done();
-	});
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('#let');
+    assert.equal(results.length > 1, true, 'Got results for #let');
+    assert.equal(indexOfPageInResults('can-stache.helpers.let', results), 0, 'first result is the can-stache.helpers.let page');
+    done();
+  });
 });
 
 QUnit.test("Prioritize core packages in search results", function(assert) {
-	var done = assert.async();
-	setUpSearchControl.then(function() {
-		var results = searchLogic.search('types');
-		assert.equal(results.length > 1, true, 'Got results for type');
-		assert.equal(indexOfPageInResults('can-type', results), 0, 'first result is the can-type page');
-		done();
-	});
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('types');
+    assert.equal(results.length > 1, true, 'Got results for type');
+    assert.equal(indexOfPageInResults('can-type', results), 0, 'first result is the can-type page');
+    done();
+  });
 });
