@@ -200,11 +200,21 @@ QUnit.test('Speed while searching for can-*', function(assert) {
 });
 
 QUnit.test('Search for helper starting with "#xxx"', function(assert) {
-	var done = assert.async();
-	setUpSearchControl.then(function() {
-		var results = searchLogic.search('#let');
-		assert.equal(results.length > 1, true, 'Got results for #let');
-		assert.equal(indexOfPageInResults('can-stache.helpers.let', results), 0, 'first result is the can-stache.helpers.let page');
-		done();
-	});
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('#let');
+    assert.equal(results.length > 1, true, 'Got results for #let');
+    assert.equal(indexOfPageInResults('can-stache.helpers.let', results), 0, 'first result is the can-stache.helpers.let page');
+    done();
+  });
+});
+
+QUnit.test("Prioritize core packages in search results", function(assert) {
+  var done = assert.async();
+  setUpSearchControl.then(function() {
+    var results = searchLogic.search('types');
+    assert.equal(results.length > 1, true, 'Got results for type');
+    assert.equal(indexOfPageInResults('can-type', results), 0, 'first result is the can-type page');
+    done();
+  });
 });
